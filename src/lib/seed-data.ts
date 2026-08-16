@@ -97,11 +97,11 @@ const seed: SeedTemplate[] = [
     categorySlug: "barberias",
     title: "Barbería Premium",
     slug: "barberia-premium",
-    short_description: "Diseño moderno y elegante con reservas integradas y galería de trabajos.",
+    short_description: "Barbería luminosa y minimalista, con reservas integradas y galería de trabajos.",
     full_description:
       "Diseño moderno y elegante, perfecto para barberías que quieren destacar online y llenar su agenda de reservas. Incluye página de inicio con hero de impacto, listado de servicios con precios, presentación del equipo, galería de trabajos, testimonios y formulario de contacto con botón directo de WhatsApp.",
     price_cents: 14900,
-    preview_url: "/demos/barberia/index.html",
+    preview_url: null,
     gradient: "linear-gradient(160deg,#12100b,#1c1712 55%,#0c0a08)",
     features: [
       "Diseño 100% personalizable",
@@ -117,11 +117,11 @@ const seed: SeedTemplate[] = [
     categorySlug: "barberias",
     title: "Barbería Clásica",
     slug: "barberia-clasica",
-    short_description: "Estilo vintage, ideal para barberías tradicionales con historia.",
+    short_description: "Local tradicional de madera y latón, para barberías con historia.",
     full_description:
       "Estética vintage con tipografía clásica y paleta cálida. Pensada para barberías tradicionales que quieren transmitir oficio y años de experiencia sin renunciar a una web rápida y moderna.",
     price_cents: 13900,
-    preview_url: null,
+    preview_url: "/demos/barberia/index.html",
     gradient: "linear-gradient(160deg,#1b1512,#2a1f18 55%,#100c0a)",
     features: [
       "Diseño 100% personalizable",

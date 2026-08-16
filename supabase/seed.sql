@@ -2,9 +2,8 @@
 -- Leuname Software — datos de ejemplo
 -- Ejecutar DESPUÉS de 0001_schema_inicial.sql.
 --
--- GENERADO desde src/lib/seed-data.ts (scripts/generate-seed-sql.py).
--- No editar a mano: cambia el catálogo en el TypeScript y vuelve a generar,
--- así la vitrine sin Supabase y la base de datos nunca se contradicen.
+-- GENERADO por scripts/generate-seed-sql.py desde src/lib/seed-data.ts.
+-- No editar a mano: cambia el catálogo en el TypeScript y vuelve a generar.
 -- ============================================================
 
 insert into public.categories (id, name, slug, icon) values
@@ -49,18 +48,18 @@ values
   ('22222222-2222-4222-8222-000000000003',
    '11111111-1111-4111-8111-000000000002',
    'Barbería Premium', 'barberia-premium',
-   'Diseño moderno y elegante con reservas integradas y galería de trabajos.',
+   'Barbería luminosa y minimalista, con reservas integradas y galería de trabajos.',
    'Diseño moderno y elegante, perfecto para barberías que quieren destacar online y llenar su agenda de reservas. Incluye página de inicio con hero de impacto, listado de servicios con precios, presentación del equipo, galería de trabajos, testimonios y formulario de contacto con botón directo de WhatsApp.',
-   14900, '/demos/barberia/index.html', '/thumbnails/barberia-premium.jpg',
+   14900, null, '/thumbnails/barberia-premium.jpg',
    '["Diseño 100% personalizable", "Responsive (móvil, tablet y desktop)", "Sistema de reservas integrado", "Galería de trabajos", "Botón directo de WhatsApp", "Optimizado para Google (SEO)"]'::jsonb,
    'published'),
 
   ('22222222-2222-4222-8222-000000000004',
    '11111111-1111-4111-8111-000000000002',
    'Barbería Clásica', 'barberia-clasica',
-   'Estilo vintage, ideal para barberías tradicionales con historia.',
+   'Local tradicional de madera y latón, para barberías con historia.',
    'Estética vintage con tipografía clásica y paleta cálida. Pensada para barberías tradicionales que quieren transmitir oficio y años de experiencia sin renunciar a una web rápida y moderna.',
-   13900, null, '/thumbnails/barberia-clasica.jpg',
+   13900, '/demos/barberia/index.html', '/thumbnails/barberia-clasica.jpg',
    '["Diseño 100% personalizable", "Responsive (móvil, tablet y desktop)", "Sección de historia de la barbería", "Lista de precios por servicio", "Mapa de ubicación integrado", "Optimizado para Google (SEO)"]'::jsonb,
    'published'),
 

@@ -38,70 +38,66 @@ const nav = (brand, links, css) => `
 const designs = [
   {
     slug: "barberia-premium",
-    fonts: "family=Bebas+Neue&family=Inter:wght@400;600",
+    fonts: "family=Jost:wght@200;300;400;500&family=Cormorant+Garamond:wght@500",
     html: `
-      ${nav("GENTLEMEN'S&nbsp;QUARTERS", ["INICIO", "SERVICIOS", "GALERÍA"])}
+      ${nav("AURUM", ["SERVICIOS", "EQUIPO", "TIENDA"])}
       <div class="shot"></div>
       <div class="scrim"></div>
       <div class="body">
-        <div class="tag">MÁS QUE UN CORTE, UNA EXPERIENCIA</div>
-        <h1>ESTILO QUE<br><em>TE DEFINE</em></h1>
-        <p>Cortes clásicos y afeitados premium en un ambiente exclusivo.</p>
+        <div class="tag">B A R B E R Í A&nbsp;&nbsp;&&nbsp;&nbsp;G R O O M I N G</div>
+        <h1>Precisión en<br><em>cada detalle</em></h1>
+        <p>Corte, barba y ritual de afeitado en un espacio pensado para desconectar.</p>
         <div class="btns"><span class="b1">RESERVAR CITA</span><span class="b2">VER SERVICIOS</span></div>
       </div>`,
     css: `
-      .wrap{background:#0b0908;color:#f5efe3;font-family:Inter,sans-serif;}
-      .shot{position:absolute;inset:0;background:url("${photo("barberia.jpg")}") center/cover no-repeat;}
+      .wrap{background:#f6f1ea;color:#23201c;font-family:Jost,sans-serif;}
+      .shot{position:absolute;inset:0;background:url("${photo("barberia-moderna.jpg")}") center/cover no-repeat;}
       .scrim{position:absolute;inset:0;background:
-        linear-gradient(90deg,rgba(8,6,5,.95) 0%,rgba(8,6,5,.88) 34%,rgba(8,6,5,.45) 62%,rgba(8,6,5,.12) 100%),
-        linear-gradient(180deg,rgba(8,6,5,.92) 0%,rgba(8,6,5,.80) 12%,transparent 30%);}
-      .nav{position:absolute;top:0;left:0;right:0;z-index:3;display:flex;align-items:center;justify-content:space-between;padding:26px 120px;font-size:15px;letter-spacing:.22em;border-bottom:1px solid rgba(217,164,65,.22);}
-      .brand{font-family:'Bebas Neue';font-size:27px;letter-spacing:.1em;color:#e7b45c;}
-      .links i{font-style:normal;margin:0 20px;color:#a2917a;font-size:14px;letter-spacing:.18em;}
-      .navcta{background:#d9a441;color:#1a1200;padding:10px 22px;border-radius:4px;font-weight:600;font-size:13px;letter-spacing:.14em;}
-      .body{position:absolute;left:120px;top:170px;z-index:2;}
-      .tag{font-size:16px;letter-spacing:.34em;color:#d9a441;margin-bottom:22px;}
-      h1{font-family:'Bebas Neue';font-size:132px;line-height:.86;letter-spacing:.02em;margin-bottom:22px;}
-      h1 em{font-style:normal;color:#d9a441;}
-      p{color:#b9ac95;font-size:22px;max-width:520px;margin-bottom:36px;}
-      .b1{background:#d9a441;color:#1a1200;padding:18px 34px;border-radius:4px;font-weight:700;font-size:15px;letter-spacing:.12em;}
-      .b2{border:1px solid #4a4030;color:#e9e0cc;padding:18px 34px;border-radius:4px;font-weight:700;font-size:15px;letter-spacing:.12em;margin-left:14px;}`,
+        linear-gradient(90deg,rgba(248,244,238,.97) 0%,rgba(248,244,238,.93) 38%,rgba(248,244,238,.52) 64%,rgba(248,244,238,.06) 100%),
+        linear-gradient(180deg,rgba(248,244,238,.92) 0%,rgba(248,244,238,.72) 12%,transparent 28%);}
+      .nav{position:absolute;top:0;left:0;right:0;z-index:3;display:flex;align-items:center;justify-content:space-between;padding:26px 120px;border-bottom:1px solid rgba(35,32,28,.14);}
+      .brand{font-family:'Cormorant Garamond';font-weight:500;font-size:32px;letter-spacing:.34em;color:#23201c;}
+      .links i{font-style:normal;margin:0 18px;font-size:13px;letter-spacing:.2em;color:#6f675d;font-weight:300;}
+      .navcta{background:#23201c;color:#f6f1ea;padding:11px 24px;border-radius:99px;font-size:12px;letter-spacing:.16em;font-weight:400;}
+      .body{position:absolute;left:120px;top:200px;z-index:2;}
+      .tag{font-size:13px;letter-spacing:.3em;color:#a67c4e;margin-bottom:26px;font-weight:500;}
+      h1{font-family:Jost;font-weight:300;font-size:104px;line-height:1;letter-spacing:-.02em;margin-bottom:24px;}
+      h1 em{font-style:normal;font-weight:500;color:#a67c4e;}
+      p{color:#6f675d;font-size:21px;max-width:470px;font-weight:300;margin-bottom:34px;}
+      .b1{background:#23201c;color:#f6f1ea;padding:18px 34px;border-radius:99px;font-size:14px;letter-spacing:.12em;font-weight:400;}
+      .b2{border:1px solid rgba(35,32,28,.3);color:#23201c;padding:18px 34px;border-radius:99px;font-size:14px;letter-spacing:.12em;margin-left:14px;font-weight:400;}`,
   },
   {
     slug: "barberia-clasica",
     fonts: "family=Playfair+Display:wght@700;900&family=Inter:wght@400;500",
     html: `
-      ${nav("BARBER&nbsp;&&nbsp;CO.", ["LA CASA", "PRECIOS", "CONTACTO"])}
-      <div class="frame"></div>
-      <div class="medal"><span>B<i>&</i>C</span><em>EST. 1968</em></div>
+      ${nav("GENTLEMEN&rsquo;S&nbsp;QUARTERS", ["LA CASA", "PRECIOS", "CONTACTO"])}
+      <div class="shot"></div>
+      <div class="scrim"></div>
       <div class="body">
         <div class="tag">— DESDE 1968 —</div>
         <h1>El oficio<br><em>de siempre</em></h1>
         <div class="rule"></div>
         <p>Navaja, toalla caliente y el mismo cuidado de hace medio siglo.</p>
+        <div class="btns"><span class="b1">RESERVAR CITA</span></div>
       </div>`,
     css: `
-      .wrap{background:linear-gradient(160deg,#f3ead8 0%,#e6d8bd 55%,#d8c7a5 100%);color:#2a2018;font-family:Inter,sans-serif;}
-      .wrap::after{content:"";position:absolute;inset:0;background:radial-gradient(90% 120% at 50% 0%,rgba(255,255,255,.5),transparent 60%);}
-      .nav{position:absolute;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:26px 120px;border-bottom:2px solid #2a2018;z-index:2;}
-      .brand{font-family:'Playfair Display';font-weight:900;font-size:26px;letter-spacing:.14em;}
-      .links i{font-style:normal;margin:0 18px;font-size:13px;letter-spacing:.22em;color:#6b5b45;}
-      .navcta{background:#2a2018;color:#f3ead8;padding:10px 22px;font-size:12px;letter-spacing:.16em;font-weight:500;}
-      .frame{position:absolute;inset:104px 44px 44px;border:2px solid #2a2018;opacity:.32;z-index:1;}
-      .frame::before{content:"";position:absolute;inset:10px;border:1px solid #2a2018;opacity:.5;}
-      .medal{position:absolute;right:150px;top:212px;width:300px;height:300px;border-radius:50%;z-index:2;
-        border:3px double #2a2018;display:flex;flex-direction:column;align-items:center;justify-content:center;
-        background:radial-gradient(circle at 40% 32%,rgba(255,255,255,.7),rgba(216,199,165,.35));
-        box-shadow:0 26px 60px rgba(90,72,44,.28);}
-      .medal span{font-family:'Playfair Display';font-weight:900;font-size:88px;letter-spacing:.02em;line-height:1;}
-      .medal span i{font-style:italic;font-weight:700;color:#8a6a34;font-size:64px;}
-      .medal em{font-style:normal;font-size:14px;letter-spacing:.36em;color:#6b5b45;margin-top:14px;}
-      .body{position:absolute;left:150px;top:200px;z-index:2;}
-      .tag{font-size:15px;letter-spacing:.4em;color:#8a7350;margin-bottom:26px;}
-      h1{font-family:'Playfair Display';font-weight:900;font-size:112px;line-height:.94;margin-bottom:28px;}
-      h1 em{font-style:italic;font-weight:700;color:#8a6a34;}
-      .rule{width:130px;height:3px;background:#2a2018;margin-bottom:26px;}
-      p{font-size:22px;color:#5c4c38;max-width:560px;}`,
+      .wrap{background:#0c0a08;color:#f4ead7;font-family:Inter,sans-serif;}
+      .shot{position:absolute;inset:0;background:url("${photo("barberia.jpg")}") center/cover no-repeat;}
+      .scrim{position:absolute;inset:0;background:
+        linear-gradient(90deg,rgba(10,7,5,.96) 0%,rgba(10,7,5,.90) 38%,rgba(10,7,5,.48) 64%,rgba(10,7,5,.12) 100%),
+        linear-gradient(180deg,rgba(10,7,5,.92) 0%,rgba(10,7,5,.78) 12%,transparent 30%);}
+      .nav{position:absolute;top:0;left:0;right:0;z-index:3;display:flex;align-items:center;justify-content:space-between;padding:26px 120px;border-bottom:1px solid rgba(212,175,110,.28);}
+      .brand{font-family:'Playfair Display';font-weight:900;font-size:25px;letter-spacing:.1em;color:#d4af6e;}
+      .links i{font-style:normal;margin:0 18px;font-size:13px;letter-spacing:.2em;color:#a2917a;}
+      .navcta{border:1px solid #d4af6e;color:#d4af6e;padding:10px 22px;font-size:12px;letter-spacing:.16em;font-weight:500;}
+      .body{position:absolute;left:120px;top:196px;z-index:2;}
+      .tag{font-size:15px;letter-spacing:.4em;color:#d4af6e;margin-bottom:24px;}
+      h1{font-family:'Playfair Display';font-weight:900;font-size:110px;line-height:.94;margin-bottom:24px;}
+      h1 em{font-style:italic;font-weight:700;color:#d4af6e;}
+      .rule{width:130px;height:3px;background:#d4af6e;margin-bottom:24px;}
+      p{font-size:21px;color:#bdae95;max-width:520px;margin-bottom:32px;}
+      .b1{background:#d4af6e;color:#1a1200;padding:18px 34px;font-weight:700;font-size:14px;letter-spacing:.12em;}`,
   },
   {
     slug: "cafeteria-artesanal",
