@@ -465,43 +465,36 @@ const designs = [
     fonts: "family=Manrope:wght@500;800&family=Inter:wght@400;600",
     html: `
       ${nav("PRIME&nbsp;CASA", ["COMPRAR", "ALQUILAR", "VALORAR"])}
-      <div class="card">
-        <div class="photo"><span class="tagline">DESTACADA</span></div>
-        <div class="meta"><b>€ 385.000</b><span>Chalet · 4 hab · 210 m²</span></div>
-        <div class="feat"><i>4 hab</i><i>2 baños</i><i>Jardín</i></div>
-      </div>
+      <div class="shot"></div>
+      <div class="scrim"></div>
       <div class="body">
         <div class="tag">INMOBILIARIA DE CONFIANZA</div>
         <h1>Tu próxima<br><em>casa te espera</em></h1>
-        <p>Más de 300 propiedades verificadas. Valoramos la tuya gratis en 24 h.</p>
+        <p>Más de 300 propiedades verificadas en la ciudad.</p>
         <div class="search"><span class="sfield">Zona o código postal</span><span class="sbtn">Buscar</span></div>
-      </div>`,
+      </div>
+      <div class="chip"><b>€ 385.000</b><span>Piso · 3 hab · 120 m²</span></div>`,
     css: `
-      .wrap{background:linear-gradient(150deg,#122031 0%,#16293d 52%,#0a121c 100%);color:#eaf1fa;font-family:Inter,sans-serif;}
-      .nav{position:absolute;top:0;left:0;right:0;z-index:3;display:flex;align-items:center;justify-content:space-between;padding:26px 120px;border-bottom:1px solid rgba(255,255,255,.12);}
+      .wrap{background:#0a121c;color:#eaf1fa;font-family:Inter,sans-serif;}
+      .shot{position:absolute;inset:0;background:url("${photo("inmobiliaria.jpg")}") center/cover no-repeat;}
+      ${scrim(90, 10, 18, 28)}
+      .nav{position:absolute;top:0;left:0;right:0;z-index:4;display:flex;align-items:center;justify-content:space-between;padding:26px 120px;border-bottom:1px solid rgba(255,255,255,.16);}
       .brand{font-family:Manrope;font-weight:800;font-size:26px;letter-spacing:.02em;color:#e2b062;}
-      .links i{font-style:normal;margin:0 18px;font-size:14px;color:#95a9c0;}
+      .links i{font-style:normal;margin:0 18px;font-size:14px;color:#a8bacf;}
       .navcta{background:#e2b062;color:#122031;padding:11px 22px;border-radius:8px;font-size:13px;font-weight:600;}
-      .card{position:absolute;right:120px;top:168px;width:400px;border-radius:18px;overflow:hidden;z-index:2;
-        background:linear-gradient(165deg,rgba(255,255,255,.13),rgba(255,255,255,.05));border:1px solid rgba(255,255,255,.2);
-        box-shadow:0 38px 84px rgba(0,0,0,.5);}
-      .photo{height:210px;position:relative;background:linear-gradient(160deg,#3d5f7d,#22394f 60%,#16293d);}
-      .photo::after{content:"";position:absolute;left:16%;bottom:0;width:68%;height:58%;
-        background:linear-gradient(180deg,#e8d9c2,#c9b394);clip-path:polygon(50% 0,100% 34%,100% 100%,0 100%,0 34%);}
-      .tagline{position:absolute;left:16px;top:16px;z-index:2;background:#e2b062;color:#122031;font-size:12px;font-weight:700;letter-spacing:.1em;padding:6px 12px;border-radius:6px;}
-      .meta{padding:18px 20px 6px;display:flex;flex-direction:column;gap:4px;}
-      .meta b{font-family:Manrope;font-size:32px;color:#e2b062;}
-      .meta span{font-size:14px;color:#95a9c0;}
-      .feat{display:flex;gap:10px;padding:10px 20px 20px;}
-      .feat i{font-style:normal;font-size:12px;color:#cfe0f2;border:1px solid rgba(255,255,255,.2);border-radius:99px;padding:6px 12px;}
-      .body{position:absolute;left:120px;top:200px;z-index:2;}
-      .tag{font-size:14px;letter-spacing:.24em;color:#e2b062;font-weight:600;margin-bottom:22px;}
-      h1{font-family:Manrope;font-weight:800;font-size:104px;line-height:.96;letter-spacing:-.03em;margin-bottom:22px;}
+      .body{position:absolute;left:120px;top:196px;z-index:3;}
+      .tag{font-size:14px;letter-spacing:.24em;color:#e2b062;font-weight:600;margin-bottom:20px;}
+      h1{font-family:Manrope;font-weight:800;font-size:88px;line-height:1;letter-spacing:-.03em;margin-bottom:18px;max-width:600px;${textGlow(false)}}
       h1 em{font-style:normal;color:#e2b062;}
-      p{color:#95a9c0;font-size:21px;max-width:520px;margin-bottom:30px;}
-      .search{display:flex;align-items:center;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:12px;padding:8px 8px 8px 22px;width:520px;}
-      .sfield{flex:1;color:#9fb3c9;font-size:16px;}
-      .sbtn{background:#e2b062;color:#122031;padding:14px 28px;border-radius:9px;font-weight:700;font-size:15px;}`,
+      p{color:#c3d0de;font-size:19px;max-width:430px;margin-bottom:26px;${textGlow(false)}}
+      .search{display:flex;align-items:center;background:rgba(10,18,28,.72);border:1px solid rgba(255,255,255,.28);border-radius:12px;padding:7px 7px 7px 20px;width:480px;backdrop-filter:blur(6px);}
+      .sfield{flex:1;color:#b9c8d8;font-size:15px;}
+      .sbtn{background:#e2b062;color:#122031;padding:13px 26px;border-radius:9px;font-weight:700;font-size:14px;}
+      .chip{position:absolute;right:80px;bottom:70px;z-index:3;display:flex;flex-direction:column;gap:2px;
+        background:rgba(10,18,28,.78);border:1px solid rgba(255,255,255,.26);border-radius:14px;padding:16px 22px;
+        backdrop-filter:blur(8px);box-shadow:0 22px 50px rgba(0,0,0,.45);}
+      .chip b{font-family:Manrope;font-weight:800;font-size:28px;color:#e2b062;}
+      .chip span{font-size:13.5px;color:#c3d0de;}`,
   },
   {
     slug: "clinica-dental",
