@@ -548,13 +548,8 @@ const designs = [
     fonts: "family=Archivo+Black&family=Inter:wght@400;600",
     html: `
       ${nav("PULSO&nbsp;STUDIO", ["CLASES", "BONOS", "ENTRENADORES"])}
-      <div class="streak"></div>
-      <div class="board">
-        <div class="row"><b>07:00</b><span>HIIT</span><i>12 plazas</i></div>
-        <div class="row on"><b>09:30</b><span>YOGA FLOW</span><i>4 plazas</i></div>
-        <div class="row"><b>18:00</b><span>FUERZA</span><i>8 plazas</i></div>
-        <div class="row"><b>20:00</b><span>PILATES</span><i>6 plazas</i></div>
-      </div>
+      <div class="shot"></div>
+      <div class="scrim"></div>
       <div class="body">
         <div class="tag">CLASES DIRIGIDAS · SIN PERMANENCIA</div>
         <h1>ENTRENA<br><em>HOY MISMO</em></h1>
@@ -562,27 +557,19 @@ const designs = [
         <div class="btns"><span class="b1">VER HORARIOS</span></div>
       </div>`,
     css: `
-      .wrap{background:linear-gradient(150deg,#191919 0%,#241a16 50%,#0d0d0d 100%);color:#f7f4f1;font-family:Inter,sans-serif;}
-      .nav{position:absolute;top:0;left:0;right:0;z-index:4;display:flex;align-items:center;justify-content:space-between;padding:26px 120px;border-bottom:1px solid rgba(255,255,255,.12);}
+      .wrap{background:#080c14;color:#f7f4f1;font-family:Inter,sans-serif;}
+      .shot{position:absolute;inset:0;background:url("${photo("fitness.jpg")}") center/cover no-repeat;}
+      ${scrim(90, 8, 12, 20)}
+      .nav{position:absolute;top:0;left:0;right:0;z-index:4;display:flex;align-items:center;justify-content:space-between;padding:26px 120px;border-bottom:1px solid rgba(255,255,255,.16);}
       .brand{font-family:'Archivo Black';font-size:24px;letter-spacing:.04em;color:#ff5a1f;}
-      .links i{font-style:normal;margin:0 18px;font-size:14px;color:#9a908a;}
+      .links i{font-style:normal;margin:0 18px;font-size:14px;color:#a9b3c2;}
       .navcta{background:#ff5a1f;color:#141010;padding:11px 22px;border-radius:6px;font-size:13px;font-weight:600;}
-      .streak{position:absolute;right:-60px;top:0;bottom:0;width:52%;background:linear-gradient(200deg,rgba(255,90,31,.22),rgba(255,90,31,.02));clip-path:polygon(26% 0,100% 0,100% 100%,0 100%);}
-      .board{position:absolute;right:120px;top:186px;width:410px;z-index:2;border-radius:16px;overflow:hidden;
-        border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.06);box-shadow:0 36px 80px rgba(0,0,0,.55);}
-      .row{display:flex;align-items:center;gap:16px;padding:20px 22px;border-bottom:1px solid rgba(255,255,255,.09);}
-      .row:last-child{border-bottom:none;}
-      .row b{font-family:'Archivo Black';font-size:19px;width:76px;}
-      .row span{flex:1;font-size:16px;font-weight:600;letter-spacing:.04em;}
-      .row i{font-style:normal;font-size:12.5px;color:#9a908a;}
-      .row.on{background:#ff5a1f;color:#141010;}
-      .row.on i{color:rgba(20,16,16,.7);}
-      .body{position:absolute;left:120px;top:196px;z-index:3;}
+      .body{position:absolute;left:120px;top:200px;z-index:3;}
       .tag{font-size:13.5px;letter-spacing:.22em;color:#ff5a1f;font-weight:600;margin-bottom:22px;}
-      h1{font-family:'Archivo Black';font-size:118px;line-height:.9;letter-spacing:-.02em;margin-bottom:24px;}
+      h1{font-family:'Archivo Black';font-size:104px;line-height:.92;letter-spacing:-.02em;margin-bottom:22px;${textGlow(false)}}
       h1 em{font-style:normal;color:#ff5a1f;}
-      p{color:#9a908a;font-size:21px;max-width:460px;margin-bottom:32px;}
-      .b1{background:#ff5a1f;color:#141010;padding:18px 34px;border-radius:6px;font-weight:700;font-size:15px;letter-spacing:.08em;}`,
+      p{color:#a9b3c2;font-size:20px;max-width:400px;margin-bottom:30px;${textGlow(false)}}
+      .b1{background:#ff5a1f;color:#141010;padding:17px 32px;border-radius:6px;font-weight:700;font-size:15px;letter-spacing:.08em;}`,
   },
   {
     slug: "casa-rural",
