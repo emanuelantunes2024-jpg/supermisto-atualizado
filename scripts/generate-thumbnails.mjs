@@ -258,11 +258,11 @@ const designs = [
   },
   {
     slug: "studio-belleza",
-    fonts: "family=Cormorant+Garamond:wght@600&family=Jost:wght@300;500",
+    fonts: "family=Cormorant+Garamond:wght@500;600&family=Jost:wght@300;400;500",
     html: `
       ${nav("STUDIO&nbsp;NÜ", ["TRATAMIENTOS", "EQUIPO", "CITAS"])}
-      <div class="arch"><div class="glow"></div></div>
-      <div class="leaf l1"></div><div class="leaf l2"></div>
+      <div class="mirror"><div class="glow"></div></div>
+      <div class="ribbon"></div>
       <div class="body">
         <div class="tag">B E L L E Z A&nbsp;&nbsp;&&nbsp;&nbsp;B I E N E S T A R</div>
         <h1>Tu mejor<br><em>versión</em></h1>
@@ -270,23 +270,23 @@ const designs = [
         <div class="btns"><span class="b1">RESERVAR CITA</span></div>
       </div>`,
     css: `
-      .wrap{background:linear-gradient(155deg,#fbf1ec 0%,#f2ddd4 48%,#e5c4b8 100%);color:#3d2b26;font-family:Jost,sans-serif;}
-      .nav{position:absolute;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:26px 120px;border-bottom:1px solid rgba(61,43,38,.12);z-index:3;}
-      .brand{font-family:'Cormorant Garamond';font-size:29px;letter-spacing:.24em;}
-      .links i{font-style:normal;margin:0 18px;font-size:13px;letter-spacing:.16em;color:#8a6e64;font-weight:300;}
-      .navcta{background:#b98978;color:#fff;padding:11px 24px;border-radius:99px;font-size:12px;letter-spacing:.14em;font-weight:500;}
-      .arch{position:absolute;right:150px;top:150px;width:320px;height:440px;border-radius:160px 160px 26px 26px;
-        background:linear-gradient(170deg,#d99e88,#b8705a 58%,#8f4f3c);box-shadow:0 40px 90px rgba(110,66,52,.45);overflow:hidden;}
-      .arch .glow{position:absolute;left:-20%;top:8%;width:150%;height:60%;background:radial-gradient(circle at 40% 30%,rgba(255,255,255,.6),transparent 62%);}
-      .leaf{position:absolute;border-radius:0 100% 0 100%;background:rgba(150,105,88,.48);}
-      .l1{width:150px;height:150px;right:98px;top:120px;transform:rotate(18deg);}
-      .l2{width:110px;height:110px;right:430px;top:470px;transform:rotate(-24deg);}
-      .body{position:absolute;left:120px;top:216px;z-index:2;}
-      .tag{font-size:13px;letter-spacing:.3em;color:#b98978;margin-bottom:24px;font-weight:500;}
-      h1{font-family:'Cormorant Garamond';font-weight:600;font-size:124px;line-height:.92;margin-bottom:24px;}
-      h1 em{font-style:italic;color:#b98978;}
-      p{color:#7d635a;font-size:22px;max-width:500px;font-weight:300;margin-bottom:34px;}
-      .b1{background:#3d2b26;color:#fbf1ec;padding:18px 34px;border-radius:99px;font-size:15px;letter-spacing:.1em;font-weight:500;}`,
+      .wrap{background:linear-gradient(150deg,#2d1824 0%,#4a2438 46%,#1a0d14 100%);color:#fbeef2;font-family:Jost,sans-serif;}
+      .nav{position:absolute;top:0;left:0;right:0;z-index:3;display:flex;align-items:center;justify-content:space-between;padding:26px 120px;border-bottom:1px solid rgba(232,180,160,.22);}
+      .brand{font-family:'Cormorant Garamond';font-weight:600;font-size:29px;letter-spacing:.26em;color:#e8b4a0;}
+      .links i{font-style:normal;margin:0 18px;font-size:13px;letter-spacing:.18em;color:#cfa9b4;font-weight:300;}
+      .navcta{background:#e8b4a0;color:#2d1824;padding:11px 24px;border-radius:99px;font-size:12px;letter-spacing:.14em;font-weight:500;}
+      .mirror{position:absolute;right:190px;top:150px;width:330px;height:470px;border-radius:170px 170px 20px 20px;
+        border:3px solid rgba(232,180,160,.75);overflow:hidden;
+        background:linear-gradient(165deg,rgba(232,180,160,.30),rgba(120,60,86,.42) 58%,rgba(40,18,30,.55));
+        box-shadow:0 40px 90px rgba(20,8,14,.55);}
+      .mirror .glow{position:absolute;left:-14%;top:6%;width:150%;height:56%;background:radial-gradient(circle at 38% 30%,rgba(255,235,228,.62),transparent 64%);}
+      .ribbon{position:absolute;right:120px;top:104px;width:470px;height:560px;border:1px solid rgba(232,180,160,.30);border-radius:200px 200px 26px 26px;}
+      .body{position:absolute;left:120px;top:210px;z-index:2;}
+      .tag{font-size:13px;letter-spacing:.3em;color:#e8b4a0;margin-bottom:24px;font-weight:500;}
+      h1{font-family:'Cormorant Garamond';font-weight:600;font-size:116px;line-height:.94;margin-bottom:24px;}
+      h1 em{font-style:italic;color:#e8b4a0;}
+      p{color:#cfa9b4;font-size:21px;max-width:470px;font-weight:300;margin-bottom:34px;}
+      .b1{background:#e8b4a0;color:#2d1824;padding:18px 34px;border-radius:99px;font-size:14px;letter-spacing:.12em;font-weight:500;}`,
   },
   {
     slug: "asesoria-abogados",
@@ -366,33 +366,31 @@ const designs = [
     fonts: "family=Cormorant+Garamond:wght@500;600&family=Jost:wght@300;400;500",
     html: `
       ${nav("SALÓN&nbsp;ÉLITE", ["SERVICIOS", "TARIFAS", "EQUIPO"])}
-      <div class="mirror"><div class="glow"></div></div>
-      <div class="ribbon"></div>
+      <div class="shot"></div>
+      <div class="scrim"></div>
       <div class="body">
         <div class="tag">P E L U Q U E R Í A&nbsp;&nbsp;&&nbsp;&nbsp;C O L O R</div>
         <h1>El color que<br><em>te sienta bien</em></h1>
-        <p>Corte, color y tratamientos con producto profesional. Pide tu cita en un minuto.</p>
+        <p>Corte, color y tratamientos con producto profesional.</p>
         <div class="btns"><span class="b1">RESERVAR CITA</span><span class="b2">VER TARIFAS</span></div>
       </div>`,
     css: `
-      .wrap{background:linear-gradient(150deg,#2d1824 0%,#4a2438 46%,#1a0d14 100%);color:#fbeef2;font-family:Jost,sans-serif;}
-      .nav{position:absolute;top:0;left:0;right:0;z-index:3;display:flex;align-items:center;justify-content:space-between;padding:26px 120px;border-bottom:1px solid rgba(232,180,160,.22);}
-      .brand{font-family:'Cormorant Garamond';font-weight:600;font-size:29px;letter-spacing:.26em;color:#e8b4a0;}
-      .links i{font-style:normal;margin:0 18px;font-size:13px;letter-spacing:.18em;color:#cfa9b4;font-weight:300;}
-      .navcta{background:#e8b4a0;color:#2d1824;padding:11px 24px;border-radius:99px;font-size:12px;letter-spacing:.14em;font-weight:500;}
-      .mirror{position:absolute;right:190px;top:150px;width:330px;height:470px;border-radius:170px 170px 20px 20px;
-        border:3px solid rgba(232,180,160,.75);overflow:hidden;
-        background:linear-gradient(165deg,rgba(232,180,160,.30),rgba(120,60,86,.42) 58%,rgba(40,18,30,.55));
-        box-shadow:0 40px 90px rgba(20,8,14,.55);}
-      .mirror .glow{position:absolute;left:-14%;top:6%;width:150%;height:56%;background:radial-gradient(circle at 38% 30%,rgba(255,235,228,.62),transparent 64%);}
-      .ribbon{position:absolute;right:120px;top:104px;width:470px;height:560px;border:1px solid rgba(232,180,160,.30);border-radius:200px 200px 26px 26px;}
-      .body{position:absolute;left:120px;top:206px;z-index:2;}
-      .tag{font-size:13px;letter-spacing:.3em;color:#e8b4a0;margin-bottom:24px;font-weight:500;}
-      h1{font-family:'Cormorant Garamond';font-weight:600;font-size:114px;line-height:.94;margin-bottom:24px;max-width:660px;}
-      h1 em{font-style:italic;color:#e8b4a0;}
-      p{color:#cfa9b4;font-size:21px;max-width:490px;font-weight:300;margin-bottom:34px;}
-      .b1{background:#e8b4a0;color:#2d1824;padding:18px 34px;border-radius:99px;font-size:14px;letter-spacing:.12em;font-weight:500;}
-      .b2{border:1px solid rgba(232,180,160,.5);color:#fbeef2;padding:18px 34px;border-radius:99px;font-size:14px;letter-spacing:.12em;margin-left:14px;font-weight:500;}`,
+      .wrap{background:#f7ecec;color:#3d2530;font-family:Jost,sans-serif;}
+      .shot{position:absolute;inset:0;background:url("${photo("salon.jpg")}") center/cover no-repeat;}
+      .scrim{position:absolute;inset:0;background:
+        linear-gradient(90deg,rgba(250,238,238,.97) 0%,rgba(250,238,238,.92) 36%,rgba(250,238,238,.48) 62%,rgba(250,238,238,.04) 100%),
+        linear-gradient(180deg,rgba(250,238,238,.92) 0%,rgba(250,238,238,.70) 12%,transparent 28%);}
+      .nav{position:absolute;top:0;left:0;right:0;z-index:3;display:flex;align-items:center;justify-content:space-between;padding:26px 120px;border-bottom:1px solid rgba(61,37,48,.16);}
+      .brand{font-family:'Cormorant Garamond';font-weight:600;font-size:30px;letter-spacing:.26em;color:#3d2530;}
+      .links i{font-style:normal;margin:0 18px;font-size:13px;letter-spacing:.18em;color:#8a6b76;font-weight:300;}
+      .navcta{background:#b5697e;color:#fff;padding:11px 24px;border-radius:99px;font-size:12px;letter-spacing:.14em;font-weight:500;}
+      .body{position:absolute;left:120px;top:198px;z-index:2;}
+      .tag{font-size:13px;letter-spacing:.3em;color:#b5697e;margin-bottom:24px;font-weight:500;}
+      h1{font-family:'Cormorant Garamond';font-weight:600;font-size:104px;line-height:.96;margin-bottom:22px;max-width:600px;}
+      h1 em{font-style:italic;color:#b5697e;}
+      p{color:#7d616b;font-size:20px;max-width:420px;font-weight:300;margin-bottom:32px;}
+      .b1{background:#3d2530;color:#faeeee;padding:17px 32px;border-radius:99px;font-size:14px;letter-spacing:.12em;font-weight:400;}
+      .b2{border:1px solid rgba(61,37,48,.3);color:#3d2530;padding:17px 32px;border-radius:99px;font-size:14px;letter-spacing:.12em;margin-left:12px;font-weight:400;}`,
   },
   {
     slug: "panaderia-horno",
