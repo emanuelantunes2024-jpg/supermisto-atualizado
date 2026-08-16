@@ -131,34 +131,65 @@ const designs = [
   },
   {
     slug: "restaurante-gourmet",
-    fonts: "family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500",
+    fonts: "family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500",
     html: `
       ${nav("MAISON", ["CARTA", "RESERVAS", "EVENTOS"])}
-      <div class="plate"><div class="inner"></div><div class="dot"></div></div>
+      <div class="shot"></div>
+      <div class="scrim"></div>
       <div class="body">
         <div class="tag">C O C I N A&nbsp;&nbsp;D E&nbsp;&nbsp;A U T O R</div>
         <h1>Cada plato,<br><em>una historia</em></h1>
         <div class="stars">★★★★★</div>
         <p>Menú de temporada con producto local y bodega seleccionada.</p>
+        <div class="btns"><span class="b1">RESERVAR MESA</span></div>
       </div>`,
     css: `
-      .wrap{background:linear-gradient(150deg,#14110d 0%,#241d14 50%,#0a0908 100%);color:#f4efe6;font-family:Inter,sans-serif;}
-      .nav{position:absolute;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:26px 120px;border-bottom:1px solid rgba(198,166,110,.2);z-index:3;}
+      .wrap{background:#0a0806;color:#f4efe6;font-family:Inter,sans-serif;}
+      .shot{position:absolute;inset:0;background:url("${photo("restaurante.jpg")}") center/cover no-repeat;}
+      .scrim{position:absolute;inset:0;background:
+        linear-gradient(90deg,rgba(8,6,4,.95) 0%,rgba(8,6,4,.88) 32%,rgba(8,6,4,.42) 58%,rgba(8,6,4,.08) 100%),
+        linear-gradient(180deg,rgba(8,6,4,.90) 0%,rgba(8,6,4,.72) 12%,transparent 28%);}
+      .nav{position:absolute;top:0;left:0;right:0;z-index:3;display:flex;align-items:center;justify-content:space-between;padding:26px 120px;border-bottom:1px solid rgba(198,166,110,.28);}
       .brand{font-family:'Cormorant Garamond';font-weight:700;font-size:30px;letter-spacing:.3em;color:#c6a66e;}
-      .links i{font-style:normal;margin:0 18px;font-size:13px;letter-spacing:.2em;color:#9c8c72;}
+      .links i{font-style:normal;margin:0 18px;font-size:13px;letter-spacing:.2em;color:#a2947c;}
       .navcta{border:1px solid #c6a66e;color:#c6a66e;padding:10px 22px;font-size:12px;letter-spacing:.18em;}
-      .plate{position:absolute;right:130px;top:180px;width:400px;height:400px;border-radius:50%;
-        background:radial-gradient(circle at 40% 32%,#2b241a,#151109 72%);border:2px solid rgba(198,166,110,.5);
-        box-shadow:0 46px 100px rgba(0,0,0,.7);}
-      .plate .inner{position:absolute;inset:52px;border-radius:50%;border:1px solid rgba(198,166,110,.28);}
-      .plate .dot{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:120px;height:120px;border-radius:50%;
-        background:radial-gradient(circle at 38% 34%,#c6a66e,#8a6c38);box-shadow:0 12px 30px rgba(0,0,0,.6);}
-      .body{position:absolute;left:120px;top:212px;z-index:2;}
-      .tag{font-size:13px;letter-spacing:.36em;color:#c6a66e;margin-bottom:26px;}
-      h1{font-family:'Cormorant Garamond';font-weight:600;font-size:118px;line-height:.94;margin-bottom:20px;}
+      .body{position:absolute;left:120px;top:196px;z-index:2;}
+      .tag{font-size:13px;letter-spacing:.36em;color:#c6a66e;margin-bottom:24px;}
+      h1{font-family:'Cormorant Garamond';font-weight:600;font-size:104px;line-height:.96;margin-bottom:18px;max-width:520px;}
       h1 em{font-style:italic;color:#c6a66e;}
-      .stars{color:#c6a66e;letter-spacing:.5em;font-size:19px;margin-bottom:20px;}
-      p{color:#a99c86;font-size:21px;max-width:500px;}`,
+      .stars{color:#c6a66e;letter-spacing:.5em;font-size:18px;margin-bottom:18px;}
+      p{color:#b3a68f;font-size:20px;max-width:420px;margin-bottom:30px;}
+      .b1{background:#c6a66e;color:#1a1206;padding:17px 32px;font-weight:600;font-size:14px;letter-spacing:.14em;}`,
+  },
+  {
+    slug: "bistro-del-barrio",
+    fonts: "family=Bitter:wght@600;700&family=Inter:wght@400;600",
+    html: `
+      ${nav("CASA&nbsp;NUESTRA", ["MENÚ DEL DÍA", "CARTA", "RESERVAR"])}
+      <div class="shot"></div>
+      <div class="scrim"></div>
+      <div class="body">
+        <div class="tag">MENÚ DEL DÍA · 14,50 €</div>
+        <h1>Comida de<br><em>todos los días</em></h1>
+        <p>Primero, segundo, postre y bebida. De lunes a viernes.</p>
+        <div class="btns"><span class="b1">VER EL MENÚ DE HOY</span></div>
+      </div>`,
+    css: `
+      .wrap{background:#14100c;color:#f7f1e7;font-family:Inter,sans-serif;}
+      .shot{position:absolute;inset:0;background:url("${photo("bistro.jpg")}") center/cover no-repeat;}
+      .scrim{position:absolute;inset:0;background:
+        linear-gradient(270deg,rgba(16,11,7,.95) 0%,rgba(16,11,7,.88) 30%,rgba(16,11,7,.44) 56%,rgba(16,11,7,.06) 100%),
+        linear-gradient(180deg,rgba(16,11,7,.88) 0%,rgba(16,11,7,.66) 12%,transparent 28%);}
+      .nav{position:absolute;top:0;left:0;right:0;z-index:3;display:flex;align-items:center;justify-content:space-between;padding:26px 120px;border-bottom:1px solid rgba(232,178,86,.26);}
+      .brand{font-family:Bitter;font-weight:700;font-size:25px;letter-spacing:.08em;color:#e8b256;}
+      .links i{font-style:normal;margin:0 16px;font-size:13.5px;color:#b8a891;}
+      .navcta{background:#e8b256;color:#20160c;padding:11px 22px;border-radius:6px;font-size:13px;font-weight:600;}
+      .body{position:absolute;right:120px;top:198px;z-index:2;text-align:right;}
+      .tag{font-size:14px;letter-spacing:.2em;color:#e8b256;font-weight:600;margin-bottom:22px;}
+      h1{font-family:Bitter;font-weight:700;font-size:82px;line-height:1.02;margin-bottom:22px;}
+      h1 em{font-style:normal;color:#e8b256;}
+      p{color:#b8a891;font-size:20px;max-width:430px;margin-left:auto;margin-bottom:30px;}
+      .b1{background:#e8b256;color:#20160c;padding:17px 30px;border-radius:6px;font-weight:700;font-size:15px;}`,
   },
   {
     slug: "tienda-urbana",
