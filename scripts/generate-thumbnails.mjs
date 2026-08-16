@@ -262,19 +262,19 @@ const designs = [
       .b1{background:#3d2b26;color:#fbf1ec;padding:18px 34px;border-radius:99px;font-size:15px;letter-spacing:.1em;font-weight:500;}`,
   },
   {
-    slug: "consultora-pro",
+    slug: "asesoria-abogados",
     fonts: "family=Space+Grotesk:wght@500;700&family=Inter:wght@400;600",
     html: `
-      ${nav("NORTE&nbsp;&&nbsp;CO", ["SERVICIOS", "CASOS", "EQUIPO"])}
+      ${nav("LEX&nbsp;&&nbsp;PARTNERS", ["ÁREAS", "EQUIPO", "CONTACTO"])}
       <div class="panel">
         <div class="bars"><i style="height:38%"></i><i style="height:56%"></i><i style="height:74%"></i><i style="height:100%"></i></div>
-        <div class="kpi"><b>+38%</b><span>crecimiento medio</span></div>
+        <div class="kpi"><b>+1.200</b><span>casos resueltos</span></div>
       </div>
       <div class="body">
-        <div class="tag">CONSULTORÍA ESTRATÉGICA</div>
-        <h1>Decisiones<br><em>con datos</em></h1>
-        <p>Acompañamos a pymes que quieren crecer sin improvisar.</p>
-        <div class="btns"><span class="b1">AGENDAR CONSULTA</span></div>
+        <div class="tag">ABOGADOS Y ASESORÍA FISCAL</div>
+        <h1>Tu caso,<br><em>en buenas manos</em></h1>
+        <p>Mercantil, laboral y fiscal. Primera consulta sin compromiso.</p>
+        <div class="btns"><span class="b1">CONSULTA GRATUITA</span></div>
       </div>`,
     css: `
       .wrap{background:linear-gradient(150deg,#0c1a2e 0%,#12294a 52%,#081524 100%);color:#eaf1fb;font-family:Inter,sans-serif;}
@@ -333,6 +333,266 @@ const designs = [
       h1 em{font-style:normal;color:#ffb545;}
       p{color:#b9a3d4;font-size:22px;max-width:470px;margin-bottom:34px;}
       .b1{background:#ffb545;color:#241436;padding:18px 34px;border-radius:99px;font-weight:600;font-size:16px;}`,
+  },
+  {
+    slug: "salon-elite",
+    fonts: "family=Cormorant+Garamond:wght@500;600&family=Jost:wght@300;400;500",
+    html: `
+      ${nav("SALÓN&nbsp;ÉLITE", ["SERVICIOS", "TARIFAS", "EQUIPO"])}
+      <div class="mirror"><div class="glow"></div></div>
+      <div class="ribbon"></div>
+      <div class="body">
+        <div class="tag">P E L U Q U E R Í A&nbsp;&nbsp;&&nbsp;&nbsp;C O L O R</div>
+        <h1>El color que<br><em>te sienta bien</em></h1>
+        <p>Corte, color y tratamientos con producto profesional. Pide tu cita en un minuto.</p>
+        <div class="btns"><span class="b1">RESERVAR CITA</span><span class="b2">VER TARIFAS</span></div>
+      </div>`,
+    css: `
+      .wrap{background:linear-gradient(150deg,#2d1824 0%,#4a2438 46%,#1a0d14 100%);color:#fbeef2;font-family:Jost,sans-serif;}
+      .nav{position:absolute;top:0;left:0;right:0;z-index:3;display:flex;align-items:center;justify-content:space-between;padding:26px 120px;border-bottom:1px solid rgba(232,180,160,.22);}
+      .brand{font-family:'Cormorant Garamond';font-weight:600;font-size:29px;letter-spacing:.26em;color:#e8b4a0;}
+      .links i{font-style:normal;margin:0 18px;font-size:13px;letter-spacing:.18em;color:#cfa9b4;font-weight:300;}
+      .navcta{background:#e8b4a0;color:#2d1824;padding:11px 24px;border-radius:99px;font-size:12px;letter-spacing:.14em;font-weight:500;}
+      .mirror{position:absolute;right:190px;top:150px;width:330px;height:470px;border-radius:170px 170px 20px 20px;
+        border:3px solid rgba(232,180,160,.75);overflow:hidden;
+        background:linear-gradient(165deg,rgba(232,180,160,.30),rgba(120,60,86,.42) 58%,rgba(40,18,30,.55));
+        box-shadow:0 40px 90px rgba(20,8,14,.55);}
+      .mirror .glow{position:absolute;left:-14%;top:6%;width:150%;height:56%;background:radial-gradient(circle at 38% 30%,rgba(255,235,228,.62),transparent 64%);}
+      .ribbon{position:absolute;right:120px;top:104px;width:470px;height:560px;border:1px solid rgba(232,180,160,.30);border-radius:200px 200px 26px 26px;}
+      .body{position:absolute;left:120px;top:206px;z-index:2;}
+      .tag{font-size:13px;letter-spacing:.3em;color:#e8b4a0;margin-bottom:24px;font-weight:500;}
+      h1{font-family:'Cormorant Garamond';font-weight:600;font-size:114px;line-height:.94;margin-bottom:24px;max-width:660px;}
+      h1 em{font-style:italic;color:#e8b4a0;}
+      p{color:#cfa9b4;font-size:21px;max-width:490px;font-weight:300;margin-bottom:34px;}
+      .b1{background:#e8b4a0;color:#2d1824;padding:18px 34px;border-radius:99px;font-size:14px;letter-spacing:.12em;font-weight:500;}
+      .b2{border:1px solid rgba(232,180,160,.5);color:#fbeef2;padding:18px 34px;border-radius:99px;font-size:14px;letter-spacing:.12em;margin-left:14px;font-weight:500;}`,
+  },
+  {
+    slug: "panaderia-horno",
+    fonts: "family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;600",
+    html: `
+      ${nav("EL&nbsp;HORNO", ["PRODUCTOS", "ENCARGOS", "LOCALES"])}
+      <div class="oven"></div>
+      <div class="loaf l1"></div><div class="loaf l2"></div><div class="loaf l3"></div>
+      <div class="body">
+        <div class="tag">OBRADOR ARTESANO · DESDE 1974</div>
+        <h1>Pan de masa<br><em>madre cada día</em></h1>
+        <p>Horneado en leña cada mañana. Encarga tu tarta por WhatsApp.</p>
+        <div class="btns"><span class="b1">VER PRODUCTOS</span></div>
+      </div>`,
+    css: `
+      .wrap{background:linear-gradient(152deg,#f7e9d2 0%,#efd9b6 50%,#e0c193 100%);color:#3d2a15;font-family:Inter,sans-serif;}
+      .nav{position:absolute;top:0;left:0;right:0;z-index:3;display:flex;align-items:center;justify-content:space-between;padding:26px 120px;border-bottom:1px solid rgba(61,42,21,.18);}
+      .brand{font-family:Fraunces;font-weight:700;font-size:27px;letter-spacing:.08em;color:#8a4f1c;}
+      .links i{font-style:normal;margin:0 18px;font-size:14px;color:#7a6039;}
+      .navcta{background:#8a4f1c;color:#f7e9d2;padding:11px 22px;border-radius:99px;font-size:13px;font-weight:600;}
+      .oven{position:absolute;right:150px;top:170px;width:400px;height:400px;border-radius:50% 50% 24px 24px;
+        background:radial-gradient(circle at 46% 62%,#ffb85c,#d4711f 44%,#8a4318 78%);
+        box-shadow:0 40px 90px rgba(120,70,20,.4),inset 0 -18px 40px rgba(90,40,10,.5);}
+      .oven::after{content:"";position:absolute;left:14%;top:34%;width:72%;height:56%;border-radius:50% 50% 14px 14px;
+        background:radial-gradient(circle at 50% 60%,#3a1d08,#201004);box-shadow:inset 0 10px 30px rgba(255,180,90,.55);}
+      .loaf{position:absolute;border-radius:50%;background:linear-gradient(160deg,#e8b877,#c98a45);box-shadow:0 14px 30px rgba(120,70,20,.32);}
+      .l1{width:130px;height:86px;right:560px;top:452px;transform:rotate(-12deg);}
+      .l2{width:104px;height:70px;right:452px;top:522px;transform:rotate(8deg);}
+      .l3{width:88px;height:60px;right:640px;top:552px;transform:rotate(-4deg);}
+      .body{position:absolute;left:120px;top:206px;z-index:2;}
+      .tag{font-size:14px;letter-spacing:.24em;color:#8a4f1c;font-weight:600;margin-bottom:22px;}
+      h1{font-family:Fraunces;font-weight:700;font-size:100px;line-height:.98;margin-bottom:24px;max-width:660px;}
+      h1 em{font-style:italic;color:#8a4f1c;}
+      p{color:#6b5433;font-size:22px;max-width:470px;margin-bottom:34px;}
+      .b1{background:#8a4f1c;color:#f7e9d2;padding:18px 34px;border-radius:99px;font-weight:600;font-size:16px;}`,
+  },
+  {
+    slug: "boutique-moda",
+    fonts: "family=Italiana&family=Jost:wght@300;400;500",
+    html: `
+      ${nav("MAISON&nbsp;LUNA", ["COLECCIÓN", "NOVEDADES", "TIENDA"])}
+      <div class="panel p1"></div><div class="panel p2"></div>
+      <div class="badge">SS/26</div>
+      <div class="body">
+        <div class="tag">N U E V A&nbsp;&nbsp;C O L E C C I Ó N</div>
+        <h1>Primavera<br><em>en calma</em></h1>
+        <p>Prendas atemporales, tejidos naturales y tallas de la 34 a la 48.</p>
+        <div class="btns"><span class="b1">VER COLECCIÓN</span></div>
+      </div>`,
+    css: `
+      .wrap{background:linear-gradient(150deg,#efe7e1 0%,#e2d5cd 52%,#cdbcb2 100%);color:#2e2724;font-family:Jost,sans-serif;}
+      .nav{position:absolute;top:0;left:0;right:0;z-index:4;display:flex;align-items:center;justify-content:space-between;padding:26px 120px;border-bottom:1px solid rgba(46,39,36,.16);}
+      .brand{font-family:Italiana;font-size:32px;letter-spacing:.22em;}
+      .links i{font-style:normal;margin:0 18px;font-size:13px;letter-spacing:.2em;color:#6f625b;font-weight:300;}
+      .navcta{background:#2e2724;color:#efe7e1;padding:11px 24px;font-size:12px;letter-spacing:.16em;font-weight:400;}
+      .panel{position:absolute;border-radius:200px 200px 6px 6px;box-shadow:0 34px 76px rgba(90,72,62,.3);}
+      .p1{right:300px;top:150px;width:250px;height:430px;background:linear-gradient(170deg,#b9a294,#8d7566 62%,#6d584b);}
+      .p2{right:120px;top:222px;width:200px;height:358px;background:linear-gradient(170deg,#d9cabe,#b7a294 64%,#93806f);}
+      .badge{position:absolute;right:236px;top:110px;z-index:3;font-family:Italiana;font-size:26px;letter-spacing:.2em;
+        background:#2e2724;color:#efe7e1;padding:12px 20px;border-radius:99px;}
+      .body{position:absolute;left:120px;top:214px;z-index:2;}
+      .tag{font-size:13px;letter-spacing:.32em;color:#8d7566;margin-bottom:26px;font-weight:400;}
+      h1{font-family:Italiana;font-size:126px;line-height:.92;margin-bottom:26px;}
+      h1 em{font-style:normal;color:#8d7566;}
+      p{color:#6f625b;font-size:21px;max-width:470px;font-weight:300;margin-bottom:34px;}
+      .b1{background:#2e2724;color:#efe7e1;padding:18px 36px;font-size:14px;letter-spacing:.14em;font-weight:400;}`,
+  },
+  {
+    slug: "inmobiliaria-prime",
+    fonts: "family=Manrope:wght@500;800&family=Inter:wght@400;600",
+    html: `
+      ${nav("PRIME&nbsp;CASA", ["COMPRAR", "ALQUILAR", "VALORAR"])}
+      <div class="card">
+        <div class="photo"><span class="tagline">DESTACADA</span></div>
+        <div class="meta"><b>€ 385.000</b><span>Chalet · 4 hab · 210 m²</span></div>
+        <div class="feat"><i>4 hab</i><i>2 baños</i><i>Jardín</i></div>
+      </div>
+      <div class="body">
+        <div class="tag">INMOBILIARIA DE CONFIANZA</div>
+        <h1>Tu próxima<br><em>casa te espera</em></h1>
+        <p>Más de 300 propiedades verificadas. Valoramos la tuya gratis en 24 h.</p>
+        <div class="search"><span class="sfield">Zona o código postal</span><span class="sbtn">Buscar</span></div>
+      </div>`,
+    css: `
+      .wrap{background:linear-gradient(150deg,#122031 0%,#16293d 52%,#0a121c 100%);color:#eaf1fa;font-family:Inter,sans-serif;}
+      .nav{position:absolute;top:0;left:0;right:0;z-index:3;display:flex;align-items:center;justify-content:space-between;padding:26px 120px;border-bottom:1px solid rgba(255,255,255,.12);}
+      .brand{font-family:Manrope;font-weight:800;font-size:26px;letter-spacing:.02em;color:#e2b062;}
+      .links i{font-style:normal;margin:0 18px;font-size:14px;color:#95a9c0;}
+      .navcta{background:#e2b062;color:#122031;padding:11px 22px;border-radius:8px;font-size:13px;font-weight:600;}
+      .card{position:absolute;right:120px;top:168px;width:400px;border-radius:18px;overflow:hidden;z-index:2;
+        background:linear-gradient(165deg,rgba(255,255,255,.13),rgba(255,255,255,.05));border:1px solid rgba(255,255,255,.2);
+        box-shadow:0 38px 84px rgba(0,0,0,.5);}
+      .photo{height:210px;position:relative;background:linear-gradient(160deg,#3d5f7d,#22394f 60%,#16293d);}
+      .photo::after{content:"";position:absolute;left:16%;bottom:0;width:68%;height:58%;
+        background:linear-gradient(180deg,#e8d9c2,#c9b394);clip-path:polygon(50% 0,100% 34%,100% 100%,0 100%,0 34%);}
+      .tagline{position:absolute;left:16px;top:16px;z-index:2;background:#e2b062;color:#122031;font-size:12px;font-weight:700;letter-spacing:.1em;padding:6px 12px;border-radius:6px;}
+      .meta{padding:18px 20px 6px;display:flex;flex-direction:column;gap:4px;}
+      .meta b{font-family:Manrope;font-size:32px;color:#e2b062;}
+      .meta span{font-size:14px;color:#95a9c0;}
+      .feat{display:flex;gap:10px;padding:10px 20px 20px;}
+      .feat i{font-style:normal;font-size:12px;color:#cfe0f2;border:1px solid rgba(255,255,255,.2);border-radius:99px;padding:6px 12px;}
+      .body{position:absolute;left:120px;top:200px;z-index:2;}
+      .tag{font-size:14px;letter-spacing:.24em;color:#e2b062;font-weight:600;margin-bottom:22px;}
+      h1{font-family:Manrope;font-weight:800;font-size:104px;line-height:.96;letter-spacing:-.03em;margin-bottom:22px;}
+      h1 em{font-style:normal;color:#e2b062;}
+      p{color:#95a9c0;font-size:21px;max-width:520px;margin-bottom:30px;}
+      .search{display:flex;align-items:center;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:12px;padding:8px 8px 8px 22px;width:520px;}
+      .sfield{flex:1;color:#9fb3c9;font-size:16px;}
+      .sbtn{background:#e2b062;color:#122031;padding:14px 28px;border-radius:9px;font-weight:700;font-size:15px;}`,
+  },
+  {
+    slug: "clinica-dental",
+    fonts: "family=Outfit:wght@500;700&family=Inter:wght@400;600",
+    html: `
+      ${nav("CLÍNICA&nbsp;NOVA", ["TRATAMIENTOS", "EQUIPO", "CITA"])}
+      <div class="halo"></div>
+      <div class="tooth"></div>
+      <div class="chip c1">✓ Sin dolor</div>
+      <div class="chip c2">Financiación 0%</div>
+      <div class="body">
+        <div class="tag">ODONTOLOGÍA · IMPLANTES · ORTODONCIA</div>
+        <h1>Sonríe sin<br><em>pensarlo</em></h1>
+        <p>Primera visita y diagnóstico sin coste, desde 2009.</p>
+        <div class="btns"><span class="b1">PEDIR CITA PREVIA</span></div>
+      </div>`,
+    css: `
+      .wrap{background:linear-gradient(150deg,#ffffff 0%,#eef8fb 46%,#cfeaf3 100%);color:#0b2f3d;font-family:Inter,sans-serif;}
+      .nav{position:absolute;top:0;left:0;right:0;z-index:4;display:flex;align-items:center;justify-content:space-between;padding:26px 120px;border-bottom:1px solid rgba(11,47,61,.1);}
+      .brand{font-family:Outfit;font-weight:700;font-size:26px;color:#0b2f3d;}
+      .links i{font-style:normal;margin:0 18px;font-size:14px;color:#4d7c8c;}
+      .navcta{background:#12a3c4;color:#fff;padding:11px 22px;border-radius:99px;font-size:13px;font-weight:600;}
+      .halo{position:absolute;right:170px;top:150px;width:430px;height:430px;border-radius:50%;
+        background:radial-gradient(circle at 40% 34%,rgba(255,255,255,.95),rgba(160,224,240,.55) 58%,rgba(120,200,225,.28));
+        box-shadow:0 34px 80px rgba(11,47,61,.16);}
+      .tooth{position:absolute;right:288px;top:222px;width:200px;height:250px;
+        background:linear-gradient(170deg,#ffffff,#e4f4fa 60%,#c6e6f2);
+        border-radius:100px 100px 44px 44px;box-shadow:0 24px 54px rgba(11,47,61,.24);}
+      .tooth::after{content:"";position:absolute;left:50%;bottom:-2px;transform:translateX(-50%);width:56px;height:86px;background:radial-gradient(circle at 50% 100%,rgba(160,215,235,.9),rgba(190,230,245,.75));border-radius:0 0 40px 40px;}
+      .tooth::before{content:"";position:absolute;left:50%;top:-6px;transform:translateX(-50%);width:46px;height:52px;
+        background:radial-gradient(circle at 50% 0,rgba(200,232,244,.95),rgba(228,244,250,0) 72%);border-radius:0 0 30px 30px;}
+      .chip{position:absolute;z-index:3;background:#fff;border:1px solid rgba(11,47,61,.1);border-radius:99px;
+        padding:12px 20px;font-size:15px;font-weight:600;color:#0b2f3d;box-shadow:0 16px 36px rgba(11,47,61,.14);}
+      .c1{right:520px;top:220px;} .c2{right:130px;top:498px;}
+      .body{position:absolute;left:120px;top:206px;z-index:2;}
+      .tag{font-size:13px;letter-spacing:.2em;color:#12a3c4;font-weight:600;margin-bottom:22px;}
+      h1{font-family:Outfit;font-weight:700;font-size:106px;line-height:.98;letter-spacing:-.03em;margin-bottom:24px;max-width:620px;}
+      h1 em{font-style:normal;color:#12a3c4;}
+      p{color:#4d7c8c;font-size:21px;max-width:520px;margin-bottom:34px;}
+      .b1{background:#12a3c4;color:#fff;padding:19px 34px;border-radius:99px;font-weight:600;font-size:16px;}`,
+  },
+  {
+    slug: "studio-fitness",
+    fonts: "family=Archivo+Black&family=Inter:wght@400;600",
+    html: `
+      ${nav("PULSO&nbsp;STUDIO", ["CLASES", "BONOS", "ENTRENADORES"])}
+      <div class="streak"></div>
+      <div class="board">
+        <div class="row"><b>07:00</b><span>HIIT</span><i>12 plazas</i></div>
+        <div class="row on"><b>09:30</b><span>YOGA FLOW</span><i>4 plazas</i></div>
+        <div class="row"><b>18:00</b><span>FUERZA</span><i>8 plazas</i></div>
+        <div class="row"><b>20:00</b><span>PILATES</span><i>6 plazas</i></div>
+      </div>
+      <div class="body">
+        <div class="tag">CLASES DIRIGIDAS · SIN PERMANENCIA</div>
+        <h1>ENTRENA<br><em>HOY MISMO</em></h1>
+        <p>Reserva tu plaza desde el móvil. Primera clase gratis.</p>
+        <div class="btns"><span class="b1">VER HORARIOS</span></div>
+      </div>`,
+    css: `
+      .wrap{background:linear-gradient(150deg,#191919 0%,#241a16 50%,#0d0d0d 100%);color:#f7f4f1;font-family:Inter,sans-serif;}
+      .nav{position:absolute;top:0;left:0;right:0;z-index:4;display:flex;align-items:center;justify-content:space-between;padding:26px 120px;border-bottom:1px solid rgba(255,255,255,.12);}
+      .brand{font-family:'Archivo Black';font-size:24px;letter-spacing:.04em;color:#ff5a1f;}
+      .links i{font-style:normal;margin:0 18px;font-size:14px;color:#9a908a;}
+      .navcta{background:#ff5a1f;color:#141010;padding:11px 22px;border-radius:6px;font-size:13px;font-weight:600;}
+      .streak{position:absolute;right:-60px;top:0;bottom:0;width:52%;background:linear-gradient(200deg,rgba(255,90,31,.22),rgba(255,90,31,.02));clip-path:polygon(26% 0,100% 0,100% 100%,0 100%);}
+      .board{position:absolute;right:120px;top:186px;width:410px;z-index:2;border-radius:16px;overflow:hidden;
+        border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.06);box-shadow:0 36px 80px rgba(0,0,0,.55);}
+      .row{display:flex;align-items:center;gap:16px;padding:20px 22px;border-bottom:1px solid rgba(255,255,255,.09);}
+      .row:last-child{border-bottom:none;}
+      .row b{font-family:'Archivo Black';font-size:19px;width:76px;}
+      .row span{flex:1;font-size:16px;font-weight:600;letter-spacing:.04em;}
+      .row i{font-style:normal;font-size:12.5px;color:#9a908a;}
+      .row.on{background:#ff5a1f;color:#141010;}
+      .row.on i{color:rgba(20,16,16,.7);}
+      .body{position:absolute;left:120px;top:196px;z-index:3;}
+      .tag{font-size:13.5px;letter-spacing:.22em;color:#ff5a1f;font-weight:600;margin-bottom:22px;}
+      h1{font-family:'Archivo Black';font-size:118px;line-height:.9;letter-spacing:-.02em;margin-bottom:24px;}
+      h1 em{font-style:normal;color:#ff5a1f;}
+      p{color:#9a908a;font-size:21px;max-width:460px;margin-bottom:32px;}
+      .b1{background:#ff5a1f;color:#141010;padding:18px 34px;border-radius:6px;font-weight:700;font-size:15px;letter-spacing:.08em;}`,
+  },
+  {
+    slug: "casa-rural",
+    fonts: "family=Fraunces:opsz,wght@9..144,600&family=Jost:wght@300;400;500",
+    html: `
+      ${nav("VALLE&nbsp;SERENO", ["LA CASA", "ENTORNO", "RESERVAR"])}
+      <div class="hills h1"></div><div class="hills h2"></div>
+      <div class="sun"></div>
+      <div class="house"><div class="roof"></div><div class="win"></div></div>
+      <div class="body">
+        <div class="tag">CASA RURAL · SIERRA DE GREDOS</div>
+        <h1>Desconecta<br><em>de verdad</em></h1>
+        <p>6 habitaciones, piscina y 20 hectáreas de encinar. Reserva directa sin comisiones.</p>
+        <div class="btns"><span class="b1">VER DISPONIBILIDAD</span></div>
+      </div>`,
+    css: `
+      .wrap{background:linear-gradient(160deg,#1b3028 0%,#2c4a37 46%,#0f1c16 100%);color:#f2f0e4;font-family:Jost,sans-serif;}
+      .nav{position:absolute;top:0;left:0;right:0;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:26px 120px;border-bottom:1px solid rgba(226,200,140,.2);}
+      .brand{font-family:Fraunces;font-weight:600;font-size:27px;letter-spacing:.1em;color:#e2c88c;}
+      .links i{font-style:normal;margin:0 18px;font-size:13.5px;letter-spacing:.12em;color:#b6c2b0;font-weight:300;}
+      .navcta{background:#e2c88c;color:#1b3028;padding:11px 24px;border-radius:99px;font-size:13px;font-weight:500;}
+      .sun{position:absolute;right:300px;top:150px;width:180px;height:180px;border-radius:50%;
+        background:radial-gradient(circle at 42% 40%,#f6e0a8,#e2c88c 58%,rgba(226,200,140,.25));box-shadow:0 0 90px rgba(226,200,140,.45);}
+      .hills{position:absolute;left:0;right:0;border-radius:50% 50% 0 0;}
+      .h1{bottom:-140px;height:400px;background:linear-gradient(180deg,#3a5c44,#26402f);opacity:.95;transform:scaleX(1.5);}
+      .h2{bottom:-190px;height:360px;background:linear-gradient(180deg,#48704f,#2f4d38);opacity:.75;transform:scaleX(1.9) translateX(12%);}
+      .house{position:absolute;right:230px;bottom:126px;width:238px;height:172px;background:#f2ead6;border-radius:4px;z-index:3;
+        box-shadow:0 22px 46px rgba(0,0,0,.45);}
+      .house .roof{position:absolute;left:-26px;right:-26px;top:-70px;height:74px;background:#8a4a32;
+        clip-path:polygon(50% 0,100% 100%,0 100%);}
+      .house .win{position:absolute;left:42px;top:54px;width:62px;height:66px;background:#e2c88c;box-shadow:90px 0 0 #e2c88c;}
+      .body{position:absolute;left:120px;top:206px;z-index:4;}
+      .tag{font-size:13.5px;letter-spacing:.26em;color:#e2c88c;font-weight:500;margin-bottom:24px;}
+      h1{font-family:Fraunces;font-weight:600;font-size:112px;line-height:.94;margin-bottom:24px;}
+      h1 em{font-style:italic;color:#e2c88c;}
+      p{color:#b6c2b0;font-size:21px;max-width:500px;font-weight:300;margin-bottom:34px;}
+      .b1{background:#e2c88c;color:#1b3028;padding:18px 34px;border-radius:99px;font-weight:500;font-size:15px;letter-spacing:.06em;}`,
   },
 ];
 
