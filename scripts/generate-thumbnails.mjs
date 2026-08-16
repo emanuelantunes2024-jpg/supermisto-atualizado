@@ -108,26 +108,26 @@ const designs = [
       <div class="scrim"></div>
       <div class="body">
         <div class="tag">CAFÉ DE ESPECIALIDAD</div>
-        <h1>Tostado<br>cada <em>mañana</em></h1>
-        <p>Grano de origen, molido al momento y servido como debe ser.</p>
+        <h1>Tostado<br>cada <em>día</em></h1>
+        <p>Grano de origen, molido al momento.</p>
         <div class="btns"><span class="b1">VER LA CARTA</span></div>
       </div>`,
     css: `
       .wrap{background:#2a1a10;color:#f7ecdc;font-family:Inter,sans-serif;}
       .shot{position:absolute;inset:0;background:url("${photo("cafeteria.jpg")}") center/cover no-repeat;}
       .scrim{position:absolute;inset:0;background:
-        linear-gradient(90deg,rgba(22,12,6,.95) 0%,rgba(22,12,6,.90) 42%,rgba(22,12,6,.52) 68%,rgba(22,12,6,.06) 100%),
-        linear-gradient(180deg,rgba(22,12,6,.88) 0%,rgba(22,12,6,.74) 12%,transparent 30%);}
+        linear-gradient(90deg,rgba(24,13,6,.94) 0%,rgba(24,13,6,.86) 26%,rgba(24,13,6,.34) 50%,rgba(24,13,6,.04) 72%),
+        linear-gradient(180deg,rgba(24,13,6,.90) 0%,rgba(24,13,6,.70) 12%,transparent 28%);}
       .nav{position:absolute;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:26px 120px;border-bottom:1px solid rgba(240,200,150,.16);z-index:3;}
       .brand{font-family:Fraunces;font-size:26px;letter-spacing:.06em;color:#f0c88a;}
       .links i{font-style:normal;margin:0 18px;font-size:14px;color:#c8ab88;}
       .navcta{background:#f0c88a;color:#3a2616;padding:10px 22px;border-radius:99px;font-size:13px;font-weight:600;}
-      .body{position:absolute;left:120px;top:208px;z-index:2;}
+      .body{position:absolute;left:120px;top:190px;z-index:2;}
       .tag{font-size:15px;letter-spacing:.32em;color:#f0c88a;margin-bottom:22px;}
-      h1{font-family:Fraunces;font-size:98px;line-height:.98;margin-bottom:26px;max-width:640px;}
+      h1{font-family:Fraunces;font-size:86px;line-height:1;margin-bottom:24px;max-width:420px;}
       h1 em{font-style:italic;color:#f0c88a;}
-      p{color:#d3bda2;font-size:22px;max-width:520px;margin-bottom:34px;}
-      .b1{background:#f0c88a;color:#3a2616;padding:18px 34px;border-radius:99px;font-weight:600;font-size:16px;}`,
+      p{color:#d3bda2;font-size:20px;max-width:360px;margin-bottom:30px;}
+      .b1{background:#f0c88a;color:#3a2616;padding:17px 30px;border-radius:99px;font-weight:600;font-size:15px;}`,
   },
   {
     slug: "restaurante-gourmet",
