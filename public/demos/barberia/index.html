@@ -41,9 +41,17 @@ h1,h2,h3{font-family:'Bebas Neue',sans-serif;letter-spacing:0.02em;font-weight:4
 
 /* hero */
 .bh-hero{
-  padding:90px 0 70px;
-  background:radial-gradient(ellipse at 75% 30%,rgba(217,164,65,0.10),transparent 55%);
+  padding:110px 0 90px;
   position:relative;
+  background:
+    linear-gradient(90deg,rgba(12,10,8,0.95) 0%,rgba(12,10,8,0.88) 38%,rgba(12,10,8,0.45) 66%,rgba(12,10,8,0.15) 100%),
+    linear-gradient(180deg,rgba(12,10,8,0.55) 0%,transparent 22%,rgba(12,10,8,0.9) 100%),
+    url("img/hero.jpg") center 22%/cover no-repeat;
+}
+.bh-hero .container{position:relative;z-index:1;}
+.bh-hero h1{text-shadow:0 4px 24px rgba(0,0,0,0.55);}
+@media(max-width:760px){
+  .bh-hero{background-position:center,center,62% 22%;}
 }
 .bh-hero-tag{font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;}
 .bh-hero h1{font-size:clamp(46px,7vw,84px);line-height:0.95;margin-bottom:20px;}

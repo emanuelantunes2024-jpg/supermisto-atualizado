@@ -20,6 +20,13 @@ const WIDTH = 1600;
 const HEIGHT = 720; // ~2.22:1, la proporción con la que se recorta en la tarjeta
 const OUT_DIR = path.join(process.cwd(), "public", "thumbnails");
 
+
+/** Foto local incrustada como data: URI (evita depender de red al renderizar). */
+function photo(name) {
+  const file = path.join(process.cwd(), "scripts", "photos", name);
+  return `data:image/jpeg;base64,${fs.readFileSync(file).toString("base64")}`;
+}
+
 /** Barra de navegación falsa: señala "esto es un sitio web". */
 const nav = (brand, links, css) => `
   <nav class="nav">
@@ -34,7 +41,8 @@ const designs = [
     fonts: "family=Bebas+Neue&family=Inter:wght@400;600",
     html: `
       ${nav("GENTLEMAN", ["INICIO", "SERVICIOS", "GALERÍA"])}
-      <div class="pole"></div>
+      <div class="shot"></div>
+      <div class="scrim"></div>
       <div class="body">
         <div class="tag">MÁS QUE UN CORTE, UNA EXPERIENCIA</div>
         <h1>ESTILO QUE<br><em>TE DEFINE</em></h1>
@@ -42,15 +50,16 @@ const designs = [
         <div class="btns"><span class="b1">RESERVAR CITA</span><span class="b2">VER SERVICIOS</span></div>
       </div>`,
     css: `
-      .wrap{background:radial-gradient(120% 140% at 78% 25%,#3a2a14 0%,#191410 45%,#0b0908 100%);color:#f5efe3;font-family:Inter,sans-serif;}
-      .nav{position:absolute;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:26px 120px;font-size:15px;letter-spacing:.22em;border-bottom:1px solid rgba(217,164,65,.18);}
+      .wrap{background:#0b0908;color:#f5efe3;font-family:Inter,sans-serif;}
+      .shot{position:absolute;inset:0;background:url("${photo("barberia.jpg")}") center/cover no-repeat;}
+      .scrim{position:absolute;inset:0;background:
+        linear-gradient(90deg,rgba(8,6,5,.95) 0%,rgba(8,6,5,.88) 34%,rgba(8,6,5,.45) 62%,rgba(8,6,5,.12) 100%),
+        linear-gradient(180deg,rgba(8,6,5,.92) 0%,rgba(8,6,5,.80) 12%,transparent 30%);}
+      .nav{position:absolute;top:0;left:0;right:0;z-index:3;display:flex;align-items:center;justify-content:space-between;padding:26px 120px;font-size:15px;letter-spacing:.22em;border-bottom:1px solid rgba(217,164,65,.22);}
       .brand{font-family:'Bebas Neue';font-size:30px;letter-spacing:.16em;color:#e7b45c;}
       .links i{font-style:normal;margin:0 20px;color:#a2917a;font-size:14px;letter-spacing:.18em;}
       .navcta{background:#d9a441;color:#1a1200;padding:10px 22px;border-radius:4px;font-weight:600;font-size:13px;letter-spacing:.14em;}
-      .pole{position:absolute;right:150px;top:150px;width:120px;height:520px;border-radius:60px;
-        background:repeating-linear-gradient(150deg,#e8e3d8 0 34px,#c2372f 34px 68px,#e8e3d8 68px 102px,#2b4a86 102px 136px);
-        box-shadow:0 40px 90px rgba(0,0,0,.65),inset -22px 0 44px rgba(0,0,0,.5);opacity:.9;}
-      .body{position:absolute;left:120px;top:170px;}
+      .body{position:absolute;left:120px;top:170px;z-index:2;}
       .tag{font-size:16px;letter-spacing:.34em;color:#d9a441;margin-bottom:22px;}
       h1{font-family:'Bebas Neue';font-size:132px;line-height:.86;letter-spacing:.02em;margin-bottom:22px;}
       h1 em{font-style:normal;color:#d9a441;}
@@ -99,8 +108,8 @@ const designs = [
     fonts: "family=Fraunces:opsz,wght@9..144,700&family=Inter:wght@400;600",
     html: `
       ${nav("TOSTA&nbsp;·&nbsp;CAFÉ", ["CARTA", "NOSOTROS", "VISÍTANOS"])}
-      <div class="ring r1"></div><div class="ring r2"></div>
-      <div class="cup"><div class="crema"></div></div>
+      <div class="shot"></div>
+      <div class="scrim"></div>
       <div class="body">
         <div class="tag">CAFÉ DE ESPECIALIDAD</div>
         <h1>Tostado<br>cada <em>mañana</em></h1>
@@ -108,20 +117,18 @@ const designs = [
         <div class="btns"><span class="b1">VER LA CARTA</span></div>
       </div>`,
     css: `
-      .wrap{background:linear-gradient(155deg,#3a2616 0%,#5a3a1e 42%,#2a1a10 100%);color:#f7ecdc;font-family:Inter,sans-serif;}
+      .wrap{background:#2a1a10;color:#f7ecdc;font-family:Inter,sans-serif;}
+      .shot{position:absolute;inset:0;background:url("${photo("cafeteria.jpg")}") center/cover no-repeat;}
+      .scrim{position:absolute;inset:0;background:
+        linear-gradient(90deg,rgba(22,12,6,.95) 0%,rgba(22,12,6,.90) 42%,rgba(22,12,6,.52) 68%,rgba(22,12,6,.06) 100%),
+        linear-gradient(180deg,rgba(22,12,6,.88) 0%,rgba(22,12,6,.74) 12%,transparent 30%);}
       .nav{position:absolute;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:26px 120px;border-bottom:1px solid rgba(240,200,150,.16);z-index:3;}
       .brand{font-family:Fraunces;font-size:26px;letter-spacing:.06em;color:#f0c88a;}
       .links i{font-style:normal;margin:0 18px;font-size:14px;color:#c8ab88;}
       .navcta{background:#f0c88a;color:#3a2616;padding:10px 22px;border-radius:99px;font-size:13px;font-weight:600;}
-      .ring{position:absolute;border-radius:50%;border:2px solid rgba(240,200,138,.22);}
-      .r1{width:520px;height:520px;right:-90px;top:120px;}
-      .r2{width:340px;height:340px;right:20px;top:210px;border-color:rgba(240,200,138,.14);}
-      .cup{position:absolute;right:118px;top:262px;width:250px;height:250px;border-radius:50%;
-        background:radial-gradient(circle at 36% 30%,#8a5a2e,#4a2c14 70%);box-shadow:0 34px 80px rgba(0,0,0,.55);}
-      .cup .crema{position:absolute;inset:26px;border-radius:50%;background:radial-gradient(circle at 40% 34%,#d8a869,#a06c34 65%,#7a4c22);}
       .body{position:absolute;left:120px;top:208px;z-index:2;}
       .tag{font-size:15px;letter-spacing:.32em;color:#f0c88a;margin-bottom:22px;}
-      h1{font-family:Fraunces;font-size:110px;line-height:.96;margin-bottom:26px;}
+      h1{font-family:Fraunces;font-size:98px;line-height:.98;margin-bottom:26px;max-width:640px;}
       h1 em{font-style:italic;color:#f0c88a;}
       p{color:#d3bda2;font-size:22px;max-width:520px;margin-bottom:34px;}
       .b1{background:#f0c88a;color:#3a2616;padding:18px 34px;border-radius:99px;font-weight:600;font-size:16px;}`,
