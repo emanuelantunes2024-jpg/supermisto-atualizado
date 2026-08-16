@@ -27,6 +27,31 @@ function photo(name) {
   return `data:image/jpeg;base64,${fs.readFileSync(file).toString("base64")}`;
 }
 
+
+/**
+ * Velo sobre la fotografía.
+ *
+ * Antes cubría casi media imagen al 96 % y la foto se perdía. Ahora es corto
+ * y suave: la legibilidad la aporta sobre todo la sombra del texto
+ * (`textGlow`), no tapar la foto. `dir` es 90 (texto a la izquierda) o 270
+ * (texto a la derecha).
+ */
+function scrim(dir, r, g, b) {
+  const light = r + g + b > 400;
+  const [a0, a1, a2] = light ? [0.9, 0.72, 0.24] : [0.86, 0.66, 0.2];
+  const c = (a) => `rgba(${r},${g},${b},${a})`;
+  return `.scrim{position:absolute;inset:0;background:
+        linear-gradient(${dir}deg,${c(a0)} 0%,${c(a1)} 22%,${c(a2)} 46%,${c(0)} 70%),
+        linear-gradient(180deg,${c(a0 * 0.7)} 0%,${c(a1 * 0.5)} 9%,${c(0)} 22%);}`;
+}
+
+/** Sombra que sostiene el texto sin oscurecer la foto que hay detrás. */
+function textGlow(light) {
+  return light
+    ? "text-shadow:0 1px 2px rgba(255,255,255,.9),0 2px 22px rgba(255,255,255,.75);"
+    : "text-shadow:0 1px 2px rgba(0,0,0,.55),0 2px 24px rgba(0,0,0,.6);";
+}
+
 /** Barra de navegación falsa: señala "esto es un sitio web". */
 const nav = (brand, links, css) => `
   <nav class="nav">
@@ -52,18 +77,16 @@ const designs = [
     css: `
       .wrap{background:#f6f1ea;color:#23201c;font-family:Jost,sans-serif;}
       .shot{position:absolute;inset:0;background:url("${photo("barberia-moderna.jpg")}") center/cover no-repeat;}
-      .scrim{position:absolute;inset:0;background:
-        linear-gradient(90deg,rgba(248,244,238,.97) 0%,rgba(248,244,238,.93) 38%,rgba(248,244,238,.52) 64%,rgba(248,244,238,.06) 100%),
-        linear-gradient(180deg,rgba(248,244,238,.92) 0%,rgba(248,244,238,.72) 12%,transparent 28%);}
+      ${scrim(90, 248, 244, 238)}
       .nav{position:absolute;top:0;left:0;right:0;z-index:3;display:flex;align-items:center;justify-content:space-between;padding:26px 120px;border-bottom:1px solid rgba(35,32,28,.14);}
       .brand{font-family:'Cormorant Garamond';font-weight:500;font-size:32px;letter-spacing:.34em;color:#23201c;}
       .links i{font-style:normal;margin:0 18px;font-size:13px;letter-spacing:.2em;color:#6f675d;font-weight:300;}
       .navcta{background:#23201c;color:#f6f1ea;padding:11px 24px;border-radius:99px;font-size:12px;letter-spacing:.16em;font-weight:400;}
       .body{position:absolute;left:120px;top:200px;z-index:2;}
       .tag{font-size:13px;letter-spacing:.3em;color:#a67c4e;margin-bottom:26px;font-weight:500;}
-      h1{font-family:Jost;font-weight:300;font-size:104px;line-height:1;letter-spacing:-.02em;margin-bottom:24px;}
+      h1{font-family:Jost;font-weight:300;font-size:104px;line-height:1;letter-spacing:-.02em;margin-bottom:24px;${textGlow(true)}}
       h1 em{font-style:normal;font-weight:500;color:#a67c4e;}
-      p{color:#6f675d;font-size:21px;max-width:470px;font-weight:300;margin-bottom:34px;}
+      p{color:#6f675d;font-size:21px;max-width:470px;font-weight:300;margin-bottom:34px;${textGlow(true)}}
       .b1{background:#23201c;color:#f6f1ea;padding:18px 34px;border-radius:99px;font-size:14px;letter-spacing:.12em;font-weight:400;}
       .b2{border:1px solid rgba(35,32,28,.3);color:#23201c;padding:18px 34px;border-radius:99px;font-size:14px;letter-spacing:.12em;margin-left:14px;font-weight:400;}`,
   },
@@ -84,19 +107,17 @@ const designs = [
     css: `
       .wrap{background:#0c0a08;color:#f4ead7;font-family:Inter,sans-serif;}
       .shot{position:absolute;inset:0;background:url("${photo("barberia.jpg")}") center/cover no-repeat;}
-      .scrim{position:absolute;inset:0;background:
-        linear-gradient(90deg,rgba(10,7,5,.96) 0%,rgba(10,7,5,.90) 38%,rgba(10,7,5,.48) 64%,rgba(10,7,5,.12) 100%),
-        linear-gradient(180deg,rgba(10,7,5,.92) 0%,rgba(10,7,5,.78) 12%,transparent 30%);}
+      ${scrim(90, 10, 7, 5)}
       .nav{position:absolute;top:0;left:0;right:0;z-index:3;display:flex;align-items:center;justify-content:space-between;padding:26px 120px;border-bottom:1px solid rgba(212,175,110,.28);}
       .brand{font-family:'Playfair Display';font-weight:900;font-size:25px;letter-spacing:.1em;color:#d4af6e;}
       .links i{font-style:normal;margin:0 18px;font-size:13px;letter-spacing:.2em;color:#a2917a;}
       .navcta{border:1px solid #d4af6e;color:#d4af6e;padding:10px 22px;font-size:12px;letter-spacing:.16em;font-weight:500;}
       .body{position:absolute;left:120px;top:196px;z-index:2;}
       .tag{font-size:15px;letter-spacing:.4em;color:#d4af6e;margin-bottom:24px;}
-      h1{font-family:'Playfair Display';font-weight:900;font-size:110px;line-height:.94;margin-bottom:24px;}
+      h1{font-family:'Playfair Display';font-weight:900;font-size:110px;line-height:.94;margin-bottom:24px;${textGlow(false)}}
       h1 em{font-style:italic;font-weight:700;color:#d4af6e;}
       .rule{width:130px;height:3px;background:#d4af6e;margin-bottom:24px;}
-      p{font-size:21px;color:#bdae95;max-width:520px;margin-bottom:32px;}
+      p{font-size:21px;color:#bdae95;max-width:520px;margin-bottom:32px;${textGlow(false)}}
       .b1{background:#d4af6e;color:#1a1200;padding:18px 34px;font-weight:700;font-size:14px;letter-spacing:.12em;}`,
   },
   {
@@ -115,18 +136,16 @@ const designs = [
     css: `
       .wrap{background:#2a1a10;color:#f7ecdc;font-family:Inter,sans-serif;}
       .shot{position:absolute;inset:0;background:url("${photo("cafeteria.jpg")}") center/cover no-repeat;}
-      .scrim{position:absolute;inset:0;background:
-        linear-gradient(90deg,rgba(24,13,6,.94) 0%,rgba(24,13,6,.86) 26%,rgba(24,13,6,.34) 50%,rgba(24,13,6,.04) 72%),
-        linear-gradient(180deg,rgba(24,13,6,.90) 0%,rgba(24,13,6,.70) 12%,transparent 28%);}
+      ${scrim(90, 24, 13, 6)}
       .nav{position:absolute;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:26px 120px;border-bottom:1px solid rgba(240,200,150,.16);z-index:3;}
       .brand{font-family:Fraunces;font-size:26px;letter-spacing:.06em;color:#f0c88a;}
       .links i{font-style:normal;margin:0 18px;font-size:14px;color:#c8ab88;}
       .navcta{background:#f0c88a;color:#3a2616;padding:10px 22px;border-radius:99px;font-size:13px;font-weight:600;}
       .body{position:absolute;left:120px;top:190px;z-index:2;}
       .tag{font-size:15px;letter-spacing:.32em;color:#f0c88a;margin-bottom:22px;}
-      h1{font-family:Fraunces;font-size:86px;line-height:1;margin-bottom:24px;max-width:420px;}
+      h1{font-family:Fraunces;font-size:86px;line-height:1;margin-bottom:24px;max-width:420px;${textGlow(false)}}
       h1 em{font-style:italic;color:#f0c88a;}
-      p{color:#d3bda2;font-size:20px;max-width:360px;margin-bottom:30px;}
+      p{color:#d3bda2;font-size:20px;max-width:360px;margin-bottom:30px;${textGlow(false)}}
       .b1{background:#f0c88a;color:#3a2616;padding:17px 30px;border-radius:99px;font-weight:600;font-size:15px;}`,
   },
   {
@@ -146,19 +165,17 @@ const designs = [
     css: `
       .wrap{background:#0a0806;color:#f4efe6;font-family:Inter,sans-serif;}
       .shot{position:absolute;inset:0;background:url("${photo("restaurante.jpg")}") center/cover no-repeat;}
-      .scrim{position:absolute;inset:0;background:
-        linear-gradient(90deg,rgba(8,6,4,.95) 0%,rgba(8,6,4,.88) 32%,rgba(8,6,4,.42) 58%,rgba(8,6,4,.08) 100%),
-        linear-gradient(180deg,rgba(8,6,4,.90) 0%,rgba(8,6,4,.72) 12%,transparent 28%);}
+      ${scrim(90, 8, 6, 4)}
       .nav{position:absolute;top:0;left:0;right:0;z-index:3;display:flex;align-items:center;justify-content:space-between;padding:26px 120px;border-bottom:1px solid rgba(198,166,110,.28);}
       .brand{font-family:'Cormorant Garamond';font-weight:700;font-size:30px;letter-spacing:.3em;color:#c6a66e;}
       .links i{font-style:normal;margin:0 18px;font-size:13px;letter-spacing:.2em;color:#a2947c;}
       .navcta{border:1px solid #c6a66e;color:#c6a66e;padding:10px 22px;font-size:12px;letter-spacing:.18em;}
       .body{position:absolute;left:120px;top:196px;z-index:2;}
       .tag{font-size:13px;letter-spacing:.36em;color:#c6a66e;margin-bottom:24px;}
-      h1{font-family:'Cormorant Garamond';font-weight:600;font-size:104px;line-height:.96;margin-bottom:18px;max-width:520px;}
+      h1{font-family:'Cormorant Garamond';font-weight:600;font-size:104px;line-height:.96;margin-bottom:18px;max-width:520px;${textGlow(false)}}
       h1 em{font-style:italic;color:#c6a66e;}
       .stars{color:#c6a66e;letter-spacing:.5em;font-size:18px;margin-bottom:18px;}
-      p{color:#b3a68f;font-size:20px;max-width:420px;margin-bottom:30px;}
+      p{color:#b3a68f;font-size:20px;max-width:420px;margin-bottom:30px;${textGlow(false)}}
       .b1{background:#c6a66e;color:#1a1206;padding:17px 32px;font-weight:600;font-size:14px;letter-spacing:.14em;}`,
   },
   {
@@ -177,18 +194,16 @@ const designs = [
     css: `
       .wrap{background:#14100c;color:#f7f1e7;font-family:Inter,sans-serif;}
       .shot{position:absolute;inset:0;background:url("${photo("bistro.jpg")}") center/cover no-repeat;}
-      .scrim{position:absolute;inset:0;background:
-        linear-gradient(270deg,rgba(16,11,7,.95) 0%,rgba(16,11,7,.88) 30%,rgba(16,11,7,.44) 56%,rgba(16,11,7,.06) 100%),
-        linear-gradient(180deg,rgba(16,11,7,.88) 0%,rgba(16,11,7,.66) 12%,transparent 28%);}
+      ${scrim(270, 16, 11, 7)}
       .nav{position:absolute;top:0;left:0;right:0;z-index:3;display:flex;align-items:center;justify-content:space-between;padding:26px 120px;border-bottom:1px solid rgba(232,178,86,.26);}
       .brand{font-family:Bitter;font-weight:700;font-size:25px;letter-spacing:.08em;color:#e8b256;}
       .links i{font-style:normal;margin:0 16px;font-size:13.5px;color:#b8a891;}
       .navcta{background:#e8b256;color:#20160c;padding:11px 22px;border-radius:6px;font-size:13px;font-weight:600;}
       .body{position:absolute;right:120px;top:198px;z-index:2;text-align:right;}
       .tag{font-size:14px;letter-spacing:.2em;color:#e8b256;font-weight:600;margin-bottom:22px;}
-      h1{font-family:Bitter;font-weight:700;font-size:82px;line-height:1.02;margin-bottom:22px;}
+      h1{font-family:Bitter;font-weight:700;font-size:82px;line-height:1.02;margin-bottom:22px;${textGlow(false)}}
       h1 em{font-style:normal;color:#e8b256;}
-      p{color:#b8a891;font-size:20px;max-width:430px;margin-left:auto;margin-bottom:30px;}
+      p{color:#b8a891;font-size:20px;max-width:430px;margin-left:auto;margin-bottom:30px;${textGlow(false)}}
       .b1{background:#e8b256;color:#20160c;padding:17px 30px;border-radius:6px;font-weight:700;font-size:15px;}`,
   },
   {
@@ -272,18 +287,16 @@ const designs = [
     css: `
       .wrap{background:#fbf6f6;color:#2f2630;font-family:Jost,sans-serif;}
       .shot{position:absolute;inset:0;background:url("${photo("estetica.jpg")}") center/cover no-repeat;}
-      .scrim{position:absolute;inset:0;background:
-        linear-gradient(270deg,rgba(253,249,249,.97) 0%,rgba(253,249,249,.93) 34%,rgba(253,249,249,.50) 60%,rgba(253,249,249,.04) 100%),
-        linear-gradient(180deg,rgba(253,249,249,.92) 0%,rgba(253,249,249,.70) 12%,transparent 28%);}
+      ${scrim(270, 253, 249, 249)}
       .nav{position:absolute;top:0;left:0;right:0;z-index:3;display:flex;align-items:center;justify-content:space-between;padding:26px 120px;border-bottom:1px solid rgba(47,38,48,.14);}
       .brand{font-family:Jost;font-weight:600;font-size:25px;letter-spacing:.24em;color:#2f2630;}
       .links i{font-style:normal;margin:0 18px;font-size:13px;letter-spacing:.16em;color:#7c6b78;font-weight:300;}
       .navcta{background:#a8567a;color:#fff;padding:11px 24px;border-radius:99px;font-size:12px;letter-spacing:.14em;font-weight:500;}
       .body{position:absolute;right:120px;top:206px;z-index:2;text-align:right;}
       .tag{font-size:12.5px;letter-spacing:.26em;color:#a8567a;margin-bottom:24px;font-weight:500;}
-      h1{font-family:Jost;font-weight:400;font-size:92px;line-height:1.02;letter-spacing:-.01em;margin-bottom:22px;}
+      h1{font-family:Jost;font-weight:400;font-size:92px;line-height:1.02;letter-spacing:-.01em;margin-bottom:22px;${textGlow(true)}}
       h1 em{font-style:normal;font-weight:600;color:#a8567a;}
-      p{color:#7c6b78;font-size:19px;max-width:400px;margin-left:auto;font-weight:300;margin-bottom:30px;}
+      p{color:#7c6b78;font-size:19px;max-width:400px;margin-left:auto;font-weight:300;margin-bottom:30px;${textGlow(true)}}
       .b1{background:#2f2630;color:#fdf9f9;padding:17px 32px;border-radius:99px;font-size:14px;letter-spacing:.12em;font-weight:400;}`,
   },
   {
@@ -375,18 +388,16 @@ const designs = [
     css: `
       .wrap{background:#f7ecec;color:#3d2530;font-family:Jost,sans-serif;}
       .shot{position:absolute;inset:0;background:url("${photo("salon.jpg")}") center/cover no-repeat;}
-      .scrim{position:absolute;inset:0;background:
-        linear-gradient(90deg,rgba(250,238,238,.97) 0%,rgba(250,238,238,.92) 36%,rgba(250,238,238,.48) 62%,rgba(250,238,238,.04) 100%),
-        linear-gradient(180deg,rgba(250,238,238,.92) 0%,rgba(250,238,238,.70) 12%,transparent 28%);}
+      ${scrim(90, 250, 238, 238)}
       .nav{position:absolute;top:0;left:0;right:0;z-index:3;display:flex;align-items:center;justify-content:space-between;padding:26px 120px;border-bottom:1px solid rgba(61,37,48,.16);}
       .brand{font-family:'Cormorant Garamond';font-weight:600;font-size:30px;letter-spacing:.26em;color:#3d2530;}
       .links i{font-style:normal;margin:0 18px;font-size:13px;letter-spacing:.18em;color:#8a6b76;font-weight:300;}
       .navcta{background:#b5697e;color:#fff;padding:11px 24px;border-radius:99px;font-size:12px;letter-spacing:.14em;font-weight:500;}
       .body{position:absolute;left:120px;top:198px;z-index:2;}
       .tag{font-size:13px;letter-spacing:.3em;color:#b5697e;margin-bottom:24px;font-weight:500;}
-      h1{font-family:'Cormorant Garamond';font-weight:600;font-size:104px;line-height:.96;margin-bottom:22px;max-width:600px;}
+      h1{font-family:'Cormorant Garamond';font-weight:600;font-size:104px;line-height:.96;margin-bottom:22px;max-width:600px;${textGlow(true)}}
       h1 em{font-style:italic;color:#b5697e;}
-      p{color:#7d616b;font-size:20px;max-width:420px;font-weight:300;margin-bottom:32px;}
+      p{color:#7d616b;font-size:20px;max-width:420px;font-weight:300;margin-bottom:32px;${textGlow(true)}}
       .b1{background:#3d2530;color:#faeeee;padding:17px 32px;border-radius:99px;font-size:14px;letter-spacing:.12em;font-weight:400;}
       .b2{border:1px solid rgba(61,37,48,.3);color:#3d2530;padding:17px 32px;border-radius:99px;font-size:14px;letter-spacing:.12em;margin-left:12px;font-weight:400;}`,
   },
@@ -406,18 +417,16 @@ const designs = [
     css: `
       .wrap{background:#f7ecd8;color:#3d2a15;font-family:Inter,sans-serif;}
       .shot{position:absolute;inset:0;background:url("${photo("panaderia.jpg")}") center/cover no-repeat;}
-      .scrim{position:absolute;inset:0;background:
-        linear-gradient(90deg,rgba(250,241,226,.97) 0%,rgba(250,241,226,.94) 38%,rgba(250,241,226,.52) 62%,rgba(250,241,226,.04) 100%),
-        linear-gradient(180deg,rgba(250,241,226,.93) 0%,rgba(250,241,226,.72) 12%,transparent 28%);}
+      ${scrim(90, 250, 241, 226)}
       .nav{position:absolute;top:0;left:0;right:0;z-index:3;display:flex;align-items:center;justify-content:space-between;padding:26px 120px;border-bottom:1px solid rgba(61,42,21,.18);}
       .brand{font-family:Fraunces;font-weight:700;font-size:27px;letter-spacing:.08em;color:#8a4f1c;}
       .links i{font-style:normal;margin:0 18px;font-size:14px;color:#7a6039;}
       .navcta{background:#8a4f1c;color:#f7ecd8;padding:11px 22px;border-radius:99px;font-size:13px;font-weight:600;}
       .body{position:absolute;left:120px;top:200px;z-index:2;}
       .tag{font-size:14px;letter-spacing:.24em;color:#8a4f1c;font-weight:600;margin-bottom:22px;}
-      h1{font-family:Fraunces;font-weight:700;font-size:84px;line-height:1.02;margin-bottom:22px;max-width:520px;}
+      h1{font-family:Fraunces;font-weight:700;font-size:84px;line-height:1.02;margin-bottom:22px;max-width:520px;${textGlow(true)}}
       h1 em{font-style:italic;color:#8a4f1c;}
-      p{color:#6b5433;font-size:20px;max-width:380px;margin-bottom:30px;}
+      p{color:#6b5433;font-size:20px;max-width:380px;margin-bottom:30px;${textGlow(true)}}
       .b1{background:#8a4f1c;color:#f7ecd8;padding:17px 32px;border-radius:99px;font-weight:600;font-size:15px;}`,
   },
   {
