@@ -89,7 +89,11 @@ export default async function TemplateDetailPage({ params }: PageProps) {
       <section className="pb-16 pt-8">
         <div className="container-shell grid items-start gap-8 lg:grid-cols-[1.5fr_1fr]">
           <div>
-            <PreviewFrame src={template.preview_url} title={template.title} />
+            <PreviewFrame
+              src={template.preview_url}
+              title={template.title}
+              thumbnail={template.thumbnail_url}
+            />
 
             <div className="panel mt-6">
               <h2 className="mb-3 text-lg">Sobre esta plantilla</h2>

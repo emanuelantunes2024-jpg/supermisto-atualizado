@@ -233,7 +233,8 @@ export const seedTemplates: TemplateWithCategory[] = seed.map((t) => ({
   full_description: t.full_description,
   price_cents: t.price_cents,
   preview_url: t.preview_url,
-  thumbnail_url: null,
+  // Maqueta del diseño real, generada por scripts/generate-thumbnails.mjs.
+  thumbnail_url: `/thumbnails/${t.slug}.jpg`,
   features: t.features,
   file_url: null,
   status: "published",

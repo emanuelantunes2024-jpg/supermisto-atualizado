@@ -1,37 +1,44 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 
 interface PreviewFrameProps {
   src: string | null;
   title: string;
+  /** Maqueta del diseño: se muestra cuando la plantilla aún no tiene demo en vivo. */
+  thumbnail?: string | null;
 }
 
-/** Vista previa en vivo de la demo, con conmutador escritorio / móvil. */
-export function PreviewFrame({ src, title }: PreviewFrameProps) {
+/** Vista previa de la plantilla, con conmutador escritorio / móvil. */
+export function PreviewFrame({ src, title, thumbnail }: PreviewFrameProps) {
   const [device, setDevice] = useState<"desktop" | "mobile">("desktop");
 
   return (
     <div className="surface overflow-hidden">
       <div className="flex items-center justify-between border-b border-line px-4 py-3">
-        <span className="text-[12.5px] text-ink-muted">Vista previa en vivo</span>
+        <span className="text-[12.5px] text-ink-muted">
+          {src ? "Vista previa en vivo" : "Vista del diseño"}
+        </span>
 
-        <div className="flex gap-1">
-          {(["desktop", "mobile"] as const).map((value) => (
-            <button
-              key={value}
-              type="button"
-              onClick={() => setDevice(value)}
-              aria-pressed={device === value}
-              aria-label={value === "desktop" ? "Vista escritorio" : "Vista móvil"}
-              className={`rounded-md px-2.5 py-1 text-sm transition-colors ${
-                device === value ? "bg-navy-700 text-gold-400" : "text-ink-muted hover:text-ink"
-              }`}
-            >
-              {value === "desktop" ? "🖥" : "📱"}
-            </button>
-          ))}
-        </div>
+        {src && (
+          <div className="flex gap-1">
+            {(["desktop", "mobile"] as const).map((value) => (
+              <button
+                key={value}
+                type="button"
+                onClick={() => setDevice(value)}
+                aria-pressed={device === value}
+                aria-label={value === "desktop" ? "Vista escritorio" : "Vista móvil"}
+                className={`rounded-md px-2.5 py-1 text-sm transition-colors ${
+                  device === value ? "bg-navy-700 text-gold-400" : "text-ink-muted hover:text-ink"
+                }`}
+              >
+                {value === "desktop" ? "🖥" : "📱"}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
 
       {src ? (
@@ -46,14 +53,29 @@ export function PreviewFrame({ src, title }: PreviewFrameProps) {
             }`}
           />
         </div>
+      ) : thumbnail ? (
+        <div className="bg-navy-950 p-3">
+          <div className="relative aspect-[1600/720] w-full overflow-hidden rounded-lg border border-line">
+            <Image
+              src={thumbnail}
+              alt={`Diseño de ${title}`}
+              fill
+              sizes="(max-width:1024px) 100vw, 760px"
+              priority
+              className="object-cover"
+            />
+          </div>
+          <p className="px-1 pb-1 pt-3 text-[12.5px] text-ink-muted">
+            Demo navegable disponible en breve. Escríbenos y te enviamos el recorrido completo del diseño.
+          </p>
+        </div>
       ) : (
         <div className="flex h-[420px] flex-col items-center justify-center gap-3 bg-navy-950 px-6 text-center">
           <span className="text-4xl" aria-hidden>
             🖼️
           </span>
           <p className="max-w-sm text-sm text-ink-muted">
-            La demo en vivo de esta plantilla estará disponible en breve. Escríbenos y te enviamos capturas
-            completas del diseño.
+            La vista previa de esta plantilla estará disponible en breve.
           </p>
         </div>
       )}

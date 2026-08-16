@@ -54,8 +54,8 @@ export default async function HomePage() {
           </div>
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {featured.map((template) => (
-              <TemplateCard key={template.id} template={template} showPriceNote />
+            {featured.map((template, index) => (
+              <TemplateCard key={template.id} template={template} showPriceNote priority={index < 3} />
             ))}
           </div>
 

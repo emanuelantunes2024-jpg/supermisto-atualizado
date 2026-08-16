@@ -67,8 +67,8 @@ export default async function TemplatesPage({ searchParams }: PageProps) {
             </div>
           ) : (
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {templates.map((template) => (
-                <TemplateCard key={template.id} template={template} />
+              {templates.map((template, index) => (
+                <TemplateCard key={template.id} template={template} priority={index < 3} />
               ))}
             </div>
           )}
