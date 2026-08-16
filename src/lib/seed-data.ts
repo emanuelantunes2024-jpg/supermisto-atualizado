@@ -56,7 +56,7 @@ const seed: SeedTemplate[] = [
     categorySlug: "peluqueria",
     title: "Salón Élite",
     slug: "salon-elite",
-    short_description: "Peluquería femenina con reserva de cita, tarifas por servicio y galería de looks.",
+    short_description: "Peluquería: corte, color y tratamientos capilares, con reserva de cita online.",
     full_description:
       "Pensada para peluquerías y salones de belleza femeninos que quieren llenar la agenda. Incluye reserva de cita online paso a paso, tarifas separadas por corte, color y tratamientos, galería de looks antes y después, presentación del equipo de estilistas y opiniones de clientas. Estética elegante en tonos nude y dorado.",
     price_cents: 15900,
@@ -77,7 +77,7 @@ const seed: SeedTemplate[] = [
     categorySlug: "peluqueria",
     title: "Studio Belleza",
     slug: "studio-belleza",
-    short_description: "Centro de estética con catálogo de tratamientos y agenda de citas.",
+    short_description: "Estética: uñas, faciales y depilación, con catálogo de tratamientos y agenda.",
     full_description:
       "Para centros de estética, uñas y cuidado facial: catálogo de tratamientos con duración y precio, agenda de citas, presentación del equipo y testimonios. Paleta suave y elegante, totalmente editable.",
     price_cents: 13500,
@@ -198,7 +198,7 @@ const seed: SeedTemplate[] = [
     categorySlug: "cafeterias",
     title: "Panadería del Horno",
     slug: "panaderia-horno",
-    short_description: "Obrador artesano con catálogo de productos y encargos por WhatsApp.",
+    short_description: "Obrador artesano con catálogo de panes y bollería, y encargos por WhatsApp.",
     full_description:
       "Para panaderías y pastelerías artesanas: catálogo de panes, bollería y tartas con precios, encargos para fechas señaladas, historia del obrador y horarios por local. Tonos cálidos de harina y horno de leña.",
     price_cents: 11900,

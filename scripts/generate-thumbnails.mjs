@@ -258,35 +258,33 @@ const designs = [
   },
   {
     slug: "studio-belleza",
-    fonts: "family=Cormorant+Garamond:wght@500;600&family=Jost:wght@300;400;500",
+    fonts: "family=Jost:wght@300;400;500;600&family=Inter:wght@400",
     html: `
-      ${nav("STUDIO&nbsp;NÜ", ["TRATAMIENTOS", "EQUIPO", "CITAS"])}
-      <div class="mirror"><div class="glow"></div></div>
-      <div class="ribbon"></div>
+      ${nav("STUDIO&nbsp;NÜ", ["TRATAMIENTOS", "PRECIOS", "CITAS"])}
+      <div class="shot"></div>
+      <div class="scrim"></div>
       <div class="body">
-        <div class="tag">B E L L E Z A&nbsp;&nbsp;&&nbsp;&nbsp;B I E N E S T A R</div>
-        <h1>Tu mejor<br><em>versión</em></h1>
-        <p>Tratamientos faciales, uñas y color en un espacio para respirar.</p>
-        <div class="btns"><span class="b1">RESERVAR CITA</span></div>
+        <div class="tag">U Ñ A S&nbsp;·&nbsp;F A C I A L&nbsp;·&nbsp;D E P I L A C I Ó N</div>
+        <h1>Cuidarte es<br><em>la rutina</em></h1>
+        <p>Cabina privada, producto profesional y cita previa en un minuto.</p>
+        <div class="btns"><span class="b1">PEDIR CITA</span></div>
       </div>`,
     css: `
-      .wrap{background:linear-gradient(150deg,#2d1824 0%,#4a2438 46%,#1a0d14 100%);color:#fbeef2;font-family:Jost,sans-serif;}
-      .nav{position:absolute;top:0;left:0;right:0;z-index:3;display:flex;align-items:center;justify-content:space-between;padding:26px 120px;border-bottom:1px solid rgba(232,180,160,.22);}
-      .brand{font-family:'Cormorant Garamond';font-weight:600;font-size:29px;letter-spacing:.26em;color:#e8b4a0;}
-      .links i{font-style:normal;margin:0 18px;font-size:13px;letter-spacing:.18em;color:#cfa9b4;font-weight:300;}
-      .navcta{background:#e8b4a0;color:#2d1824;padding:11px 24px;border-radius:99px;font-size:12px;letter-spacing:.14em;font-weight:500;}
-      .mirror{position:absolute;right:190px;top:150px;width:330px;height:470px;border-radius:170px 170px 20px 20px;
-        border:3px solid rgba(232,180,160,.75);overflow:hidden;
-        background:linear-gradient(165deg,rgba(232,180,160,.30),rgba(120,60,86,.42) 58%,rgba(40,18,30,.55));
-        box-shadow:0 40px 90px rgba(20,8,14,.55);}
-      .mirror .glow{position:absolute;left:-14%;top:6%;width:150%;height:56%;background:radial-gradient(circle at 38% 30%,rgba(255,235,228,.62),transparent 64%);}
-      .ribbon{position:absolute;right:120px;top:104px;width:470px;height:560px;border:1px solid rgba(232,180,160,.30);border-radius:200px 200px 26px 26px;}
-      .body{position:absolute;left:120px;top:210px;z-index:2;}
-      .tag{font-size:13px;letter-spacing:.3em;color:#e8b4a0;margin-bottom:24px;font-weight:500;}
-      h1{font-family:'Cormorant Garamond';font-weight:600;font-size:116px;line-height:.94;margin-bottom:24px;}
-      h1 em{font-style:italic;color:#e8b4a0;}
-      p{color:#cfa9b4;font-size:21px;max-width:470px;font-weight:300;margin-bottom:34px;}
-      .b1{background:#e8b4a0;color:#2d1824;padding:18px 34px;border-radius:99px;font-size:14px;letter-spacing:.12em;font-weight:500;}`,
+      .wrap{background:#fbf6f6;color:#2f2630;font-family:Jost,sans-serif;}
+      .shot{position:absolute;inset:0;background:url("${photo("estetica.jpg")}") center/cover no-repeat;}
+      .scrim{position:absolute;inset:0;background:
+        linear-gradient(270deg,rgba(253,249,249,.97) 0%,rgba(253,249,249,.93) 34%,rgba(253,249,249,.50) 60%,rgba(253,249,249,.04) 100%),
+        linear-gradient(180deg,rgba(253,249,249,.92) 0%,rgba(253,249,249,.70) 12%,transparent 28%);}
+      .nav{position:absolute;top:0;left:0;right:0;z-index:3;display:flex;align-items:center;justify-content:space-between;padding:26px 120px;border-bottom:1px solid rgba(47,38,48,.14);}
+      .brand{font-family:Jost;font-weight:600;font-size:25px;letter-spacing:.24em;color:#2f2630;}
+      .links i{font-style:normal;margin:0 18px;font-size:13px;letter-spacing:.16em;color:#7c6b78;font-weight:300;}
+      .navcta{background:#a8567a;color:#fff;padding:11px 24px;border-radius:99px;font-size:12px;letter-spacing:.14em;font-weight:500;}
+      .body{position:absolute;right:120px;top:206px;z-index:2;text-align:right;}
+      .tag{font-size:12.5px;letter-spacing:.26em;color:#a8567a;margin-bottom:24px;font-weight:500;}
+      h1{font-family:Jost;font-weight:400;font-size:92px;line-height:1.02;letter-spacing:-.01em;margin-bottom:22px;}
+      h1 em{font-style:normal;font-weight:600;color:#a8567a;}
+      p{color:#7c6b78;font-size:19px;max-width:400px;margin-left:auto;font-weight:300;margin-bottom:30px;}
+      .b1{background:#2f2630;color:#fdf9f9;padding:17px 32px;border-radius:99px;font-size:14px;letter-spacing:.12em;font-weight:400;}`,
   },
   {
     slug: "asesoria-abogados",
@@ -397,35 +395,30 @@ const designs = [
     fonts: "family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;600",
     html: `
       ${nav("EL&nbsp;HORNO", ["PRODUCTOS", "ENCARGOS", "LOCALES"])}
-      <div class="oven"></div>
-      <div class="loaf l1"></div><div class="loaf l2"></div><div class="loaf l3"></div>
+      <div class="shot"></div>
+      <div class="scrim"></div>
       <div class="body">
         <div class="tag">OBRADOR ARTESANO · DESDE 1974</div>
-        <h1>Pan de masa<br><em>madre cada día</em></h1>
-        <p>Horneado en leña cada mañana. Encarga tu tarta por WhatsApp.</p>
+        <h1>Pan de masa<br><em>madre</em></h1>
+        <p>Horneado cada mañana. Encarga tu tarta por WhatsApp.</p>
         <div class="btns"><span class="b1">VER PRODUCTOS</span></div>
       </div>`,
     css: `
-      .wrap{background:linear-gradient(152deg,#f7e9d2 0%,#efd9b6 50%,#e0c193 100%);color:#3d2a15;font-family:Inter,sans-serif;}
+      .wrap{background:#f7ecd8;color:#3d2a15;font-family:Inter,sans-serif;}
+      .shot{position:absolute;inset:0;background:url("${photo("panaderia.jpg")}") center/cover no-repeat;}
+      .scrim{position:absolute;inset:0;background:
+        linear-gradient(90deg,rgba(250,241,226,.97) 0%,rgba(250,241,226,.94) 38%,rgba(250,241,226,.52) 62%,rgba(250,241,226,.04) 100%),
+        linear-gradient(180deg,rgba(250,241,226,.93) 0%,rgba(250,241,226,.72) 12%,transparent 28%);}
       .nav{position:absolute;top:0;left:0;right:0;z-index:3;display:flex;align-items:center;justify-content:space-between;padding:26px 120px;border-bottom:1px solid rgba(61,42,21,.18);}
       .brand{font-family:Fraunces;font-weight:700;font-size:27px;letter-spacing:.08em;color:#8a4f1c;}
       .links i{font-style:normal;margin:0 18px;font-size:14px;color:#7a6039;}
-      .navcta{background:#8a4f1c;color:#f7e9d2;padding:11px 22px;border-radius:99px;font-size:13px;font-weight:600;}
-      .oven{position:absolute;right:150px;top:170px;width:400px;height:400px;border-radius:50% 50% 24px 24px;
-        background:radial-gradient(circle at 46% 62%,#ffb85c,#d4711f 44%,#8a4318 78%);
-        box-shadow:0 40px 90px rgba(120,70,20,.4),inset 0 -18px 40px rgba(90,40,10,.5);}
-      .oven::after{content:"";position:absolute;left:14%;top:34%;width:72%;height:56%;border-radius:50% 50% 14px 14px;
-        background:radial-gradient(circle at 50% 60%,#3a1d08,#201004);box-shadow:inset 0 10px 30px rgba(255,180,90,.55);}
-      .loaf{position:absolute;border-radius:50%;background:linear-gradient(160deg,#e8b877,#c98a45);box-shadow:0 14px 30px rgba(120,70,20,.32);}
-      .l1{width:130px;height:86px;right:560px;top:452px;transform:rotate(-12deg);}
-      .l2{width:104px;height:70px;right:452px;top:522px;transform:rotate(8deg);}
-      .l3{width:88px;height:60px;right:640px;top:552px;transform:rotate(-4deg);}
-      .body{position:absolute;left:120px;top:206px;z-index:2;}
+      .navcta{background:#8a4f1c;color:#f7ecd8;padding:11px 22px;border-radius:99px;font-size:13px;font-weight:600;}
+      .body{position:absolute;left:120px;top:200px;z-index:2;}
       .tag{font-size:14px;letter-spacing:.24em;color:#8a4f1c;font-weight:600;margin-bottom:22px;}
-      h1{font-family:Fraunces;font-weight:700;font-size:100px;line-height:.98;margin-bottom:24px;max-width:660px;}
+      h1{font-family:Fraunces;font-weight:700;font-size:84px;line-height:1.02;margin-bottom:22px;max-width:520px;}
       h1 em{font-style:italic;color:#8a4f1c;}
-      p{color:#6b5433;font-size:22px;max-width:470px;margin-bottom:34px;}
-      .b1{background:#8a4f1c;color:#f7e9d2;padding:18px 34px;border-radius:99px;font-weight:600;font-size:16px;}`,
+      p{color:#6b5433;font-size:20px;max-width:380px;margin-bottom:30px;}
+      .b1{background:#8a4f1c;color:#f7ecd8;padding:17px 32px;border-radius:99px;font-weight:600;font-size:15px;}`,
   },
   {
     slug: "boutique-moda",
