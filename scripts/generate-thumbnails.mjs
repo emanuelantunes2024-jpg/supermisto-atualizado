@@ -40,7 +40,7 @@ const designs = [
     slug: "barberia-premium",
     fonts: "family=Bebas+Neue&family=Inter:wght@400;600",
     html: `
-      ${nav("GENTLEMAN", ["INICIO", "SERVICIOS", "GALERÍA"])}
+      ${nav("GENTLEMEN'S&nbsp;QUARTERS", ["INICIO", "SERVICIOS", "GALERÍA"])}
       <div class="shot"></div>
       <div class="scrim"></div>
       <div class="body">
@@ -56,7 +56,7 @@ const designs = [
         linear-gradient(90deg,rgba(8,6,5,.95) 0%,rgba(8,6,5,.88) 34%,rgba(8,6,5,.45) 62%,rgba(8,6,5,.12) 100%),
         linear-gradient(180deg,rgba(8,6,5,.92) 0%,rgba(8,6,5,.80) 12%,transparent 30%);}
       .nav{position:absolute;top:0;left:0;right:0;z-index:3;display:flex;align-items:center;justify-content:space-between;padding:26px 120px;font-size:15px;letter-spacing:.22em;border-bottom:1px solid rgba(217,164,65,.22);}
-      .brand{font-family:'Bebas Neue';font-size:30px;letter-spacing:.16em;color:#e7b45c;}
+      .brand{font-family:'Bebas Neue';font-size:27px;letter-spacing:.1em;color:#e7b45c;}
       .links i{font-style:normal;margin:0 20px;color:#a2917a;font-size:14px;letter-spacing:.18em;}
       .navcta{background:#d9a441;color:#1a1200;padding:10px 22px;border-radius:4px;font-weight:600;font-size:13px;letter-spacing:.14em;}
       .body{position:absolute;left:120px;top:170px;z-index:2;}
