@@ -242,8 +242,9 @@ const designs = [
     fonts: "family=Manrope:wght@500;800&family=Inter:wght@400;600",
     html: `
       ${nav("CLEANPRO", ["SERVICIOS", "ZONAS", "PRESUPUESTO"])}
-      <div class="bubble b-a"></div><div class="bubble b-b"></div><div class="bubble b-c"></div>
-      <div class="shield"><span>✓</span></div>
+      <div class="shot"></div>
+      <div class="scrim"></div>
+      <div class="chip"><span>✓</span> Confianza garantizada</div>
       <div class="body">
         <div class="tag">LIMPIEZA PROFESIONAL</div>
         <h1>Impecable.<br><em>Siempre.</em></h1>
@@ -251,24 +252,21 @@ const designs = [
         <div class="btns"><span class="b1">PEDIR PRESUPUESTO</span></div>
       </div>`,
     css: `
-      .wrap{background:linear-gradient(150deg,#e8f7fb 0%,#c3e9f4 45%,#8fd3e8 100%);color:#0d3b4a;font-family:Inter,sans-serif;}
+      .wrap{background:#e8f7fb;color:#0d3b4a;font-family:Inter,sans-serif;}
+      .shot{position:absolute;inset:0;background:url("${photo("clean-pro-crew.jpg")}") center/cover no-repeat;}
+      ${scrim(90, 232, 247, 251)}
       .nav{position:absolute;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:26px 120px;border-bottom:1px solid rgba(13,59,74,.12);z-index:3;}
       .brand{font-family:Manrope;font-weight:800;font-size:25px;letter-spacing:.02em;color:#0d3b4a;}
       .links i{font-style:normal;margin:0 18px;font-size:14px;color:#3d7386;}
       .navcta{background:#0d3b4a;color:#e8f7fb;padding:11px 22px;border-radius:99px;font-size:13px;font-weight:600;}
-      .bubble{position:absolute;border-radius:50%;background:radial-gradient(circle at 34% 30%,rgba(255,255,255,.95),rgba(255,255,255,.28) 62%,rgba(255,255,255,.06));border:1px solid rgba(255,255,255,.7);}
-      .b-a{width:230px;height:230px;right:300px;top:130px;}
-      .b-b{width:130px;height:130px;right:170px;top:390px;}
-      .b-c{width:76px;height:76px;right:390px;top:430px;}
-      .shield{position:absolute;right:130px;top:196px;width:250px;height:270px;border-radius:34px 34px 90px 90px;
-        background:linear-gradient(160deg,#18b9d8,#0d7a99);box-shadow:0 34px 74px rgba(13,59,74,.34);
-        display:flex;align-items:center;justify-content:center;}
-      .shield span{color:#fff;font-size:112px;font-weight:700;line-height:1;}
+      .chip{position:absolute;right:110px;bottom:76px;z-index:3;background:#fff;border-radius:99px;padding:14px 24px;
+        font-size:15px;font-weight:700;color:#0d3b4a;box-shadow:0 20px 44px rgba(13,59,74,.22);}
+      .chip span{color:#18b9d8;margin-right:4px;}
       .body{position:absolute;left:120px;top:212px;z-index:2;}
       .tag{font-size:15px;letter-spacing:.28em;color:#0d7a99;font-weight:600;margin-bottom:22px;}
-      h1{font-family:Manrope;font-weight:800;font-size:122px;line-height:.94;letter-spacing:-.03em;margin-bottom:24px;}
+      h1{font-family:Manrope;font-weight:800;font-size:108px;line-height:.94;letter-spacing:-.03em;margin-bottom:24px;${textGlow(true)}}
       h1 em{font-style:normal;color:#0d7a99;}
-      p{color:#3d7386;font-size:22px;max-width:520px;margin-bottom:34px;}
+      p{color:#25505e;font-size:21px;max-width:500px;margin-bottom:34px;${textGlow(true)}}
       .b1{background:#0d3b4a;color:#fff;padding:19px 34px;border-radius:99px;font-weight:600;font-size:16px;}`,
   },
   {
@@ -286,7 +284,7 @@ const designs = [
       </div>`,
     css: `
       .wrap{background:#fbf6f6;color:#2f2630;font-family:Jost,sans-serif;}
-      .shot{position:absolute;inset:0;background:url("${photo("estetica.jpg")}") center/cover no-repeat;}
+      .shot{position:absolute;inset:0;background:url("${photo("estetica-unas.jpg")}") center 30%/cover no-repeat;}
       ${scrim(270, 253, 249, 249)}
       .nav{position:absolute;top:0;left:0;right:0;z-index:3;display:flex;align-items:center;justify-content:space-between;padding:26px 120px;border-bottom:1px solid rgba(47,38,48,.14);}
       .brand{font-family:Jost;font-weight:600;font-size:25px;letter-spacing:.24em;color:#2f2630;}
@@ -304,10 +302,9 @@ const designs = [
     fonts: "family=Space+Grotesk:wght@500;700&family=Inter:wght@400;600",
     html: `
       ${nav("LEX&nbsp;&&nbsp;PARTNERS", ["ÁREAS", "EQUIPO", "CONTACTO"])}
-      <div class="panel">
-        <div class="bars"><i style="height:38%"></i><i style="height:56%"></i><i style="height:74%"></i><i style="height:100%"></i></div>
-        <div class="kpi"><b>+1.200</b><span>casos resueltos</span></div>
-      </div>
+      <div class="shot"></div>
+      <div class="scrim"></div>
+      <div class="kpi"><b>+1.200</b><span>casos resueltos</span></div>
       <div class="body">
         <div class="tag">ABOGADOS Y ASESORÍA FISCAL</div>
         <h1>Tu caso,<br><em>en buenas manos</em></h1>
@@ -315,25 +312,22 @@ const designs = [
         <div class="btns"><span class="b1">CONSULTA GRATUITA</span></div>
       </div>`,
     css: `
-      .wrap{background:linear-gradient(150deg,#0c1a2e 0%,#12294a 52%,#081524 100%);color:#eaf1fb;font-family:Inter,sans-serif;}
+      .wrap{background:#0c1a2e;color:#eaf1fb;font-family:Inter,sans-serif;}
+      .shot{position:absolute;inset:0;background:url("${photo("asesoria-justicia.jpg")}") center/cover no-repeat;}
+      ${scrim(90, 10, 16, 26)}
       .nav{position:absolute;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:26px 120px;border-bottom:1px solid rgba(255,255,255,.1);z-index:3;}
       .brand{font-family:'Space Grotesk';font-weight:700;font-size:24px;letter-spacing:.04em;}
       .links i{font-style:normal;margin:0 18px;font-size:14px;color:#8fa4c2;}
       .navcta{background:#3d8bfd;color:#fff;padding:11px 22px;border-radius:8px;font-size:13px;font-weight:600;}
-      .panel{position:absolute;right:104px;top:184px;width:410px;height:340px;border-radius:20px;
-        background:linear-gradient(165deg,rgba(255,255,255,.13),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.18);
-        box-shadow:0 38px 84px rgba(0,0,0,.45);padding:34px;}
-      .bars{display:flex;align-items:flex-end;gap:20px;height:190px;}
-      .bars i{width:62px;border-radius:8px 8px 0 0;background:linear-gradient(180deg,#5fa8ff,#2f6ed4);}
-      .bars i:last-child{background:linear-gradient(180deg,#7fe3b0,#2fa876);}
-      .kpi{margin-top:26px;display:flex;align-items:baseline;gap:14px;}
-      .kpi b{font-family:'Space Grotesk';font-size:44px;color:#7fe3b0;}
-      .kpi span{color:#8fa4c2;font-size:16px;}
+      .kpi{position:absolute;right:104px;bottom:70px;z-index:3;display:flex;align-items:baseline;gap:14px;
+        background:rgba(10,16,26,.6);border:1px solid rgba(255,255,255,.18);border-radius:14px;padding:16px 24px;backdrop-filter:blur(6px);}
+      .kpi b{font-family:'Space Grotesk';font-size:36px;color:#7fe3b0;}
+      .kpi span{color:#c3d0de;font-size:15px;}
       .body{position:absolute;left:120px;top:214px;z-index:2;}
       .tag{font-size:14px;letter-spacing:.26em;color:#5fa8ff;font-weight:600;margin-bottom:22px;}
-      h1{font-family:'Space Grotesk';font-weight:700;font-size:114px;line-height:.96;letter-spacing:-.03em;margin-bottom:24px;}
+      h1{font-family:'Space Grotesk';font-weight:700;font-size:100px;line-height:.96;letter-spacing:-.03em;margin-bottom:24px;${textGlow(false)}}
       h1 em{font-style:normal;color:#5fa8ff;}
-      p{color:#8fa4c2;font-size:22px;max-width:470px;margin-bottom:34px;}
+      p{color:#c3d0de;font-size:21px;max-width:470px;margin-bottom:34px;${textGlow(false)}}
       .b1{background:#3d8bfd;color:#fff;padding:18px 34px;border-radius:10px;font-weight:600;font-size:16px;}`,
   },
   {
@@ -434,7 +428,8 @@ const designs = [
     fonts: "family=Italiana&family=Jost:wght@300;400;500",
     html: `
       ${nav("MAISON&nbsp;LUNA", ["COLECCIÓN", "NOVEDADES", "TIENDA"])}
-      <div class="panel p1"></div><div class="panel p2"></div>
+      <div class="shot"></div>
+      <div class="scrim"></div>
       <div class="badge">SS/26</div>
       <div class="body">
         <div class="tag">N U E V A&nbsp;&nbsp;C O L E C C I Ó N</div>
@@ -443,21 +438,20 @@ const designs = [
         <div class="btns"><span class="b1">VER COLECCIÓN</span></div>
       </div>`,
     css: `
-      .wrap{background:linear-gradient(150deg,#efe7e1 0%,#e2d5cd 52%,#cdbcb2 100%);color:#2e2724;font-family:Jost,sans-serif;}
+      .wrap{background:#efe7e1;color:#2e2724;font-family:Jost,sans-serif;}
+      .shot{position:absolute;inset:0;background:url("${photo("boutique-moda-lumiere.jpg")}") center/cover no-repeat;}
+      ${scrim(90, 239, 231, 225)}
       .nav{position:absolute;top:0;left:0;right:0;z-index:4;display:flex;align-items:center;justify-content:space-between;padding:26px 120px;border-bottom:1px solid rgba(46,39,36,.16);}
       .brand{font-family:Italiana;font-size:32px;letter-spacing:.22em;}
       .links i{font-style:normal;margin:0 18px;font-size:13px;letter-spacing:.2em;color:#6f625b;font-weight:300;}
       .navcta{background:#2e2724;color:#efe7e1;padding:11px 24px;font-size:12px;letter-spacing:.16em;font-weight:400;}
-      .panel{position:absolute;border-radius:200px 200px 6px 6px;box-shadow:0 34px 76px rgba(90,72,62,.3);}
-      .p1{right:300px;top:150px;width:250px;height:430px;background:linear-gradient(170deg,#b9a294,#8d7566 62%,#6d584b);}
-      .p2{right:120px;top:222px;width:200px;height:358px;background:linear-gradient(170deg,#d9cabe,#b7a294 64%,#93806f);}
-      .badge{position:absolute;right:236px;top:110px;z-index:3;font-family:Italiana;font-size:26px;letter-spacing:.2em;
+      .badge{position:absolute;right:120px;top:150px;z-index:3;font-family:Italiana;font-size:26px;letter-spacing:.2em;
         background:#2e2724;color:#efe7e1;padding:12px 20px;border-radius:99px;}
       .body{position:absolute;left:120px;top:214px;z-index:2;}
-      .tag{font-size:13px;letter-spacing:.32em;color:#8d7566;margin-bottom:26px;font-weight:400;}
-      h1{font-family:Italiana;font-size:126px;line-height:.92;margin-bottom:26px;}
-      h1 em{font-style:normal;color:#8d7566;}
-      p{color:#6f625b;font-size:21px;max-width:470px;font-weight:300;margin-bottom:34px;}
+      .tag{font-size:13px;letter-spacing:.32em;color:#8d7566;margin-bottom:26px;font-weight:400;${textGlow(true)}}
+      h1{font-family:Italiana;font-size:112px;line-height:.92;margin-bottom:26px;${textGlow(true)}}
+      h1 em{font-style:normal;color:#5a4738;}
+      p{color:#3a332e;font-size:20px;max-width:440px;font-weight:300;margin-bottom:34px;${textGlow(true)}}
       .b1{background:#2e2724;color:#efe7e1;padding:18px 36px;font-size:14px;letter-spacing:.14em;font-weight:400;}`,
   },
   {
@@ -501,8 +495,8 @@ const designs = [
     fonts: "family=Outfit:wght@500;700&family=Inter:wght@400;600",
     html: `
       ${nav("CLÍNICA&nbsp;NOVA", ["TRATAMIENTOS", "EQUIPO", "CITA"])}
-      <div class="halo"></div>
-      <div class="tooth"></div>
+      <div class="shot"></div>
+      <div class="scrim"></div>
       <div class="chip c1">✓ Sin dolor</div>
       <div class="chip c2">Financiación 0%</div>
       <div class="body">
@@ -512,28 +506,21 @@ const designs = [
         <div class="btns"><span class="b1">PEDIR CITA PREVIA</span></div>
       </div>`,
     css: `
-      .wrap{background:linear-gradient(150deg,#ffffff 0%,#eef8fb 46%,#cfeaf3 100%);color:#0b2f3d;font-family:Inter,sans-serif;}
+      .wrap{background:#eef8fb;color:#0b2f3d;font-family:Inter,sans-serif;}
+      .shot{position:absolute;inset:0;background:url("${photo("clinica-dental-2.jpg")}") center/cover no-repeat;}
+      ${scrim(90, 238, 248, 251)}
       .nav{position:absolute;top:0;left:0;right:0;z-index:4;display:flex;align-items:center;justify-content:space-between;padding:26px 120px;border-bottom:1px solid rgba(11,47,61,.1);}
       .brand{font-family:Outfit;font-weight:700;font-size:26px;color:#0b2f3d;}
       .links i{font-style:normal;margin:0 18px;font-size:14px;color:#4d7c8c;}
       .navcta{background:#12a3c4;color:#fff;padding:11px 22px;border-radius:99px;font-size:13px;font-weight:600;}
-      .halo{position:absolute;right:170px;top:150px;width:430px;height:430px;border-radius:50%;
-        background:radial-gradient(circle at 40% 34%,rgba(255,255,255,.95),rgba(160,224,240,.55) 58%,rgba(120,200,225,.28));
-        box-shadow:0 34px 80px rgba(11,47,61,.16);}
-      .tooth{position:absolute;right:288px;top:222px;width:200px;height:250px;
-        background:linear-gradient(170deg,#ffffff,#e4f4fa 60%,#c6e6f2);
-        border-radius:100px 100px 44px 44px;box-shadow:0 24px 54px rgba(11,47,61,.24);}
-      .tooth::after{content:"";position:absolute;left:50%;bottom:-2px;transform:translateX(-50%);width:56px;height:86px;background:radial-gradient(circle at 50% 100%,rgba(160,215,235,.9),rgba(190,230,245,.75));border-radius:0 0 40px 40px;}
-      .tooth::before{content:"";position:absolute;left:50%;top:-6px;transform:translateX(-50%);width:46px;height:52px;
-        background:radial-gradient(circle at 50% 0,rgba(200,232,244,.95),rgba(228,244,250,0) 72%);border-radius:0 0 30px 30px;}
       .chip{position:absolute;z-index:3;background:#fff;border:1px solid rgba(11,47,61,.1);border-radius:99px;
         padding:12px 20px;font-size:15px;font-weight:600;color:#0b2f3d;box-shadow:0 16px 36px rgba(11,47,61,.14);}
-      .c1{right:520px;top:220px;} .c2{right:130px;top:498px;}
+      .c1{right:120px;top:150px;} .c2{right:120px;top:210px;}
       .body{position:absolute;left:120px;top:206px;z-index:2;}
       .tag{font-size:13px;letter-spacing:.2em;color:#12a3c4;font-weight:600;margin-bottom:22px;}
-      h1{font-family:Outfit;font-weight:700;font-size:106px;line-height:.98;letter-spacing:-.03em;margin-bottom:24px;max-width:620px;}
+      h1{font-family:Outfit;font-weight:700;font-size:96px;line-height:.98;letter-spacing:-.03em;margin-bottom:24px;max-width:600px;${textGlow(true)}}
       h1 em{font-style:normal;color:#12a3c4;}
-      p{color:#4d7c8c;font-size:21px;max-width:520px;margin-bottom:34px;}
+      p{color:#2c5e6f;font-size:20px;max-width:480px;margin-bottom:34px;${textGlow(true)}}
       .b1{background:#12a3c4;color:#fff;padding:19px 34px;border-radius:99px;font-weight:600;font-size:16px;}`,
   },
   {
