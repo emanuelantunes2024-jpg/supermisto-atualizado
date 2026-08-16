@@ -1,0 +1,44 @@
+import type { Metadata } from "next";
+import { redirect } from "next/navigation";
+
+import { AuthForm } from "@/components/auth/AuthForm";
+import { getSession } from "@/lib/auth";
+import { isSupabaseConfigured } from "@/lib/config";
+
+export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: "Crear cuenta",
+  robots: { index: false, follow: false },
+};
+
+interface PageProps {
+  searchParams: Promise<{ redirect?: string }>;
+}
+
+export default async function RegisterPage({ searchParams }: PageProps) {
+  const { redirect: redirectParam } = await searchParams;
+  const redirectTo = redirectParam?.startsWith("/") ? redirectParam : "/mi-cuenta";
+
+  if (isSupabaseConfigured) {
+    const { user } = await getSession();
+    if (user) redirect(redirectTo);
+  }
+
+  return (
+    <section className="py-16">
+      <div className="container-shell max-w-[460px]">
+        {isSupabaseConfigured ? (
+          <AuthForm mode="register" redirectTo={redirectTo} />
+        ) : (
+          <div className="panel text-center">
+            <h1 className="mb-3 text-2xl">Registro no configurado</h1>
+            <p className="text-[14px] text-ink-muted">
+              Añade las claves de Supabase en <code>.env.local</code> para activar el registro de clientes.
+            </p>
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}

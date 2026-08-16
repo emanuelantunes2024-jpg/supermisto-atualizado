@@ -1,0 +1,226 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===========================================================
+   LEUNAME SOFTWARE — sistema visual
+   Paleta navy profundo + dorado, tomada del prototipo de marca.
+   Los tokens viven aquí; tailwind.config.ts expone los mismos
+   valores como utilidades (bg-navy-800, text-gold-400, ...).
+   =========================================================== */
+
+:root {
+  --navy-950: #070c18;
+  --navy-900: #0b1424;
+  --navy-800: #101c33;
+  --navy-700: #172845;
+  --navy-600: #23375c;
+  --gold-500: #e7a63c;
+  --gold-400: #f4c565;
+  --gold-600: #c88423;
+  --ink: #eef1f8;
+  --ink-muted: #a8b3cc;
+  --line: rgba(255, 255, 255, 0.09);
+  --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.45);
+
+  --font-display: "Sora", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+
+  color-scheme: dark;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--navy-950);
+    color: var(--ink);
+    font-family: var(--font-body);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+  }
+
+  img {
+    max-width: 100%;
+    display: block;
+  }
+
+  ::selection {
+    background: var(--gold-500);
+    color: var(--navy-950);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--gold-400);
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  .container-shell {
+    @apply mx-auto w-full max-w-shell px-7;
+  }
+
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  /* -------- botones -------- */
+  .btn {
+    @apply inline-flex cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-[9px]
+           border border-transparent px-5 py-2.5 text-sm font-semibold transition-all duration-200
+           disabled:cursor-not-allowed disabled:opacity-60;
+  }
+  .btn-gold {
+    background: linear-gradient(180deg, var(--gold-400), var(--gold-600));
+    color: var(--navy-950);
+  }
+  .btn-gold:hover:not(:disabled) {
+    filter: brightness(1.08);
+    transform: translateY(-1px);
+  }
+  .btn-ghost {
+    border-color: var(--line);
+    color: var(--ink);
+  }
+  .btn-ghost:hover:not(:disabled) {
+    border-color: var(--gold-500);
+    color: var(--gold-400);
+  }
+  .btn-block {
+    @apply w-full;
+  }
+  .btn-lg {
+    @apply px-[26px] py-3.5 text-[15px];
+  }
+
+  /* -------- tipografía de sección -------- */
+  .eyebrow {
+    @apply mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-gold-400;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 20px;
+    height: 1px;
+    background: var(--gold-500);
+  }
+  .section-head {
+    @apply mb-11 max-w-[640px];
+  }
+  .section-head h2 {
+    @apply mb-3 text-[clamp(26px,3vw,36px)];
+  }
+  .section-head p {
+    @apply text-[15.5px] text-ink-muted;
+  }
+  .section-head-center {
+    @apply mx-auto text-center;
+  }
+  .section-head-center .eyebrow {
+    @apply justify-center;
+  }
+
+  /* -------- tarjetas -------- */
+  .surface {
+    background: var(--navy-800);
+    border: 1px solid var(--line);
+    @apply rounded-card;
+  }
+  .panel {
+    background: var(--navy-800);
+    border: 1px solid var(--line);
+    @apply rounded-card p-6;
+  }
+  .badge-pill {
+    @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[11.5px] font-semibold text-gold-400;
+    background: rgba(231, 166, 60, 0.12);
+  }
+
+  /* -------- formularios -------- */
+  .field-label {
+    @apply mb-1.5 block text-[12.5px] font-medium text-ink-muted;
+  }
+  .field-input {
+    @apply w-full rounded-lg border px-3.5 py-2.5 text-sm text-ink outline-none transition-colors;
+    background: var(--navy-900);
+    border-color: var(--line);
+  }
+  .field-input::placeholder {
+    color: #5c6a86;
+  }
+  .field-input:focus {
+    border-color: var(--gold-500);
+  }
+  .field-input:disabled {
+    @apply opacity-60;
+  }
+  select.field-input option {
+    background: var(--navy-900);
+  }
+
+  /* -------- misceláneo -------- */
+  .breadcrumb {
+    @apply flex flex-wrap gap-1.5 pt-5 text-[12.5px] text-ink-muted;
+  }
+  .breadcrumb a:hover {
+    color: var(--gold-400);
+  }
+  .divider {
+    border-top: 1px solid var(--line);
+  }
+  .anim-in {
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards;
+  }
+}
+
+@layer utilities {
+  .text-ink {
+    color: var(--ink);
+  }
+  .text-ink-muted {
+    color: var(--ink-muted);
+  }
+  .border-line {
+    border-color: var(--line);
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-in {
+    animation: none;
+    opacity: 1;
+  }
+  .animate-floatY,
+  .animate-pulseGlow,
+  .animate-fadeUp {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
