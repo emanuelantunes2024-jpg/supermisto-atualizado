@@ -1,4 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
+import { createPublicClient } from "@/lib/supabase/public";
 import { seedCategories, seedTemplates } from "@/lib/seed-data";
 import type { Category, OrderWithTemplate, Template, TemplateWithCategory } from "@/lib/types";
 
@@ -17,7 +18,7 @@ function sortCategories(list: Category[]): Category[] {
 }
 
 export async function getCategories(): Promise<Category[]> {
-  const supabase = await createClient();
+  const supabase = createPublicClient();
   if (!supabase) return sortCategories(seedCategories);
 
   const { data, error } = await supabase.from("categories").select("*").order("name");
@@ -27,7 +28,7 @@ export async function getCategories(): Promise<Category[]> {
 }
 
 export async function getPublishedTemplates(categorySlug?: string): Promise<TemplateWithCategory[]> {
-  const supabase = await createClient();
+  const supabase = createPublicClient();
 
   if (!supabase) {
     return categorySlug
@@ -57,7 +58,7 @@ export async function getFeaturedTemplates(limit = 6): Promise<TemplateWithCateg
 }
 
 export async function getTemplateBySlug(slug: string): Promise<TemplateWithCategory | null> {
-  const supabase = await createClient();
+  const supabase = createPublicClient();
 
   if (!supabase) {
     return seedTemplates.find((t) => t.slug === slug) ?? null;
