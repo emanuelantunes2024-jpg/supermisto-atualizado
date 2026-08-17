@@ -99,7 +99,17 @@ export async function POST(request: Request) {
             product_data: {
               name: template.title,
               description: template.short_description,
-              ...(template.thumbnail_url ? { images: [template.thumbnail_url] } : {}),
+              // Stripe exige una URL absoluta; thumbnail_url en la base de datos
+              // es una ruta relativa (ej. "/thumbnails/foo.jpg").
+              ...(template.thumbnail_url
+                ? {
+                    images: [
+                      template.thumbnail_url.startsWith("http")
+                        ? template.thumbnail_url
+                        : `${siteConfig.url}${template.thumbnail_url}`,
+                    ],
+                  }
+                : {}),
             },
           },
         },
