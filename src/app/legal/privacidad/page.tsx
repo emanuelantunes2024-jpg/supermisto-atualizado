@@ -23,8 +23,9 @@ export default function PrivacyPage() {
           .
         </p>
         <p className="rounded-lg border border-line bg-navy-900 px-4 py-3 text-[13px]">
-          <strong className="text-ink">Pendiente de completar antes del lanzamiento:</strong> identificación
-          fiscal y domicilio del responsable, y datos del delegado de protección de datos si procede.
+          <strong className="text-ink">Responsable:</strong> Emanuel Da Silva Antunes Coletto, persona física
+          residente en Brasil, CPF 096.463.317-50. <strong className="text-ink">Domicilio:</strong> Estrada de
+          Xerem, 484, Casa — Duque de Caxias, RJ, 25241390, Brasil.
         </p>
       </LegalSection>
 
@@ -58,8 +59,8 @@ export default function PrivacyPage() {
             archivos.
           </li>
           <li>
-            <strong className="text-ink">Stripe Payments Europe, Ltd.</strong> — procesamiento de pagos. Los
-            datos de tarjeta se tratan exclusivamente en su entorno; nosotros no los recibimos.
+            <strong className="text-ink">Stripe</strong> — procesamiento de pagos. Los datos de tarjeta se
+            tratan exclusivamente en su entorno; nosotros no los recibimos.
           </li>
           <li>
             <strong className="text-ink">Resend</strong> — envío de emails transaccionales.

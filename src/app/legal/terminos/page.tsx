@@ -21,9 +21,10 @@ export default function TermsPage() {
           aceptación de estas condiciones.
         </p>
         <p className="rounded-lg border border-line bg-navy-900 px-4 py-3 text-[13px]">
-          <strong className="text-ink">Pendiente de completar antes del lanzamiento:</strong> denominación
-          social, NIF/CIF, domicilio fiscal y datos de inscripción registral del titular, tal como exige la Ley
-          34/2002 (LSSI) y la normativa equivalente de tu país de establecimiento.
+          <strong className="text-ink">Titular:</strong> Emanuel Da Silva Antunes Coletto, persona física
+          residente en Brasil, CPF 096.463.317-50. <strong className="text-ink">Domicilio:</strong> Estrada de
+          Xerem, 484, Casa — Duque de Caxias, RJ, 25241390, Brasil. <strong className="text-ink">Contacto:
+          </strong> {siteConfig.supportEmail}.
         </p>
       </LegalSection>
 
@@ -53,8 +54,7 @@ export default function TermsPage() {
           digitales.
         </p>
         <p>
-          Los pagos se procesan a través de Stripe Payments Europe, Ltd. No almacenamos ni tenemos acceso a los
-          datos de tu tarjeta.
+          Los pagos se procesan a través de Stripe. No almacenamos ni tenemos acceso a los datos de tu tarjeta.
         </p>
       </LegalSection>
 
