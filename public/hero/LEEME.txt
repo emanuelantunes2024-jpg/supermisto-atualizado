@@ -1,0 +1,15 @@
+FOTOS DE LA PORTADA
+===================
+
+Copia aquí las dos fotos de la referencia de marca, con estos nombres exactos:
+
+  restaurante.jpg  -> el plato que se ve dentro del portátil
+  moda.jpg         -> la modelo que se ve dentro del móvil
+
+Medidas recomendadas:
+  restaurante.jpg  1200 x 750 px (horizontal)
+  moda.jpg          600 x 1200 px (vertical)
+
+No hay que tocar el código: en cuanto los archivos estén en esta carpeta
+aparecen solos en la portada. Mientras no existan se ve un degradado del
+mismo tono y la página sigue funcionando.

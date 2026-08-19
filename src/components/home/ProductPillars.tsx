@@ -4,146 +4,264 @@ interface ProductPillarsProps {
   templateCount: number;
 }
 
+/** Lista con los ticks dorados de las tarjetas. */
+function Checklist({ items }: { items: string[] }) {
+  return (
+    <ul className="mb-6 space-y-[7px] text-[13px]">
+      {items.map((item) => (
+        <li key={item} className="flex items-center gap-2">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className="shrink-0 text-gold-400">
+            <path d="M4 12.5l5 5L20 6.5" />
+          </svg>
+          {item}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+/** Botón inferior de cada tarjeta. */
+function CardLink({ href, children }: { href: string; children: React.ReactNode }) {
+  return (
+    <Link
+      href={href}
+      className="mt-auto inline-flex w-fit items-center gap-2.5 rounded-[9px] border border-line px-5 py-2.5 text-[13px] font-bold uppercase tracking-[0.04em] text-ink transition-colors hover:border-gold-500 hover:text-gold-400"
+    >
+      {children}
+      <span aria-hidden>→</span>
+    </Link>
+  );
+}
+
 /**
- * Los tres pilares del catálogo. Sitios web está a la venta; PDVs y Combos
- * llevan la estructura lista pero marcada "Próximamente", sin botón de compra:
- * el producto todavía no existe y no se puede ofrecer.
+ * Los tres pilares del catálogo: sitios web, sistemas PDV y combos.
+ * Cada tarjeta lleva la maqueta del dispositivo a la derecha, como en la
+ * referencia de marca.
  */
 export function ProductPillars({ templateCount }: ProductPillarsProps) {
   return (
-    <section id="servicios" className="pb-12">
+    <section id="servicios" className="pb-4">
       <div className="container-shell grid gap-5 lg:grid-cols-3">
         {/* Sitios web premium */}
         <article
-          className="group relative flex flex-col overflow-hidden rounded-[16px] border border-line p-7 transition-all duration-200 hover:-translate-y-1 hover:border-gold-500"
-          style={{ background: "linear-gradient(150deg,#111c2c,#0b0e14 72%)" }}
+          className="group relative flex flex-col overflow-hidden rounded-[14px] border border-line p-6 transition-all duration-200 hover:-translate-y-1 hover:border-gold-500/60"
+          style={{ background: "linear-gradient(150deg,#0e1b2c,#0a0d13 74%)" }}
         >
-          <div className="mb-5 flex items-start justify-between gap-4">
-            <div>
-              <h3 className="mb-2 text-[20px] uppercase leading-none">Sitios web premium</h3>
-              <p className="text-[13px] text-ink-muted">
+          <div className="mb-4 flex items-start justify-between gap-4">
+            <div className="max-w-[58%]">
+              <h3 className="mb-2 whitespace-nowrap text-[18px] uppercase leading-none">Sitios web premium</h3>
+              <p className="text-[12.5px] leading-snug text-ink-muted">
                 Diseños profesionales, responsivos y optimizados para convertir visitantes en clientes.
               </p>
             </div>
-            <BrowserMock accent="#3f83f8" label="Inmobiliaria" />
+            <LaptopMock />
           </div>
 
-          <ul className="mb-6 space-y-2 text-[13px]">
-            {["100% personalizables", "Listos para usar", "SEO optimizado", "Soporte incluido"].map((item) => (
-              <li key={item} className="flex items-center gap-2">
-                <span className="text-gold-400">✓</span>
-                {item}
-              </li>
-            ))}
-          </ul>
+          <Checklist
+            items={[
+              "100% Personalizables",
+              "Listos para usar",
+              "SEO Optimizado",
+              "Soporte incluido",
+              "Rendimiento superior",
+            ]}
+          />
 
-          <Link href="/plantillas" className="btn btn-gold btn-block mt-auto uppercase tracking-[0.04em]">
-            Ver sitios {templateCount > 0 && `(${templateCount})`} →
-          </Link>
+          <CardLink href="/plantillas">Ver sitios{templateCount > 0 ? ` (${templateCount})` : ""}</CardLink>
         </article>
 
         {/* Sistemas PDV */}
         <article
-          className="relative flex flex-col overflow-hidden rounded-[16px] border border-line p-7"
-          style={{ background: "linear-gradient(150deg,#0f2018,#0b0e14 72%)" }}
+          className="group relative flex flex-col overflow-hidden rounded-[14px] border border-line p-6 transition-all duration-200 hover:-translate-y-1 hover:border-gold-500/60"
+          style={{ background: "linear-gradient(150deg,#0d2018,#0a0d13 74%)" }}
         >
-          <span className="absolute right-6 top-7 rounded-full border border-line bg-navy-900/80 px-2.5 py-1 text-[10px] font-semibold text-ink-muted">
-            Próximamente
-          </span>
-          <div className="mb-5 flex items-start justify-between gap-4">
-            <div className="max-w-[62%]">
-              <h3 className="mb-2 text-[20px] uppercase leading-none text-ink/75">Sistemas PDV</h3>
-              <p className="text-[13px] text-ink-muted/80">
+          <div className="mb-4 flex items-start justify-between gap-4">
+            <div className="max-w-[58%]">
+              <h3 className="mb-2 whitespace-nowrap text-[18px] uppercase leading-none">Sistemas PDV</h3>
+              <p className="text-[12.5px] leading-snug text-ink-muted">
                 Puntos de venta modernos y fáciles de usar para gestionar tu negocio de forma eficiente.
               </p>
             </div>
+            <PdvMock />
           </div>
 
-          <ul className="mb-6 space-y-2 text-[13px] text-ink-muted/80">
-            {["Ventas rápidas", "Gestión de stock", "Reportes completos", "Multi-dispositivo"].map((item) => (
-              <li key={item} className="flex items-center gap-2">
-                <span className="text-gold-400/50">✓</span>
-                {item}
-              </li>
-            ))}
-          </ul>
+          <Checklist
+            items={[
+              "Ventas rápidas",
+              "Gestión de stock",
+              "Clientes y productos",
+              "Reportes completos",
+              "Multi-dispositivo",
+              "Fácil de usar",
+            ]}
+          />
 
-          <div className="mb-6 overflow-hidden rounded-lg border border-line opacity-55">
-            <div className="grid grid-cols-4 gap-1.5 p-3" style={{ background: "var(--navy-900)" }}>
-              {Array.from({ length: 8 }).map((_, i) => (
-                <span key={i} className="aspect-square rounded border border-line bg-navy-800" />
-              ))}
-            </div>
-            <div className="flex items-center justify-between border-t border-line px-3 py-2">
-              <span className="text-[8px] text-ink-muted/60">TOTAL</span>
-              <span className="rounded bg-gold-500/20 px-2 py-1 text-[8px] font-bold text-gold-400/70">COBRAR</span>
-            </div>
-          </div>
-
-          <Link href="/pdvs" className="btn btn-ghost btn-block mt-auto uppercase tracking-[0.04em]">
-            Avisarme →
-          </Link>
+          <CardLink href="/pdvs">Ver PDVs</CardLink>
         </article>
 
-        {/* Combos */}
+        {/* Combos premium */}
         <article
-          className="relative flex flex-col overflow-hidden rounded-[16px] border border-line p-7"
-          style={{ background: "linear-gradient(150deg,#1a1226,#0b0e14 72%)" }}
+          className="group relative flex flex-col overflow-hidden rounded-[14px] border border-line p-6 transition-all duration-200 hover:-translate-y-1 hover:border-gold-500/60"
+          style={{ background: "linear-gradient(150deg,#1a0f26,#0a0d13 74%)" }}
         >
-          <span className="absolute right-6 top-7 rounded-full border border-line bg-navy-900/80 px-2.5 py-1 text-[10px] font-semibold text-ink-muted">
-            Próximamente
-          </span>
-          <div className="mb-5 max-w-[62%]">
-            <h3 className="mb-2 text-[20px] uppercase leading-none text-ink/75">Combos premium</h3>
-            <p className="text-[13px] text-ink-muted/80">
-              Obtén tu sitio web + PDV y ahorra dinero con nuestros paquetes especiales.
-            </p>
+          <div className="mb-4 flex items-start justify-between gap-4">
+            <div className="max-w-[58%]">
+              <h3 className="mb-2 whitespace-nowrap text-[18px] uppercase leading-none">Combos premium</h3>
+              <p className="text-[12.5px] leading-snug text-ink-muted">
+                Obtén tu sitio web + PDV y ahorra dinero con nuestros paquetes especiales.
+              </p>
+            </div>
+            <ComboMock />
           </div>
 
-          <ul className="mb-6 space-y-2 text-[13px] text-ink-muted/80">
-            {["Mejor precio", "Todo integrado", "Instalación incluida", "Soporte prioritario"].map((item) => (
-              <li key={item} className="flex items-center gap-2">
-                <span className="text-gold-400/50">✓</span>
-                {item}
-              </li>
-            ))}
-          </ul>
+          <Checklist
+            items={[
+              "Mejor precio",
+              "Todo integrado",
+              "Instalación incluida",
+              "Soporte prioritario",
+              "Actualizaciones gratuitas",
+            ]}
+          />
 
-          <div className="mb-6 flex items-center justify-center gap-4 rounded-lg border border-line px-4 py-7 opacity-55">
-            <span className="rounded border border-line bg-navy-800 px-4 py-5 text-[9px] text-ink-muted">Sitio</span>
-            <span className="flex h-8 w-8 items-center justify-center rounded-full border border-line bg-navy-800 font-display text-lg font-extrabold text-gold-400/70">
-              +
-            </span>
-            <span className="rounded border border-line bg-navy-800 px-4 py-5 text-[9px] text-ink-muted">PDV</span>
-          </div>
-
-          <Link href="/pdvs" className="btn btn-ghost btn-block mt-auto uppercase tracking-[0.04em]">
-            Avisarme →
-          </Link>
+          <CardLink href="/combos">Ver combos</CardLink>
         </article>
       </div>
     </section>
   );
 }
 
-function BrowserMock({ accent, label }: { accent: string; label: string }) {
+/* ------------------------------------------------------------------ */
+/*  Maquetas de las tarjetas                                           */
+/* ------------------------------------------------------------------ */
+
+function LaptopMock() {
   return (
-    <div className="hidden w-[38%] shrink-0 overflow-hidden rounded-md border border-line sm:block">
-      <div className="flex gap-1 bg-navy-700 px-2 py-1.5">
-        {[0, 1, 2].map((d) => (
-          <span key={d} className="h-[4px] w-[4px] rounded-full bg-[#3a3a42]" />
-        ))}
-      </div>
-      <div className="px-2.5 py-3" style={{ background: "linear-gradient(150deg,#152033,#0b0e14)" }}>
-        <div className="mb-1 text-[6px] uppercase tracking-[0.14em]" style={{ color: accent }}>
-          {label}
+    <div className="hidden w-[40%] shrink-0 sm:block">
+      <div className="overflow-hidden rounded-t-[5px] border-[3px] border-b-0 border-[#2a2c31]">
+        <div className="flex gap-1 bg-[#141920] px-1.5 py-1">
+          {[0, 1, 2].map((d) => (
+            <span key={d} className="h-[3px] w-[3px] rounded-full bg-[#3a3a42]" />
+          ))}
         </div>
-        <div className="mb-2 h-[4px] w-3/4 rounded-full bg-white/25" />
-        <div className="mb-2.5 h-[3px] w-1/2 rounded-full bg-white/12" />
-        <span className="inline-block rounded px-2 py-1 text-[5.5px] font-bold text-[#1a1200]" style={{ background: "var(--gold-500)" }}>
-          BUSCAR
-        </span>
+        <div
+          className="flex min-h-[86px] flex-col justify-center px-2.5 py-2.5"
+          style={{ background: "radial-gradient(ellipse at 78% 60%,#2c3f57,#141c28 55%,#080b10)" }}
+        >
+          <div className="mb-1 font-display text-[8px] font-extrabold uppercase leading-[1.05] text-white/90">
+            Agencia
+            <br />
+            Inmobiliaria
+            <br />
+            <span className="text-gold-400">Premium</span>
+          </div>
+          <p className="mb-1.5 text-[4.5px] leading-tight text-white/55">
+            Encuentra la propiedad perfecta para ti
+          </p>
+          <span className="w-fit rounded-[2px] bg-white/90 px-1.5 py-[3px] text-[4.5px] font-bold uppercase text-[#0d1420]">
+            Ver demo
+          </span>
+        </div>
       </div>
+      <div
+        className="h-[4px]"
+        style={{ background: "linear-gradient(180deg,#2f3238,#1a1c20)", clipPath: "polygon(5% 0,95% 0,100% 100%,0 100%)" }}
+      />
+    </div>
+  );
+}
+
+function PdvMock() {
+  const tiles = Array.from({ length: 12 });
+  return (
+    <div className="hidden w-[40%] shrink-0 sm:block">
+      <div className="overflow-hidden rounded-[5px] border-[3px] border-[#2a2c31] bg-[#0e1116]">
+        <div className="flex items-center justify-between border-b border-line px-1.5 py-1">
+          <span className="text-[4px] font-bold uppercase tracking-[0.1em] text-gold-400">Leuname</span>
+          <span className="flex gap-[3px]">
+            {[0, 1, 2].map((d) => (
+              <span key={d} className="h-[3px] w-[3px] rounded-full bg-[#3a3a42]" />
+            ))}
+          </span>
+        </div>
+        <div className="flex gap-1 p-1">
+          <div className="grid flex-1 grid-cols-4 gap-[3px]">
+            {tiles.map((_, i) => (
+              <span
+                key={i}
+                className="flex aspect-square items-center justify-center rounded-[2px] border border-gold-500/25"
+                style={{ background: "linear-gradient(160deg,#2a2113,#171208)" }}
+              >
+                <span className="h-[5px] w-[5px] rounded-full bg-gold-500/70" />
+              </span>
+            ))}
+          </div>
+          <div className="flex w-[38%] flex-col rounded-[2px] border border-line bg-[#12151a] p-1">
+            <span className="mb-[2px] border-b border-line pb-[2px] text-[4px] font-bold uppercase text-ink-muted">
+              Carrito
+            </span>
+            {[
+              ["Pan", "2,50 €"],
+              ["Leche", "1,90 €"],
+              ["Manzanas", "2,10 €"],
+              ["Huevos", "1,80 €"],
+            ].map(([name, price]) => (
+              <span key={name} className="flex justify-between py-[1px] text-[3.8px] text-ink/80">
+                {name}
+                <i className="not-italic text-ink-muted">{price}</i>
+              </span>
+            ))}
+            <span className="mt-[3px] flex justify-between border-t border-line pt-[2px] text-[4.2px] font-bold text-ink">
+              TOTAL
+              <i className="not-italic">7,70 €</i>
+            </span>
+            <span className="mt-[3px] rounded-[2px] bg-[#22a35a] py-[3px] text-center text-[4.2px] font-extrabold uppercase text-white">
+              Pagar
+            </span>
+          </div>
+        </div>
+      </div>
+      <div className="mx-auto h-[6px] w-[14%] bg-[#25272c]" />
+      <div className="mx-auto h-[3px] w-[42%] rounded-[2px] bg-[#2f3238]" />
+    </div>
+  );
+}
+
+function ComboMock() {
+  return (
+    <div className="relative hidden w-[38%] shrink-0 pr-1 sm:block">
+      {/* Ventana del sitio web */}
+      <div className="overflow-hidden rounded-[5px] border border-[#7c3ecf]/50" style={{ background: "linear-gradient(150deg,#6d2bbf,#3d1a70)" }}>
+        <div className="flex gap-1 border-b border-white/15 px-1.5 py-1">
+          {["#ff5f57", "#febc2e", "#28c840"].map((color) => (
+            <span key={color} className="h-[3px] w-[3px] rounded-full" style={{ background: color }} />
+          ))}
+        </div>
+        <div className="space-y-[3px] px-2 py-2.5">
+          <span className="block h-[3px] w-4/5 rounded-full bg-white/45" />
+          <span className="block h-[3px] w-3/5 rounded-full bg-white/30" />
+          <span className="block h-[3px] w-2/3 rounded-full bg-white/20" />
+          <span className="block h-[3px] w-1/2 rounded-full bg-white/15" />
+        </div>
+      </div>
+
+      {/* Monitor PDV superpuesto */}
+      <div className="absolute -bottom-1 right-0 w-[52%]">
+        <div className="overflow-hidden rounded-[4px] border-[2px] border-[#3a2a55] bg-[#180f26]">
+          <div className="grid grid-cols-3 gap-[2px] p-1.5">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <span key={i} className="aspect-square rounded-[2px] bg-white/10" />
+            ))}
+          </div>
+        </div>
+        <div className="mx-auto h-[4px] w-[16%] bg-[#3a2a55]" />
+        <div className="mx-auto h-[2.5px] w-[46%] rounded-[2px] bg-[#4a3568]" />
+      </div>
+
+      {/* Símbolo + */}
+      <span className="absolute bottom-[18%] left-[26%] flex h-6 w-6 items-center justify-center rounded-full border border-white/30 bg-[#1a1226] font-display text-[13px] font-extrabold leading-none text-white">
+        +
+      </span>
     </div>
   );
 }
