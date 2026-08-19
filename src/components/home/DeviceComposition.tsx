@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { PlatedDish } from "@/components/home/PlatedDish";
 import { heroPhotos } from "@/lib/config";
 
 /**
@@ -65,19 +66,22 @@ function Laptop() {
         className="rounded-t-[14px] p-[9px] pb-[7px] shadow-lg"
         style={{ background: "linear-gradient(160deg,#4a4d55,#26282e 40%,#15171a)" }}
       >
-        <div
-          className="relative overflow-hidden rounded-[5px]"
-          style={{
-            /* Foto encima, degradado debajo: si aún no has copiado el
-               archivo en public/hero/, se ve el degradado y nada se rompe. */
-            background: [
-              "linear-gradient(100deg,rgba(6,4,2,.95) 6%,rgba(10,7,4,.72) 40%,rgba(10,7,4,.08) 68%)",
-              `url(${heroPhotos.restaurante}) center/cover no-repeat`,
-              "radial-gradient(ellipse at 72% 52%,#7a4416,#2c1809 46%,#0b0705 80%)",
-            ].join(","),
-          }}
-        >
-          <div className="flex min-h-[212px] flex-col justify-center px-6 py-6">
+        <div className="relative overflow-hidden rounded-[5px] bg-[#0b0705]">
+          {/* El plato dibujado; si hay foto en public/hero/ se pinta encima. */}
+          <PlatedDish className="absolute inset-0 h-full w-full" />
+          <div
+            className="absolute inset-0"
+            style={{ background: `url(${heroPhotos.restaurante}) center/cover no-repeat` }}
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(100deg,rgba(6,4,2,.95) 4%,rgba(9,6,3,.86) 30%,rgba(10,7,4,.34) 56%,rgba(10,7,4,0) 74%)",
+            }}
+          />
+
+          <div className="relative flex min-h-[212px] flex-col justify-center px-6 py-6">
             <div className="mb-2.5 flex items-center gap-1.5 text-[8px] uppercase tracking-[0.18em] text-gold-400/85">
               <span className="h-[3px] w-[3px] rounded-full bg-gold-400" />
               Sabores excepcionales
