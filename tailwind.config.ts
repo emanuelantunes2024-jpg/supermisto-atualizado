@@ -10,22 +10,26 @@ const config: Config = {
     extend: {
       colors: {
         navy: {
-          950: "#070c18",
-          900: "#0b1424",
-          800: "#101c33",
-          700: "#172845",
-          600: "#23375c",
+          950: "#08090b",
+          900: "#0d0f12",
+          800: "#16181c",
+          700: "#202329",
+          600: "#2c3039",
         },
         gold: {
-          400: "#f4c565",
-          500: "#e7a63c",
-          600: "#c88423",
+          400: "#ffc75f",
+          500: "#f0a730",
+          600: "#c9820f",
+        },
+        orange: {
+          500: "#ff7a3d",
+          600: "#e85d1f",
         },
         ink: {
-          DEFAULT: "#eef1f8",
-          muted: "#a8b3cc",
+          DEFAULT: "#f5f6f8",
+          muted: "#a3a8b3",
         },
-        line: "rgba(255,255,255,0.09)",
+        line: "rgba(255,255,255,0.1)",
       },
       fontFamily: {
         display: ["var(--font-display)", "Sora", "sans-serif"],

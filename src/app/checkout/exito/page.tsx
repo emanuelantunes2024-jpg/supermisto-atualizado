@@ -73,7 +73,7 @@ export default async function CheckoutSuccessPage({ searchParams }: PageProps) {
         <div className="panel text-center">
           <span
             className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full text-3xl"
-            style={{ background: "rgba(231,166,60,0.14)" }}
+            style={{ background: "rgba(240,167,48,0.14)" }}
           >
             {confirmation?.paid ? "✅" : "⏳"}
           </span>

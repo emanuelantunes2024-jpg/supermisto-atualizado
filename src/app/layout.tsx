@@ -50,7 +50,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap"
           rel="stylesheet"
         />
-        <meta name="theme-color" content="#070c18" />
+        <meta name="theme-color" content="#08090b" />
       </head>
       <body className="flex min-h-screen flex-col">
         <Header isLoggedIn={Boolean(user)} isAdmin={isAdmin} />

@@ -58,11 +58,19 @@ export const brandLogo: BrandLogo | null = {
  */
 export const brandLogoFull = { src: "/logo.png", width: 1042, height: 657 } as const;
 
+/**
+ * Menú principal. `soon: true` marca secciones cuyo producto todavía no
+ * existe (PDVs, Combos): se muestran en el menú con la etiqueta "Pronto"
+ * y no enlazan a ninguna parte, para no ofrecer algo que no se puede comprar.
+ */
 export const mainNav = [
   { href: "/", label: "Inicio" },
-  { href: "/plantillas", label: "Plantillas" },
-  { href: "/#como-funciona", label: "Cómo funciona" },
-  { href: "/#precios", label: "Precios" },
+  { href: "/plantillas", label: "Categorías" },
+  { href: "/pdvs", label: "PDVs", soon: true },
+  { href: "/combos", label: "Combos", soon: true },
+  { href: "/legal/terminos", label: "Licencias" },
+  { href: "/#como-funciona", label: "Servicios" },
+  { href: "/contacto", label: "Soporte" },
   { href: "/contacto", label: "Contacto" },
 ] as const;
 

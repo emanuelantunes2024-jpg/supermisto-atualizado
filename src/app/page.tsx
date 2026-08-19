@@ -1,9 +1,12 @@
 import Link from "next/link";
 
+import { BenefitsStrip } from "@/components/home/BenefitsStrip";
 import { CategoryGrid } from "@/components/home/CategoryGrid";
+import { CategoryStrip } from "@/components/home/CategoryStrip";
 import { CtaBand } from "@/components/home/CtaBand";
 import { Hero } from "@/components/home/Hero";
 import { HowItWorks } from "@/components/home/HowItWorks";
+import { ProductPillars } from "@/components/home/ProductPillars";
 import { StatsBand } from "@/components/home/StatsBand";
 import { Testimonials } from "@/components/home/Testimonials";
 import { TemplateCard } from "@/components/templates/TemplateCard";
@@ -39,8 +42,11 @@ export default async function HomePage() {
         }}
       />
 
-      <Hero templateCount={templates.length} />
-      <StatsBand templateCount={templates.length} />
+      <Hero templateCount={templates.length} categoryCount={categories.length} />
+      <CategoryStrip categories={categories} />
+      <ProductPillars templateCount={templates.length} />
+      <BenefitsStrip />
+      <StatsBand templateCount={templates.length} categoryCount={categories.length} />
       <CategoryGrid categories={categories} counts={counts} />
 
       <section id="destacadas" className="py-20">

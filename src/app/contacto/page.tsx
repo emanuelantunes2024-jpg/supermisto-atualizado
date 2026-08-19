@@ -66,7 +66,7 @@ export default function ContactPage() {
               >
                 <span
                   className="flex h-11 w-11 items-center justify-center rounded-[10px] text-xl"
-                  style={{ background: "rgba(231,166,60,0.12)" }}
+                  style={{ background: "rgba(240,167,48,0.12)" }}
                 >
                   ✉️
                 </span>
@@ -79,7 +79,7 @@ export default function ContactPage() {
               <div className="surface flex items-center gap-4 p-5">
                 <span
                   className="flex h-11 w-11 items-center justify-center rounded-[10px] text-xl"
-                  style={{ background: "rgba(231,166,60,0.12)" }}
+                  style={{ background: "rgba(240,167,48,0.12)" }}
                 >
                   ⏱️
                 </span>
@@ -92,7 +92,7 @@ export default function ContactPage() {
               <div className="surface flex items-center gap-4 p-5">
                 <span
                   className="flex h-11 w-11 items-center justify-center rounded-[10px] text-xl"
-                  style={{ background: "rgba(231,166,60,0.12)" }}
+                  style={{ background: "rgba(240,167,48,0.12)" }}
                 >
                   🧾
                 </span>

@@ -10,18 +10,21 @@
    =========================================================== */
 
 :root {
-  --navy-950: #070c18;
-  --navy-900: #0b1424;
-  --navy-800: #101c33;
-  --navy-700: #172845;
-  --navy-600: #23375c;
-  --gold-500: #e7a63c;
-  --gold-400: #f4c565;
-  --gold-600: #c88423;
-  --ink: #eef1f8;
-  --ink-muted: #a8b3cc;
-  --line: rgba(255, 255, 255, 0.09);
-  --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.45);
+  /* Grafite/negro premium (antes navy-azulado) — identidad visual 2026. */
+  --navy-950: #08090b;
+  --navy-900: #0d0f12;
+  --navy-800: #16181c;
+  --navy-700: #202329;
+  --navy-600: #2c3039;
+  --gold-500: #f0a730;
+  --gold-400: #ffc75f;
+  --gold-600: #c9820f;
+  --orange-500: #ff7a3d;
+  --orange-600: #e85d1f;
+  --ink: #f5f6f8;
+  --ink-muted: #a3a8b3;
+  --line: rgba(255, 255, 255, 0.1);
+  --shadow-lg: 0 24px 70px rgba(0, 0, 0, 0.55);
 
   --font-display: "Sora", ui-sans-serif, system-ui, sans-serif;
   --font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;

@@ -42,7 +42,7 @@ export function Testimonials() {
               <figcaption className="flex items-center gap-3">
                 <span
                   className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-lg"
-                  style={{ background: "rgba(231,166,60,0.14)" }}
+                  style={{ background: "rgba(240,167,48,0.14)" }}
                 >
                   {item.avatar}
                 </span>

@@ -56,7 +56,7 @@ export default async function CheckoutPage({ params }: PageProps) {
             <div className="flex items-center gap-3.5">
               <span
                 className="flex h-16 w-16 shrink-0 items-center justify-center rounded-lg text-2xl"
-                style={{ background: "rgba(231,166,60,0.12)" }}
+                style={{ background: "rgba(240,167,48,0.12)" }}
               >
                 {template.category?.icon ?? "🎨"}
               </span>

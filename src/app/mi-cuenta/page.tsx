@@ -89,7 +89,7 @@ export default async function MyAccountPage() {
                   <div className="flex items-center gap-4">
                     <span
                       className="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg text-2xl"
-                      style={{ background: "rgba(231,166,60,0.12)" }}
+                      style={{ background: "rgba(240,167,48,0.12)" }}
                     >
                       {order.template?.category?.icon ?? "🎨"}
                     </span>
