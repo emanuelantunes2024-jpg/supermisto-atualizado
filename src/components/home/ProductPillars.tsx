@@ -38,94 +38,96 @@ function CardLink({ href, children }: { href: string; children: React.ReactNode 
  * Cada tarjeta lleva la maqueta del dispositivo a la derecha, como en la
  * referencia de marca.
  */
+/**
+ * Una tarjeta: texto a la izquierda (título, descripción, ticks y botón) y la
+ * maqueta del aparato ocupando toda la banda derecha, como en la referencia.
+ */
+function PillarCard({
+  background,
+  title,
+  description,
+  items,
+  href,
+  cta,
+  mock,
+}: {
+  background: string;
+  title: string;
+  description: string;
+  items: string[];
+  href: string;
+  cta: string;
+  mock: React.ReactNode;
+}) {
+  return (
+    <article
+      className="group relative flex overflow-hidden rounded-[14px] border border-line p-6 transition-all duration-200 hover:-translate-y-1 hover:border-gold-500/60"
+      style={{ background }}
+    >
+      <div className="flex flex-1 flex-col pr-3">
+        <h3 className="mb-2 whitespace-nowrap text-[18px] uppercase leading-none">{title}</h3>
+        <p className="mb-4 min-h-[54px] text-[12.5px] leading-snug text-ink-muted">{description}</p>
+        <Checklist items={items} />
+        <CardLink href={href}>{cta}</CardLink>
+      </div>
+
+      <div className="hidden w-[41%] shrink-0 items-center sm:flex">{mock}</div>
+    </article>
+  );
+}
+
 export function ProductPillars({ templateCount }: ProductPillarsProps) {
   return (
     <section id="servicios" className="pb-4">
-      <div className="container-shell grid gap-5 lg:grid-cols-3">
-        {/* Sitios web premium */}
-        <article
-          className="group relative flex flex-col overflow-hidden rounded-[14px] border border-line p-6 transition-all duration-200 hover:-translate-y-1 hover:border-gold-500/60"
-          style={{ background: "linear-gradient(150deg,#0e1b2c,#0a0d13 74%)" }}
-        >
-          <div className="mb-4 flex items-start justify-between gap-4">
-            <div className="max-w-[58%]">
-              <h3 className="mb-2 whitespace-nowrap text-[18px] uppercase leading-none">Sitios web premium</h3>
-              <p className="text-[12.5px] leading-snug text-ink-muted">
-                Diseños profesionales, responsivos y optimizados para convertir visitantes en clientes.
-              </p>
-            </div>
-            <LaptopMock />
-          </div>
+      <div className="container-shell grid items-stretch gap-5 lg:grid-cols-3">
+        <PillarCard
+          background="linear-gradient(150deg,#0e1b2c,#0a0d13 74%)"
+          title="Sitios web premium"
+          description="Diseños profesionales, responsivos y optimizados para convertir visitantes en clientes."
+          items={[
+            "100% Personalizables",
+            "Listos para usar",
+            "SEO Optimizado",
+            "Soporte incluido",
+            "Rendimiento superior",
+          ]}
+          href="/plantillas"
+          cta={`Ver sitios${templateCount > 0 ? ` (${templateCount})` : ""}`}
+          mock={<LaptopMock />}
+        />
 
-          <Checklist
-            items={[
-              "100% Personalizables",
-              "Listos para usar",
-              "SEO Optimizado",
-              "Soporte incluido",
-              "Rendimiento superior",
-            ]}
-          />
+        <PillarCard
+          background="linear-gradient(150deg,#0d2018,#0a0d13 74%)"
+          title="Sistemas PDV"
+          description="Puntos de venta modernos y fáciles de usar para gestionar tu negocio de forma eficiente."
+          items={[
+            "Ventas rápidas",
+            "Gestión de stock",
+            "Clientes y productos",
+            "Reportes completos",
+            "Multi-dispositivo",
+            "Fácil de usar",
+          ]}
+          href="/pdvs"
+          cta="Ver PDVs"
+          mock={<PdvMock />}
+        />
 
-          <CardLink href="/plantillas">Ver sitios{templateCount > 0 ? ` (${templateCount})` : ""}</CardLink>
-        </article>
-
-        {/* Sistemas PDV */}
-        <article
-          className="group relative flex flex-col overflow-hidden rounded-[14px] border border-line p-6 transition-all duration-200 hover:-translate-y-1 hover:border-gold-500/60"
-          style={{ background: "linear-gradient(150deg,#0d2018,#0a0d13 74%)" }}
-        >
-          <div className="mb-4 flex items-start justify-between gap-4">
-            <div className="max-w-[58%]">
-              <h3 className="mb-2 whitespace-nowrap text-[18px] uppercase leading-none">Sistemas PDV</h3>
-              <p className="text-[12.5px] leading-snug text-ink-muted">
-                Puntos de venta modernos y fáciles de usar para gestionar tu negocio de forma eficiente.
-              </p>
-            </div>
-            <PdvMock />
-          </div>
-
-          <Checklist
-            items={[
-              "Ventas rápidas",
-              "Gestión de stock",
-              "Clientes y productos",
-              "Reportes completos",
-              "Multi-dispositivo",
-              "Fácil de usar",
-            ]}
-          />
-
-          <CardLink href="/pdvs">Ver PDVs</CardLink>
-        </article>
-
-        {/* Combos premium */}
-        <article
-          className="group relative flex flex-col overflow-hidden rounded-[14px] border border-line p-6 transition-all duration-200 hover:-translate-y-1 hover:border-gold-500/60"
-          style={{ background: "linear-gradient(150deg,#1a0f26,#0a0d13 74%)" }}
-        >
-          <div className="mb-4 flex items-start justify-between gap-4">
-            <div className="max-w-[58%]">
-              <h3 className="mb-2 whitespace-nowrap text-[18px] uppercase leading-none">Combos premium</h3>
-              <p className="text-[12.5px] leading-snug text-ink-muted">
-                Obtén tu sitio web + PDV y ahorra dinero con nuestros paquetes especiales.
-              </p>
-            </div>
-            <ComboMock />
-          </div>
-
-          <Checklist
-            items={[
-              "Mejor precio",
-              "Todo integrado",
-              "Instalación incluida",
-              "Soporte prioritario",
-              "Actualizaciones gratuitas",
-            ]}
-          />
-
-          <CardLink href="/combos">Ver combos</CardLink>
-        </article>
+        <PillarCard
+          background="linear-gradient(150deg,#1a0f26,#0a0d13 74%)"
+          title="Combos premium"
+          description="Obtén tu sitio web + PDV y ahorra dinero con nuestros paquetes especiales."
+          items={[
+            "Mejor precio",
+            "Todo integrado",
+            "Instalación incluida",
+            "Soporte prioritario",
+            "Actualizaciones gratuitas",
+          ]}
+          href="/combos"
+          cta="Ver combos"
+          mock={<ComboMock />}
+        />
       </div>
     </section>
   );
@@ -137,7 +139,7 @@ export function ProductPillars({ templateCount }: ProductPillarsProps) {
 
 function LaptopMock() {
   return (
-    <div className="hidden w-[40%] shrink-0 sm:block">
+    <div className="w-full">
       <div className="overflow-hidden rounded-t-[5px] border-[3px] border-b-0 border-[#2a2c31]">
         <div className="flex gap-1 bg-[#141920] px-1.5 py-1">
           {[0, 1, 2].map((d) => (
@@ -174,7 +176,7 @@ function LaptopMock() {
 function PdvMock() {
   const tiles = Array.from({ length: 12 });
   return (
-    <div className="hidden w-[40%] shrink-0 sm:block">
+    <div className="w-full">
       <div className="overflow-hidden rounded-[5px] border-[3px] border-[#2a2c31] bg-[#0e1116]">
         <div className="flex items-center justify-between border-b border-line px-1.5 py-1">
           <span className="text-[4px] font-bold uppercase tracking-[0.1em] text-gold-400">Leuname</span>
@@ -229,7 +231,7 @@ function PdvMock() {
 
 function ComboMock() {
   return (
-    <div className="relative hidden w-[38%] shrink-0 pr-1 sm:block">
+    <div className="relative w-full">
       {/* Ventana del sitio web */}
       <div className="overflow-hidden rounded-[5px] border border-[#7c3ecf]/50" style={{ background: "linear-gradient(150deg,#6d2bbf,#3d1a70)" }}>
         <div className="flex gap-1 border-b border-white/15 px-1.5 py-1">

@@ -46,7 +46,11 @@ export default async function TemplatesPage({ searchParams }: PageProps) {
             <div className="eyebrow">Catálogo completo</div>
             <h2>
               {templates.length} {templates.length === 1 ? "plantilla" : "plantillas"}
-              {activeCategory ? ` para ${activeCategory.name.toLowerCase()}` : " profesionales"}
+              {activeCategory
+                ? ` para ${activeCategory.name.toLowerCase()}`
+                : templates.length === 1
+                  ? " profesional"
+                  : " profesionales"}
             </h2>
             <p>
               Filtra por categoría y encuentra el diseño ideal para tu negocio. Todas incluyen versión móvil y son

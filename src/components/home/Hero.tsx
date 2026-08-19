@@ -1,12 +1,12 @@
 import Link from "next/link";
 
 import { DeviceComposition } from "@/components/home/DeviceComposition";
+import { siteStats } from "@/lib/config";
 
-interface HeroProps {
-  categoryCount: number;
-}
+export function Hero() {
+  // Misma cifra que la banda "Líderes en soluciones digitales premium".
+  const categoriesLabel = siteStats[0]?.value || "+30";
 
-export function Hero({ categoryCount }: HeroProps) {
   const highlights = [
     {
       icon: (
@@ -17,7 +17,7 @@ export function Hero({ categoryCount }: HeroProps) {
           <rect x="14" y="14" width="7" height="7" rx="1.5" />
         </>
       ),
-      title: `${categoryCount}+`,
+      title: categoriesLabel,
       lines: ["Categorías", "Premium"],
     },
     {

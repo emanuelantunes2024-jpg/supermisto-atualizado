@@ -1,28 +1,42 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 
 interface PreviewFrameProps {
   src: string | null;
   title: string;
+  /** Slug de la plantilla: abre la demo a pantalla completa. */
+  slug: string;
   /** Maqueta del diseño: se muestra cuando la plantilla aún no tiene demo en vivo. */
   thumbnail?: string | null;
 }
 
 /** Vista previa de la plantilla, con conmutador escritorio / móvil. */
-export function PreviewFrame({ src, title, thumbnail }: PreviewFrameProps) {
+export function PreviewFrame({ src, title, slug, thumbnail }: PreviewFrameProps) {
   const [device, setDevice] = useState<"desktop" | "mobile">("desktop");
 
   return (
     <div className="surface overflow-hidden">
-      <div className="flex items-center justify-between border-b border-line px-4 py-3">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-line px-4 py-3">
         <span className="text-[12.5px] text-ink-muted">
           {src ? "Vista previa en vivo" : "Vista del diseño"}
         </span>
 
         {src && (
-          <div className="flex gap-1">
+          <div className="flex items-center gap-3">
+            <Link
+              href={`/plantillas/${slug}/demo`}
+              className="flex items-center gap-1.5 rounded-md border border-gold-500 px-3 py-1.5 text-[12px] font-bold uppercase tracking-[0.04em] text-gold-400 transition-colors hover:bg-gold-500 hover:text-[#1a1200]"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M4 9V4h5M20 15v5h-5M20 9V4h-5M4 15v5h5" />
+              </svg>
+              Ver demo completa
+            </Link>
+
+            <div className="flex gap-1">
             {(["desktop", "mobile"] as const).map((value) => (
               <button
                 key={value}
@@ -37,6 +51,7 @@ export function PreviewFrame({ src, title, thumbnail }: PreviewFrameProps) {
                 {value === "desktop" ? "🖥" : "📱"}
               </button>
             ))}
+            </div>
           </div>
         )}
       </div>
