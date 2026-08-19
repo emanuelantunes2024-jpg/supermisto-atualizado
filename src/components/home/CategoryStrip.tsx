@@ -15,7 +15,7 @@ export function CategoryStrip({ categories }: { categories: Category[] }) {
     <section className="pb-10">
       <div className="container-shell">
         <div
-          className="anim-in flex flex-wrap items-center justify-center gap-x-4 gap-y-6 rounded-[14px] border border-line px-7 py-5 lg:flex-nowrap lg:justify-between"
+          className="anim-in flex flex-wrap items-center justify-center gap-x-4 gap-y-6 rounded-[14px] border border-line px-7 py-5 xl:flex-nowrap xl:justify-between"
           style={{ background: "linear-gradient(120deg,var(--navy-900),var(--navy-800))" }}
         >
           <span className="shrink-0 text-[12.5px] font-bold uppercase leading-tight tracking-[0.03em] text-gold-400">
@@ -31,7 +31,7 @@ export function CategoryStrip({ categories }: { categories: Category[] }) {
               className="group flex min-w-[78px] flex-col items-center gap-2 px-1 text-center"
             >
               <span className="text-gold-400 transition-transform duration-200 group-hover:-translate-y-0.5">
-                <CategoryIcon slug={category.slug} />
+                <CategoryIcon slug={category.slug} name={category.name} />
               </span>
               <span className="text-[11.5px] font-medium leading-tight text-ink transition-colors group-hover:text-gold-400">
                 {category.name}

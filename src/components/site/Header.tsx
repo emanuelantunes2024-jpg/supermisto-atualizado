@@ -74,11 +74,14 @@ export function Header({ isLoggedIn, isAdmin }: HeaderProps) {
   return (
     <>
       {/* Barra superior de servicio */}
-      <div className="hidden border-b border-line bg-navy-950 md:block">
-        <div className="mx-auto flex max-w-shell items-center justify-between px-7 py-2.5 text-[12px] text-ink-muted">
-          <div className="flex items-center gap-8">
-            {topBar.map((item) => (
-              <span key={item.label} className="flex items-center gap-2">
+      <div className="border-b border-line bg-navy-950">
+        <div className="mx-auto flex max-w-shell items-center justify-between gap-3 px-5 py-2.5 text-[11.5px] text-ink-muted sm:px-7 sm:text-[12px]">
+          <div className="flex items-center gap-5 xl:gap-8">
+            {topBar.map((item, index) => (
+              <span
+                key={item.label}
+                className={`flex items-center gap-2 ${index > 0 ? "hidden md:flex" : ""}`}
+              >
                 <span className="text-gold-400">
                   <LineIcon>{item.icon}</LineIcon>
                 </span>
@@ -103,7 +106,7 @@ export function Header({ isLoggedIn, isAdmin }: HeaderProps) {
                 {contactPhone}
               </a>
             )}
-            <Link href="/contacto" className="transition-colors hover:text-gold-400">
+            <Link href="/contacto" className="hidden transition-colors hover:text-gold-400 sm:block">
               Ayuda
             </Link>
             <span className="flex items-center gap-1 text-ink-muted/80">
@@ -120,19 +123,19 @@ export function Header({ isLoggedIn, isAdmin }: HeaderProps) {
         className="sticky top-0 z-50 border-b border-line backdrop-blur-[10px]"
         style={{ background: "rgba(8,9,11,0.92)" }}
       >
-        <div className="mx-auto flex max-w-shell items-center gap-6 px-7 py-4">
+        <div className="mx-auto flex max-w-shell items-center gap-4 px-5 py-4 sm:px-7 nav:gap-6">
           <div className="shrink-0">
             <Logo />
           </div>
 
-          <nav className="hidden flex-1 items-center justify-center gap-6 xl:flex">
+          <nav className="hidden flex-1 items-center justify-center gap-2 nav:flex lg:gap-3.5 xl:gap-6">
             {mainNav.map((item) => {
               const hasMenu = "menu" in item && item.menu;
               return (
                 <Link
                   key={item.label}
                   href={item.href}
-                  className={`flex items-center gap-1.5 whitespace-nowrap text-[13px] font-bold uppercase tracking-[0.04em] transition-colors hover:text-gold-400 ${
+                  className={`flex items-center gap-1.5 whitespace-nowrap text-[10.5px] font-bold uppercase tracking-[0.02em] transition-colors hover:text-gold-400 lg:text-[11.5px] lg:tracking-[0.03em] xl:text-[13px] xl:tracking-[0.04em] ${
                     isActive(item.href) ? "text-gold-400" : "text-ink"
                   }`}
                 >
@@ -147,11 +150,11 @@ export function Header({ isLoggedIn, isAdmin }: HeaderProps) {
             })}
           </nav>
 
-          <div className="hidden shrink-0 items-center gap-5 xl:flex">
+          <div className="ml-auto flex shrink-0 items-center gap-2.5 nav:ml-0 lg:gap-3.5 xl:gap-5">
             <Link
               href="/plantillas"
               aria-label="Buscar plantillas"
-              className="text-ink transition-colors hover:text-gold-400"
+              className="hidden text-ink transition-colors hover:text-gold-400 sm:block"
             >
               <LineIcon size={19}>
                 <circle cx="11" cy="11" r="7" />
@@ -160,19 +163,19 @@ export function Header({ isLoggedIn, isAdmin }: HeaderProps) {
             </Link>
 
             {isAdmin && (
-              <Link href="/admin" className="text-[13px] text-ink-muted transition-colors hover:text-gold-400">
+              <Link href="/admin" className="hidden text-[13px] text-ink-muted transition-colors hover:text-gold-400 wide:block">
                 Panel
               </Link>
             )}
 
             <Link
               href="/mi-cuenta"
-              className="relative flex items-center gap-2 text-[13px] text-ink transition-colors hover:text-gold-400"
+              className="relative hidden items-center gap-2 text-[13px] text-ink transition-colors hover:text-gold-400 sm:flex"
             >
               <LineIcon size={19}>
                 <path d="M12 20s-7-4.3-7-9a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 4.7-7 9-7 9z" />
               </LineIcon>
-              Favoritos
+              <span className="hidden wide:inline">Favoritos</span>
               <Count value={0} />
             </Link>
 
@@ -184,7 +187,7 @@ export function Header({ isLoggedIn, isAdmin }: HeaderProps) {
                 <circle cx="12" cy="8" r="3.6" />
                 <path d="M4.5 20c0-3.6 3.4-6.4 7.5-6.4s7.5 2.8 7.5 6.4" />
               </LineIcon>
-              Mi cuenta
+              <span className="hidden wide:inline">Mi cuenta</span>
             </Link>
 
             <Link
@@ -196,7 +199,7 @@ export function Header({ isLoggedIn, isAdmin }: HeaderProps) {
                 <circle cx="18" cy="20" r="1.3" />
                 <path d="M2.5 3.5h2.6l2.4 11h11l2-7.5H6.4" />
               </LineIcon>
-              Carrito
+              <span className="hidden wide:inline">Carrito</span>
               <Count value={0} />
             </Link>
           </div>
@@ -204,7 +207,7 @@ export function Header({ isLoggedIn, isAdmin }: HeaderProps) {
           <button
             type="button"
             onClick={() => setOpen((value) => !value)}
-            className="ml-auto flex h-10 w-10 items-center justify-center rounded-lg border border-line text-ink xl:hidden"
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-line text-ink nav:hidden"
             aria-expanded={open}
             aria-label={open ? "Cerrar menú" : "Abrir menú"}
           >
@@ -215,7 +218,7 @@ export function Header({ isLoggedIn, isAdmin }: HeaderProps) {
         </div>
 
         {open && (
-          <div className="border-t border-line bg-navy-950/95 px-7 py-4 xl:hidden">
+          <div className="border-t border-line bg-navy-950/95 px-5 py-4 sm:px-7 nav:hidden">
             <nav className="flex flex-col gap-3">
               {mainNav.map((item) => (
                 <Link key={item.label} href={item.href} className="py-1 text-[15px] text-ink-muted">

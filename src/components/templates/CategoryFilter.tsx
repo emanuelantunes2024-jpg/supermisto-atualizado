@@ -35,7 +35,7 @@ export function CategoryFilter({ categories, active }: CategoryFilterProps) {
       {categories.map((category) => (
         <Link key={category.id} href={`/plantillas?cat=${category.slug}`} className={tile(active === category.slug)}>
           <span className={active === category.slug ? "" : "text-gold-400"}>
-            <CategoryIcon slug={category.slug} />
+            <CategoryIcon slug={category.slug} name={category.name} />
           </span>
           <span className="text-[11.5px] font-medium leading-tight">{category.name}</span>
         </Link>

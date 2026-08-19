@@ -43,7 +43,7 @@ export function TemplateCard({ template, showPriceNote = false, priority = false
           />
         ) : (
           <span className="pointer-events-none absolute -right-3 -top-3 text-gold-400 opacity-[0.14]">
-            <CategoryIcon slug={template.category?.slug ?? ""} size={140} />
+            <CategoryIcon slug={template.category?.slug ?? ""} name={template.category?.name} size={140} />
           </span>
         )}
 
