@@ -492,36 +492,35 @@ const designs = [
   },
   {
     slug: "clinica-dental",
-    fonts: "family=Outfit:wght@500;700&family=Inter:wght@400;600",
+    fonts: "family=Poppins:wght@600;700&family=Inter:wght@400;600",
     html: `
-      ${nav("CLÍNICA&nbsp;NOVA", ["TRATAMIENTOS", "EQUIPO", "CITA"])}
+      ${nav("DENTAL&nbsp;PREMIUM", ["TRATAMIENTOS", "EQUIPO", "CITA"])}
       <div class="shot"></div>
       <div class="scrim"></div>
-      <div class="chip c1">✓ Sin dolor</div>
-      <div class="chip c2">Financiación 0%</div>
+      <div class="chip c1">🛡️ Seguridad y confianza</div>
       <div class="body">
         <div class="tag">ODONTOLOGÍA · IMPLANTES · ORTODONCIA</div>
-        <h1>Sonríe sin<br><em>pensarlo</em></h1>
-        <p>Primera visita y diagnóstico sin coste, desde 2009.</p>
-        <div class="btns"><span class="b1">PEDIR CITA PREVIA</span></div>
+        <h1>Tu sonrisa,<br><em>nuestra prioridad</em></h1>
+        <p>Tecnología avanzada y trato humano para ti y tu familia.</p>
+        <div class="btns"><span class="b1">AGENDAR CITA</span></div>
       </div>`,
     css: `
-      .wrap{background:#eef8fb;color:#0b2f3d;font-family:Inter,sans-serif;}
-      .shot{position:absolute;inset:0;background:url("${photo("clinica-dental-2.jpg")}") center/cover no-repeat;}
-      ${scrim(90, 238, 248, 251)}
-      .nav{position:absolute;top:0;left:0;right:0;z-index:4;display:flex;align-items:center;justify-content:space-between;padding:26px 120px;border-bottom:1px solid rgba(11,47,61,.1);}
-      .brand{font-family:Outfit;font-weight:700;font-size:26px;color:#0b2f3d;}
-      .links i{font-style:normal;margin:0 18px;font-size:14px;color:#4d7c8c;}
-      .navcta{background:#12a3c4;color:#fff;padding:11px 22px;border-radius:99px;font-size:13px;font-weight:600;}
-      .chip{position:absolute;z-index:3;background:#fff;border:1px solid rgba(11,47,61,.1);border-radius:99px;
-        padding:12px 20px;font-size:15px;font-weight:600;color:#0b2f3d;box-shadow:0 16px 36px rgba(11,47,61,.14);}
-      .c1{right:120px;top:150px;} .c2{right:120px;top:210px;}
+      .wrap{background:#eef4fd;color:#0a1e3d;font-family:Inter,sans-serif;}
+      .shot{position:absolute;inset:0;background:url("${photo("clinica-dental-premium.jpg")}") center/cover no-repeat;}
+      ${scrim(90, 238, 244, 253)}
+      .nav{position:absolute;top:0;left:0;right:0;z-index:4;display:flex;align-items:center;justify-content:space-between;padding:26px 120px;border-bottom:1px solid rgba(10,30,61,.1);}
+      .brand{font-family:Poppins;font-weight:700;font-size:26px;color:#0a1e3d;}
+      .links i{font-style:normal;margin:0 18px;font-size:14px;color:#5c6b85;}
+      .navcta{background:#1d5fb8;color:#fff;padding:11px 22px;border-radius:9px;font-size:13px;font-weight:600;}
+      .chip{position:absolute;z-index:3;background:#fff;border:1px solid rgba(10,30,61,.1);border-radius:14px;
+        padding:12px 20px;font-size:15px;font-weight:600;color:#0a1e3d;box-shadow:0 16px 36px rgba(10,30,61,.14);}
+      .c1{right:120px;top:180px;}
       .body{position:absolute;left:120px;top:206px;z-index:2;}
-      .tag{font-size:13px;letter-spacing:.2em;color:#12a3c4;font-weight:600;margin-bottom:22px;}
-      h1{font-family:Outfit;font-weight:700;font-size:96px;line-height:.98;letter-spacing:-.03em;margin-bottom:24px;max-width:600px;${textGlow(true)}}
-      h1 em{font-style:normal;color:#12a3c4;}
-      p{color:#2c5e6f;font-size:20px;max-width:480px;margin-bottom:34px;${textGlow(true)}}
-      .b1{background:#12a3c4;color:#fff;padding:19px 34px;border-radius:99px;font-weight:600;font-size:16px;}`,
+      .tag{font-size:13px;letter-spacing:.2em;color:#1d5fb8;font-weight:600;margin-bottom:22px;}
+      h1{font-family:Poppins;font-weight:700;font-size:92px;line-height:1;letter-spacing:-.02em;margin-bottom:24px;max-width:620px;${textGlow(true)}}
+      h1 em{font-style:normal;color:#1d5fb8;}
+      p{color:#2f4066;font-size:20px;max-width:480px;margin-bottom:34px;${textGlow(true)}}
+      .b1{background:#1d5fb8;color:#fff;padding:19px 34px;border-radius:9px;font-weight:600;font-size:16px;}`,
   },
   {
     slug: "studio-fitness",

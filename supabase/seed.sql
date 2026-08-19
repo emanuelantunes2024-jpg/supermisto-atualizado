@@ -128,11 +128,11 @@ values
 
   ('22222222-2222-4222-8222-000000000011',
    '11111111-1111-4111-8111-000000000007',
-   'Clínica Dental', 'clinica-dental',
-   'Clínica con tratamientos, cuadro médico y cita previa online.',
-   'Para clínicas dentales, fisioterapia y consultas privadas: tratamientos explicados uno a uno, cuadro médico con titulación, cita previa online, financiación y avisos legales sanitarios. Diseño limpio que transmite confianza.',
-   16500, null, '/thumbnails/clinica-dental.jpg',
-   '["Cita previa online", "Tratamientos explicados uno a uno", "Cuadro médico con titulación", "Sección de financiación", "Preparada para avisos legales sanitarios", "Optimizado para Google (SEO)"]'::jsonb,
+   'Clínica Dental Premium', 'clinica-dental',
+   'Clínica dental completa: tratamientos, equipo, urgencias y cita previa online.',
+   'Para clínicas dentales y consultas privadas: catálogo de 6 tratamientos, equipo de especialistas, franja de urgencias 24h, preguntas frecuentes y formulario de cita previa. Paleta blanco + azul que transmite confianza y tecnología.',
+   16500, '/demos/clinica-dental-premium/index.html', '/thumbnails/clinica-dental.jpg',
+   '["Cita previa online", "6 tratamientos con ficha propia", "Equipo de especialistas", "Urgencias 24h y financiación", "Preguntas frecuentes", "Optimizado para Google (SEO)"]'::jsonb,
    'published'),
 
   ('22222222-2222-4222-8222-000000000012',
