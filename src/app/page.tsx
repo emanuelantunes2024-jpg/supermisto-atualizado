@@ -31,7 +31,7 @@ export default async function HomePage() {
         }}
       />
 
-      <Hero categoryCount={categories.length} />
+      <Hero />
       <CategoryStrip categories={categories} />
       <ProductPillars templateCount={templates.length} />
       <BenefitsStrip />

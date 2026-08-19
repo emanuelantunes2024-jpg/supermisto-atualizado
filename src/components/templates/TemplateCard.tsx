@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { CategoryIcon } from "@/components/templates/CategoryIcon";
+
 import { formatPriceShort } from "@/lib/format";
 import { templateGradients } from "@/lib/seed-data";
 import type { TemplateWithCategory } from "@/lib/types";
@@ -17,15 +19,18 @@ interface TemplateCardProps {
 
 export function TemplateCard({ template, showPriceNote = false, priority = false }: TemplateCardProps) {
   const gradient = templateGradients[template.slug] ?? FALLBACK_GRADIENT;
-  const icon = template.category?.icon ?? "🎨";
+  // Con demo lista, la miniatura entra directo en la demo navegable.
+  const demoHref = template.preview_url
+    ? `/plantillas/${template.slug}/demo`
+    : `/plantillas/${template.slug}`;
 
   return (
     <article className="surface flex flex-col overflow-hidden transition-all duration-[250ms] hover:-translate-y-1 hover:border-gold-500 hover:shadow-lg">
       <Link
-        href={`/plantillas/${template.slug}`}
+        href={demoHref}
         className="group relative flex h-[170px] items-end overflow-hidden p-[18px]"
         style={template.thumbnail_url ? undefined : { background: gradient }}
-        aria-label={`Ver ${template.title}`}
+        aria-label={template.preview_url ? `Ver la demo de ${template.title}` : `Ver ${template.title}`}
       >
         {template.thumbnail_url ? (
           <Image
@@ -37,11 +42,8 @@ export function TemplateCard({ template, showPriceNote = false, priority = false
             className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
           />
         ) : (
-          <span
-            aria-hidden
-            className="pointer-events-none absolute -right-2.5 -top-2.5 text-[120px] leading-none opacity-[0.16]"
-          >
-            {icon}
+          <span className="pointer-events-none absolute -right-3 -top-3 text-gold-400 opacity-[0.14]">
+            <CategoryIcon slug={template.category?.slug ?? ""} name={template.category?.name} size={140} />
           </span>
         )}
 
@@ -61,6 +63,18 @@ export function TemplateCard({ template, showPriceNote = false, priority = false
             {template.category.name}
           </span>
         )}
+
+        {/* Aviso de demo navegable: aparece al pasar el ratón por la miniatura. */}
+        {template.preview_url && (
+          <span
+            aria-hidden
+            className="absolute inset-0 z-10 flex items-center justify-center bg-black/45 opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+          >
+            <span className="rounded-[7px] bg-gold-500 px-4 py-2 text-[12px] font-extrabold uppercase tracking-[0.06em] text-[#1a1200]">
+              Ver demo
+            </span>
+          </span>
+        )}
       </Link>
 
       <div className="flex flex-1 flex-col p-[18px] pb-5">
@@ -76,12 +90,22 @@ export function TemplateCard({ template, showPriceNote = false, priority = false
             {formatPriceShort(template.price_cents)}
             {showPriceNote && <small className="ml-1 text-[11px] font-normal text-ink-muted">pago único</small>}
           </div>
-          <Link
-            href={`/plantillas/${template.slug}`}
-            className="border-b border-gold-500 pb-px text-[12.5px] font-semibold text-ink transition-colors hover:text-gold-400"
-          >
-            Ver detalle →
-          </Link>
+          <span className="flex items-center gap-3">
+            {template.preview_url && (
+              <Link
+                href={`/plantillas/${template.slug}/demo`}
+                className="rounded-md border border-line px-2.5 py-1 text-[12px] font-semibold text-ink transition-colors hover:border-gold-500 hover:text-gold-400"
+              >
+                Ver demo
+              </Link>
+            )}
+            <Link
+              href={`/plantillas/${template.slug}`}
+              className="border-b border-gold-500 pb-px text-[12.5px] font-semibold text-ink transition-colors hover:text-gold-400"
+            >
+              Ver detalle →
+            </Link>
+          </span>
         </div>
       </div>
     </article>

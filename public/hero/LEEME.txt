@@ -1,0 +1,15 @@
+FOTOS DE LA PORTADA
+===================
+
+  restaurante.jpg  -> el plato que se ve dentro del portátil   [puesta]
+  moda.jpg         -> la modelo que se ve dentro del móvil     [puesta]
+
+Para cambiar una foto basta con sustituir el archivo por otro con el mismo
+nombre: no hay que tocar el código.
+
+Medidas usadas:
+  restaurante.jpg  1400 x 1120 px
+  moda.jpg          700 x 1400 px (vertical)
+
+Si un archivo falta, la portada dibuja un plato en SVG y sigue funcionando
+(src/components/home/PlatedDish.tsx).

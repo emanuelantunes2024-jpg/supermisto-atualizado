@@ -8,44 +8,22 @@ import type { Category, TemplateWithCategory } from "@/lib/types";
  *  2. Alimenta la vitrine cuando todavía no hay Supabase configurado,
  *     para poder ver y revisar el sitio antes de crear las cuentas.
  *
- * Las 30 categorías premium son la taxonomía definitiva del catálogo.
- * Cada plantilla se añade a `seed` según llega su paquete (foto + prompt).
+ * Las categorías son las ocho de la referencia de marca. Cada plantilla se
+ * añade a `seed` según llega su paquete (foto + prompt).
  */
 
 const CAT = "11111111-1111-4111-8111-0000000000";
 
-/** Las 30 categorías premium, en el orden oficial del catálogo. */
+/** Las ocho categorías premium, en el orden de la referencia de marca. */
 export const seedCategories: Category[] = [
-  { id: `${CAT}01`, name: "Clínica Dental", slug: "clinica-dental", icon: "🦷" },
-  { id: `${CAT}02`, name: "Clínica Veterinaria", slug: "clinica-veterinaria", icon: "🐾" },
-  { id: `${CAT}03`, name: "Pet Shop", slug: "pet-shop", icon: "🐕" },
-  { id: `${CAT}04`, name: "Agencia Inmobiliaria", slug: "inmobiliaria", icon: "🏡" },
-  { id: `${CAT}05`, name: "Agencia de Viajes", slug: "agencia-viajes", icon: "✈️" },
-  { id: `${CAT}06`, name: "Hotel", slug: "hotel", icon: "🏨" },
-  { id: `${CAT}07`, name: "Restaurante", slug: "restaurante", icon: "🍽️" },
-  { id: `${CAT}08`, name: "Panadería", slug: "panaderia", icon: "🥖" },
-  { id: `${CAT}09`, name: "Boutique de Moda", slug: "boutique-moda", icon: "👗" },
-  { id: `${CAT}10`, name: "Muebles y Decoración", slug: "muebles-decoracion", icon: "🛋️" },
-  { id: `${CAT}11`, name: "Taller Mecánico", slug: "taller-mecanico", icon: "🔧" },
-  { id: `${CAT}12`, name: "Piezas Automotrices", slug: "piezas-auto", icon: "⚙️" },
-  { id: `${CAT}13`, name: "Taller de Motos", slug: "taller-motos", icon: "🏍️" },
-  { id: `${CAT}14`, name: "Piezas para Moto", slug: "piezas-moto", icon: "🔩" },
-  { id: `${CAT}15`, name: "Pizzería", slug: "pizzeria", icon: "🍕" },
-  { id: `${CAT}16`, name: "Materiales de Construcción", slug: "materiales-construccion", icon: "🧱" },
-  { id: `${CAT}17`, name: "Obras y Construcción", slug: "obras-construccion", icon: "🏗️" },
-  { id: `${CAT}18`, name: "Pesca", slug: "pesca", icon: "🎣" },
-  { id: `${CAT}19`, name: "Restaurantes", slug: "restaurantes", icon: "🍴" },
-  { id: `${CAT}20`, name: "Restaurante Premium", slug: "restaurante-premium", icon: "🍷" },
-  { id: `${CAT}21`, name: "Energía Solar", slug: "energia-solar", icon: "☀️" },
-  { id: `${CAT}22`, name: "Mudanzas y Transportes", slug: "mudanzas-transportes", icon: "🚚" },
-  { id: `${CAT}23`, name: "Electrónica", slug: "electronica", icon: "📱" },
-  { id: `${CAT}24`, name: "Hamburguesería", slug: "hamburgueseria", icon: "🍔" },
-  { id: `${CAT}25`, name: "Alquiler de Coches", slug: "alquiler-coches", icon: "🚗" },
-  { id: `${CAT}26`, name: "Concesionaria de Automóviles", slug: "concesionaria", icon: "🚘" },
-  { id: `${CAT}27`, name: "Instrumentos Musicales", slug: "instrumentos-musicales", icon: "🎸" },
-  { id: `${CAT}28`, name: "Perfumería", slug: "perfumeria", icon: "🧴" },
-  { id: `${CAT}29`, name: "Relojería", slug: "relojeria", icon: "⌚" },
-  { id: `${CAT}30`, name: "Frutería y Verdulería", slug: "fruteria", icon: "🥬" },
+  { id: `${CAT}01`, name: "Restaurantes", slug: "restaurantes", icon: "🍴" },
+  { id: `${CAT}02`, name: "Clínicas", slug: "clinicas", icon: "🩺" },
+  { id: `${CAT}03`, name: "Inmobiliarias", slug: "inmobiliarias", icon: "🏡" },
+  { id: `${CAT}04`, name: "Hoteles", slug: "hoteles", icon: "🏨" },
+  { id: `${CAT}05`, name: "Tiendas Online", slug: "tiendas-online", icon: "🛒" },
+  { id: `${CAT}06`, name: "Automotriz", slug: "automotriz", icon: "🚗" },
+  { id: `${CAT}07`, name: "Salud & Belleza", slug: "salud-belleza", icon: "💆" },
+  { id: `${CAT}08`, name: "Educación", slug: "educacion", icon: "🎓" },
 ];
 
 const byslug = (slug: string) => seedCategories.find((c) => c.slug === slug)!;
@@ -76,7 +54,7 @@ const SEO = "Optimizado para Google (SEO)";
 const seed: SeedTemplate[] = [
   {
     id: `${TPL}01`,
-    categorySlug: "clinica-dental",
+    categorySlug: "clinicas",
     title: "Clínica Dental Premium",
     slug: "clinica-dental-premium",
     short_description: "Clínica dental completa: tratamientos, equipo, urgencias y cita previa online.",

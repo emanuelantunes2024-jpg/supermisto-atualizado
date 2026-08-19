@@ -13,17 +13,52 @@ interface HeaderProps {
 }
 
 const topBar = [
-  { icon: "📦", label: "Envío digital inmediato" },
-  { icon: "🔒", label: "Pago 100% seguro" },
-  { icon: "🎧", label: "Soporte experto" },
+  {
+    label: "Envío digital inmediato",
+    icon: (
+      <>
+        <rect x="2.5" y="7" width="19" height="13" rx="2" />
+        <path d="M2.5 11h19M9 7V4h6v3" />
+      </>
+    ),
+  },
+  {
+    label: "Pago 100% seguro",
+    icon: (
+      <>
+        <rect x="4" y="10" width="16" height="11" rx="2" />
+        <path d="M8 10V7a4 4 0 0 1 8 0v3" />
+      </>
+    ),
+  },
+  {
+    label: "Soporte experto",
+    icon: (
+      <>
+        <path d="M4 14v-2a8 8 0 0 1 16 0v2" />
+        <rect x="2.5" y="13" width="4" height="6" rx="1.6" />
+        <rect x="17.5" y="13" width="4" height="6" rx="1.6" />
+      </>
+    ),
+  },
 ];
 
-/** Sección del menú cuyo producto todavía no está a la venta. */
-function SoonTag() {
+/** Icono de línea dorado usado en la barra superior y en las acciones. */
+function LineIcon({ children, size = 15 }: { children: React.ReactNode; size?: number }) {
   return (
-    <span className="rounded-full border border-line px-1.5 py-px text-[9px] font-semibold normal-case tracking-normal text-ink-muted/70">
-      Pronto
-    </span>
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.7"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+    >
+      {children}
+    </svg>
   );
 }
 
@@ -39,29 +74,42 @@ export function Header({ isLoggedIn, isAdmin }: HeaderProps) {
   return (
     <>
       {/* Barra superior de servicio */}
-      <div className="hidden border-b border-line bg-navy-950 md:block">
-        <div className="mx-auto flex max-w-shell items-center justify-between px-7 py-2.5 text-[12px] text-ink-muted">
-          <div className="flex items-center gap-7">
-            {topBar.map((item) => (
-              <span key={item.label} className="flex items-center gap-2">
-                <span className="text-gold-400" aria-hidden>
-                  {item.icon}
+      <div className="border-b border-line bg-navy-950">
+        <div className="mx-auto flex max-w-shell items-center justify-between gap-3 px-5 py-2.5 text-[11.5px] text-ink-muted sm:px-7 sm:text-[12px]">
+          <div className="flex items-center gap-5 xl:gap-8">
+            {topBar.map((item, index) => (
+              <span
+                key={item.label}
+                className={`flex items-center gap-2 ${index > 0 ? "hidden md:flex" : ""}`}
+              >
+                <span className="text-gold-400">
+                  <LineIcon>{item.icon}</LineIcon>
                 </span>
                 {item.label}
               </span>
             ))}
           </div>
-          <div className="flex items-center gap-5">
+          <div className="flex items-center gap-6">
             {contactPhone && (
-              <a href={`tel:${contactPhone.replace(/\s/g, "")}`} className="flex items-center gap-2 transition-colors hover:text-gold-400">
-                <span className="text-[#22c55e]" aria-hidden>📞</span>
+              <a
+                href={`https://wa.me/${contactPhone.replace(/[^0-9]/g, "")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 transition-colors hover:text-gold-400"
+              >
+                <span className="text-[#25d366]">
+                  <LineIcon size={16}>
+                    <path d="M20.5 11.6a8.5 8.5 0 0 1-12.6 7.5L3.5 20.5l1.4-4.3A8.5 8.5 0 1 1 20.5 11.6z" />
+                    <path d="M8.9 8.4c.3-.7.6-.7.9-.7h.6c.2 0 .5 0 .7.5l.8 1.9c.1.2 0 .4-.1.6l-.4.5c-.1.2-.3.4-.1.7.2.4.9 1.4 1.9 2 1.2.7 1.4.5 1.7.5.2-.1.6-.5.7-.7.2-.2.3-.2.5-.1l1.8.9c.3.1.4.2.5.4 0 .2 0 .9-.3 1.3-.4.5-1.1.9-1.6.9-1.1.1-2.6-.3-4.4-1.5-2.1-1.4-3.4-3.5-3.5-3.7-.1-.2-.8-1.2-.8-2.3 0-1 .5-1.5.7-1.7z" />
+                  </LineIcon>
+                </span>
                 {contactPhone}
               </a>
             )}
-            <Link href="/contacto" className="transition-colors hover:text-gold-400">
+            <Link href="/contacto" className="hidden transition-colors hover:text-gold-400 sm:block">
               Ayuda
             </Link>
-            <span className="flex items-center gap-1 text-ink-muted/70">
+            <span className="flex items-center gap-1 text-ink-muted/80">
               ES
               <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
                 <path d="M6 9l6 6 6-6" />
@@ -75,78 +123,91 @@ export function Header({ isLoggedIn, isAdmin }: HeaderProps) {
         className="sticky top-0 z-50 border-b border-line backdrop-blur-[10px]"
         style={{ background: "rgba(8,9,11,0.92)" }}
       >
-        <div className="mx-auto flex max-w-shell items-center justify-between gap-8 px-7 py-4">
-          <Logo />
+        <div className="mx-auto flex max-w-shell items-center gap-4 px-5 py-4 sm:px-7 nav:gap-6">
+          <div className="shrink-0">
+            <Logo />
+          </div>
 
-          <nav className="hidden flex-1 justify-center gap-5 xl:flex">
+          <nav className="hidden flex-1 items-center justify-center gap-2 nav:flex lg:gap-3.5 xl:gap-6">
             {mainNav.map((item) => {
-              const soon = "soon" in item && item.soon;
-              const inner = (
-                <span className="flex items-center gap-1.5 whitespace-nowrap text-[13px] font-bold uppercase tracking-[0.04em]">
-                  {item.label}
-                  {soon && <SoonTag />}
-                </span>
-              );
-
-              if (soon) {
-                return (
-                  <span key={item.label} className="cursor-default text-ink-muted/45">
-                    {inner}
-                  </span>
-                );
-              }
+              const hasMenu = "menu" in item && item.menu;
               return (
                 <Link
                   key={item.label}
                   href={item.href}
-                  className={`transition-colors hover:text-gold-400 ${
-                    isActive(item.href) ? "text-gold-400" : "text-ink-muted"
+                  className={`flex items-center gap-1.5 whitespace-nowrap text-[10.5px] font-bold uppercase tracking-[0.02em] transition-colors hover:text-gold-400 lg:text-[11.5px] lg:tracking-[0.03em] xl:text-[13px] xl:tracking-[0.04em] ${
+                    isActive(item.href) ? "text-gold-400" : "text-ink"
                   }`}
                 >
-                  {inner}
+                  {item.label}
+                  {hasMenu && (
+                    <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.2">
+                      <path d="M6 9l6 6 6-6" />
+                    </svg>
+                  )}
                 </Link>
               );
             })}
           </nav>
 
-          <div className="hidden items-center gap-4 xl:flex">
+          <div className="ml-auto flex shrink-0 items-center gap-2.5 nav:ml-0 lg:gap-3.5 xl:gap-5">
             <Link
               href="/plantillas"
               aria-label="Buscar plantillas"
-              className="text-ink-muted transition-colors hover:text-gold-400"
+              className="hidden text-ink transition-colors hover:text-gold-400 sm:block"
             >
-              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <LineIcon size={19}>
                 <circle cx="11" cy="11" r="7" />
                 <path d="M20 20l-3.5-3.5" />
-              </svg>
+              </LineIcon>
             </Link>
 
             {isAdmin && (
-              <Link href="/admin" className="text-[13px] text-ink-muted transition-colors hover:text-gold-400">
+              <Link href="/admin" className="hidden text-[13px] text-ink-muted transition-colors hover:text-gold-400 wide:block">
                 Panel
               </Link>
             )}
 
             <Link
-              href={isLoggedIn ? "/mi-cuenta" : "/entrar"}
-              className="flex items-center gap-2 text-[13px] text-ink-muted transition-colors hover:text-gold-400"
+              href="/mi-cuenta"
+              className="relative hidden items-center gap-2 text-[13px] text-ink transition-colors hover:text-gold-400 sm:flex"
             >
-              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <circle cx="12" cy="8" r="4" />
-                <path d="M4 21c0-4 3.6-7 8-7s8 3 8 7" />
-              </svg>
-              {isLoggedIn ? "Mi cuenta" : "Entrar"}
+              <LineIcon size={19}>
+                <path d="M12 20s-7-4.3-7-9a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 4.7-7 9-7 9z" />
+              </LineIcon>
+              <span className="hidden wide:inline">Favoritos</span>
+              <Count value={0} />
             </Link>
 
-            <Link href="/plantillas" className="btn btn-gold" style={{ fontSize: "13px" }}>
-              Explorar tienda
+            <Link
+              href={isLoggedIn ? "/mi-cuenta" : "/entrar"}
+              className="flex items-center gap-2 text-[13px] text-ink transition-colors hover:text-gold-400"
+            >
+              <LineIcon size={19}>
+                <circle cx="12" cy="8" r="3.6" />
+                <path d="M4.5 20c0-3.6 3.4-6.4 7.5-6.4s7.5 2.8 7.5 6.4" />
+              </LineIcon>
+              <span className="hidden wide:inline">Mi cuenta</span>
+            </Link>
+
+            <Link
+              href="/plantillas"
+              className="flex items-center gap-2 text-[13px] text-ink transition-colors hover:text-gold-400"
+            >
+              <LineIcon size={19}>
+                <circle cx="9.5" cy="20" r="1.3" />
+                <circle cx="18" cy="20" r="1.3" />
+                <path d="M2.5 3.5h2.6l2.4 11h11l2-7.5H6.4" />
+              </LineIcon>
+              <span className="hidden wide:inline">Carrito</span>
+              <Count value={0} />
             </Link>
           </div>
 
           <button
             type="button"
             onClick={() => setOpen((value) => !value)}
-            className="flex h-10 w-10 items-center justify-center rounded-lg border border-line text-ink xl:hidden"
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-line text-ink nav:hidden"
             aria-expanded={open}
             aria-label={open ? "Cerrar menú" : "Abrir menú"}
           >
@@ -157,24 +218,13 @@ export function Header({ isLoggedIn, isAdmin }: HeaderProps) {
         </div>
 
         {open && (
-          <div className="border-t border-line bg-navy-950/95 px-7 py-4 xl:hidden">
+          <div className="border-t border-line bg-navy-950/95 px-5 py-4 sm:px-7 nav:hidden">
             <nav className="flex flex-col gap-3">
-              {mainNav.map((item) => {
-                const soon = "soon" in item && item.soon;
-                if (soon) {
-                  return (
-                    <span key={item.label} className="flex items-center gap-2 py-1 text-[15px] text-ink-muted/45">
-                      {item.label}
-                      <SoonTag />
-                    </span>
-                  );
-                }
-                return (
-                  <Link key={item.label} href={item.href} className="py-1 text-[15px] text-ink-muted">
-                    {item.label}
-                  </Link>
-                );
-              })}
+              {mainNav.map((item) => (
+                <Link key={item.label} href={item.href} className="py-1 text-[15px] text-ink-muted">
+                  {item.label}
+                </Link>
+              ))}
               {isAdmin && (
                 <Link href="/admin" className="py-1 text-[15px] text-ink-muted">
                   Panel de administración
@@ -186,12 +236,21 @@ export function Header({ isLoggedIn, isAdmin }: HeaderProps) {
                 {isLoggedIn ? "Mi cuenta" : "Entrar"}
               </Link>
               <Link href="/plantillas" className="btn btn-gold btn-block">
-                Explorar tienda
+                Ver categorías
               </Link>
             </div>
           </div>
         )}
       </header>
     </>
+  );
+}
+
+/** Contador dorado en burbuja (Favoritos / Carrito). */
+function Count({ value }: { value: number }) {
+  return (
+    <span className="flex h-[17px] min-w-[17px] items-center justify-center rounded-full bg-gold-500 px-1 text-[10px] font-bold text-[#1a1200]">
+      {value}
+    </span>
   );
 }

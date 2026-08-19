@@ -35,8 +35,15 @@ const config: Config = {
         display: ["var(--font-display)", "Sora", "sans-serif"],
         sans: ["var(--font-body)", "Inter", "system-ui", "sans-serif"],
       },
+      screens: {
+        // A partir de aquí cabe la barra de menú completa: por debajo se
+        // usa el botón de menú. (Chrome en "sitio para ordenador" da 980px.)
+        nav: "940px",
+        // Aquí ya caben las palabras "Favoritos", "Mi cuenta" y "Carrito".
+        wide: "1380px",
+      },
       maxWidth: {
-        shell: "1240px",
+        shell: "1440px",
       },
       borderRadius: {
         card: "14px",

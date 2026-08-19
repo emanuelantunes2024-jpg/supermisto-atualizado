@@ -92,6 +92,7 @@ export default async function TemplateDetailPage({ params }: PageProps) {
             <PreviewFrame
               src={template.preview_url}
               title={template.title}
+              slug={template.slug}
               thumbnail={template.thumbnail_url}
             />
 
@@ -128,14 +129,9 @@ export default async function TemplateDetailPage({ params }: PageProps) {
               Comprar esta plantilla
             </Link>
             {template.preview_url && (
-              <a
-                href={template.preview_url}
-                target="_blank"
-                rel="noreferrer"
-                className="btn btn-ghost btn-block mt-2.5"
-              >
-                Abrir demo en otra pestaña
-              </a>
+              <Link href={`/plantillas/${template.slug}/demo`} className="btn btn-ghost btn-block mt-2.5">
+                Ver la demo completa
+              </Link>
             )}
 
             <div className="mt-6 rounded-xl border border-line bg-navy-900 p-4">
