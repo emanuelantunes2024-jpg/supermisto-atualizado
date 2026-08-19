@@ -58,21 +58,25 @@ export const brandLogo: BrandLogo | null = {
  */
 export const brandLogoFull = { src: "/logo.png", width: 1042, height: 657 } as const;
 
-/**
- * Menú principal. `soon: true` marca secciones cuyo producto todavía no
- * existe (PDVs, Combos): se muestran en el menú con la etiqueta "Pronto"
- * y no enlazan a ninguna parte, para no ofrecer algo que no se puede comprar.
- */
+/** Menú principal. */
 export const mainNav = [
   { href: "/", label: "Inicio" },
   { href: "/plantillas", label: "Categorías" },
-  { href: "/pdvs", label: "PDVs", soon: true },
-  { href: "/combos", label: "Combos", soon: true },
-  { href: "/legal/terminos", label: "Licencias" },
-  { href: "/#como-funciona", label: "Servicios" },
+  { href: "/pdvs", label: "PDVs" },
+  { href: "/plantillas", label: "Sitio Premium" },
+  { href: "/#precios", label: "Planes" },
   { href: "/contacto", label: "Soporte" },
   { href: "/contacto", label: "Contacto" },
 ] as const;
+
+/** Redes sociales de la marca — deja el href en "" para ocultar el icono. */
+export const socialLinks = {
+  whatsapp: "",
+  facebook: "",
+  instagram: "",
+  youtube: "",
+  tiktok: "",
+} as const;
 
 /** Países de la UE + vecinos, para el formulario de compra. */
 export const countries = [
