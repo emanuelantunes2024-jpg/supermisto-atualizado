@@ -71,13 +71,13 @@ function Laptop() {
           <PlatedDish className="absolute inset-0 h-full w-full" />
           <div
             className="absolute inset-0"
-            style={{ background: `url(${heroPhotos.restaurante}) center/cover no-repeat` }}
+            style={{ background: `url(${heroPhotos.restaurante}) 63% 52%/cover no-repeat` }}
           />
           <div
             className="absolute inset-0"
             style={{
               background:
-                "linear-gradient(100deg,rgba(6,4,2,.95) 4%,rgba(9,6,3,.86) 30%,rgba(10,7,4,.34) 56%,rgba(10,7,4,0) 74%)",
+                "linear-gradient(100deg,rgba(5,3,1,.96) 4%,rgba(8,5,2,.88) 28%,rgba(10,7,4,.40) 52%,rgba(10,7,4,0) 72%)",
             }}
           />
 
