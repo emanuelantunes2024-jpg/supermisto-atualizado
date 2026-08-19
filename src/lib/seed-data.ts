@@ -95,6 +95,28 @@ const seed: SeedTemplate[] = [
       SEO,
     ],
   },
+  {
+    id: `${TPL}02`,
+    categorySlug: "agencia-viajes",
+    title: "Agencia de Viajes Premium",
+    slug: "agencia-viajes-premium",
+    short_description: "Agencia de viajes con buscador, destinos, paquetes y planificación a medida.",
+    full_description:
+      "Para agencias de viajes y turoperadores: buscador de viajes, carrusel de destinos destacados con precios y valoraciones, tarjetas de cruceros y ofertas, 8 tipos de viaje filtrables, paquetes preparados, testimonios, preguntas frecuentes, blog y formulario de propuesta a medida con validación. Paleta verde azulado + coral, tipografía Playfair Display.",
+    price_cents: 21900,
+    preview_url: "/demos/agencia-viajes-premium/index.html",
+    gradient: "linear-gradient(160deg,#0b3b3c,#1a5f60 55%,#08292a)",
+    features: [
+      "Buscador de viajes funcional",
+      "Carrusel de destinos con valoraciones",
+      "8 tipos de viaje filtrables",
+      "Paquetes y ofertas destacadas",
+      "Formulario de propuesta con validación",
+      "Preguntas frecuentes y blog",
+      RESPONSIVE,
+      SEO,
+    ],
+  },
 ];
 
 /** Degradado por slug — respaldo de miniatura en las tarjetas. */

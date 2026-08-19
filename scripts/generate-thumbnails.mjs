@@ -93,6 +93,34 @@ const designs = [
       p{color:#2f4066;font-size:20px;max-width:480px;margin-bottom:34px;${textGlow(true)}}
       .b1{background:#1d5fb8;color:#fff;padding:19px 34px;border-radius:9px;font-weight:600;font-size:16px;}`,
   },
+  {
+    slug: "agencia-viajes-premium",
+    fonts: "family=Playfair+Display:ital,wght@0,700;1,500&family=Inter:wght@400;600",
+    html: `
+      ${nav("AGENCIA&nbsp;DE&nbsp;VIAJES", ["DESTINOS", "PAQUETES", "OFERTAS"])}
+      <div class="shot"></div>
+      <div class="scrim"></div>
+      <div class="body">
+        <div class="tag">Viaja. Descubre. Vive.</div>
+        <h1>El mundo empieza<br><em>donde decides ir</em></h1>
+        <p>Experiencias únicas y viajes a medida por todo el mundo.</p>
+        <div class="btns"><span class="b1">EXPLORAR DESTINOS</span></div>
+      </div>`,
+    css: `
+      .wrap{background:#08282a;color:#fff;font-family:Inter,sans-serif;}
+      .shot{position:absolute;inset:0;background:url("${photo("agencia-viajes-premium.jpg")}") center/cover no-repeat;}
+      ${scrim(90, 8, 40, 42)}
+      .nav{position:absolute;top:0;left:0;right:0;z-index:4;display:flex;align-items:center;justify-content:space-between;padding:26px 120px;border-bottom:1px solid rgba(255,255,255,.16);}
+      .brand{font-family:'Playfair Display';font-weight:700;font-size:25px;letter-spacing:.06em;}
+      .links i{font-style:normal;margin:0 18px;font-size:14px;color:#c3d7d5;}
+      .navcta{background:#e2694a;color:#fff;padding:11px 22px;border-radius:10px;font-size:13px;font-weight:600;}
+      .body{position:absolute;left:120px;top:200px;z-index:2;}
+      .tag{font-family:'Playfair Display';font-style:italic;font-size:26px;color:#ffb59b;margin-bottom:12px;}
+      h1{font-family:'Playfair Display';font-weight:700;font-size:88px;line-height:1.06;margin-bottom:22px;max-width:680px;${textGlow(false)}}
+      h1 em{font-style:normal;color:#ffb59b;}
+      p{color:#dbeae8;font-size:20px;max-width:470px;margin-bottom:32px;${textGlow(false)}}
+      .b1{background:#e2694a;color:#fff;padding:19px 34px;border-radius:10px;font-weight:600;font-size:16px;}`,
+  },
 ];
 
 
