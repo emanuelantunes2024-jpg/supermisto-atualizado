@@ -1,31 +1,20 @@
 import Link from "next/link";
 
 import { BenefitsStrip } from "@/components/home/BenefitsStrip";
-import { CategoryGrid } from "@/components/home/CategoryGrid";
-import { CtaBand } from "@/components/home/CtaBand";
-import { FeatureChips } from "@/components/home/FeatureChips";
+import { CategoryStrip } from "@/components/home/CategoryStrip";
 import { Hero } from "@/components/home/Hero";
-import { HowItWorks } from "@/components/home/HowItWorks";
-import { ShowcaseBanners } from "@/components/home/ShowcaseBanners";
+import { ProductPillars } from "@/components/home/ProductPillars";
 import { StatsBand } from "@/components/home/StatsBand";
-import { Testimonials } from "@/components/home/Testimonials";
 import { TemplateCard } from "@/components/templates/TemplateCard";
 import { siteConfig } from "@/lib/config";
-import { getCategories, getCategoryCounts, getPublishedTemplates } from "@/lib/queries";
+import { getCategories, getPublishedTemplates } from "@/lib/queries";
 
 export const revalidate = 300;
 
 export default async function HomePage() {
-  const [templates, categories, counts] = await Promise.all([
-    getPublishedTemplates(),
-    getCategories(),
-    getCategoryCounts(),
-  ]);
+  const [templates, categories] = await Promise.all([getPublishedTemplates(), getCategories()]);
 
   const featured = templates.slice(0, 6);
-  const fromPriceCents = templates.length
-    ? Math.min(...templates.map((template) => template.price_cents))
-    : 9900;
 
   return (
     <>
@@ -42,40 +31,38 @@ export default async function HomePage() {
         }}
       />
 
-      <Hero templateCount={templates.length} />
-      <FeatureChips categoryCount={categories.length} />
-      <ShowcaseBanners templates={templates} />
+      <Hero categoryCount={categories.length} />
+      <CategoryStrip categories={categories} />
+      <ProductPillars templateCount={templates.length} />
       <BenefitsStrip />
-      <StatsBand templateCount={templates.length} categoryCount={categories.length} />
-      <CategoryGrid categories={categories} counts={counts} />
+      <StatsBand />
 
-      <section id="destacadas" className="py-20">
-        <div className="container-shell">
-          <div className="section-head">
-            <div className="eyebrow">Plantillas destacadas</div>
-            <h2>Diseños listos para publicar hoy</h2>
-            <p>
-              Cada plantilla incluye todas las páginas del negocio, es 100% editable y funciona perfecto en móvil.
-            </p>
+      {featured.length > 0 && (
+        <section id="destacadas" className="pb-20">
+          <div className="container-shell">
+            <div className="section-head">
+              <div className="eyebrow">Sitios web premium</div>
+              <h2>Diseños listos para publicar hoy</h2>
+              <p>
+                Cada plantilla incluye todas las páginas del negocio, es 100% editable y funciona perfecto en
+                móvil.
+              </p>
+            </div>
+
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {featured.map((template, index) => (
+                <TemplateCard key={template.id} template={template} showPriceNote priority={index < 3} />
+              ))}
+            </div>
+
+            <div className="mt-10 text-center">
+              <Link href="/plantillas" className="btn btn-ghost btn-lg">
+                Ver el catálogo completo
+              </Link>
+            </div>
           </div>
-
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {featured.map((template, index) => (
-              <TemplateCard key={template.id} template={template} showPriceNote priority={index < 3} />
-            ))}
-          </div>
-
-          <div className="mt-10 text-center">
-            <Link href="/plantillas" className="btn btn-ghost btn-lg">
-              Ver el catálogo completo
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      <HowItWorks />
-      <CtaBand templateCount={templates.length} fromPriceCents={fromPriceCents} />
-      <Testimonials />
+        </section>
+      )}
     </>
   );
 }

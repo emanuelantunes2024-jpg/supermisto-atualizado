@@ -7,16 +7,15 @@ const columns = [
   {
     title: "Productos",
     links: [
-      { href: "/plantillas", label: "Todas las plantillas" },
-      { href: "/plantillas?cat=barberias", label: "Barberías" },
-      { href: "/plantillas?cat=restaurantes", label: "Restaurantes" },
-      { href: "/#precios", label: "Precios" },
+      { href: "/plantillas", label: "Todos los sitios web" },
+      { href: "/plantillas", label: "Categorías premium" },
+      { href: "/pdvs", label: "Sistemas PDV" },
     ],
   },
   {
     title: "Empresa",
     links: [
-      { href: "/#como-funciona", label: "Cómo funciona" },
+      { href: "/#servicios", label: "Servicios" },
       { href: "/contacto", label: "Contacto" },
       { href: "/mi-cuenta", label: "Mis compras" },
     ],

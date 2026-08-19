@@ -13,18 +13,22 @@ import type { Category, OrderWithTemplate, Template, TemplateWithCategory } from
 
 const TEMPLATE_SELECT = "*, category:categories(*)";
 
+/** Orden oficial del catálogo (el de `seedCategories`), no alfabético. */
 function sortCategories(list: Category[]): Category[] {
-  return [...list].sort((a, b) => a.name.localeCompare(b.name, "es"));
+  const order = new Map(seedCategories.map((c, i) => [c.slug, i]));
+  return [...list].sort(
+    (a, b) => (order.get(a.slug) ?? 999) - (order.get(b.slug) ?? 999),
+  );
 }
 
 export async function getCategories(): Promise<Category[]> {
   const supabase = createPublicClient();
   if (!supabase) return sortCategories(seedCategories);
 
-  const { data, error } = await supabase.from("categories").select("*").order("name");
+  const { data, error } = await supabase.from("categories").select("*");
   if (error || !data || data.length === 0) return sortCategories(seedCategories);
 
-  return data as Category[];
+  return sortCategories(data as Category[]);
 }
 
 export async function getPublishedTemplates(categorySlug?: string): Promise<TemplateWithCategory[]> {

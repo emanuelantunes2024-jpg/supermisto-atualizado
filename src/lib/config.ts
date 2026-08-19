@@ -58,25 +58,33 @@ export const brandLogo: BrandLogo | null = {
  */
 export const brandLogoFull = { src: "/logo.png", width: 1042, height: 657 } as const;
 
-/** Menú principal. */
+/** Menú principal. `soon` marca lo que aún no está a la venta. */
 export const mainNav = [
   { href: "/", label: "Inicio" },
   { href: "/plantillas", label: "Categorías" },
-  { href: "/pdvs", label: "PDVs" },
-  { href: "/plantillas", label: "Sitio Premium" },
-  { href: "/#precios", label: "Planes" },
+  { href: "/pdvs", label: "PDVs", soon: true },
+  { href: "/combos", label: "Combos", soon: true },
+  { href: "/legal/terminos", label: "Licencias" },
+  { href: "/#servicios", label: "Servicios" },
   { href: "/contacto", label: "Soporte" },
   { href: "/contacto", label: "Contacto" },
 ] as const;
 
-/** Redes sociales de la marca — deja el href en "" para ocultar el icono. */
-export const socialLinks = {
-  whatsapp: "",
-  facebook: "",
-  instagram: "",
-  youtube: "",
-  tiktok: "",
-} as const;
+/** Teléfono de atención. Deja "" para ocultarlo de la barra superior. */
+export const contactPhone: string = "";
+
+/**
+ * Cifras de la banda "Líderes en soluciones digitales premium".
+ * EDITA AQUÍ cuando tengas los números reales de clientes y entregas.
+ * Deja `value: ""` para que esa columna no se muestre.
+ */
+export const siteStats: { value: string; label: string }[] = [
+  { value: "+30", label: "Categorías\npremium" },
+  { value: "", label: "Clientes\nsatisfechos" },
+  { value: "", label: "Sitios\nentregados" },
+  { value: "", label: "PDVs\ndisponibles" },
+  { value: "", label: "Valoración de\nnuestros clientes" },
+];
 
 /** Países de la UE + vecinos, para el formulario de compra. */
 export const countries = [
