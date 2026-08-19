@@ -36,7 +36,7 @@ const config: Config = {
         sans: ["var(--font-body)", "Inter", "system-ui", "sans-serif"],
       },
       maxWidth: {
-        shell: "1240px",
+        shell: "1440px",
       },
       borderRadius: {
         card: "14px",

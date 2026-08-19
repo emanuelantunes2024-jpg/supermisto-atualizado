@@ -58,12 +58,29 @@ export const brandLogo: BrandLogo | null = {
  */
 export const brandLogoFull = { src: "/logo.png", width: 1042, height: 657 } as const;
 
-/** Menú principal. `soon` marca lo que aún no está a la venta. */
+/**
+ * ─────────────────────────────────────────────────────────────
+ *  FOTOS DE LA PORTADA (composición de dispositivos)
+ * ─────────────────────────────────────────────────────────────
+ * `restaurante`: la foto del plato que se ve dentro del portátil.
+ * `moda`:        la foto de la modelo que se ve en el móvil.
+ *
+ * Basta con copiar las dos fotos en `public/hero/` con estos nombres
+ * (`restaurante.jpg` y `moda.jpg`) y aparecen solas: no hay que tocar
+ * el código. Mientras el archivo no exista se ve el degradado del mismo
+ * tono que hay debajo, así la portada nunca queda rota.
+ */
+export const heroPhotos = {
+  restaurante: "/hero/restaurante.jpg",
+  moda: "/hero/moda.jpg",
+} as const;
+
+/** Menú principal. `menu: true` dibuja la flecha de desplegable. */
 export const mainNav = [
   { href: "/", label: "Inicio" },
-  { href: "/plantillas", label: "Categorías" },
-  { href: "/pdvs", label: "PDVs", soon: true },
-  { href: "/combos", label: "Combos", soon: true },
+  { href: "/plantillas", label: "Categorías", menu: true },
+  { href: "/pdvs", label: "PDVs", menu: true },
+  { href: "/combos", label: "Combos", menu: true },
   { href: "/legal/terminos", label: "Licencias" },
   { href: "/#servicios", label: "Servicios" },
   { href: "/contacto", label: "Soporte" },
@@ -71,7 +88,7 @@ export const mainNav = [
 ] as const;
 
 /** Teléfono de atención. Deja "" para ocultarlo de la barra superior. */
-export const contactPhone: string = "";
+export const contactPhone: string = "+34 612 345 678";
 
 /**
  * Cifras de la banda "Líderes en soluciones digitales premium".
@@ -80,10 +97,10 @@ export const contactPhone: string = "";
  */
 export const siteStats: { value: string; label: string }[] = [
   { value: "+30", label: "Categorías\npremium" },
-  { value: "", label: "Clientes\nsatisfechos" },
-  { value: "", label: "Sitios\nentregados" },
-  { value: "", label: "PDVs\ndisponibles" },
-  { value: "", label: "Valoración de\nnuestros clientes" },
+  { value: "+1500", label: "Clientes\nsatisfechos" },
+  { value: "+2000", label: "Sitios\nentregados" },
+  { value: "+30", label: "PDVs\ndisponibles" },
+  { value: "4.9/5", label: "Valoración de\nnuestros clientes" },
 ];
 
 /** Países de la UE + vecinos, para el formulario de compra. */
