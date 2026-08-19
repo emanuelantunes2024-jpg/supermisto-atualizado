@@ -6,32 +6,47 @@ import { heroPhotos } from "@/lib/config";
  * Composición portátil + tablet PDV + móvil de la portada, tal cual la
  * referencia de marca.
  *
- * Las fotos (el plato del restaurante y la modelo) se configuran en
- * `heroPhotos` (src/lib/config.ts). Mientras no haya archivo se dibuja un
- * degradado del mismo tono, así la composición nunca se rompe.
+ * Las fotos (el plato del restaurante y la modelo) se leen de
+ * `heroPhotos` (src/lib/config.ts) → `public/hero/`. Van pintadas encima de
+ * un degradado del mismo tono: mientras el archivo no exista se ve el
+ * degradado y la composición nunca queda rota.
  */
 export function DeviceComposition() {
   return (
-    <div className="anim-in relative pb-6 pt-2" style={{ animationDelay: ".2s" }}>
+    <div className="anim-in relative pb-8 pt-2" style={{ animationDelay: ".2s" }}>
       {/* Arcos dorados del fondo */}
       <div
-        className="pointer-events-none absolute right-[-18%] top-[-22%] h-[460px] w-[460px] animate-pulseGlow rounded-full"
+        className="pointer-events-none absolute right-[-16%] top-[-26%] h-[520px] w-[520px] animate-pulseGlow rounded-full"
         style={{
-          background: "conic-gradient(from 195deg,transparent 0deg,rgba(240,167,48,.55) 70deg,transparent 155deg)",
-          maskImage: "radial-gradient(circle,transparent 64%,#000 65%,#000 71%,transparent 72%)",
-          WebkitMaskImage: "radial-gradient(circle,transparent 64%,#000 65%,#000 71%,transparent 72%)",
+          background: "conic-gradient(from 190deg,transparent 0deg,rgba(240,167,48,.6) 72deg,transparent 158deg)",
+          maskImage: "radial-gradient(circle,transparent 63%,#000 64%,#000 70%,transparent 71%)",
+          WebkitMaskImage: "radial-gradient(circle,transparent 63%,#000 64%,#000 70%,transparent 71%)",
         }}
       />
       <div
-        className="pointer-events-none absolute inset-x-[-8%] bottom-[4%] top-[-6%] blur-[18px]"
-        style={{ background: "radial-gradient(ellipse at 52% 52%,rgba(240,167,48,0.18),transparent 68%)" }}
+        className="pointer-events-none absolute right-[-10%] top-[-14%] h-[380px] w-[380px] animate-pulseGlow rounded-full"
+        style={{
+          background: "conic-gradient(from 205deg,transparent 0deg,rgba(240,167,48,.35) 60deg,transparent 140deg)",
+          maskImage: "radial-gradient(circle,transparent 70%,#000 71%,#000 75%,transparent 76%)",
+          WebkitMaskImage: "radial-gradient(circle,transparent 70%,#000 71%,#000 75%,transparent 76%)",
+        }}
+      />
+      <div
+        className="pointer-events-none absolute inset-x-[-8%] bottom-[2%] top-[-6%] blur-[20px]"
+        style={{ background: "radial-gradient(ellipse at 54% 52%,rgba(240,167,48,0.16),transparent 66%)" }}
       />
 
-      <div className="relative z-10 flex items-end justify-center gap-[2%]">
+      <div className="relative z-10 flex items-end justify-center">
         <Laptop />
         <Tablet />
         <Phone />
       </div>
+
+      {/* Reflejo sobre la superficie */}
+      <div
+        className="pointer-events-none absolute inset-x-[6%] bottom-0 h-6 blur-[6px]"
+        style={{ background: "radial-gradient(ellipse at 50% 0%,rgba(240,167,48,0.18),transparent 70%)" }}
+      />
     </div>
   );
 }
@@ -40,64 +55,72 @@ export function DeviceComposition() {
 /*  Portátil — sitio web de restaurante                                */
 /* ------------------------------------------------------------------ */
 
+const laptopFeatures = ["Diseño Premium", "100% Responsive", "Optimizado SEO", "Rápido", "Soporte incluido"];
+
 function Laptop() {
   return (
-    <div className="w-[52%] shrink-0 animate-floatY">
-      <div className="overflow-hidden rounded-t-[10px] border-[7px] border-b-0 border-[#2a2c31] bg-[#050506] shadow-lg">
+    <div className="relative z-10 w-[47%] shrink-0 animate-floatY">
+      {/* Tapa: marco + pantalla */}
+      <div
+        className="rounded-t-[14px] p-[9px] pb-[7px] shadow-lg"
+        style={{ background: "linear-gradient(160deg,#4a4d55,#26282e 40%,#15171a)" }}
+      >
         <div
-          className="relative flex min-h-[188px] flex-col justify-center px-5 py-4"
+          className="relative overflow-hidden rounded-[5px]"
           style={{
             /* Foto encima, degradado debajo: si aún no has copiado el
                archivo en public/hero/, se ve el degradado y nada se rompe. */
             background: [
-              "linear-gradient(100deg,rgba(6,4,2,.94) 4%,rgba(10,7,4,.72) 40%,rgba(10,7,4,.10) 70%)",
+              "linear-gradient(100deg,rgba(6,4,2,.95) 6%,rgba(10,7,4,.72) 40%,rgba(10,7,4,.08) 68%)",
               `url(${heroPhotos.restaurante}) center/cover no-repeat`,
-              "radial-gradient(ellipse at 72% 50%,#6b3c14,#2a1708 45%,#0b0705 78%)",
+              "radial-gradient(ellipse at 72% 52%,#7a4416,#2c1809 46%,#0b0705 80%)",
             ].join(","),
           }}
         >
-          <div className="mb-2 flex items-center gap-1.5 text-[7.5px] uppercase tracking-[0.16em] text-gold-400/85">
-            <span className="h-[3px] w-[3px] rounded-full bg-gold-400" />
-            Sabores excepcionales
-          </div>
-          <div className="mb-1.5 font-display text-[20px] font-extrabold uppercase leading-[1.02] text-[#f7f2e8]">
-            Restaurante
-            <br />
-            Premium
-          </div>
-          <p className="mb-3.5 text-[8.5px] uppercase tracking-[0.12em] text-[#cbbfa6]">Sitio web completo</p>
-          <Link
-            href="/plantillas"
-            className="inline-block w-fit rounded bg-gold-500 px-4 py-2 text-[9px] font-extrabold uppercase tracking-[0.06em] text-[#1a1200]"
-          >
-            Ver demo
-          </Link>
+          <div className="flex min-h-[212px] flex-col justify-center px-6 py-6">
+            <div className="mb-2.5 flex items-center gap-1.5 text-[8px] uppercase tracking-[0.18em] text-gold-400/85">
+              <span className="h-[3px] w-[3px] rounded-full bg-gold-400" />
+              Sabores excepcionales
+            </div>
+            <div className="mb-2 font-display text-[25px] font-extrabold uppercase leading-[1] text-[#f7f2e8]">
+              Restaurante
+              <br />
+              Premium
+            </div>
+            <p className="mb-4 text-[9.5px] uppercase tracking-[0.14em] text-[#cbbfa6]">Sitio web completo</p>
+            <Link
+              href="/plantillas"
+              className="inline-block w-fit rounded bg-gold-500 px-5 py-2.5 text-[10px] font-extrabold uppercase tracking-[0.08em] text-[#1a1200] transition-transform hover:-translate-y-0.5"
+            >
+              Ver demo
+            </Link>
 
-          {/* Franja inferior de ventajas */}
-          <div className="absolute inset-x-0 bottom-0 flex items-center gap-3 border-t border-white/10 bg-black/55 px-4 py-1.5 text-[6px] uppercase tracking-[0.08em] text-[#d8cfbb] backdrop-blur-[2px]">
-            {["Diseño Premium", "100% Responsive", "Optimizado SEO", "Rápido", "Soporte incluido"].map((item) => (
-              <span key={item} className="flex items-center gap-1">
-                <span className="text-gold-400">◆</span>
-                {item}
-              </span>
-            ))}
+            {/* Franja inferior de ventajas */}
+            <div className="absolute inset-x-0 bottom-0 flex items-center gap-4 border-t border-white/10 bg-black/55 px-5 py-2 text-[6.5px] uppercase tracking-[0.1em] text-[#d8cfbb] backdrop-blur-[2px]">
+              {laptopFeatures.map((item) => (
+                <span key={item} className="flex items-center gap-1">
+                  <span className="text-gold-400">◆</span>
+                  {item}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Base del portátil */}
+      {/* Bisagra + base del teclado en perspectiva */}
       <div
-        className="h-[10px]"
+        className="mx-[-4%] h-[16px] rounded-b-[4px]"
         style={{
-          background: "linear-gradient(180deg,#33363c,#1b1d21)",
-          clipPath: "polygon(4% 0,96% 0,100% 100%,0 100%)",
+          background: "linear-gradient(180deg,#3c3f46,#23262b 55%,#15171a)",
+          clipPath: "polygon(3.5% 0,96.5% 0,100% 100%,0 100%)",
         }}
       />
       <div
-        className="relative mx-[-2%] h-[13px] rounded-b-[7px]"
-        style={{ background: "linear-gradient(180deg,#3a3d44,#16181c)" }}
+        className="relative mx-[-6%] h-[9px] rounded-b-[10px]"
+        style={{ background: "linear-gradient(180deg,#2a2d33,#101215)" }}
       >
-        <span className="absolute left-1/2 top-0 h-[4px] w-[64px] -translate-x-1/2 rounded-b-[4px] bg-[#0d0f12]" />
+        <span className="absolute left-1/2 top-0 h-[4px] w-[16%] -translate-x-1/2 rounded-b-[4px] bg-[#0a0b0d]" />
       </div>
     </div>
   );
@@ -108,18 +131,18 @@ function Laptop() {
 /* ------------------------------------------------------------------ */
 
 const pdvTiles: { label: string; color: string }[] = [
-  { label: "Ventas", color: "#2f9e6b" },
-  { label: "Productos", color: "#e07b2c" },
-  { label: "Clientes", color: "#2f7fd1" },
-  { label: "Mesas", color: "#c9a227" },
-  { label: "Pedidos", color: "#cf3b3b" },
-  { label: "Cocina", color: "#8a4bd1" },
-  { label: "Inventario", color: "#2fa39e" },
-  { label: "Reportes", color: "#6b52c9" },
-  { label: "Empleados", color: "#2f6fd1" },
-  { label: "Proveedores", color: "#e0562c" },
-  { label: "Gastos", color: "#3fa35c" },
-  { label: "Ajustes", color: "#7a52c9" },
+  { label: "Ventas", color: "#1f9d55" },
+  { label: "Productos", color: "#e2761b" },
+  { label: "Clientes", color: "#1d6fa5" },
+  { label: "Mesas", color: "#d4a017" },
+  { label: "Pedidos", color: "#c0392b" },
+  { label: "Cocina", color: "#7d3cb5" },
+  { label: "Inventario", color: "#159a8f" },
+  { label: "Reportes", color: "#5b4bc4" },
+  { label: "Empleados", color: "#2563a8" },
+  { label: "Proveedores", color: "#d4551f" },
+  { label: "Gastos", color: "#2f9e4f" },
+  { label: "Ajustes", color: "#6b3fb0" },
 ];
 
 const pdvTicket = [
@@ -132,72 +155,84 @@ const pdvTicket = [
 
 function Tablet() {
   return (
-    <div className="hidden w-[34%] shrink-0 animate-floatY sm:block" style={{ animationDelay: ".35s" }}>
-      <div className="overflow-hidden rounded-[9px] border-[6px] border-[#2a2c31] bg-[#0b0d10] shadow-lg">
-        {/* Barra de título */}
-        <div className="flex items-center justify-between border-b border-line px-2.5 py-1.5">
-          <span className="text-[7px] font-bold uppercase tracking-[0.1em] text-ink">PDV Restaurante</span>
-          <span className="flex gap-1.5 text-ink-muted/60">
-            {[0, 1, 2, 3].map((d) => (
-              <span key={d} className="h-[5px] w-[5px] rounded-full border border-current" />
-            ))}
-          </span>
-        </div>
+    <div className="z-20 ml-[-1%] hidden w-[35%] shrink-0 animate-floatY sm:block" style={{ animationDelay: ".35s" }}>
+      <div
+        className="rounded-[12px] p-[7px] shadow-lg"
+        style={{ background: "linear-gradient(160deg,#4a4d55,#26282e 42%,#15171a)" }}
+      >
+        <div className="overflow-hidden rounded-[5px] bg-[#0b0d10]">
+          {/* Barra de título */}
+          <div className="flex items-center justify-between border-b border-white/10 px-2.5 py-1.5">
+            <span className="flex items-center gap-1.5 text-[7.5px] font-semibold uppercase tracking-[0.08em] text-ink">
+              <span className="text-gold-400">◆</span>
+              PDV Restaurante
+            </span>
+            <span className="flex gap-1.5 text-ink-muted/55">
+              {[0, 1, 2, 3].map((d) => (
+                <span key={d} className="h-[6px] w-[6px] rounded-full border border-current" />
+              ))}
+            </span>
+          </div>
 
-        <div className="flex gap-1.5 p-1.5">
-          {/* Rejilla de accesos */}
-          <div className="grid flex-1 grid-cols-4 gap-1">
-            {pdvTiles.map((tile) => (
-              <span
-                key={tile.label}
-                className="flex aspect-square flex-col items-center justify-center gap-[3px] rounded-[3px] text-[4.5px] font-medium text-white/90"
-                style={{ background: `linear-gradient(160deg,${tile.color},${tile.color}bb)` }}
-              >
-                <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.8">
-                  <rect x="4" y="4" width="16" height="16" rx="3" />
+          <div className="flex gap-2 p-2">
+            {/* Rejilla de accesos */}
+            <div className="grid flex-1 grid-cols-4 gap-[5px]">
+              {pdvTiles.map((tile) => (
+                <span
+                  key={tile.label}
+                  className="flex aspect-[1/0.92] flex-col items-center justify-center gap-[3px] rounded-[4px] text-[5px] font-medium text-white/95"
+                  style={{ background: `linear-gradient(165deg,${tile.color},${tile.color}c0)` }}
+                >
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.6">
+                    <rect x="4.5" y="6" width="15" height="13" rx="2.5" />
+                    <path d="M8.5 6V4.5h7V6" />
+                  </svg>
+                  {tile.label}
+                </span>
+              ))}
+            </div>
+
+            {/* Ticket de la venta actual — panel claro, como la referencia */}
+            <div className="flex w-[41%] flex-col rounded-[4px] bg-[#f4f2ee] p-2 text-[#1c1a17]">
+              <span className="mb-1 border-b border-black/15 pb-1 text-[5.5px] font-bold uppercase tracking-[0.1em] text-[#4a463f]">
+                Venta actual
+              </span>
+              {pdvTicket.map((row) => (
+                <span key={row.name} className="flex justify-between py-[2px] text-[5.5px]">
+                  {row.name}
+                  <i className="not-italic font-medium">{row.price}</i>
+                </span>
+              ))}
+              <span className="mt-auto flex justify-between border-t border-black/15 pt-1.5 text-[7px] font-bold">
+                TOTAL
+                <i className="not-italic">53,50 €</i>
+              </span>
+              <span className="mt-1.5 rounded-[3px] bg-gold-500 py-1.5 text-center text-[7px] font-extrabold uppercase tracking-[0.06em] text-[#1a1200]">
+                Pagar
+              </span>
+            </div>
+          </div>
+
+          {/* Barra inferior */}
+          <div className="flex items-center justify-around border-t border-white/10 px-2 py-1.5 text-[5px] text-ink-muted/70">
+            {["Inicio", "Ventas", "Productos", "Reportes"].map((item) => (
+              <span key={item} className="flex flex-col items-center gap-[2px]">
+                <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+                  <rect x="4.5" y="6" width="15" height="13" rx="2.5" />
                 </svg>
-                {tile.label}
+                {item}
               </span>
             ))}
           </div>
-
-          {/* Ticket de la venta actual */}
-          <div className="flex w-[42%] flex-col rounded-[3px] border border-line bg-[#101216] p-1.5">
-            <span className="mb-1 border-b border-line pb-1 text-[5.5px] font-bold uppercase tracking-[0.08em] text-ink-muted">
-              Venta actual
-            </span>
-            {pdvTicket.map((row) => (
-              <span key={row.name} className="flex justify-between py-[1.5px] text-[5px] text-ink/85">
-                {row.name}
-                <i className="not-italic text-ink-muted">{row.price}</i>
-              </span>
-            ))}
-            <span className="mt-auto flex justify-between border-t border-line pt-1 text-[6px] font-bold text-ink">
-              TOTAL
-              <i className="not-italic">53,50 €</i>
-            </span>
-            <span className="mt-1 rounded-[3px] bg-gold-500 py-1 text-center text-[6.5px] font-extrabold uppercase text-[#1a1200]">
-              Pagar
-            </span>
-          </div>
-        </div>
-
-        {/* Barra inferior */}
-        <div className="flex items-center justify-around border-t border-line px-2 py-1 text-[4.5px] text-ink-muted/70">
-          {["Inicio", "Ventas", "Productos", "Reportes"].map((item) => (
-            <span key={item} className="flex flex-col items-center gap-[2px]">
-              <svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <rect x="4" y="4" width="16" height="16" rx="3" />
-              </svg>
-              {item}
-            </span>
-          ))}
         </div>
       </div>
 
       {/* Pie del monitor */}
-      <div className="mx-auto h-[14px] w-[16%] bg-[#25272c]" />
-      <div className="mx-auto h-[5px] w-[46%] rounded-[3px] bg-[#2f3238]" />
+      <div className="mx-auto h-[20px] w-[13%]" style={{ background: "linear-gradient(90deg,#20232a,#3a3d44,#20232a)" }} />
+      <div
+        className="mx-auto h-[6px] w-[44%] rounded-[4px]"
+        style={{ background: "linear-gradient(180deg,#3a3d44,#1a1c20)" }}
+      />
     </div>
   );
 }
@@ -208,40 +243,56 @@ function Tablet() {
 
 function Phone() {
   return (
-    <div
-      className="hidden w-[13%] shrink-0 animate-floatY overflow-hidden rounded-[14px] border-[4px] border-[#2a2c31] bg-[#050506] shadow-lg sm:block"
-      style={{ animationDelay: ".5s" }}
-    >
+    <div className="z-30 mb-[5%] ml-[-1%] hidden w-[13.5%] shrink-0 animate-floatY sm:block" style={{ animationDelay: ".5s" }}>
       <div
-        className="relative flex aspect-[9/18] flex-col justify-end px-2 pb-2.5"
-        style={{
-          background: [
-            "linear-gradient(180deg,rgba(6,4,2,.30) 34%,rgba(8,6,4,.90) 76%)",
-            `url(${heroPhotos.moda}) center/cover no-repeat`,
-            "linear-gradient(180deg,#4a3a2c,#1d1712 55%,#0a0806)",
-          ].join(","),
-        }}
+        className="rounded-[17px] p-[4px] shadow-lg"
+        style={{ background: "linear-gradient(160deg,#4a4d55,#26282e 45%,#15171a)" }}
       >
-        <div className="absolute inset-x-0 top-0 flex items-center justify-between px-2 py-1.5">
-          <svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5">
-            <path d="M3 6h18M3 12h18M3 18h18" />
-          </svg>
-          <span className="text-[5px] font-bold uppercase tracking-[0.1em] text-gold-400">Leuname</span>
-        </div>
+        <div
+          className="relative flex aspect-[9/18.5] flex-col justify-end overflow-hidden rounded-[14px] px-2.5 pb-3"
+          style={{
+            background: [
+              "linear-gradient(180deg,rgba(6,4,2,.28) 32%,rgba(8,6,4,.92) 74%)",
+              `url(${heroPhotos.moda}) center/cover no-repeat`,
+              "linear-gradient(180deg,#4a3a2c,#1d1712 55%,#0a0806)",
+            ].join(","),
+          }}
+        >
+          {/* Barra de estado + cabecera */}
+          <div className="absolute inset-x-0 top-0">
+            <div className="flex items-center justify-between px-2 pt-1 text-[4px] text-white/70">
+              <span>9:41</span>
+              <span className="flex gap-[2px]">
+                <span className="h-[3px] w-[3px] rounded-[1px] bg-white/70" />
+                <span className="h-[3px] w-[3px] rounded-[1px] bg-white/70" />
+                <span className="h-[3px] w-[5px] rounded-[1px] bg-white/70" />
+              </span>
+            </div>
+            <div className="flex items-center justify-between px-2 py-1.5">
+              <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5">
+                <path d="M3 6h18M3 12h18M3 18h18" />
+              </svg>
+              <span className="flex items-center gap-1 text-[5px] font-bold uppercase tracking-[0.1em] text-gold-400">
+                <span className="text-[6px]">☀</span>
+                Leuname
+              </span>
+            </div>
+          </div>
 
-        <div className="mb-0.5 font-display text-[10px] font-extrabold uppercase leading-[1.02] text-[#f7f2e8]">
-          Moda
-          <br />
-          <span className="text-gold-400">Premium</span>
+          <div className="mb-1 font-display text-[13px] font-extrabold uppercase leading-[0.98] text-[#f7f2e8]">
+            Moda
+            <br />
+            <span className="text-gold-400">Premium</span>
+          </div>
+          <p className="mb-2 text-[6px] leading-tight text-[#e0d7c4]">
+            Nueva colección
+            <br />
+            2024
+          </p>
+          <span className="rounded-[3px] bg-gold-500 px-2 py-1.5 text-center text-[5.5px] font-extrabold uppercase tracking-[0.06em] text-[#1a1200]">
+            Ver colección
+          </span>
         </div>
-        <p className="mb-1.5 text-[5.5px] leading-tight text-[#d8cfbb]">
-          Nueva colección
-          <br />
-          2024
-        </p>
-        <span className="rounded-[3px] bg-gold-500 px-1.5 py-1 text-center text-[5px] font-extrabold uppercase text-[#1a1200]">
-          Ver colección
-        </span>
       </div>
     </div>
   );
