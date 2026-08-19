@@ -71,43 +71,54 @@ function Laptop() {
           <PlatedDish className="absolute inset-0 h-full w-full" />
           <div
             className="absolute inset-0"
-            style={{ background: `url(${heroPhotos.restaurante}) 63% 52%/cover no-repeat` }}
+            style={{ background: `url(${heroPhotos.restaurante}) 58% 54%/cover no-repeat` }}
           />
           <div
             className="absolute inset-0"
             style={{
               background:
-                "linear-gradient(100deg,rgba(5,3,1,.96) 4%,rgba(8,5,2,.88) 28%,rgba(10,7,4,.40) 52%,rgba(10,7,4,0) 72%)",
+                "linear-gradient(96deg,rgba(5,3,1,.92) 0%,rgba(7,5,2,.74) 20%,rgba(10,7,4,.28) 38%,rgba(10,7,4,0) 52%)",
             }}
           />
 
-          <div className="relative flex min-h-[212px] flex-col justify-center px-6 py-6">
-            <div className="mb-2.5 flex items-center gap-1.5 text-[8px] uppercase tracking-[0.18em] text-gold-400/85">
+          <div className="relative flex min-h-[212px] max-w-[62%] flex-col justify-center px-6 pb-11 pt-6">
+            <div
+              className="mb-2.5 flex items-center gap-1.5 text-[8px] uppercase tracking-[0.18em] text-gold-400"
+              style={{ textShadow: "0 1px 8px rgba(0,0,0,.9)" }}
+            >
               <span className="h-[3px] w-[3px] rounded-full bg-gold-400" />
               Sabores excepcionales
             </div>
-            <div className="mb-2 font-display text-[25px] font-extrabold uppercase leading-[1] text-[#f7f2e8]">
+            <div
+              className="mb-2 font-display text-[25px] font-extrabold uppercase leading-[1] text-[#f7f2e8]"
+              style={{ textShadow: "0 2px 14px rgba(0,0,0,.85), 0 1px 3px rgba(0,0,0,.9)" }}
+            >
               Restaurante
               <br />
               Premium
             </div>
-            <p className="mb-4 text-[9.5px] uppercase tracking-[0.14em] text-[#cbbfa6]">Sitio web completo</p>
+            <p
+              className="mb-4 text-[9.5px] uppercase tracking-[0.14em] text-[#cbbfa6]"
+              style={{ textShadow: "0 1px 8px rgba(0,0,0,.9)" }}
+            >
+              Sitio web completo
+            </p>
             <Link
               href="/plantillas"
               className="inline-block w-fit rounded bg-gold-500 px-5 py-2.5 text-[10px] font-extrabold uppercase tracking-[0.08em] text-[#1a1200] transition-transform hover:-translate-y-0.5"
             >
               Ver demo
             </Link>
+          </div>
 
-            {/* Franja inferior de ventajas */}
-            <div className="absolute inset-x-0 bottom-0 flex items-center gap-4 border-t border-white/10 bg-black/55 px-5 py-2 text-[6.5px] uppercase tracking-[0.1em] text-[#d8cfbb] backdrop-blur-[2px]">
-              {laptopFeatures.map((item) => (
-                <span key={item} className="flex items-center gap-1">
-                  <span className="text-gold-400">◆</span>
-                  {item}
-                </span>
-              ))}
-            </div>
+          {/* Franja inferior de ventajas */}
+          <div className="absolute inset-x-0 bottom-0 flex items-center gap-4 border-t border-white/10 bg-black/70 px-5 py-2 text-[6.5px] uppercase tracking-[0.1em] text-[#d8cfbb] backdrop-blur-[2px]">
+            {laptopFeatures.map((item) => (
+              <span key={item} className="flex items-center gap-1">
+                <span className="text-gold-400">◆</span>
+                {item}
+              </span>
+            ))}
           </div>
         </div>
       </div>
