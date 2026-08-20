@@ -66,6 +66,24 @@ nav.links a.active,nav.links a:hover{color:var(--blue-600);}
 
 /* beneficios */
 .benefits{background:var(--blue-950);}
+/* Sobre nosotros */
+#nosotros .nos-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;}
+#nosotros .nos-foto{position:relative;}
+#nosotros .nos-foto img{width:100%;height:400px;object-fit:cover;border-radius:18px;display:block;}
+#nosotros .nos-sello{position:absolute;right:-18px;bottom:-18px;background:var(--blue-600);color:#fff;
+  border-radius:16px;padding:18px 22px;text-align:center;box-shadow:0 14px 34px rgba(10,30,61,.22);}
+#nosotros .nos-sello strong{display:block;font-size:30px;line-height:1;}
+#nosotros .nos-sello span{font-size:12px;opacity:.88;}
+#nosotros h2{margin-bottom:14px;}
+#nosotros .nos-texto p{color:var(--muted);margin-bottom:14px;line-height:1.7;}
+#nosotros .nos-puntos{list-style:none;margin:22px 0 26px;padding:0;}
+#nosotros .nos-puntos li{display:flex;gap:11px;align-items:flex-start;margin-bottom:12px;color:var(--ink);font-size:14.5px;}
+#nosotros .nos-puntos svg{flex:0 0 20px;margin-top:2px;color:var(--blue-600);}
+@media(max-width:900px){
+  #nosotros .nos-grid{grid-template-columns:1fr;gap:34px;}
+  #nosotros .nos-foto img{height:280px;}
+  #nosotros .nos-sello{right:12px;bottom:-14px;padding:14px 18px;}
+}
 .benefits-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;}
 .benefit{padding:26px 22px;border-right:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08);color:#fff;}
 .benefit .ic{width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:10px;}
@@ -213,6 +231,33 @@ footer{background:var(--blue-950);color:#a9bdde;padding-top:56px;}
       <div class="benefit"><div class="ic">📅</div><strong>Citas fáciles</strong><p>Online, rápidas y sin complicaciones</p></div>
       <div class="benefit"><div class="ic">🔒</div><strong>Entorno seguro</strong><p>Máximos protocolos de bioseguridad</p></div>
       <div class="benefit"><div class="ic">💳</div><strong>Facilidades de pago</strong><p>Planes y condiciones especiales</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="nosotros">
+  <div class="container">
+    <div class="nos-grid">
+      <div class="nos-foto">
+        <img src="img/hero.jpg" alt="Equipo de la clínica atendiendo a una paciente">
+        <div class="nos-sello"><strong>+15</strong><span>años cuidando sonrisas</span></div>
+      </div>
+      <div class="nos-texto">
+        <div class="eyebrow">Sobre nosotros</div>
+        <h2>Una clínica pensada para que vengas tranquilo</h2>
+        <p>Somos un equipo de odontólogos especializados que lleva más de quince años
+        cuidando la salud bucal de familias enteras. Aquí nadie te vende un tratamiento:
+        te explicamos qué necesitas, por qué y cuánto cuesta, y tú decides.</p>
+        <p>Trabajamos con tecnología de diagnóstico digital, protocolos estrictos de
+        esterilización y un trato cercano de verdad, sin prisas y sin letra pequeña.</p>
+        <ul class="nos-puntos">
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden><path d="M20 6L9 17l-5-5"/></svg><span><strong>Primera visita y diagnóstico sin coste</strong>, con plan de tratamiento por escrito.</span></li>
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden><path d="M20 6L9 17l-5-5"/></svg><span><strong>Presupuesto cerrado</strong>: lo que te decimos al principio es lo que pagas.</span></li>
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden><path d="M20 6L9 17l-5-5"/></svg><span><strong>Financiación hasta 12 meses sin intereses</strong> en los tratamientos largos.</span></li>
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden><path d="M20 6L9 17l-5-5"/></svg><span><strong>Urgencias el mismo día</strong>, también fuera del horario habitual.</span></li>
+        </ul>
+        <a href="#cita" class="btn btn-blue">Pedir cita</a>
+      </div>
     </div>
   </div>
 </section>
