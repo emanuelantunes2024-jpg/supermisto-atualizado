@@ -122,6 +122,15 @@ values
    'Para restaurantes de cocina de autor y locales con carta de vinos: portada con carrusel de fotos, buscador de disponibilidad, seis secciones con foto propia, carta completa agrupada en entrantes, principales y postres con sus precios, cifras del local, opiniones que van rotando solas, galería, blog y formulario de reserva con validación (email, teléfono y fechas pasadas). Paleta negro + terracota + oro, tipografía Playfair Display. El dueño cambia la carta entera desde el panel escribiendo una línea por plato.',
    24900, '/demos/restaurante-premium/index.html', '/thumbnails/restaurante-premium.jpg',
    '["Carta completa con precios, editable línea a línea", "Portada con carrusel de hasta 4 fotos", "Buscador de disponibilidad y formulario de reserva", "Galería de 8 fotos y blog", "Opiniones de clientes que rotan solas", "Botón de WhatsApp para reservas", "Responsive (móvil, tablet y desktop)", "Optimizado para Google (SEO)"]'::jsonb,
+   'published'),
+
+  ('22222222-2222-4222-8222-000000000005',
+   '11111111-1111-4111-8111-000000000008',
+   'Panadería con Pedidos Online', 'panaderia-premium',
+   'Panadería con catálogo de productos, cesta y pedidos que llegan por WhatsApp.',
+   'Para panaderías, pastelerías y cafeterías que quieren vender sin depender de las plataformas de reparto: catálogo de productos por categorías con filtros, cesta de la compra que recuerda lo que has elegido aunque cierres la página, elección entre recoger en tienda o entrega a domicilio con su coste y su pedido mínimo, y un formulario que arma el pedido completo y lo manda al WhatsApp del negocio, con productos, cantidades, totales, dirección y hora. Sin comisiones por pedido y sin pasarela de pago que configurar. Paleta crema + ámbar, tipografía Playfair Display.',
+   19900, '/demos/panaderia-premium/index.html', '/thumbnails/panaderia-premium.jpg',
+   '["Catálogo de productos con filtros por categoría", "Cesta de la compra que no se pierde al cerrar", "Recogida en tienda o entrega, con pedido mínimo", "El pedido llega entero por WhatsApp", "Sin comisiones y sin pasarela que configurar", "Horarios, historia del negocio y contacto", "Responsive (móvil, tablet y desktop)", "Optimizado para Google (SEO)"]'::jsonb,
    'published')
 
 on conflict (id) do update

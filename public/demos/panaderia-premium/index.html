@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Delicias Panadería — Pan fresco cada día y pedidos online</title>
+<meta name="description" content="Panadería artesana con pedidos online. Panes, bollería, pastelería, salados y café. Recoge en tienda o te lo llevamos a casa.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="aviso-demo">Plantilla demostrativa. Nombre, datos, productos y precios son ficticios.</div>
+
+<!-- Cabecera -->
+<header class="cab">
+  <div class="env">
+    <a href="#inicio" class="marca">
+      <svg width="46" height="46" viewBox="0 0 48 48" fill="none" aria-hidden="true"><circle cx="24" cy="24" r="20" fill="#e8a33d"/><path d="M15 20h13v7a6.5 6.5 0 0 1-13 0z" fill="#fff"/><path d="M28 21.5h2.4a2.8 2.8 0 0 1 0 5.6H28" stroke="#fff" stroke-width="2.2" fill="none"/><path d="M14 34h16" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/><path d="M19 17c.8-1 .8-2 0-3M23.5 17c.8-1 .8-2 0-3" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg>      <span class="marca-txt">
+        <strong>Delicias</strong>
+        <span>Panadería</span>
+      </span>
+    </a>
+    <nav class="menu">
+      <a href="#inicio">Inicio</a><a href="#productos">Productos</a><a href="#pedidos">Pedidos Online</a><a href="#nosotros">Nosotros</a><a href="#contacto">Contacto</a>    </nav>
+    <div class="cab-acc">
+      <button type="button" class="btn btn-blanco btn-peq btn-carrito" id="abrirCarrito" aria-label="Ver la cesta">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9.5" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2.5 3.5h2.7l2.4 11h11l2-8H6.3"/></svg>        <span class="carrito-num" id="carritoNum" hidden>0</span>
+      </button>
+      <a href="#pedidos" class="btn btn-ambar btn-peq"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 8h13l1 12.5H4.5z"/><path d="M8.5 10.5V6.5a3.5 3.5 0 0 1 7 0v4"/></svg>Hacer pedido</a>
+      <button class="abrir-menu" id="abrirMenu" aria-expanded="false" aria-label="Abrir menú">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+  <nav class="menu-movil" id="menuMovil">
+    <a href="#inicio">Inicio</a><a href="#productos">Productos</a><a href="#pedidos">Pedidos Online</a><a href="#nosotros">Nosotros</a><a href="#contacto">Contacto</a>    <a href="#pedidos" class="btn btn-ambar">Hacer pedido</a>
+  </nav>
+</header>
+
+<!-- Portada -->
+<section class="portada" id="inicio">
+  <div class="env">
+    <div>
+      <span class="portada-pill"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21V9"/><path d="M12 9c-2.4 0-4.4-2-4.4-4.4C10 4.6 12 6.6 12 9zM12 9c2.4 0 4.4-2 4.4-4.4C14 4.6 12 6.6 12 9z"/><path d="M12 14.5c-2 0-3.7-1.7-3.7-3.7M12 14.5c2 0 3.7-1.7 3.7-3.7"/></svg>Cafeterías y Panaderías</span>
+      <h1>Panadería con<br>Pedidos Online</h1>
+      <p>Encarga tus panes, bollería y pasteles desde casa. Recoge en tienda cuando quieras o te lo llevamos a la puerta.</p>
+      <div class="portada-botones">
+        <a href="#pedidos" class="btn btn-ambar"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 8h13l1 12.5H4.5z"/><path d="M8.5 10.5V6.5a3.5 3.5 0 0 1 7 0v4"/></svg>Hacer pedido</a>
+        <a href="#productos" class="btn btn-linea">Ver productos →</a>
+      </div>
+    </div>
+    <div class="portada-foto"><img src="img/hero.jpg" alt="" loading="lazy"></div>
+  </div>
+</section>
+
+<!-- Virtudes -->
+<div class="virtudes">
+  <div class="env">
+    <div class="virtudes-caja">
+              <div class="virtud">
+          <div class="virtud-ic"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 8h13l1 12.5H4.5z"/><path d="M8.5 10.5V6.5a3.5 3.5 0 0 1 7 0v4"/></svg></div>
+          <div>
+            <strong>Pedidos Online</strong>
+            <span>Fácil y rápido</span>
+          </div>
+        </div>
+              <div class="virtud">
+          <div class="virtud-ic"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 7h10.5v9H2.5z"/><path d="M13 10h3.6l3.4 3.4V16H13z"/><circle cx="6.5" cy="18" r="1.8"/><circle cx="16.5" cy="18" r="1.8"/></svg></div>
+          <div>
+            <strong>Recogida o Entrega</strong>
+            <span>Elige tu opción</span>
+          </div>
+        </div>
+              <div class="virtud">
+          <div class="virtud-ic"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21V9"/><path d="M12 9c-2.4 0-4.4-2-4.4-4.4C10 4.6 12 6.6 12 9zM12 9c2.4 0 4.4-2 4.4-4.4C14 4.6 12 6.6 12 9z"/><path d="M12 14.5c-2 0-3.7-1.7-3.7-3.7M12 14.5c2 0 3.7-1.7 3.7-3.7"/></svg></div>
+          <div>
+            <strong>Productos Frescos</strong>
+            <span>Cada día para ti</span>
+          </div>
+        </div>
+              <div class="virtud">
+          <div class="virtud-ic"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9.5" r="5.5"/><path d="M9.4 14.3 8 21.5l4-2.2 4 2.2-1.4-7.2"/><path d="m12 7 .9 1.8 2 .3-1.4 1.4.3 2-1.8-1-1.8 1 .3-2L9.1 9.1l2-.3z"/></svg></div>
+          <div>
+            <strong>Calidad Garantizada</strong>
+            <span>Ingredientes premium</span>
+          </div>
+        </div>
+          </div>
+  </div>
+</div>
+
+<!-- Categorías + tarjeta de pedido -->
+<section>
+  <div class="env">
+    <div class="zona-cat">
+      <div>
+        <div class="cab-sec">
+          <span class="rotulo">Descubre lo mejor</span>
+          <h2>Nuestras categorías</h2>
+        </div>
+        <div class="cats">
+                      <a class="cat" href="#productos" data-cat="Panes">
+              <div class="cat-foto"><img src="img/panes.jpg" alt="" loading="lazy"></div>
+              <div class="cat-cuerpo">
+                <h3>Panes</h3>
+                <p>Siempre recién horneados</p>
+              </div>
+            </a>
+                      <a class="cat" href="#productos" data-cat="Bollería">
+              <div class="cat-foto"><img src="img/bolleria.jpg" alt="" loading="lazy"></div>
+              <div class="cat-cuerpo">
+                <h3>Bollería</h3>
+                <p>Dulce tentación</p>
+              </div>
+            </a>
+                      <a class="cat" href="#productos" data-cat="Pastelería">
+              <div class="cat-foto"><img src="img/pasteleria.jpg" alt="" loading="lazy"></div>
+              <div class="cat-cuerpo">
+                <h3>Pastelería</h3>
+                <p>Para cada ocasión</p>
+              </div>
+            </a>
+                      <a class="cat" href="#productos" data-cat="Salados">
+              <div class="cat-foto"><img src="img/salados.jpg" alt="" loading="lazy"></div>
+              <div class="cat-cuerpo">
+                <h3>Salados</h3>
+                <p>Ideales para cualquier momento</p>
+              </div>
+            </a>
+                      <a class="cat" href="#productos" data-cat="Bebidas">
+              <div class="cat-foto"><img src="img/bebidas.jpg" alt="" loading="lazy"></div>
+              <div class="cat-cuerpo">
+                <h3>Bebidas</h3>
+                <p>El complemento perfecto</p>
+              </div>
+            </a>
+                  </div>
+      </div>
+
+      <div class="tarj-pedido">
+        <span class="rotulo">Haz tu pedido</span>
+        <h3>Pide online y ahorra tiempo</h3>
+        <p>Encarga tus productos favoritos desde casa y recógelos cuando quieras o recíbelos donde estés.</p>
+        <a href="#pedidos" class="btn btn-ambar">Hacer pedido ahora →</a>
+                  <img class="bolsa" src="img/bolsa.jpg" alt="" loading="lazy">
+              </div>
+    </div>
+  </div>
+</section>
+
+<!-- Franja de confianza -->
+<section class="confianza">
+  <div class="env">
+          <div class="conf-item">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 7h10.5v9H2.5z"/><path d="M13 10h3.6l3.4 3.4V16H13z"/><circle cx="6.5" cy="18" r="1.8"/><circle cx="16.5" cy="18" r="1.8"/></svg>        <div>
+          <strong>Envío desde 2,90 €</strong>
+          <span>Consulta tu zona</span>
+        </div>
+      </div>
+          <div class="conf-item">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="10" width="15" height="11" rx="2.4"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><path d="M12 14.5v2.5"/></svg>        <div>
+          <strong>Pago 100% Seguro</strong>
+          <span>Tarjeta, Bizum y más</span>
+        </div>
+      </div>
+          <div class="conf-item">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="2.5" y="13" width="4" height="6" rx="1.8"/><rect x="17.5" y="13" width="4" height="6" rx="1.8"/></svg>        <div>
+          <strong>Atención al cliente</strong>
+          <span>¡Estamos para ayudarte!</span>
+        </div>
+      </div>
+        <a class="conf-tel" href="tel:900123456">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 16.5v2.6a1.9 1.9 0 0 1-2.1 1.9 18.8 18.8 0 0 1-8.2-2.9 18.4 18.4 0 0 1-5.7-5.7A18.8 18.8 0 0 1 2.1 4.1 1.9 1.9 0 0 1 4 2h2.6a1.9 1.9 0 0 1 1.9 1.6c.1.9.3 1.8.7 2.7a1.9 1.9 0 0 1-.4 2L7.6 9.5a15 15 0 0 0 5.7 5.7l1.2-1.2a1.9 1.9 0 0 1 2-.4c.9.3 1.8.6 2.7.7A1.9 1.9 0 0 1 21 16.5z"/></svg>      <span>
+        <strong>¿Dudas o consultas?</strong>
+        <span>Llámanos al 900 123 456</span>
+      </span>
+    </a>
+  </div>
+</section>
+
+<!-- Productos -->
+<section id="productos">
+  <div class="env">
+    <div class="cab-sec">
+      <span class="rotulo">Recién horneado</span>
+      <h2>Nuestros productos</h2>
+    </div>
+
+    <div class="filtros" id="filtros">
+      <button type="button" class="filtro act" data-filtro="todos">Todos</button>
+              <button type="button" class="filtro" data-filtro="Panes">Panes</button>
+              <button type="button" class="filtro" data-filtro="Bollería">Bollería</button>
+              <button type="button" class="filtro" data-filtro="Pastelería">Pastelería</button>
+              <button type="button" class="filtro" data-filtro="Salados">Salados</button>
+              <button type="button" class="filtro" data-filtro="Bebidas">Bebidas</button>
+          </div>
+
+    <div class="productos" id="listaProductos">
+              <article class="prod" data-cat="Panes">
+          <div class="prod-foto">
+            <img src="img/panes.jpg" alt="" loading="lazy">                          <span class="prod-eti">Más vendido</span>
+                      </div>
+          <div class="prod-cuerpo">
+            <h3>Hogaza de masa madre</h3>
+            <p>Fermentación de 24 horas, corteza crujiente y miga alveolada.</p>
+            <div class="prod-pie">
+              <span class="prod-precio">3,80 €<small> / unidad</small></span>
+              <button type="button" class="btn btn-ambar btn-peq anadir" data-id="p0">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9.5" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2.5 3.5h2.7l2.4 11h11l2-8H6.3"/></svg>Añadir
+              </button>
+            </div>
+          </div>
+        </article>
+              <article class="prod" data-cat="Panes">
+          <div class="prod-foto">
+            <img src="img/panes.jpg" alt="" loading="lazy">                      </div>
+          <div class="prod-cuerpo">
+            <h3>Barra rústica</h3>
+            <p>La de toda la vida, horneada tres veces al día.</p>
+            <div class="prod-pie">
+              <span class="prod-precio">1,20 €<small> / unidad</small></span>
+              <button type="button" class="btn btn-ambar btn-peq anadir" data-id="p1">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9.5" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2.5 3.5h2.7l2.4 11h11l2-8H6.3"/></svg>Añadir
+              </button>
+            </div>
+          </div>
+        </article>
+              <article class="prod" data-cat="Panes">
+          <div class="prod-foto">
+            <img src="img/panes.jpg" alt="" loading="lazy">                      </div>
+          <div class="prod-cuerpo">
+            <h3>Pan de centeno y nueces</h3>
+            <p>Denso y aromático, aguanta tierno toda la semana.</p>
+            <div class="prod-pie">
+              <span class="prod-precio">4,50 €<small> / unidad</small></span>
+              <button type="button" class="btn btn-ambar btn-peq anadir" data-id="p2">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9.5" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2.5 3.5h2.7l2.4 11h11l2-8H6.3"/></svg>Añadir
+              </button>
+            </div>
+          </div>
+        </article>
+              <article class="prod" data-cat="Panes">
+          <div class="prod-foto">
+            <img src="img/panes.jpg" alt="" loading="lazy">                      </div>
+          <div class="prod-cuerpo">
+            <h3>Chapata de aceite</h3>
+            <p>Con aceite de oliva virgen extra y sal en escamas.</p>
+            <div class="prod-pie">
+              <span class="prod-precio">2,40 €<small> / unidad</small></span>
+              <button type="button" class="btn btn-ambar btn-peq anadir" data-id="p3">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9.5" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2.5 3.5h2.7l2.4 11h11l2-8H6.3"/></svg>Añadir
+              </button>
+            </div>
+          </div>
+        </article>
+              <article class="prod" data-cat="Bollería">
+          <div class="prod-foto">
+            <img src="img/bolleria.jpg" alt="" loading="lazy">                          <span class="prod-eti">Más vendido</span>
+                      </div>
+          <div class="prod-cuerpo">
+            <h3>Croissant de mantequilla</h3>
+            <p>Hojaldre de mantequilla francesa, laminado a mano.</p>
+            <div class="prod-pie">
+              <span class="prod-precio">1,60 €<small> / unidad</small></span>
+              <button type="button" class="btn btn-ambar btn-peq anadir" data-id="p4">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9.5" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2.5 3.5h2.7l2.4 11h11l2-8H6.3"/></svg>Añadir
+              </button>
+            </div>
+          </div>
+        </article>
+              <article class="prod" data-cat="Bollería">
+          <div class="prod-foto">
+            <img src="img/bolleria.jpg" alt="" loading="lazy">                      </div>
+          <div class="prod-cuerpo">
+            <h3>Napolitana de chocolate</h3>
+            <p>Chocolate negro 55% y hojaldre recién horneado.</p>
+            <div class="prod-pie">
+              <span class="prod-precio">1,80 €<small> / unidad</small></span>
+              <button type="button" class="btn btn-ambar btn-peq anadir" data-id="p5">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9.5" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2.5 3.5h2.7l2.4 11h11l2-8H6.3"/></svg>Añadir
+              </button>
+            </div>
+          </div>
+        </article>
+              <article class="prod" data-cat="Bollería">
+          <div class="prod-foto">
+            <img src="img/bolleria.jpg" alt="" loading="lazy">                      </div>
+          <div class="prod-cuerpo">
+            <h3>Caracola de pasas</h3>
+            <p>Crema pastelera, pasas al ron y un glaseado suave.</p>
+            <div class="prod-pie">
+              <span class="prod-precio">1,90 €<small> / unidad</small></span>
+              <button type="button" class="btn btn-ambar btn-peq anadir" data-id="p6">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9.5" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2.5 3.5h2.7l2.4 11h11l2-8H6.3"/></svg>Añadir
+              </button>
+            </div>
+          </div>
+        </article>
+              <article class="prod" data-cat="Bollería">
+          <div class="prod-foto">
+            <img src="img/bolleria.jpg" alt="" loading="lazy">                          <span class="prod-eti">Ahorra 2,70 €</span>
+                      </div>
+          <div class="prod-cuerpo">
+            <h3>Docena de croissants</h3>
+            <p>Para el desayuno de toda la familia o la oficina.</p>
+            <div class="prod-pie">
+              <span class="prod-precio">16,50 €<small> / docena</small></span>
+              <button type="button" class="btn btn-ambar btn-peq anadir" data-id="p7">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9.5" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2.5 3.5h2.7l2.4 11h11l2-8H6.3"/></svg>Añadir
+              </button>
+            </div>
+          </div>
+        </article>
+              <article class="prod" data-cat="Pastelería">
+          <div class="prod-foto">
+            <img src="img/pasteleria.jpg" alt="" loading="lazy">                          <span class="prod-eti">Por encargo</span>
+                      </div>
+          <div class="prod-cuerpo">
+            <h3>Tarta de chocolate</h3>
+            <p>Bizcocho de cacao, ganache y frutos rojos. 8 raciones.</p>
+            <div class="prod-pie">
+              <span class="prod-precio">24,00 €<small> / tarta</small></span>
+              <button type="button" class="btn btn-ambar btn-peq anadir" data-id="p8">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9.5" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2.5 3.5h2.7l2.4 11h11l2-8H6.3"/></svg>Añadir
+              </button>
+            </div>
+          </div>
+        </article>
+              <article class="prod" data-cat="Pastelería">
+          <div class="prod-foto">
+            <img src="img/pasteleria.jpg" alt="" loading="lazy">                      </div>
+          <div class="prod-cuerpo">
+            <h3>Tarta de queso al horno</h3>
+            <p>Queso de oveja curado, cremosa por dentro. 8 raciones.</p>
+            <div class="prod-pie">
+              <span class="prod-precio">22,00 €<small> / tarta</small></span>
+              <button type="button" class="btn btn-ambar btn-peq anadir" data-id="p9">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9.5" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2.5 3.5h2.7l2.4 11h11l2-8H6.3"/></svg>Añadir
+              </button>
+            </div>
+          </div>
+        </article>
+              <article class="prod" data-cat="Pastelería">
+          <div class="prod-foto">
+            <img src="img/pasteleria.jpg" alt="" loading="lazy">                      </div>
+          <div class="prod-cuerpo">
+            <h3>Bandeja de pastas surtidas</h3>
+            <p>Media docena de pastas de té, variedad del día.</p>
+            <div class="prod-pie">
+              <span class="prod-precio">9,50 €<small> / bandeja</small></span>
+              <button type="button" class="btn btn-ambar btn-peq anadir" data-id="p10">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9.5" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2.5 3.5h2.7l2.4 11h11l2-8H6.3"/></svg>Añadir
+              </button>
+            </div>
+          </div>
+        </article>
+              <article class="prod" data-cat="Salados">
+          <div class="prod-foto">
+            <img src="img/salados.jpg" alt="" loading="lazy">                      </div>
+          <div class="prod-cuerpo">
+            <h3>Bocadillo de jamón ibérico</h3>
+            <p>En chapata de aceite, con tomate rallado.</p>
+            <div class="prod-pie">
+              <span class="prod-precio">5,90 €<small> / unidad</small></span>
+              <button type="button" class="btn btn-ambar btn-peq anadir" data-id="p11">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9.5" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2.5 3.5h2.7l2.4 11h11l2-8H6.3"/></svg>Añadir
+              </button>
+            </div>
+          </div>
+        </article>
+              <article class="prod" data-cat="Salados">
+          <div class="prod-foto">
+            <img src="img/salados.jpg" alt="" loading="lazy">                      </div>
+          <div class="prod-cuerpo">
+            <h3>Empanada de atún</h3>
+            <p>Masa fina y relleno casero. Ración individual.</p>
+            <div class="prod-pie">
+              <span class="prod-precio">3,40 €<small> / ración</small></span>
+              <button type="button" class="btn btn-ambar btn-peq anadir" data-id="p12">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9.5" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2.5 3.5h2.7l2.4 11h11l2-8H6.3"/></svg>Añadir
+              </button>
+            </div>
+          </div>
+        </article>
+              <article class="prod" data-cat="Salados">
+          <div class="prod-foto">
+            <img src="img/salados.jpg" alt="" loading="lazy">                          <span class="prod-eti">Por encargo</span>
+                      </div>
+          <div class="prod-cuerpo">
+            <h3>Bandeja de mini bocadillos</h3>
+            <p>Doce mini bocadillos variados. Ideal para reuniones.</p>
+            <div class="prod-pie">
+              <span class="prod-precio">21,00 €<small> / bandeja</small></span>
+              <button type="button" class="btn btn-ambar btn-peq anadir" data-id="p13">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9.5" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2.5 3.5h2.7l2.4 11h11l2-8H6.3"/></svg>Añadir
+              </button>
+            </div>
+          </div>
+        </article>
+              <article class="prod" data-cat="Bebidas">
+          <div class="prod-foto">
+            <img src="img/bebidas.jpg" alt="" loading="lazy">                      </div>
+          <div class="prod-cuerpo">
+            <h3>Café con leche</h3>
+            <p>Café de tueste natural, de origen Colombia.</p>
+            <div class="prod-pie">
+              <span class="prod-precio">1,70 €<small> / taza</small></span>
+              <button type="button" class="btn btn-ambar btn-peq anadir" data-id="p14">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9.5" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2.5 3.5h2.7l2.4 11h11l2-8H6.3"/></svg>Añadir
+              </button>
+            </div>
+          </div>
+        </article>
+              <article class="prod" data-cat="Bebidas">
+          <div class="prod-foto">
+            <img src="img/bebidas.jpg" alt="" loading="lazy">                      </div>
+          <div class="prod-cuerpo">
+            <h3>Zumo de naranja natural</h3>
+            <p>Exprimido en el momento, sin azúcar añadido.</p>
+            <div class="prod-pie">
+              <span class="prod-precio">2,60 €<small> / vaso</small></span>
+              <button type="button" class="btn btn-ambar btn-peq anadir" data-id="p15">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9.5" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2.5 3.5h2.7l2.4 11h11l2-8H6.3"/></svg>Añadir
+              </button>
+            </div>
+          </div>
+        </article>
+          </div>
+  </div>
+</section>
+
+<!-- Pedido -->
+<section id="pedidos" style="background:var(--crema2)">
+  <div class="env">
+    <div class="cont-rejilla">
+      <div>
+        <span class="rotulo">Pedidos online</span>
+        <h2 style="margin-bottom:14px">Recoge en tienda o te lo llevamos</h2>
+        <p style="color:var(--apagado);margin-bottom:24px">Añade lo que quieras a la cesta,
+        elige cómo prefieres recibirlo y mándanos el pedido. Te confirmamos en unos minutos.</p>
+
+        <div class="cont-dato"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 9.5 5 4h14l1.5 5.5"/><path d="M3.5 9.5a2.8 2.8 0 0 0 5.6 0 2.8 2.8 0 0 0 5.8 0 2.8 2.8 0 0 0 5.6 0"/><path d="M5 12v8.5h14V12"/><path d="M9.5 20.5V15h5v5.5"/></svg><div>
+          <strong>Recogida en tienda</strong>
+          <span>Gratis · Recoges en la tienda</span></div></div>
+        <div class="cont-dato"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 7h10.5v9H2.5z"/><path d="M13 10h3.6l3.4 3.4V16H13z"/><circle cx="6.5" cy="18" r="1.8"/><circle cx="16.5" cy="18" r="1.8"/></svg><div>
+          <strong>Entrega a domicilio</strong>
+          <span>Desde 2,90 € · Consulta tu zona. Pedido mínimo 15,00 €.</span></div></div>
+        <div class="cont-dato"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5.2l3.3 2"/></svg><div>
+          <strong>Encargos especiales</strong>
+          <span>Tartas y bandejas, con 24 horas de antelación.</span></div></div>
+
+        <div class="horario" style="margin-top:26px">
+          <h3>Horario</h3>
+                      <div class="horario-fila"><b>Lunes a viernes</b><span>07:00 - 20:30</span></div>
+                      <div class="horario-fila"><b>Sábado</b><span>07:30 - 21:00</span></div>
+                      <div class="horario-fila"><b>Domingo</b><span>08:00 - 14:30</span></div>
+                  </div>
+      </div>
+
+      <div class="horario">
+        <h3 style="margin-bottom:16px">Tu pedido</h3>
+        <div id="resumenPedido"></div>
+
+        <form id="formPedido" novalidate style="margin-top:18px">
+          <div class="opciones">
+            <label class="opcion">
+              <input type="radio" name="modo" value="recogida" checked>
+              <span><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 9.5 5 4h14l1.5 5.5"/><path d="M3.5 9.5a2.8 2.8 0 0 0 5.6 0 2.8 2.8 0 0 0 5.8 0 2.8 2.8 0 0 0 5.6 0"/><path d="M5 12v8.5h14V12"/><path d="M9.5 20.5V15h5v5.5"/></svg>Recoger en tienda<small>Gratis</small></span>
+            </label>
+            <label class="opcion">
+              <input type="radio" name="modo" value="entrega">
+              <span><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 7h10.5v9H2.5z"/><path d="M13 10h3.6l3.4 3.4V16H13z"/><circle cx="6.5" cy="18" r="1.8"/><circle cx="16.5" cy="18" r="1.8"/></svg>Entrega a domicilio<small>2,90 €</small></span>
+            </label>
+          </div>
+
+          <div class="dos">
+            <div class="campo"><label for="nombre">Nombre</label><input type="text" id="nombre" name="nombre" autocomplete="name"></div>
+            <div class="campo"><label for="telefono">Teléfono</label><input type="tel" id="telefono" name="telefono" autocomplete="tel"></div>
+          </div>
+          <div class="campo" id="campoDireccion" hidden>
+            <label for="direccion">Dirección de entrega</label>
+            <input type="text" id="direccion" name="direccion" autocomplete="street-address">
+          </div>
+          <div class="dos">
+            <div class="campo"><label for="dia">Día</label><input type="date" id="dia" name="dia"></div>
+            <div class="campo"><label for="hora">Hora</label>
+              <select id="hora" name="hora">
+                                  <option>09:00</option>
+                                  <option>10:00</option>
+                                  <option>11:00</option>
+                                  <option>12:00</option>
+                                  <option>13:00</option>
+                                  <option>17:00</option>
+                                  <option>18:00</option>
+                                  <option>19:00</option>
+                                  <option>20:00</option>
+                              </select>
+            </div>
+          </div>
+          <div class="campo"><label for="notas">Notas (alergias, celebración, etc.)</label><textarea id="notas" name="notas" rows="2"></textarea></div>
+
+          <button type="submit" class="btn btn-ambar" style="width:100%" id="btnEnviar"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 11.6a8.5 8.5 0 0 1-12.6 7.5L3.5 20.5l1.4-4.3A8.5 8.5 0 1 1 20.5 11.6z"/><path d="M8.9 8.4c.3-.7.6-.7.9-.7h.6c.2 0 .5 0 .7.5l.8 1.9c.1.2 0 .4-.1.6l-.4.5c-.1.2-.3.4-.1.7.2.4.9 1.4 1.9 2 1.2.7 1.4.5 1.7.5.2-.1.6-.5.7-.7.2-.2.3-.2.5-.1l1.8.9c.3.1.4.2.5.4 0 .2 0 .9-.3 1.3-.4.5-1.1.9-1.6.9-1.1.1-2.6-.3-4.4-1.5-2.1-1.4-3.4-3.5-3.5-3.7-.1-.2-.8-1.2-.8-2.3 0-1 .5-1.5.7-1.7z"/></svg>Enviar pedido por WhatsApp</button>
+          <div class="aviso-form" id="avisoPedido" role="status"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Nosotros -->
+<section id="nosotros">
+  <div class="env">
+    <div class="nos-rejilla">
+      <div class="nos-foto"><img src="img/hero.jpg" alt="" loading="lazy"></div>
+      <div class="nos-texto">
+        <span class="rotulo">Desde 1968</span>
+        <h2 style="margin-bottom:14px">Tres generaciones amasando cada mañana</h2>
+        <p>Abrimos en 1968 y seguimos haciendo el pan como el primer día: masa madre, fermentación lenta y horno de piedra. Nada de mezclas preparadas ni congelados.</p>
+        <p>Lo único que ha cambiado es que ahora puedes pedirlo desde el móvil y recogerlo cuando te venga bien, sin cola.</p>
+        <ul class="nos-lista">
+                      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Masa madre propia, viva desde hace más de cincuenta años.</span></li>
+                      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Horneamos tres veces al día: mañana, mediodía y tarde.</span></li>
+                      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Sin conservantes, sin mejorantes y sin masas congeladas.</span></li>
+                      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Lo que no vendemos en el día se dona, nunca se recongela.</span></li>
+                  </ul>
+        <a href="#pedidos" class="btn btn-ambar">Hacer mi pedido</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contacto -->
+<section class="contacto" id="contacto">
+  <div class="env">
+    <div class="cont-rejilla">
+      <div>
+        <span class="rotulo">Dónde estamos</span>
+        <h2 style="margin-bottom:20px">Ven a vernos</h2>
+        <div class="cont-dato"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21.5s7-6.2 7-11.1A7 7 0 1 0 5 10.4c0 4.9 7 11.1 7 11.1z"/><circle cx="12" cy="10" r="2.6"/></svg><div><strong>Dirección</strong><span>Calle del Horno, 18 · 28012 Madrid</span></div></div>
+        <div class="cont-dato"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 16.5v2.6a1.9 1.9 0 0 1-2.1 1.9 18.8 18.8 0 0 1-8.2-2.9 18.4 18.4 0 0 1-5.7-5.7A18.8 18.8 0 0 1 2.1 4.1 1.9 1.9 0 0 1 4 2h2.6a1.9 1.9 0 0 1 1.9 1.6c.1.9.3 1.8.7 2.7a1.9 1.9 0 0 1-.4 2L7.6 9.5a15 15 0 0 0 5.7 5.7l1.2-1.2a1.9 1.9 0 0 1 2-.4c.9.3 1.8.6 2.7.7A1.9 1.9 0 0 1 21 16.5z"/></svg><div><strong>Teléfono</strong><span>900 123 456</span></div></div>
+        <div class="cont-dato"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2.4"/><path d="M2.5 7 12 13.5 21.5 7"/></svg><div><strong>Email</strong><span>pedidos@deliciaspanaderia.es</span></div></div>
+      </div>
+      <div class="horario">
+        <h3>Horario de la tienda</h3>
+                  <div class="horario-fila"><b>Lunes a viernes</b><span>07:00 - 20:30</span></div>
+                  <div class="horario-fila"><b>Sábado</b><span>07:30 - 21:00</span></div>
+                  <div class="horario-fila"><b>Domingo</b><span>08:00 - 14:30</span></div>
+              </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pie -->
+<footer class="pie">
+  <div class="env">
+    <div class="pie-rejilla">
+      <div>
+        <div class="marca" style="margin-bottom:14px">
+          <svg width="40" height="40" viewBox="0 0 48 48" fill="none" aria-hidden="true"><circle cx="24" cy="24" r="20" fill="#e8a33d"/><path d="M15 20h13v7a6.5 6.5 0 0 1-13 0z" fill="#fff"/><path d="M28 21.5h2.4a2.8 2.8 0 0 1 0 5.6H28" stroke="#fff" stroke-width="2.2" fill="none"/><path d="M14 34h16" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/><path d="M19 17c.8-1 .8-2 0-3M23.5 17c.8-1 .8-2 0-3" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg>          <span class="marca-txt">
+            <strong>Delicias</strong>
+            <span>Panadería</span>
+          </span>
+        </div>
+        <p>Calle del Horno, 18 · 28012 Madrid<br>900 123 456<br>pedidos@deliciaspanaderia.es</p>
+      </div>
+      <div>
+        <h4>Productos</h4>
+                  <a href="#productos">Panes</a>
+                  <a href="#productos">Bollería</a>
+                  <a href="#productos">Pastelería</a>
+                  <a href="#productos">Salados</a>
+                  <a href="#productos">Bebidas</a>
+              </div>
+      <div>
+        <h4>Pedidos</h4>
+        <a href="#pedidos">Hacer un pedido</a>
+        <a href="#pedidos">Recogida en tienda</a>
+        <a href="#pedidos">Entrega a domicilio</a>
+        <a href="#pedidos">Encargos especiales</a>
+      </div>
+      <div>
+        <h4>Síguenos</h4>
+                  <a href="#" target="_blank" rel="noopener">Facebook</a>
+                  <a href="#" target="_blank" rel="noopener">Instagram</a>
+              </div>
+    </div>
+    <div class="pie-abajo">
+      <span>© <span id="anio">2026</span> Delicias Panadería. Todos los derechos reservados.</span>
+      <span>Plantilla demostrativa · Aviso legal · Privacidad · Cookies</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Cesta -->
+<div class="velo" id="velo"></div>
+<aside class="cajon" id="cajon" aria-label="Tu cesta">
+  <div class="cajon-cab">
+    <h2>Tu cesta</h2>
+    <button type="button" class="cerrar" id="cerrarCarrito" aria-label="Cerrar"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+  </div>
+  <div class="cajon-cuerpo" id="cajonCuerpo"></div>
+  <div class="cajon-pie" id="cajonPie"></div>
+</aside>
+
+  <a class="wa" href="https://wa.me/34600123456?text=Hola%2C%20me%20gustar%C3%ADa%20hacer%20un%20pedido." target="_blank" rel="noopener" aria-label="WhatsApp"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 11.6a8.5 8.5 0 0 1-12.6 7.5L3.5 20.5l1.4-4.3A8.5 8.5 0 1 1 20.5 11.6z"/><path d="M8.9 8.4c.3-.7.6-.7.9-.7h.6c.2 0 .5 0 .7.5l.8 1.9c.1.2 0 .4-.1.6l-.4.5c-.1.2-.3.4-.1.7.2.4.9 1.4 1.9 2 1.2.7 1.4.5 1.7.5.2-.1.6-.5.7-.7.2-.2.3-.2.5-.1l1.8.9c.3.1.4.2.5.4 0 .2 0 .9-.3 1.3-.4.5-1.1.9-1.6.9-1.1.1-2.6-.3-4.4-1.5-2.1-1.4-3.4-3.5-3.5-3.7-.1-.2-.8-1.2-.8-2.3 0-1 .5-1.5.7-1.7z"/></svg></a>
+
+<script type="application/json" id="datosCatalogo">[{"id":"p0","nombre":"Hogaza de masa madre","precio":3.8,"unidad":"unidad","imagen":"img\/panes.jpg"},{"id":"p1","nombre":"Barra rústica","precio":1.2,"unidad":"unidad","imagen":"img\/panes.jpg"},{"id":"p2","nombre":"Pan de centeno y nueces","precio":4.5,"unidad":"unidad","imagen":"img\/panes.jpg"},{"id":"p3","nombre":"Chapata de aceite","precio":2.4,"unidad":"unidad","imagen":"img\/panes.jpg"},{"id":"p4","nombre":"Croissant de mantequilla","precio":1.6,"unidad":"unidad","imagen":"img\/bolleria.jpg"},{"id":"p5","nombre":"Napolitana de chocolate","precio":1.8,"unidad":"unidad","imagen":"img\/bolleria.jpg"},{"id":"p6","nombre":"Caracola de pasas","precio":1.9,"unidad":"unidad","imagen":"img\/bolleria.jpg"},{"id":"p7","nombre":"Docena de croissants","precio":16.5,"unidad":"docena","imagen":"img\/bolleria.jpg"},{"id":"p8","nombre":"Tarta de chocolate","precio":24,"unidad":"tarta","imagen":"img\/pasteleria.jpg"},{"id":"p9","nombre":"Tarta de queso al horno","precio":22,"unidad":"tarta","imagen":"img\/pasteleria.jpg"},{"id":"p10","nombre":"Bandeja de pastas surtidas","precio":9.5,"unidad":"bandeja","imagen":"img\/pasteleria.jpg"},{"id":"p11","nombre":"Bocadillo de jamón ibérico","precio":5.9,"unidad":"unidad","imagen":"img\/salados.jpg"},{"id":"p12","nombre":"Empanada de atún","precio":3.4,"unidad":"ración","imagen":"img\/salados.jpg"},{"id":"p13","nombre":"Bandeja de mini bocadillos","precio":21,"unidad":"bandeja","imagen":"img\/salados.jpg"},{"id":"p14","nombre":"Café con leche","precio":1.7,"unidad":"taza","imagen":"img\/bebidas.jpg"},{"id":"p15","nombre":"Zumo de naranja natural","precio":2.6,"unidad":"vaso","imagen":"img\/bebidas.jpg"}]</script>
+<script type="application/json" id="datosEnvio">{"coste":2.9,"minimo":15,"whatsapp":"34600123456","negocio":"Delicias Panadería"}</script>
+<script src="js/main.js"></script>
+</body>
+</html>

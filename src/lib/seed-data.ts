@@ -164,6 +164,29 @@ const seed: SeedTemplate[] = [
       SEO,
     ],
   },
+  {
+    id: `${TPL}05`,
+    categorySlug: "panaderia",
+    title: "Panadería con Pedidos Online",
+    slug: "panaderia-premium",
+    short_description:
+      "Panadería con catálogo de productos, cesta y pedidos que llegan por WhatsApp.",
+    full_description:
+      "Para panaderías, pastelerías y cafeterías que quieren vender sin depender de las plataformas de reparto: catálogo de productos por categorías con filtros, cesta de la compra que recuerda lo que has elegido aunque cierres la página, elección entre recoger en tienda o entrega a domicilio con su coste y su pedido mínimo, y un formulario que arma el pedido completo y lo manda al WhatsApp del negocio, con productos, cantidades, totales, dirección y hora. Sin comisiones por pedido y sin pasarela de pago que configurar. Paleta crema + ámbar, tipografía Playfair Display.",
+    price_cents: 19900,
+    preview_url: "/demos/panaderia-premium/index.html",
+    gradient: "linear-gradient(160deg,#f8f1e6,#e8a33d 55%,#c9821f)",
+    features: [
+      "Catálogo de productos con filtros por categoría",
+      "Cesta de la compra que no se pierde al cerrar",
+      "Recogida en tienda o entrega, con pedido mínimo",
+      "El pedido llega entero por WhatsApp",
+      "Sin comisiones y sin pasarela que configurar",
+      "Horarios, historia del negocio y contacto",
+      RESPONSIVE,
+      SEO,
+    ],
+  },
 ];
 
 /** Degradado por slug — respaldo de miniatura en las tarjetas. */
