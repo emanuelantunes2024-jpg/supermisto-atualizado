@@ -141,6 +141,29 @@ const seed: SeedTemplate[] = [
       SEO,
     ],
   },
+  {
+    id: `${TPL}04`,
+    categorySlug: "restaurante-premium",
+    title: "Restaurante Premium",
+    slug: "restaurante-premium",
+    short_description:
+      "Restaurante de cocina de autor: carta con precios, reservas, galería y blog.",
+    full_description:
+      "Para restaurantes de cocina de autor y locales con carta de vinos: portada con carrusel de fotos, buscador de disponibilidad, seis secciones con foto propia, carta completa agrupada en entrantes, principales y postres con sus precios, cifras del local, opiniones que van rotando solas, galería, blog y formulario de reserva con validación (email, teléfono y fechas pasadas). Paleta negro + terracota + oro, tipografía Playfair Display. El dueño cambia la carta entera desde el panel escribiendo una línea por plato.",
+    price_cents: 24900,
+    preview_url: "/demos/restaurante-premium/index.html",
+    gradient: "linear-gradient(160deg,#141418,#2a2118 55%,#0d0d10)",
+    features: [
+      "Carta completa con precios, editable línea a línea",
+      "Portada con carrusel de hasta 4 fotos",
+      "Buscador de disponibilidad y formulario de reserva",
+      "Galería de 8 fotos y blog",
+      "Opiniones de clientes que rotan solas",
+      "Botón de WhatsApp para reservas",
+      RESPONSIVE,
+      SEO,
+    ],
+  },
 ];
 
 /** Degradado por slug — respaldo de miniatura en las tarjetas. */
