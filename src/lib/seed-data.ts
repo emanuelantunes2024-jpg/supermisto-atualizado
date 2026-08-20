@@ -8,13 +8,15 @@ import type { Category, TemplateWithCategory } from "@/lib/types";
  *  2. Alimenta la vitrine cuando todavía no hay Supabase configurado,
  *     para poder ver y revisar el sitio antes de crear las cuentas.
  *
- * Las categorías son las ocho de la referencia de marca. Cada plantilla se
- * añade a `seed` según llega su paquete (foto + prompt).
+ * Una categoría por oficio. Dentro de cada una conviven varias plantillas
+ * de distinto nivel y distinto precio: por ejemplo, en "Restaurantes" está
+ * la Premium completa y, más adelante, versiones más sencillas y más
+ * baratas. La categoría agrupa; la plantilla es lo que se compra.
  */
 
 const CAT = "11111111-1111-4111-8111-0000000000";
 
-/** Las ocho categorías premium, en el orden de la referencia de marca. */
+/** Las categorías del catálogo, en el orden de la referencia de marca. */
 export const seedCategories: Category[] = [
   { id: `${CAT}01`, name: "Clínica Dental", slug: "clinica-dental", icon: "🦷" },
   { id: `${CAT}02`, name: "Clínica Veterinaria", slug: "clinica-veterinaria", icon: "🐾" },
@@ -22,7 +24,7 @@ export const seedCategories: Category[] = [
   { id: `${CAT}04`, name: "Agencia Inmobiliaria", slug: "inmobiliaria", icon: "🏡" },
   { id: `${CAT}05`, name: "Agencia de Viajes", slug: "agencia-viajes", icon: "✈️" },
   { id: `${CAT}06`, name: "Hotel", slug: "hotel", icon: "🏨" },
-  { id: `${CAT}07`, name: "Restaurante", slug: "restaurante", icon: "🍽️" },
+  { id: `${CAT}07`, name: "Restaurantes", slug: "restaurante", icon: "🍽️" },
   { id: `${CAT}08`, name: "Panadería", slug: "panaderia", icon: "🥖" },
   { id: `${CAT}09`, name: "Boutique de Moda", slug: "boutique-moda", icon: "👗" },
   { id: `${CAT}10`, name: "Muebles y Decoración", slug: "muebles-decoracion", icon: "🛋️" },
@@ -34,8 +36,6 @@ export const seedCategories: Category[] = [
   { id: `${CAT}16`, name: "Materiales de Construcción", slug: "materiales-construccion", icon: "🧱" },
   { id: `${CAT}17`, name: "Obras y Construcción", slug: "obras-construccion", icon: "🏗️" },
   { id: `${CAT}18`, name: "Pesca", slug: "pesca", icon: "🎣" },
-  { id: `${CAT}19`, name: "Restaurantes", slug: "restaurantes", icon: "🍴" },
-  { id: `${CAT}20`, name: "Restaurante Premium", slug: "restaurante-premium", icon: "🍷" },
   { id: `${CAT}21`, name: "Energía Solar", slug: "energia-solar", icon: "☀️" },
   { id: `${CAT}22`, name: "Mudanzas y Transportes", slug: "mudanzas-transportes", icon: "🚚" },
   { id: `${CAT}23`, name: "Electrónica", slug: "electronica", icon: "📱" },
@@ -143,7 +143,7 @@ const seed: SeedTemplate[] = [
   },
   {
     id: `${TPL}04`,
-    categorySlug: "restaurante-premium",
+    categorySlug: "restaurante",
     title: "Restaurante Premium",
     slug: "restaurante-premium",
     short_description:

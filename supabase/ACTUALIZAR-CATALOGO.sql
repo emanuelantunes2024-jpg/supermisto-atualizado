@@ -1,10 +1,54 @@
 -- ============================================================
--- Leuname Software — datos de ejemplo
--- Ejecutar DESPUÉS de 0001_schema_inicial.sql.
+--  LEUNAME SOFTWARE — ACTUALIZAR EL CATÁLOGO
 --
--- GENERADO por scripts/generate-seed-sql.py desde src/lib/seed-data.ts.
--- No editar a mano: cambia el catálogo en el TypeScript y vuelve a generar.
+--  QUÉ HACE
+--    1. Junta las tres categorías de restaurante en una sola.
+--       Había "Restaurante", "Restaurantes" y "Restaurante Premium",
+--       y eran la misma cosa repetida. Ahora hay UNA categoría,
+--       "Restaurantes", y dentro viven las plantillas de cada nivel
+--       y cada precio.
+--    2. Carga (o actualiza) las categorías y las plantillas.
+--
+--  QUÉ NO TOCA
+--    Pedidos y clientes: no se borra ni una fila.
+--
+--  Supabase  >  SQL Editor  >  New query  >  pegar todo  >  RUN
+--  Se puede ejecutar las veces que haga falta.
 -- ============================================================
+
+
+-- ------------------------------------------------------------
+--  ANTES
+-- ------------------------------------------------------------
+
+select 'ANTES' as momento,
+       (select count(*) from public.categories)                           as categorias,
+       (select count(*) from public.templates where status = 'published') as plantillas;
+
+
+-- ------------------------------------------------------------
+--  PASO 1 — juntar las categorías de restaurante en una sola
+-- ------------------------------------------------------------
+
+begin;
+
+-- Todo lo que colgaba de las categorías repetidas pasa a "restaurante".
+update public.templates
+   set category_id = '11111111-1111-4111-8111-000000000007'
+ where category_id in (
+   select id from public.categories where slug in ('restaurantes', 'restaurante-premium')
+ );
+
+-- Y las repetidas se van, ya sin nada colgando.
+delete from public.categories
+ where slug in ('restaurantes', 'restaurante-premium');
+
+commit;
+
+
+-- ------------------------------------------------------------
+--  PASO 2 — cargar las categorías y las plantillas
+-- ------------------------------------------------------------
 
 insert into public.categories (id, name, slug, icon) values
   ('11111111-1111-4111-8111-000000000001', 'Clínica Dental', 'clinica-dental', '🦷'),
@@ -91,3 +135,29 @@ on conflict (id) do update
       thumbnail_url     = excluded.thumbnail_url,
       features          = excluded.features,
       status            = excluded.status;
+
+
+-- ------------------------------------------------------------
+--  DESPUÉS — mira estos resultados
+-- ------------------------------------------------------------
+
+select 'DESPUÉS' as momento,
+       (select count(*) from public.categories)                           as categorias,
+       (select count(*) from public.templates where status = 'published') as plantillas;
+
+-- Las plantillas publicadas, cada una con su categoría.
+select t.title, t.slug, c.name as categoria, t.price_cents / 100 as euros
+  from public.templates t
+  left join public.categories c on c.id = t.category_id
+ where t.status = 'published'
+ order by c.name, t.price_cents desc;
+
+-- Tiene que salir UNA sola fila de restaurante.
+select name, slug from public.categories where slug like '%restaurante%';
+
+-- Si aquí sale algo, esa plantilla se quedó sin categoría y por eso
+-- no aparece en la web. Avísame si pasa.
+select t.title, t.slug, t.category_id
+  from public.templates t
+  left join public.categories c on c.id = t.category_id
+ where t.status = 'published' and c.id is null;
