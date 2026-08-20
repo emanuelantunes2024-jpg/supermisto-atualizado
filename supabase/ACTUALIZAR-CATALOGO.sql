@@ -131,6 +131,15 @@ values
    'Para panaderías, pastelerías y cafeterías que quieren vender sin depender de las plataformas de reparto: catálogo de productos por categorías con filtros, cesta de la compra que recuerda lo que has elegido aunque cierres la página, elección entre recoger en tienda o entrega a domicilio con su coste y su pedido mínimo, y un formulario que arma el pedido completo y lo manda al WhatsApp del negocio, con productos, cantidades, totales, dirección y hora. Sin comisiones por pedido y sin pasarela de pago que configurar. Paleta crema + ámbar, tipografía Playfair Display.',
    19900, '/demos/panaderia-premium/index.html', '/thumbnails/panaderia-premium.jpg',
    '["Catálogo de productos con filtros por categoría", "Cesta de la compra que no se pierde al cerrar", "Recogida en tienda o entrega, con pedido mínimo", "El pedido llega entero por WhatsApp", "Sin comisiones y sin pasarela que configurar", "Horarios, historia del negocio y contacto", "Responsive (móvil, tablet y desktop)", "Optimizado para Google (SEO)"]'::jsonb,
+   'published'),
+
+  ('22222222-2222-4222-8222-000000000006',
+   '11111111-1111-4111-8111-000000000002',
+   'Clínica Veterinaria Premium', 'veterinaria-premium',
+   'Clínica veterinaria con urgencias 24h, planes de salud mensuales y cita online.',
+   'Para clínicas veterinarias y centros de salud animal: ocho servicios con ficha propia, franja de urgencias 24 horas con llamada directa, tres planes de salud por cuota mensual (cachorro, adulto y sénior) con el plan destacado resaltado en color, equipo con su especialidad, formulario de cita que pregunta qué animal es y valida teléfono, correo y fechas pasadas, opiniones y preguntas frecuentes. Paleta verde + melocotón, tipografía Playfair Display. No necesita fotos: la portada dibuja un perro y un gato ilustrados, los servicios llevan iconos y el equipo se muestra con sus iniciales, así que se ve nítido en cualquier pantalla y carga al instante.',
+   22900, '/demos/veterinaria-premium/index.html', '/thumbnails/veterinaria-premium.jpg',
+   '["Tres planes de salud por cuota mensual", "Franja de urgencias 24h con llamada directa", "8 servicios con icono propio", "Cita online que pregunta qué animal es", "Sin fotos: todo ilustrado, carga al instante", "Equipo, opiniones y preguntas frecuentes", "Responsive (móvil, tablet y desktop)", "Optimizado para Google (SEO)"]'::jsonb,
    'published')
 
 on conflict (id) do update

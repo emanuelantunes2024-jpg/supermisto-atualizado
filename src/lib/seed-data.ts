@@ -187,6 +187,29 @@ const seed: SeedTemplate[] = [
       SEO,
     ],
   },
+  {
+    id: `${TPL}06`,
+    categorySlug: "clinica-veterinaria",
+    title: "Clínica Veterinaria Premium",
+    slug: "veterinaria-premium",
+    short_description:
+      "Clínica veterinaria con urgencias 24h, planes de salud mensuales y cita online.",
+    full_description:
+      "Para clínicas veterinarias y centros de salud animal: ocho servicios con ficha propia, franja de urgencias 24 horas con llamada directa, tres planes de salud por cuota mensual (cachorro, adulto y sénior) con el plan destacado resaltado en color, equipo con su especialidad, formulario de cita que pregunta qué animal es y valida teléfono, correo y fechas pasadas, opiniones y preguntas frecuentes. Paleta verde + melocotón, tipografía Playfair Display. No necesita fotos: la portada dibuja un perro y un gato ilustrados, los servicios llevan iconos y el equipo se muestra con sus iniciales, así que se ve nítido en cualquier pantalla y carga al instante.",
+    price_cents: 22900,
+    preview_url: "/demos/veterinaria-premium/index.html",
+    gradient: "linear-gradient(160deg,#e3f2ee,#12786a 55%,#0b5a4f)",
+    features: [
+      "Tres planes de salud por cuota mensual",
+      "Franja de urgencias 24h con llamada directa",
+      "8 servicios con icono propio",
+      "Cita online que pregunta qué animal es",
+      "Sin fotos: todo ilustrado, carga al instante",
+      "Equipo, opiniones y preguntas frecuentes",
+      RESPONSIVE,
+      SEO,
+    ],
+  },
 ];
 
 /** Degradado por slug — respaldo de miniatura en las tarjetas. */
