@@ -46,6 +46,7 @@ export const seedCategories: Category[] = [
   { id: `${CAT}28`, name: "Perfumería", slug: "perfumeria", icon: "🧴" },
   { id: `${CAT}29`, name: "Relojería", slug: "relojeria", icon: "⌚" },
   { id: `${CAT}30`, name: "Frutería y Verdulería", slug: "fruteria", icon: "🥬" },
+  { id: `${CAT}31`, name: "Abogados y Consultoría Legal", slug: "abogados", icon: "⚖️" },
 ];
 
 const byslug = (slug: string) => seedCategories.find((c) => c.slug === slug)!;
@@ -113,6 +114,29 @@ const seed: SeedTemplate[] = [
       "Paquetes y ofertas destacadas",
       "Formulario de propuesta con validación",
       "Preguntas frecuentes y blog",
+      RESPONSIVE,
+      SEO,
+    ],
+  },
+  {
+    id: `${TPL}03`,
+    categorySlug: "abogados",
+    title: "Consultoría Legal & Empresarial Premium",
+    slug: "consultoria-legal-premium",
+    short_description:
+      "Despacho de abogados con 10 áreas de especialización, blog jurídico y formulario de consulta.",
+    full_description:
+      "Para despachos de abogados y consultoras: las 10 áreas más demandadas del derecho con ficha propia (empresarial, laboral, familia, inmobiliario, civil, penal, fiscal, comercial, propiedad intelectual y consultoría), proceso de trabajo en cuatro pasos, opiniones de clientes, blog jurídico, preguntas frecuentes y formulario de consulta con validación. Paleta azul noche + oro, tipografía Playfair Display. No necesita fotos: la balanza de la portada y los iconos de las áreas están dibujados en vectores, así que se ven nítidos en cualquier pantalla y la web carga al instante.",
+    price_cents: 24900,
+    preview_url: "/demos/consultoria-legal-premium/index.html",
+    gradient: "linear-gradient(160deg,#0b1424,#16243d 55%,#080e1a)",
+    features: [
+      "10 áreas de especialización con icono propio",
+      "Formulario de consulta con validación",
+      "Proceso de trabajo en cuatro pasos",
+      "Blog jurídico y preguntas frecuentes",
+      "Botones de WhatsApp, teléfono y email",
+      "Sin fotos: todo en vectores, carga al instante",
       RESPONSIVE,
       SEO,
     ],

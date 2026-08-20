@@ -36,7 +36,8 @@ insert into public.categories (id, name, slug, icon) values
   ('11111111-1111-4111-8111-000000000027', 'Instrumentos Musicales', 'instrumentos-musicales', '🎸'),
   ('11111111-1111-4111-8111-000000000028', 'Perfumería', 'perfumeria', '🧴'),
   ('11111111-1111-4111-8111-000000000029', 'Relojería', 'relojeria', '⌚'),
-  ('11111111-1111-4111-8111-000000000030', 'Frutería y Verdulería', 'fruteria', '🥬')
+  ('11111111-1111-4111-8111-000000000030', 'Frutería y Verdulería', 'fruteria', '🥬'),
+  ('11111111-1111-4111-8111-000000000031', 'Abogados y Consultoría Legal', 'abogados', '⚖️')
 on conflict (id) do update
   set name = excluded.name,
       slug = excluded.slug,
@@ -61,6 +62,15 @@ values
    'Para agencias de viajes y turoperadores: buscador de viajes, carrusel de destinos destacados con precios y valoraciones, tarjetas de cruceros y ofertas, 8 tipos de viaje filtrables, paquetes preparados, testimonios, preguntas frecuentes, blog y formulario de propuesta a medida con validación. Paleta verde azulado + coral, tipografía Playfair Display.',
    21900, '/demos/agencia-viajes-premium/index.html', '/thumbnails/agencia-viajes-premium.jpg',
    '["Buscador de viajes funcional", "Carrusel de destinos con valoraciones", "8 tipos de viaje filtrables", "Paquetes y ofertas destacadas", "Formulario de propuesta con validación", "Preguntas frecuentes y blog", "Responsive (móvil, tablet y desktop)", "Optimizado para Google (SEO)"]'::jsonb,
+   'published'),
+
+  ('22222222-2222-4222-8222-000000000003',
+   '11111111-1111-4111-8111-000000000031',
+   'Consultoría Legal & Empresarial Premium', 'consultoria-legal-premium',
+   'Despacho de abogados con 10 áreas de especialización, blog jurídico y formulario de consulta.',
+   'Para despachos de abogados y consultoras: las 10 áreas más demandadas del derecho con ficha propia (empresarial, laboral, familia, inmobiliario, civil, penal, fiscal, comercial, propiedad intelectual y consultoría), proceso de trabajo en cuatro pasos, opiniones de clientes, blog jurídico, preguntas frecuentes y formulario de consulta con validación. Paleta azul noche + oro, tipografía Playfair Display. No necesita fotos: la balanza de la portada y los iconos de las áreas están dibujados en vectores, así que se ven nítidos en cualquier pantalla y la web carga al instante.',
+   24900, '/demos/consultoria-legal-premium/index.html', '/thumbnails/consultoria-legal-premium.jpg',
+   '["10 áreas de especialización con icono propio", "Formulario de consulta con validación", "Proceso de trabajo en cuatro pasos", "Blog jurídico y preguntas frecuentes", "Botones de WhatsApp, teléfono y email", "Sin fotos: todo en vectores, carga al instante", "Responsive (móvil, tablet y desktop)", "Optimizado para Google (SEO)"]'::jsonb,
    'published')
 
 on conflict (id) do update

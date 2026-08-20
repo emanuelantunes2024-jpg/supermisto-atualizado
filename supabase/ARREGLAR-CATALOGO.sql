@@ -5,9 +5,9 @@
 --    1. Borra las plantillas y las categorías VIEJAS (las cafeterías,
 --       barberías y peluquerías que todavía salen al entrar en una
 --       categoría de la web).
---    2. Carga las 30 CATEGORÍAS PREMIUM nuevas, en su orden.
---    3. Carga las plantillas ya terminadas (Clínica Dental Premium
---       y Agencia de Viajes Premium) con su foto y su demo.
+--    2. Carga las 31 CATEGORÍAS PREMIUM nuevas, en su orden.
+--    3. Carga las plantillas ya terminadas (Clínica Dental,
+--       Agencia de Viajes y Consultoría Legal) con su foto y su demo.
 --
 --  QUÉ NO TOCA — TRANQUILO
 --    · Los pedidos y los clientes: no se borra ni una fila.
@@ -20,7 +20,7 @@
 --    Pegar TODO este archivo  >  botón RUN
 --
 --    Se puede ejecutar las veces que haga falta: no rompe nada.
---    Al terminar, abre tu web y recarga: ya salen las 30 categorías.
+--    Al terminar, abre tu web y recarga: ya salen las 31 categorías.
 -- ============================================================
 
 
@@ -46,7 +46,7 @@ delete from public.categories
 commit;
 
 -- ------------------------------------------------------------
---  PASO 2 — cargar las 30 categorías y las plantillas
+--  PASO 2 — cargar las 31 categorías y las plantillas
 -- ------------------------------------------------------------
 insert into public.categories (id, name, slug, icon) values
   ('11111111-1111-4111-8111-000000000001', 'Clínica Dental', 'clinica-dental', '🦷'),
@@ -78,7 +78,8 @@ insert into public.categories (id, name, slug, icon) values
   ('11111111-1111-4111-8111-000000000027', 'Instrumentos Musicales', 'instrumentos-musicales', '🎸'),
   ('11111111-1111-4111-8111-000000000028', 'Perfumería', 'perfumeria', '🧴'),
   ('11111111-1111-4111-8111-000000000029', 'Relojería', 'relojeria', '⌚'),
-  ('11111111-1111-4111-8111-000000000030', 'Frutería y Verdulería', 'fruteria', '🥬')
+  ('11111111-1111-4111-8111-000000000030', 'Frutería y Verdulería', 'fruteria', '🥬'),
+  ('11111111-1111-4111-8111-000000000031', 'Abogados y Consultoría Legal', 'abogados', '⚖️')
 on conflict (id) do update
   set name = excluded.name,
       slug = excluded.slug,
@@ -103,6 +104,15 @@ values
    'Para agencias de viajes y turoperadores: buscador de viajes, carrusel de destinos destacados con precios y valoraciones, tarjetas de cruceros y ofertas, 8 tipos de viaje filtrables, paquetes preparados, testimonios, preguntas frecuentes, blog y formulario de propuesta a medida con validación. Paleta verde azulado + coral, tipografía Playfair Display.',
    21900, '/demos/agencia-viajes-premium/index.html', '/thumbnails/agencia-viajes-premium.jpg',
    '["Buscador de viajes funcional", "Carrusel de destinos con valoraciones", "8 tipos de viaje filtrables", "Paquetes y ofertas destacadas", "Formulario de propuesta con validación", "Preguntas frecuentes y blog", "Responsive (móvil, tablet y desktop)", "Optimizado para Google (SEO)"]'::jsonb,
+   'published'),
+
+  ('22222222-2222-4222-8222-000000000003',
+   '11111111-1111-4111-8111-000000000031',
+   'Consultoría Legal & Empresarial Premium', 'consultoria-legal-premium',
+   'Despacho de abogados con 10 áreas de especialización, blog jurídico y formulario de consulta.',
+   'Para despachos de abogados y consultoras: las 10 áreas más demandadas del derecho con ficha propia (empresarial, laboral, familia, inmobiliario, civil, penal, fiscal, comercial, propiedad intelectual y consultoría), proceso de trabajo en cuatro pasos, opiniones de clientes, blog jurídico, preguntas frecuentes y formulario de consulta con validación. Paleta azul noche + oro, tipografía Playfair Display. No necesita fotos: la balanza de la portada y los iconos de las áreas están dibujados en vectores, así que se ven nítidos en cualquier pantalla y la web carga al instante.',
+   24900, '/demos/consultoria-legal-premium/index.html', '/thumbnails/consultoria-legal-premium.jpg',
+   '["10 áreas de especialización con icono propio", "Formulario de consulta con validación", "Proceso de trabajo en cuatro pasos", "Blog jurídico y preguntas frecuentes", "Botones de WhatsApp, teléfono y email", "Sin fotos: todo en vectores, carga al instante", "Responsive (móvil, tablet y desktop)", "Optimizado para Google (SEO)"]'::jsonb,
    'published')
 
 on conflict (id) do update
@@ -117,12 +127,11 @@ on conflict (id) do update
       features          = excluded.features,
       status            = excluded.status;
 
-
 -- ------------------------------------------------------------
 --  PASO 3 — comprobación (mira los resultados de abajo)
 -- ------------------------------------------------------------
 
--- Tienen que salir 30 categorías.
+-- Tienen que salir 31 categorías.
 select count(*) as categorias_en_la_web from public.categories;
 
 -- Tienen que salir las plantillas terminadas, en estado "published".
