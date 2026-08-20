@@ -21,3 +21,7 @@ next-env.d.ts
 
 # vercel
 .vercel
+
+# python (los guiones de scripts/)
+__pycache__/
+*.pyc
