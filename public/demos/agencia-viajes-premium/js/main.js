@@ -1,6 +1,32 @@
 /* Agencia de Viajes — interacciones de la demo (sin dependencias). */
+/* ============================================================
+   CONFIGURACIÓN — edita solo esta parte
+   ============================================================ */
+var CONFIG = {
+  /* Número de WhatsApp del negocio, con prefijo de país y SIN
+     espacios, signos ni el "+".  Ej. España: "34600123456" */
+  whatsapp: "34600123456",
+
+  /* Mensaje con el que se abre el chat de WhatsApp. */
+  whatsappMensaje: "Hola, me gustaría información sobre un viaje."
+};
+/* ========================================================== */
+
 (function () {
   "use strict";
+
+  /* Botón flotante de WhatsApp */
+  var wa = document.getElementById("waBtn");
+  if (wa) {
+    if (CONFIG.whatsapp) {
+      wa.href =
+        "https://wa.me/" + CONFIG.whatsapp.replace(/\D/g, "") +
+        "?text=" + encodeURIComponent(CONFIG.whatsappMensaje || "");
+    } else {
+      wa.removeAttribute("target");
+      wa.href = "#planificar";
+    }
+  }
 
   /* Menú móvil */
   var burger = document.getElementById("burger");
