@@ -4,8 +4,8 @@
 -- GERADO AUTOMATICAMENTE por scripts/gerar-seed.mjs. Não edite à mão:
 -- altere os arquivos em src/data e rode `npm run gerar:seed` de novo.
 --
--- Gerado em: 2026-08-21T02:19:35.608Z
--- Conteúdo:  97 insumos, 9 categorias, 43 receitas.
+-- Gerado em: 2026-08-21T05:20:24.797Z
+-- Conteúdo:  116 insumos, 9 categorias, 55 receitas.
 --
 -- Rode este arquivo DEPOIS da migração 0001_estrutura_inicial.sql.
 -- Pode ser reaplicado: tudo usa UPSERT.
@@ -62,6 +62,25 @@ insert into public.insumos (chave, nome, unidade_base, embalagem, embalagem_rotu
   ('suco-po', 'Suco em pó', 'g', 25, 'sachê de 25 g', 1.5, 'mercearia'),
   ('emulsificante', 'Emulsificante para sorvete', 'g', 200, 'pote de 200 g', 12, 'confeitaria'),
   ('liga-neutra', 'Liga neutra', 'g', 100, 'pote de 100 g', 11, 'confeitaria'),
+  ('ameixa-seca', 'Ameixa seca sem caroço', 'g', 200, 'pacote de 200 g', 14, 'mercearia'),
+  ('acucar-mascavo', 'Açúcar mascavo', 'g', 500, 'pacote de 500 g', 9, 'mercearia'),
+  ('bicarbonato', 'Bicarbonato de sódio', 'g', 100, 'pote de 100 g', 4.5, 'mercearia'),
+  ('farinha-mandioca', 'Farinha de mandioca', 'g', 500, 'pacote de 500 g', 6, 'mercearia'),
+  ('macarrao', 'Macarrão', 'g', 500, 'pacote de 500 g', 5.5, 'mercearia'),
+  ('massa-lasanha', 'Massa de lasanha', 'g', 500, 'pacote de 500 g', 9, 'mercearia'),
+  ('massa-pastel', 'Massa de pastel', 'g', 500, 'pacote de 500 g', 8.5, 'mercearia'),
+  ('oregano', 'Orégano', 'g', 30, 'pote de 30 g', 5, 'mercearia'),
+  ('noz-moscada', 'Noz-moscada', 'g', 20, 'pote de 20 g', 7, 'mercearia'),
+  ('palmito', 'Palmito em conserva', 'g', 300, 'vidro de 300 g', 16, 'mercearia'),
+  ('salsicha', 'Salsicha', 'g', 500, 'pacote de 500 g', 12, 'carnes'),
+  ('queijo-coalho', 'Queijo coalho', 'g', 500, 'peça de 500 g', 30, 'laticinios'),
+  ('abobora', 'Abóbora', 'g', 1000, '1 kg', 5, 'hortifruti'),
+  ('berinjela', 'Berinjela', 'g', 500, '500 g', 7, 'hortifruti'),
+  ('pimenta-dedo-moca', 'Pimenta dedo-de-moça', 'g', 100, 'pacote de 100 g', 6, 'hortifruti'),
+  ('milho-verde-espiga', 'Milho verde em espiga', 'un', 6, 'pacote com 6', 12, 'hortifruti'),
+  ('abacate', 'Abacate', 'un', 1, 'unidade', 7, 'hortifruti'),
+  ('goiaba', 'Goiabada', 'g', 300, 'barra de 300 g', 9, 'mercearia'),
+  ('amido-tapioca', 'Goma de tapioca hidratada', 'g', 500, 'pacote de 500 g', 8, 'mercearia'),
   ('leite', 'Leite integral', 'ml', 1000, 'caixa de 1 L', 5, 'laticinios'),
   ('manteiga', 'Manteiga', 'g', 200, 'pote de 200 g', 11, 'laticinios'),
   ('margarina', 'Margarina', 'g', 500, 'pote de 500 g', 8.5, 'laticinios'),
@@ -575,6 +594,363 @@ values
   ((select id from public.receitas where slug = 'palha-italiana-cremosa'), 'biscoito-maisena', 400, 'g', 400, null, null, false, 4),
   ((select id from public.receitas where slug = 'palha-italiana-cremosa'), 'acucar-refinado', 50, 'g', 50, 'Finalização', null, false, 5);
 
+-- Brigadeiro Branco de Leite Ninho
+insert into public.receitas (
+  slug, nome, descricao, categoria_slug, subcategoria, imagem, tempo_minutos,
+  dificuldade, rendimento, rendimento_unidade, preparo, dicas, conservacao,
+  equipamentos, tags, objetivos, linha, para_vender, embalagem_por_unidade,
+  margem_sugerida, custo_estimado, publicada_em, novidade_ate, publicada,
+  destaque, demonstracao
+) values (
+  'brigadeiro-branco-de-leite-ninho', 'Brigadeiro Branco de Leite Ninho', 'Brigadeiro branco cremoso, feito com leite em pó de qualidade. É o par do brigadeiro tradicional nas caixinhas e o preferido de quem não gosta de chocolate.',
+  'doces', 'Brigadeiros', null,
+  25, 'facil', 45,
+  'unidades', '[{"texto":"Misture o leite condensado, o leite em pó peneirado e a manteiga em uma panela fria, até dissolver por completo."},{"texto":"Leve ao fogo baixo mexendo sem parar. O brigadeiro branco queima com muita facilidade: não aumente o fogo."},{"texto":"Cozinhe por cerca de 10 minutos, até desgrudar do fundo da panela."},{"texto":"Fora do fogo, junte o creme de leite e misture por 1 minuto."},{"texto":"Espalhe em prato untado, cubra com filme em contato e deixe esfriar por 2 horas."},{"texto":"Enrole bolinhas de 15 g, passe no leite em pó e acomode nas forminhas."}]'::jsonb, '["Fogo baixo do começo ao fim: o leite em pó caramela rápido e o doce fica com pontinhos escuros.","Passe no leite em pó só na hora de servir; feito com antecedência, o acabamento umedece."]'::jsonb,
+  'Até 4 dias em temperatura ambiente, em pote fechado, ou 8 dias refrigerado.', '["Panela de fundo grosso","Peneira","Espátula"]'::jsonb, '{"brigadeiro branco","leite ninho","festa","doce para vender"}',
+  '{"familia","festa","encomenda","venda","delivery"}', 'doces', true,
+  null, 0.75,
+  34.65, '2026-08-20', null,
+  true, false, false
+)
+on conflict (slug) do update set
+  nome = excluded.nome,
+  descricao = excluded.descricao,
+  categoria_slug = excluded.categoria_slug,
+  subcategoria = excluded.subcategoria,
+  tempo_minutos = excluded.tempo_minutos,
+  dificuldade = excluded.dificuldade,
+  rendimento = excluded.rendimento,
+  rendimento_unidade = excluded.rendimento_unidade,
+  preparo = excluded.preparo,
+  dicas = excluded.dicas,
+  conservacao = excluded.conservacao,
+  equipamentos = excluded.equipamentos,
+  tags = excluded.tags,
+  objetivos = excluded.objetivos,
+  linha = excluded.linha,
+  para_vender = excluded.para_vender,
+  embalagem_por_unidade = excluded.embalagem_por_unidade,
+  margem_sugerida = excluded.margem_sugerida,
+  custo_estimado = excluded.custo_estimado,
+  publicada_em = excluded.publicada_em,
+  novidade_ate = excluded.novidade_ate,
+  publicada = excluded.publicada,
+  destaque = excluded.destaque,
+  demonstracao = excluded.demonstracao,
+  atualizada_em = now();
+
+-- ingredientes de brigadeiro-branco-de-leite-ninho
+delete from public.receita_ingredientes
+where receita_id = (select id from public.receitas where slug = 'brigadeiro-branco-de-leite-ninho');
+
+insert into public.receita_ingredientes
+  (receita_id, insumo_chave, qtd, unidade, base, grupo, observacao, opcional, ordem)
+values
+  ((select id from public.receitas where slug = 'brigadeiro-branco-de-leite-ninho'), 'leite-condensado', 2, 'lata', 790, null, null, false, 0),
+  ((select id from public.receitas where slug = 'brigadeiro-branco-de-leite-ninho'), 'leite-po', 10, 'colher (sopa)', 100, null, null, false, 1),
+  ((select id from public.receitas where slug = 'brigadeiro-branco-de-leite-ninho'), 'manteiga', 2, 'colher (sopa)', 30, null, null, false, 2),
+  ((select id from public.receitas where slug = 'brigadeiro-branco-de-leite-ninho'), 'creme-de-leite', 1, 'caixa', 200, null, null, false, 3),
+  ((select id from public.receitas where slug = 'brigadeiro-branco-de-leite-ninho'), 'leite-po', 120, 'g', 120, 'Finalização', null, false, 4),
+  ((select id from public.receitas where slug = 'brigadeiro-branco-de-leite-ninho'), 'forminha-doce', 45, 'unidade', 45, 'Finalização', null, false, 5);
+
+-- Casadinho de Doce de Leite
+insert into public.receitas (
+  slug, nome, descricao, categoria_slug, subcategoria, imagem, tempo_minutos,
+  dificuldade, rendimento, rendimento_unidade, preparo, dicas, conservacao,
+  equipamentos, tags, objetivos, linha, para_vender, embalagem_por_unidade,
+  margem_sugerida, custo_estimado, publicada_em, novidade_ate, publicada,
+  destaque, demonstracao
+) values (
+  'casadinho-de-doce-de-leite', 'Casadinho de Doce de Leite', 'Dois biscoitos amanteigados unidos por doce de leite, com a borda passada no coco. Custo baixo por unidade, validade longa e ótima aceitação em festas.',
+  'doces', 'Doces de festa', null,
+  70, 'medio', 40,
+  'unidades', '[{"texto":"Bata a manteiga com o açúcar até formar um creme claro e aerado."},{"texto":"Junte os ovos e bata mais 1 minuto. Incorpore a farinha, o amido e o fermento peneirados."},{"texto":"Una a massa com as mãos, embrulhe em filme e leve à geladeira por 30 minutos."},{"texto":"Abra a massa com 5 mm e corte discos de 3 cm. Asse a 180 °C por 12 minutos, sem deixar dourar demais."},{"texto":"Deixe esfriar completamente sobre uma grade."},{"texto":"Una os biscoitos dois a dois com doce de leite firme e role a lateral no coco ralado."}]'::jsonb, '["Doce de leite mole escorre pelas bordas: use um de consistência firme, próprio para rechear.","Recheie no máximo 2 dias antes da entrega — depois disso o biscoito amolece."]'::jsonb,
+  'Até 7 dias em pote hermético. Os biscoitos sem recheio duram 15 dias.', '["Batedeira","Rolo de massa","Cortador redondo","Grade"]'::jsonb, '{"casadinho","doce de leite","biscoito","festa","doce para vender"}',
+  '{"festa","encomenda","venda"}', 'doces', true,
+  0.1, 0.8,
+  41.85, '2026-08-19', null,
+  true, false, false
+)
+on conflict (slug) do update set
+  nome = excluded.nome,
+  descricao = excluded.descricao,
+  categoria_slug = excluded.categoria_slug,
+  subcategoria = excluded.subcategoria,
+  tempo_minutos = excluded.tempo_minutos,
+  dificuldade = excluded.dificuldade,
+  rendimento = excluded.rendimento,
+  rendimento_unidade = excluded.rendimento_unidade,
+  preparo = excluded.preparo,
+  dicas = excluded.dicas,
+  conservacao = excluded.conservacao,
+  equipamentos = excluded.equipamentos,
+  tags = excluded.tags,
+  objetivos = excluded.objetivos,
+  linha = excluded.linha,
+  para_vender = excluded.para_vender,
+  embalagem_por_unidade = excluded.embalagem_por_unidade,
+  margem_sugerida = excluded.margem_sugerida,
+  custo_estimado = excluded.custo_estimado,
+  publicada_em = excluded.publicada_em,
+  novidade_ate = excluded.novidade_ate,
+  publicada = excluded.publicada,
+  destaque = excluded.destaque,
+  demonstracao = excluded.demonstracao,
+  atualizada_em = now();
+
+-- ingredientes de casadinho-de-doce-de-leite
+delete from public.receita_ingredientes
+where receita_id = (select id from public.receitas where slug = 'casadinho-de-doce-de-leite');
+
+insert into public.receita_ingredientes
+  (receita_id, insumo_chave, qtd, unidade, base, grupo, observacao, opcional, ordem)
+values
+  ((select id from public.receitas where slug = 'casadinho-de-doce-de-leite'), 'manteiga', 200, 'g', 200, 'Massa', null, false, 0),
+  ((select id from public.receitas where slug = 'casadinho-de-doce-de-leite'), 'acucar-refinado', 150, 'g', 150, 'Massa', null, false, 1),
+  ((select id from public.receitas where slug = 'casadinho-de-doce-de-leite'), 'ovo', 2, 'unidade', 2, 'Massa', null, false, 2),
+  ((select id from public.receitas where slug = 'casadinho-de-doce-de-leite'), 'farinha-trigo', 400, 'g', 400, 'Massa', null, false, 3),
+  ((select id from public.receitas where slug = 'casadinho-de-doce-de-leite'), 'amido-milho', 100, 'g', 100, 'Massa', null, false, 4),
+  ((select id from public.receitas where slug = 'casadinho-de-doce-de-leite'), 'fermento-quimico', 1, 'colher (chá)', 5, 'Massa', null, false, 5),
+  ((select id from public.receitas where slug = 'casadinho-de-doce-de-leite'), 'doce-leite', 400, 'g', 400, 'Recheio', null, false, 6),
+  ((select id from public.receitas where slug = 'casadinho-de-doce-de-leite'), 'coco-ralado', 100, 'g', 100, 'Finalização', null, false, 7);
+
+-- Cocada Cremosa de Forno
+insert into public.receitas (
+  slug, nome, descricao, categoria_slug, subcategoria, imagem, tempo_minutos,
+  dificuldade, rendimento, rendimento_unidade, preparo, dicas, conservacao,
+  equipamentos, tags, objetivos, linha, para_vender, embalagem_por_unidade,
+  margem_sugerida, custo_estimado, publicada_em, novidade_ate, publicada,
+  destaque, demonstracao
+) values (
+  'cocada-cremosa-de-forno', 'Cocada Cremosa de Forno', 'Cocada macia assada em travessa e cortada em quadrados. Leva poucos ingredientes, rende muito e é uma das melhores margens da categoria.',
+  'doces', 'Doces para vender', null,
+  50, 'facil', 30,
+  'unidades', '[{"texto":"Aqueça o forno a 180 °C e unte uma travessa retangular média."},{"texto":"Misture todos os ingredientes em uma tigela, sem bater — só até ficar homogêneo."},{"texto":"Despeje na travessa e alise a superfície."},{"texto":"Asse por 35 minutos, até a superfície dourar e o centro ficar firme ao toque."},{"texto":"Espere esfriar completamente antes de cortar em quadrados de 4 cm."}]'::jsonb, '["Cortar quente esfarela tudo: espere esfriar de verdade, de preferência algumas horas.","Uma pitada de canela por cima antes de assar dá aroma e valoriza a apresentação."]'::jsonb,
+  'Até 5 dias em temperatura ambiente, em pote fechado, ou 10 dias refrigerada.', '["Travessa retangular","Tigela","Espátula"]'::jsonb, '{"cocada","coco","barato","doce para vender","assado"}',
+  '{"familia","venda","encomenda","delivery"}', 'doces', true,
+  0.12, 0.85,
+  39.75, '2026-07-14', null,
+  true, false, false
+)
+on conflict (slug) do update set
+  nome = excluded.nome,
+  descricao = excluded.descricao,
+  categoria_slug = excluded.categoria_slug,
+  subcategoria = excluded.subcategoria,
+  tempo_minutos = excluded.tempo_minutos,
+  dificuldade = excluded.dificuldade,
+  rendimento = excluded.rendimento,
+  rendimento_unidade = excluded.rendimento_unidade,
+  preparo = excluded.preparo,
+  dicas = excluded.dicas,
+  conservacao = excluded.conservacao,
+  equipamentos = excluded.equipamentos,
+  tags = excluded.tags,
+  objetivos = excluded.objetivos,
+  linha = excluded.linha,
+  para_vender = excluded.para_vender,
+  embalagem_por_unidade = excluded.embalagem_por_unidade,
+  margem_sugerida = excluded.margem_sugerida,
+  custo_estimado = excluded.custo_estimado,
+  publicada_em = excluded.publicada_em,
+  novidade_ate = excluded.novidade_ate,
+  publicada = excluded.publicada,
+  destaque = excluded.destaque,
+  demonstracao = excluded.demonstracao,
+  atualizada_em = now();
+
+-- ingredientes de cocada-cremosa-de-forno
+delete from public.receita_ingredientes
+where receita_id = (select id from public.receitas where slug = 'cocada-cremosa-de-forno');
+
+insert into public.receita_ingredientes
+  (receita_id, insumo_chave, qtd, unidade, base, grupo, observacao, opcional, ordem)
+values
+  ((select id from public.receitas where slug = 'cocada-cremosa-de-forno'), 'coco-ralado', 200, 'g', 200, null, null, false, 0),
+  ((select id from public.receitas where slug = 'cocada-cremosa-de-forno'), 'leite-condensado', 2, 'lata', 790, null, null, false, 1),
+  ((select id from public.receitas where slug = 'cocada-cremosa-de-forno'), 'leite-coco', 200, 'ml', 200, null, null, false, 2),
+  ((select id from public.receitas where slug = 'cocada-cremosa-de-forno'), 'ovo', 2, 'unidade', 2, null, null, false, 3),
+  ((select id from public.receitas where slug = 'cocada-cremosa-de-forno'), 'manteiga', 2, 'colher (sopa)', 30, null, null, false, 4);
+
+-- Brigadeiro de Churros
+insert into public.receitas (
+  slug, nome, descricao, categoria_slug, subcategoria, imagem, tempo_minutos,
+  dificuldade, rendimento, rendimento_unidade, preparo, dicas, conservacao,
+  equipamentos, tags, objetivos, linha, para_vender, embalagem_por_unidade,
+  margem_sugerida, custo_estimado, publicada_em, novidade_ate, publicada,
+  destaque, demonstracao
+) values (
+  'brigadeiro-de-churros', 'Brigadeiro de Churros', 'Brigadeiro de doce de leite com canela, recheado com um centro cremoso e passado no açúcar com canela. Sabor de churros no formato de docinho de festa.',
+  'doces', 'Doces gourmet', null,
+  35, 'medio', 35,
+  'unidades', '[{"texto":"Faça gotas com os 150 g de doce de leite do recheio sobre papel-manteiga e leve ao congelador por 40 minutos."},{"texto":"Cozinhe o leite condensado com o doce de leite, a manteiga e a canela em fogo baixo, mexendo sempre, por 12 minutos."},{"texto":"Fora do fogo, junte o creme de leite. Espalhe em prato untado, cubra e resfrie por 2 horas."},{"texto":"Misture o açúcar com a canela da finalização em um prato raso."},{"texto":"Abra uma porção da massa na mão, coloque uma gota congelada no centro e feche em bolinha."},{"texto":"Passe no açúcar com canela e coloque nas forminhas."}]'::jsonb, '["Passar no açúcar com canela só perto da entrega: o açúcar derrete com o tempo e o doce fica molhado.","É um dos doces de maior valor percebido — funciona muito bem em caixas sortidas."]'::jsonb,
+  'Até 3 dias em temperatura ambiente, em pote fechado.', '["Panela de fundo grosso","Saco de confeitar","Papel-manteiga"]'::jsonb, '{"churros","doce de leite","canela","gourmet","doce para vender"}',
+  '{"festa","encomenda","venda","delivery"}', 'doces', true,
+  null, 0.8,
+  29.77, '2026-08-21', null,
+  true, true, false
+)
+on conflict (slug) do update set
+  nome = excluded.nome,
+  descricao = excluded.descricao,
+  categoria_slug = excluded.categoria_slug,
+  subcategoria = excluded.subcategoria,
+  tempo_minutos = excluded.tempo_minutos,
+  dificuldade = excluded.dificuldade,
+  rendimento = excluded.rendimento,
+  rendimento_unidade = excluded.rendimento_unidade,
+  preparo = excluded.preparo,
+  dicas = excluded.dicas,
+  conservacao = excluded.conservacao,
+  equipamentos = excluded.equipamentos,
+  tags = excluded.tags,
+  objetivos = excluded.objetivos,
+  linha = excluded.linha,
+  para_vender = excluded.para_vender,
+  embalagem_por_unidade = excluded.embalagem_por_unidade,
+  margem_sugerida = excluded.margem_sugerida,
+  custo_estimado = excluded.custo_estimado,
+  publicada_em = excluded.publicada_em,
+  novidade_ate = excluded.novidade_ate,
+  publicada = excluded.publicada,
+  destaque = excluded.destaque,
+  demonstracao = excluded.demonstracao,
+  atualizada_em = now();
+
+-- ingredientes de brigadeiro-de-churros
+delete from public.receita_ingredientes
+where receita_id = (select id from public.receitas where slug = 'brigadeiro-de-churros');
+
+insert into public.receita_ingredientes
+  (receita_id, insumo_chave, qtd, unidade, base, grupo, observacao, opcional, ordem)
+values
+  ((select id from public.receitas where slug = 'brigadeiro-de-churros'), 'leite-condensado', 1, 'lata', 395, null, null, false, 0),
+  ((select id from public.receitas where slug = 'brigadeiro-de-churros'), 'doce-leite', 200, 'g', 200, null, null, false, 1),
+  ((select id from public.receitas where slug = 'brigadeiro-de-churros'), 'manteiga', 1, 'colher (sopa)', 15, null, null, false, 2),
+  ((select id from public.receitas where slug = 'brigadeiro-de-churros'), 'canela-po', 1, 'colher (chá)', 3, null, null, false, 3),
+  ((select id from public.receitas where slug = 'brigadeiro-de-churros'), 'creme-de-leite', 1, 'caixa', 200, null, null, false, 4),
+  ((select id from public.receitas where slug = 'brigadeiro-de-churros'), 'doce-leite', 150, 'g', 150, 'Recheio', null, false, 5),
+  ((select id from public.receitas where slug = 'brigadeiro-de-churros'), 'acucar-refinado', 80, 'g', 80, 'Finalização', null, false, 6),
+  ((select id from public.receitas where slug = 'brigadeiro-de-churros'), 'canela-po', 2, 'colher (chá)', 6, 'Finalização', null, false, 7),
+  ((select id from public.receitas where slug = 'brigadeiro-de-churros'), 'forminha-doce', 35, 'unidade', 35, 'Finalização', null, false, 8);
+
+-- Pé de Moleque Caseiro
+insert into public.receitas (
+  slug, nome, descricao, categoria_slug, subcategoria, imagem, tempo_minutos,
+  dificuldade, rendimento, rendimento_unidade, preparo, dicas, conservacao,
+  equipamentos, tags, objetivos, linha, para_vender, embalagem_por_unidade,
+  margem_sugerida, custo_estimado, publicada_em, novidade_ate, publicada,
+  destaque, demonstracao
+) values (
+  'pe-de-moleque-caseiro', 'Pé de Moleque Caseiro', 'Amendoim torrado em caramelo de rapadura, cortado em pedaços. Doce de festa junina que vende o ano inteiro e tem validade longa.',
+  'doces', 'Caramelos', null,
+  40, 'medio', 30,
+  'unidades', '[{"texto":"Torre o amendoim em frigideira seca por 8 minutos, mexendo sempre. Deixe esfriar e retire a pele esfregando entre as mãos."},{"texto":"Leve os dois açúcares ao fogo médio com 100 ml de água, sem mexer, até formar um caramelo dourado."},{"texto":"Junte a manteiga e mexa. Acrescente o amendoim e misture bem."},{"texto":"Fora do fogo, adicione o bicarbonato: a mistura vai crescer e clarear. É isso que deixa o doce quebradiço, e não duro como pedra."},{"texto":"Despeje sobre uma superfície untada, espalhe com espátula e deixe firmar por 10 minutos."},{"texto":"Corte em pedaços ainda morno, com faca grande."}]'::jsonb, '["Caramelo mexido açucara e vira areia. Deixe o açúcar derreter sozinho, girando só a panela.","Corte antes de esfriar por completo, senão ele quebra irregular.","Cuidado: o caramelo passa de 150 °C e queima a pele com facilidade. Use pegador e trabalhe devagar."]'::jsonb,
+  'Até 30 dias em pote hermético, longe da umidade. Não refrigere: umedece e gruda.', '["Frigideira","Panela de fundo grosso","Espátula","Faca grande"]'::jsonb, '{"pé de moleque","amendoim","festa junina","caramelo","doce para vender"}',
+  '{"festa","venda","encomenda"}', 'doces', true,
+  0.12, 0.8,
+  25.83, '2026-06-24', null,
+  true, false, false
+)
+on conflict (slug) do update set
+  nome = excluded.nome,
+  descricao = excluded.descricao,
+  categoria_slug = excluded.categoria_slug,
+  subcategoria = excluded.subcategoria,
+  tempo_minutos = excluded.tempo_minutos,
+  dificuldade = excluded.dificuldade,
+  rendimento = excluded.rendimento,
+  rendimento_unidade = excluded.rendimento_unidade,
+  preparo = excluded.preparo,
+  dicas = excluded.dicas,
+  conservacao = excluded.conservacao,
+  equipamentos = excluded.equipamentos,
+  tags = excluded.tags,
+  objetivos = excluded.objetivos,
+  linha = excluded.linha,
+  para_vender = excluded.para_vender,
+  embalagem_por_unidade = excluded.embalagem_por_unidade,
+  margem_sugerida = excluded.margem_sugerida,
+  custo_estimado = excluded.custo_estimado,
+  publicada_em = excluded.publicada_em,
+  novidade_ate = excluded.novidade_ate,
+  publicada = excluded.publicada,
+  destaque = excluded.destaque,
+  demonstracao = excluded.demonstracao,
+  atualizada_em = now();
+
+-- ingredientes de pe-de-moleque-caseiro
+delete from public.receita_ingredientes
+where receita_id = (select id from public.receitas where slug = 'pe-de-moleque-caseiro');
+
+insert into public.receita_ingredientes
+  (receita_id, insumo_chave, qtd, unidade, base, grupo, observacao, opcional, ordem)
+values
+  ((select id from public.receitas where slug = 'pe-de-moleque-caseiro'), 'amendoim', 500, 'g', 500, null, null, false, 0),
+  ((select id from public.receitas where slug = 'pe-de-moleque-caseiro'), 'acucar-mascavo', 300, 'g', 300, null, null, false, 1),
+  ((select id from public.receitas where slug = 'pe-de-moleque-caseiro'), 'acucar-refinado', 200, 'g', 200, null, null, false, 2),
+  ((select id from public.receitas where slug = 'pe-de-moleque-caseiro'), 'manteiga', 2, 'colher (sopa)', 30, null, null, false, 3),
+  ((select id from public.receitas where slug = 'pe-de-moleque-caseiro'), 'bicarbonato', 1, 'colher (chá)', 4, null, null, false, 4);
+
+-- Olho de Sogra
+insert into public.receitas (
+  slug, nome, descricao, categoria_slug, subcategoria, imagem, tempo_minutos,
+  dificuldade, rendimento, rendimento_unidade, preparo, dicas, conservacao,
+  equipamentos, tags, objetivos, linha, para_vender, embalagem_por_unidade,
+  margem_sugerida, custo_estimado, publicada_em, novidade_ate, publicada,
+  destaque, demonstracao
+) values (
+  'olho-de-sogra', 'Olho de Sogra', 'Ameixa recheada com beijinho e passada no açúcar cristal. Doce de festa clássico, com boa margem e visual que se destaca na bandeja.',
+  'doces', 'Doces de festa', null,
+  40, 'facil', 30,
+  'unidades', '[{"texto":"Cozinhe o leite condensado com o coco e a manteiga por 12 minutos em fogo baixo, até dar ponto de enrolar."},{"texto":"Espalhe em prato untado, cubra e deixe esfriar por 2 horas."},{"texto":"Abra cada ameixa pela lateral, sem separar as metades."},{"texto":"Modele bolinhas pequenas de beijinho e encaixe dentro da ameixa, deixando o branco aparecendo."},{"texto":"Passe no açúcar cristal e coloque nas forminhas."}]'::jsonb, '["Ameixas muito secas rasgam: se estiverem duras, deixe 10 minutos de molho em água morna e seque bem.","O contraste do branco com o escuro da ameixa é o apelo do doce — não cubra o recheio por completo."]'::jsonb,
+  'Até 5 dias em temperatura ambiente, em pote fechado.', '["Panela de fundo grosso","Prato untado","Faca pequena"]'::jsonb, '{"olho de sogra","ameixa","coco","festa","doce para vender"}',
+  '{"festa","encomenda","venda"}', 'doces', true,
+  null, 0.75,
+  38.18, '2026-07-02', null,
+  true, false, false
+)
+on conflict (slug) do update set
+  nome = excluded.nome,
+  descricao = excluded.descricao,
+  categoria_slug = excluded.categoria_slug,
+  subcategoria = excluded.subcategoria,
+  tempo_minutos = excluded.tempo_minutos,
+  dificuldade = excluded.dificuldade,
+  rendimento = excluded.rendimento,
+  rendimento_unidade = excluded.rendimento_unidade,
+  preparo = excluded.preparo,
+  dicas = excluded.dicas,
+  conservacao = excluded.conservacao,
+  equipamentos = excluded.equipamentos,
+  tags = excluded.tags,
+  objetivos = excluded.objetivos,
+  linha = excluded.linha,
+  para_vender = excluded.para_vender,
+  embalagem_por_unidade = excluded.embalagem_por_unidade,
+  margem_sugerida = excluded.margem_sugerida,
+  custo_estimado = excluded.custo_estimado,
+  publicada_em = excluded.publicada_em,
+  novidade_ate = excluded.novidade_ate,
+  publicada = excluded.publicada,
+  destaque = excluded.destaque,
+  demonstracao = excluded.demonstracao,
+  atualizada_em = now();
+
+-- ingredientes de olho-de-sogra
+delete from public.receita_ingredientes
+where receita_id = (select id from public.receitas where slug = 'olho-de-sogra');
+
+insert into public.receita_ingredientes
+  (receita_id, insumo_chave, qtd, unidade, base, grupo, observacao, opcional, ordem)
+values
+  ((select id from public.receitas where slug = 'olho-de-sogra'), 'leite-condensado', 1, 'lata', 395, null, null, false, 0),
+  ((select id from public.receitas where slug = 'olho-de-sogra'), 'coco-ralado', 100, 'g', 100, null, null, false, 1),
+  ((select id from public.receitas where slug = 'olho-de-sogra'), 'manteiga', 1, 'colher (sopa)', 15, null, null, false, 2),
+  ((select id from public.receitas where slug = 'olho-de-sogra'), 'ameixa-seca', 300, 'g', 300, null, null, false, 3),
+  ((select id from public.receitas where slug = 'olho-de-sogra'), 'acucar-cristal', 100, 'g', 100, 'Finalização', null, false, 4),
+  ((select id from public.receitas where slug = 'olho-de-sogra'), 'forminha-doce', 30, 'unidade', 30, 'Finalização', null, false, 5);
+
 -- Bolo de Chocolate com Brigadeiro
 insert into public.receitas (
   slug, nome, descricao, categoria_slug, subcategoria, imagem, tempo_minutos,
@@ -957,6 +1333,378 @@ values
   ((select id from public.receitas where slug = 'bolo-red-velvet'), 'cream-cheese', 300, 'g', 300, 'Cobertura', null, false, 9),
   ((select id from public.receitas where slug = 'bolo-red-velvet'), 'manteiga', 100, 'g', 100, 'Cobertura', null, false, 10),
   ((select id from public.receitas where slug = 'bolo-red-velvet'), 'acucar-confeiteiro', 300, 'g', 300, 'Cobertura', null, false, 11);
+
+-- Bolo Formigueiro
+insert into public.receitas (
+  slug, nome, descricao, categoria_slug, subcategoria, imagem, tempo_minutos,
+  dificuldade, rendimento, rendimento_unidade, preparo, dicas, conservacao,
+  equipamentos, tags, objetivos, linha, para_vender, embalagem_por_unidade,
+  margem_sugerida, custo_estimado, publicada_em, novidade_ate, publicada,
+  destaque, demonstracao
+) values (
+  'bolo-formigueiro', 'Bolo Formigueiro', 'Massa branca fofinha salpicada de chocolate granulado, que derrete no forno e forma os pontinhos. Bolo de lanche que agrada criança e adulto.',
+  'bolos', 'Bolos simples', null,
+  55, 'facil', 14,
+  'fatias', '[{"texto":"Aqueça o forno a 180 °C e unte uma forma com furo central."},{"texto":"Bata a manteiga com o açúcar por 4 minutos, até formar um creme claro."},{"texto":"Junte os ovos um a um, batendo bem entre cada adição."},{"texto":"Acrescente a farinha peneirada alternando com o leite, começando e terminando pela farinha."},{"texto":"Incorpore o fermento e, por último, o granulado, misturando com espátula em movimentos leves."},{"texto":"Asse por 40 minutos. Faça o teste do palito antes de tirar."}]'::jsonb, '["Granulado misturado com a batedeira ligada some na massa: incorpore à mão, no fim.","Passar o granulado por um pouco de farinha antes de misturar ajuda a não afundar tudo no fundo."]'::jsonb,
+  '3 dias coberto em temperatura ambiente ou 6 dias refrigerado.', '["Batedeira","Forma com furo central","Espátula"]'::jsonb, '{"formigueiro","granulado","bolo caseiro","lanche","barato"}',
+  '{"familia","venda","delivery"}', 'bolos', true,
+  0.35, 0.8,
+  22.82, '2026-08-20', null,
+  true, false, false
+)
+on conflict (slug) do update set
+  nome = excluded.nome,
+  descricao = excluded.descricao,
+  categoria_slug = excluded.categoria_slug,
+  subcategoria = excluded.subcategoria,
+  tempo_minutos = excluded.tempo_minutos,
+  dificuldade = excluded.dificuldade,
+  rendimento = excluded.rendimento,
+  rendimento_unidade = excluded.rendimento_unidade,
+  preparo = excluded.preparo,
+  dicas = excluded.dicas,
+  conservacao = excluded.conservacao,
+  equipamentos = excluded.equipamentos,
+  tags = excluded.tags,
+  objetivos = excluded.objetivos,
+  linha = excluded.linha,
+  para_vender = excluded.para_vender,
+  embalagem_por_unidade = excluded.embalagem_por_unidade,
+  margem_sugerida = excluded.margem_sugerida,
+  custo_estimado = excluded.custo_estimado,
+  publicada_em = excluded.publicada_em,
+  novidade_ate = excluded.novidade_ate,
+  publicada = excluded.publicada,
+  destaque = excluded.destaque,
+  demonstracao = excluded.demonstracao,
+  atualizada_em = now();
+
+-- ingredientes de bolo-formigueiro
+delete from public.receita_ingredientes
+where receita_id = (select id from public.receitas where slug = 'bolo-formigueiro');
+
+insert into public.receita_ingredientes
+  (receita_id, insumo_chave, qtd, unidade, base, grupo, observacao, opcional, ordem)
+values
+  ((select id from public.receitas where slug = 'bolo-formigueiro'), 'ovo', 3, 'unidade', 3, null, null, false, 0),
+  ((select id from public.receitas where slug = 'bolo-formigueiro'), 'acucar-refinado', 1.5, 'xícara (chá)', 270, null, null, false, 1),
+  ((select id from public.receitas where slug = 'bolo-formigueiro'), 'manteiga', 100, 'g', 100, null, null, false, 2),
+  ((select id from public.receitas where slug = 'bolo-formigueiro'), 'leite', 1, 'xícara (chá)', 240, null, null, false, 3),
+  ((select id from public.receitas where slug = 'bolo-formigueiro'), 'farinha-trigo', 2.5, 'xícara (chá)', 300, null, null, false, 4),
+  ((select id from public.receitas where slug = 'bolo-formigueiro'), 'fermento-quimico', 1, 'colher (sopa)', 12, null, null, false, 5),
+  ((select id from public.receitas where slug = 'bolo-formigueiro'), 'chocolate-granulado', 150, 'g', 150, null, null, false, 6);
+
+-- Bolo de Laranja com Calda
+insert into public.receitas (
+  slug, nome, descricao, categoria_slug, subcategoria, imagem, tempo_minutos,
+  dificuldade, rendimento, rendimento_unidade, preparo, dicas, conservacao,
+  equipamentos, tags, objetivos, linha, para_vender, embalagem_por_unidade,
+  margem_sugerida, custo_estimado, publicada_em, novidade_ate, publicada,
+  destaque, demonstracao
+) values (
+  'bolo-de-laranja-com-calda', 'Bolo de Laranja com Calda', 'Bolo úmido feito com a laranja inteira batida e regado com calda cítrica. Aroma forte, custo baixo e ótima saída no café da tarde.',
+  'bolos', 'Bolos de frutas', null,
+  60, 'facil', 14,
+  'fatias', '[{"texto":"Corte uma laranja em pedaços com casca, retire as sementes e a parte branca central, que amarga."},{"texto":"Bata no liquidificador a laranja em pedaços, o suco da outra, os ovos, o óleo e o açúcar por 3 minutos."},{"texto":"Transfira para a tigela, junte a farinha peneirada e misture. Incorpore o fermento por último."},{"texto":"Asse em forma untada a 180 °C por 40 minutos."},{"titulo":"Calda","texto":"Ferva o suco das duas laranjas com o açúcar por 5 minutos, até encorpar levemente."},{"texto":"Fure o bolo ainda morno com um garfo e regue com a calda quente."}]'::jsonb, '["A parte branca da laranja é o que amarga. Vale o minuto extra para retirá-la.","A calda entra no bolo morno: frio, ela escorre e o bolo fica seco."]'::jsonb,
+  '3 dias em temperatura ambiente, coberto, ou 6 dias refrigerado.', '["Liquidificador","Forma","Panela pequena","Garfo"]'::jsonb, '{"laranja","bolo úmido","cítrico","café da tarde","barato"}',
+  '{"familia","venda","encomenda","delivery"}', 'bolos', true,
+  0.35, 0.8,
+  16.64, '2026-07-18', null,
+  true, false, false
+)
+on conflict (slug) do update set
+  nome = excluded.nome,
+  descricao = excluded.descricao,
+  categoria_slug = excluded.categoria_slug,
+  subcategoria = excluded.subcategoria,
+  tempo_minutos = excluded.tempo_minutos,
+  dificuldade = excluded.dificuldade,
+  rendimento = excluded.rendimento,
+  rendimento_unidade = excluded.rendimento_unidade,
+  preparo = excluded.preparo,
+  dicas = excluded.dicas,
+  conservacao = excluded.conservacao,
+  equipamentos = excluded.equipamentos,
+  tags = excluded.tags,
+  objetivos = excluded.objetivos,
+  linha = excluded.linha,
+  para_vender = excluded.para_vender,
+  embalagem_por_unidade = excluded.embalagem_por_unidade,
+  margem_sugerida = excluded.margem_sugerida,
+  custo_estimado = excluded.custo_estimado,
+  publicada_em = excluded.publicada_em,
+  novidade_ate = excluded.novidade_ate,
+  publicada = excluded.publicada,
+  destaque = excluded.destaque,
+  demonstracao = excluded.demonstracao,
+  atualizada_em = now();
+
+-- ingredientes de bolo-de-laranja-com-calda
+delete from public.receita_ingredientes
+where receita_id = (select id from public.receitas where slug = 'bolo-de-laranja-com-calda');
+
+insert into public.receita_ingredientes
+  (receita_id, insumo_chave, qtd, unidade, base, grupo, observacao, opcional, ordem)
+values
+  ((select id from public.receitas where slug = 'bolo-de-laranja-com-calda'), 'laranja', 2, 'unidade', 2, 'Massa', null, false, 0),
+  ((select id from public.receitas where slug = 'bolo-de-laranja-com-calda'), 'ovo', 3, 'unidade', 3, 'Massa', null, false, 1),
+  ((select id from public.receitas where slug = 'bolo-de-laranja-com-calda'), 'oleo-soja', 0.5, 'xícara (chá)', 120, 'Massa', null, false, 2),
+  ((select id from public.receitas where slug = 'bolo-de-laranja-com-calda'), 'acucar-refinado', 2, 'xícara (chá)', 360, 'Massa', null, false, 3),
+  ((select id from public.receitas where slug = 'bolo-de-laranja-com-calda'), 'farinha-trigo', 2.5, 'xícara (chá)', 300, 'Massa', null, false, 4),
+  ((select id from public.receitas where slug = 'bolo-de-laranja-com-calda'), 'fermento-quimico', 1, 'colher (sopa)', 12, 'Massa', null, false, 5),
+  ((select id from public.receitas where slug = 'bolo-de-laranja-com-calda'), 'laranja', 2, 'unidade', 2, 'Calda', null, false, 6),
+  ((select id from public.receitas where slug = 'bolo-de-laranja-com-calda'), 'acucar-refinado', 100, 'g', 100, 'Calda', null, false, 7);
+
+-- Bolo de Milho Cremoso
+insert into public.receitas (
+  slug, nome, descricao, categoria_slug, subcategoria, imagem, tempo_minutos,
+  dificuldade, rendimento, rendimento_unidade, preparo, dicas, conservacao,
+  equipamentos, tags, objetivos, linha, para_vender, embalagem_por_unidade,
+  margem_sugerida, custo_estimado, publicada_em, novidade_ate, publicada,
+  destaque, demonstracao
+) values (
+  'bolo-de-milho-cremoso', 'Bolo de Milho Cremoso', 'Bolo de milho verde batido no liquidificador, com miolo úmido e casquinha dourada. Campeão de junho, mas vende bem o ano inteiro.',
+  'bolos', 'Bolos simples', null,
+  60, 'facil', 12,
+  'fatias', '[{"texto":"Escorra o milho e bata no liquidificador com o leite, o leite condensado, os ovos e a manteiga por 3 minutos."},{"texto":"Junte o fubá e o coco e bata mais 1 minuto, até ficar bem liso."},{"texto":"Acrescente o fermento e pulse só para incorporar."},{"texto":"Despeje em forma untada e enfarinhada com fubá."},{"texto":"Asse a 180 °C por 45 minutos, até a superfície ficar dourada e firme."},{"texto":"Espere amornar antes de desenformar: quente, o bolo cremoso quebra."}]'::jsonb, '["Bater bem o milho é o segredo da textura: pedaços grandes deixam o bolo arenoso.","Use milho em conserva escorrido, sem a água da lata — ela deixa a massa aguada."]'::jsonb,
+  'Refrigerado por até 5 dias, coberto. Sirva em temperatura ambiente.', '["Liquidificador","Forma","Espátula"]'::jsonb, '{"milho","festa junina","cremoso","sem farinha","barato"}',
+  '{"familia","festa","venda","delivery"}', 'bolos', true,
+  0.35, 0.8,
+  36.2, '2026-06-12', null,
+  true, false, false
+)
+on conflict (slug) do update set
+  nome = excluded.nome,
+  descricao = excluded.descricao,
+  categoria_slug = excluded.categoria_slug,
+  subcategoria = excluded.subcategoria,
+  tempo_minutos = excluded.tempo_minutos,
+  dificuldade = excluded.dificuldade,
+  rendimento = excluded.rendimento,
+  rendimento_unidade = excluded.rendimento_unidade,
+  preparo = excluded.preparo,
+  dicas = excluded.dicas,
+  conservacao = excluded.conservacao,
+  equipamentos = excluded.equipamentos,
+  tags = excluded.tags,
+  objetivos = excluded.objetivos,
+  linha = excluded.linha,
+  para_vender = excluded.para_vender,
+  embalagem_por_unidade = excluded.embalagem_por_unidade,
+  margem_sugerida = excluded.margem_sugerida,
+  custo_estimado = excluded.custo_estimado,
+  publicada_em = excluded.publicada_em,
+  novidade_ate = excluded.novidade_ate,
+  publicada = excluded.publicada,
+  destaque = excluded.destaque,
+  demonstracao = excluded.demonstracao,
+  atualizada_em = now();
+
+-- ingredientes de bolo-de-milho-cremoso
+delete from public.receita_ingredientes
+where receita_id = (select id from public.receitas where slug = 'bolo-de-milho-cremoso');
+
+insert into public.receita_ingredientes
+  (receita_id, insumo_chave, qtd, unidade, base, grupo, observacao, opcional, ordem)
+values
+  ((select id from public.receitas where slug = 'bolo-de-milho-cremoso'), 'milho-verde', 3, 'lata', 600, null, null, false, 0),
+  ((select id from public.receitas where slug = 'bolo-de-milho-cremoso'), 'leite-condensado', 1, 'lata', 395, null, null, false, 1),
+  ((select id from public.receitas where slug = 'bolo-de-milho-cremoso'), 'leite', 1, 'xícara (chá)', 240, null, null, false, 2),
+  ((select id from public.receitas where slug = 'bolo-de-milho-cremoso'), 'ovo', 3, 'unidade', 3, null, null, false, 3),
+  ((select id from public.receitas where slug = 'bolo-de-milho-cremoso'), 'manteiga', 3, 'colher (sopa)', 45, null, null, false, 4),
+  ((select id from public.receitas where slug = 'bolo-de-milho-cremoso'), 'fuba', 0.5, 'xícara (chá)', 75, null, null, false, 5),
+  ((select id from public.receitas where slug = 'bolo-de-milho-cremoso'), 'coco-ralado', 50, 'g', 50, null, null, false, 6),
+  ((select id from public.receitas where slug = 'bolo-de-milho-cremoso'), 'fermento-quimico', 1, 'colher (sopa)', 12, null, null, false, 7);
+
+-- Mini Bolos Decorados
+insert into public.receitas (
+  slug, nome, descricao, categoria_slug, subcategoria, imagem, tempo_minutos,
+  dificuldade, rendimento, rendimento_unidade, preparo, dicas, conservacao,
+  equipamentos, tags, objetivos, linha, para_vender, embalagem_por_unidade,
+  margem_sugerida, custo_estimado, publicada_em, novidade_ate, publicada,
+  destaque, demonstracao
+) values (
+  'mini-bolos-decorados', 'Mini Bolos Decorados', 'Bolinhos individuais de massa branca com cobertura colorida. Formato de alto valor por unidade, perfeito para lembrancinha e festa infantil.',
+  'bolos', 'Mini bolos', null,
+  70, 'medio', 24,
+  'unidades', '[{"texto":"Bata a manteiga com o açúcar por 5 minutos, até ficar bem claro e fofo."},{"texto":"Junte os ovos um a um e a baunilha."},{"texto":"Alterne farinha peneirada e leite, começando e terminando pela farinha. Incorpore o fermento."},{"texto":"Distribua em forminhas de cupcake até dois terços e asse a 180 °C por 20 minutos."},{"titulo":"Cobertura","texto":"Bata a manteiga em ponto pomada com o açúcar de confeiteiro por 6 minutos, até esbranquiçar. Divida e tinja com corante."},{"texto":"Espere os bolinhos esfriarem por completo, confeite com bico pitanga e finalize com confeitos."}]'::jsonb, '["Cobertura em bolinho morno derrete e escorre. Espere esfriar de verdade.","Uma cor só, bem-feita, vende mais que várias cores mal aplicadas.","Cobre por unidade: o mini bolo tem margem bem melhor que a fatia de bolo grande."]'::jsonb,
+  '3 dias em temperatura ambiente, em caixa fechada. Não refrigere: resseca a massa.', '["Batedeira","Forminhas de cupcake","Saco de confeitar","Bico pitanga"]'::jsonb, '{"mini bolo","cupcake","festa infantil","lembrancinha","decorado"}',
+  '{"festa","encomenda","venda","delivery"}', 'bolos', true,
+  0.4, 0.8,
+  54.37, '2026-08-18', null,
+  true, false, false
+)
+on conflict (slug) do update set
+  nome = excluded.nome,
+  descricao = excluded.descricao,
+  categoria_slug = excluded.categoria_slug,
+  subcategoria = excluded.subcategoria,
+  tempo_minutos = excluded.tempo_minutos,
+  dificuldade = excluded.dificuldade,
+  rendimento = excluded.rendimento,
+  rendimento_unidade = excluded.rendimento_unidade,
+  preparo = excluded.preparo,
+  dicas = excluded.dicas,
+  conservacao = excluded.conservacao,
+  equipamentos = excluded.equipamentos,
+  tags = excluded.tags,
+  objetivos = excluded.objetivos,
+  linha = excluded.linha,
+  para_vender = excluded.para_vender,
+  embalagem_por_unidade = excluded.embalagem_por_unidade,
+  margem_sugerida = excluded.margem_sugerida,
+  custo_estimado = excluded.custo_estimado,
+  publicada_em = excluded.publicada_em,
+  novidade_ate = excluded.novidade_ate,
+  publicada = excluded.publicada,
+  destaque = excluded.destaque,
+  demonstracao = excluded.demonstracao,
+  atualizada_em = now();
+
+-- ingredientes de mini-bolos-decorados
+delete from public.receita_ingredientes
+where receita_id = (select id from public.receitas where slug = 'mini-bolos-decorados');
+
+insert into public.receita_ingredientes
+  (receita_id, insumo_chave, qtd, unidade, base, grupo, observacao, opcional, ordem)
+values
+  ((select id from public.receitas where slug = 'mini-bolos-decorados'), 'manteiga', 200, 'g', 200, 'Massa', null, false, 0),
+  ((select id from public.receitas where slug = 'mini-bolos-decorados'), 'acucar-refinado', 300, 'g', 300, 'Massa', null, false, 1),
+  ((select id from public.receitas where slug = 'mini-bolos-decorados'), 'ovo', 4, 'unidade', 4, 'Massa', null, false, 2),
+  ((select id from public.receitas where slug = 'mini-bolos-decorados'), 'farinha-trigo', 400, 'g', 400, 'Massa', null, false, 3),
+  ((select id from public.receitas where slug = 'mini-bolos-decorados'), 'leite', 1, 'xícara (chá)', 240, 'Massa', null, false, 4),
+  ((select id from public.receitas where slug = 'mini-bolos-decorados'), 'essencia-baunilha', 5, 'ml', 5, 'Massa', null, false, 5),
+  ((select id from public.receitas where slug = 'mini-bolos-decorados'), 'fermento-quimico', 1, 'colher (sopa)', 12, 'Massa', null, false, 6),
+  ((select id from public.receitas where slug = 'mini-bolos-decorados'), 'manteiga', 150, 'g', 150, 'Cobertura', null, false, 7),
+  ((select id from public.receitas where slug = 'mini-bolos-decorados'), 'acucar-confeiteiro', 400, 'g', 400, 'Cobertura', null, false, 8),
+  ((select id from public.receitas where slug = 'mini-bolos-decorados'), 'corante', 5, 'ml', 5, 'Cobertura', null, false, 9),
+  ((select id from public.receitas where slug = 'mini-bolos-decorados'), 'confeitos', 80, 'g', 80, 'Cobertura', null, false, 10);
+
+-- Bolo no Pote de Ninho com Abacaxi
+insert into public.receitas (
+  slug, nome, descricao, categoria_slug, subcategoria, imagem, tempo_minutos,
+  dificuldade, rendimento, rendimento_unidade, preparo, dicas, conservacao,
+  equipamentos, tags, objetivos, linha, para_vender, embalagem_por_unidade,
+  margem_sugerida, custo_estimado, publicada_em, novidade_ate, publicada,
+  destaque, demonstracao
+) values (
+  'bolo-no-pote-de-ninho-com-abacaxi', 'Bolo no Pote de Ninho com Abacaxi', 'Camadas de massa branca, creme de leite ninho e abacaxi caramelizado. Sabor que se destaca no cardápio de bolo no pote e usa fruta barata.',
+  'bolos', 'Bolos no pote', null,
+  80, 'facil', 15,
+  'potes', '[{"texto":"Prepare a massa branca: bata ovos, leite e óleo, junte aos secos peneirados e finalize com o fermento. Asse a 180 °C por 30 minutos."},{"texto":"Descasque o abacaxi, corte em cubos pequenos e leve ao fogo com o açúcar por 15 minutos, até secar a água e caramelizar levemente. Deixe esfriar."},{"texto":"Faça o creme: cozinhe o leite condensado com o leite em pó por 6 minutos e, fora do fogo, junte o creme de leite. Espere esfriar."},{"texto":"Corte a massa fria em cubos."},{"texto":"Monte: massa, creme, abacaxi, massa, creme e abacaxi por cima."},{"texto":"Feche e refrigere por no mínimo 4 horas antes de entregar."}]'::jsonb, '["Abacaxi cru solta muita água e azeda o pote em um dia. Cozinhar não é opcional aqui.","Deixe o abacaxi esfriar por completo antes de montar, senão o creme talha."]'::jsonb,
+  'Refrigerado por até 4 dias.', '["Forma retangular","Liquidificador","Panela","Potes de 250 ml"]'::jsonb, '{"bolo no pote","abacaxi","leite ninho","delivery","doce para vender"}',
+  '{"encomenda","venda","delivery"}', 'bolos', true,
+  null, 0.7,
+  41.01, '2026-08-07', null,
+  true, false, false
+)
+on conflict (slug) do update set
+  nome = excluded.nome,
+  descricao = excluded.descricao,
+  categoria_slug = excluded.categoria_slug,
+  subcategoria = excluded.subcategoria,
+  tempo_minutos = excluded.tempo_minutos,
+  dificuldade = excluded.dificuldade,
+  rendimento = excluded.rendimento,
+  rendimento_unidade = excluded.rendimento_unidade,
+  preparo = excluded.preparo,
+  dicas = excluded.dicas,
+  conservacao = excluded.conservacao,
+  equipamentos = excluded.equipamentos,
+  tags = excluded.tags,
+  objetivos = excluded.objetivos,
+  linha = excluded.linha,
+  para_vender = excluded.para_vender,
+  embalagem_por_unidade = excluded.embalagem_por_unidade,
+  margem_sugerida = excluded.margem_sugerida,
+  custo_estimado = excluded.custo_estimado,
+  publicada_em = excluded.publicada_em,
+  novidade_ate = excluded.novidade_ate,
+  publicada = excluded.publicada,
+  destaque = excluded.destaque,
+  demonstracao = excluded.demonstracao,
+  atualizada_em = now();
+
+-- ingredientes de bolo-no-pote-de-ninho-com-abacaxi
+delete from public.receita_ingredientes
+where receita_id = (select id from public.receitas where slug = 'bolo-no-pote-de-ninho-com-abacaxi');
+
+insert into public.receita_ingredientes
+  (receita_id, insumo_chave, qtd, unidade, base, grupo, observacao, opcional, ordem)
+values
+  ((select id from public.receitas where slug = 'bolo-no-pote-de-ninho-com-abacaxi'), 'farinha-trigo', 2, 'xícara (chá)', 240, 'Massa', null, false, 0),
+  ((select id from public.receitas where slug = 'bolo-no-pote-de-ninho-com-abacaxi'), 'acucar-refinado', 1, 'xícara (chá)', 180, 'Massa', null, false, 1),
+  ((select id from public.receitas where slug = 'bolo-no-pote-de-ninho-com-abacaxi'), 'ovo', 3, 'unidade', 3, 'Massa', null, false, 2),
+  ((select id from public.receitas where slug = 'bolo-no-pote-de-ninho-com-abacaxi'), 'leite', 1, 'xícara (chá)', 240, 'Massa', null, false, 3),
+  ((select id from public.receitas where slug = 'bolo-no-pote-de-ninho-com-abacaxi'), 'oleo-soja', 0.5, 'xícara (chá)', 120, 'Massa', null, false, 4),
+  ((select id from public.receitas where slug = 'bolo-no-pote-de-ninho-com-abacaxi'), 'fermento-quimico', 1, 'colher (sopa)', 12, 'Massa', null, false, 5),
+  ((select id from public.receitas where slug = 'bolo-no-pote-de-ninho-com-abacaxi'), 'leite-condensado', 1, 'lata', 395, 'Creme', null, false, 6),
+  ((select id from public.receitas where slug = 'bolo-no-pote-de-ninho-com-abacaxi'), 'leite-po', 6, 'colher (sopa)', 60, 'Creme', null, false, 7),
+  ((select id from public.receitas where slug = 'bolo-no-pote-de-ninho-com-abacaxi'), 'creme-de-leite', 1, 'caixa', 200, 'Creme', null, false, 8),
+  ((select id from public.receitas where slug = 'bolo-no-pote-de-ninho-com-abacaxi'), 'abacaxi', 1, 'unidade', 1, 'Abacaxi', null, false, 9),
+  ((select id from public.receitas where slug = 'bolo-no-pote-de-ninho-com-abacaxi'), 'acucar-refinado', 100, 'g', 100, 'Abacaxi', null, false, 10),
+  ((select id from public.receitas where slug = 'bolo-no-pote-de-ninho-com-abacaxi'), 'pote-250', 15, 'unidade', 15, 'Montagem', null, false, 11);
+
+-- Bolo de Banana com Aveia
+insert into public.receitas (
+  slug, nome, descricao, categoria_slug, subcategoria, imagem, tempo_minutos,
+  dificuldade, rendimento, rendimento_unidade, preparo, dicas, conservacao,
+  equipamentos, tags, objetivos, linha, para_vender, embalagem_por_unidade,
+  margem_sugerida, custo_estimado, publicada_em, novidade_ate, publicada,
+  destaque, demonstracao
+) values (
+  'bolo-de-banana-com-aveia', 'Bolo de Banana com Aveia', 'Bolo úmido de banana com aveia e canela, sem cobertura. Atende quem procura opção mais nutritiva e aproveita banana madura demais para comer.',
+  'bolos', 'Bolos caseiros', null,
+  55, 'facil', 12,
+  'fatias', '[{"texto":"Amasse 4 bananas com um garfo e reserve as outras 2 para cobrir o bolo."},{"texto":"Misture as bananas amassadas com os ovos, o açúcar mascavo e o óleo."},{"texto":"Junte a aveia, a farinha e a canela. Incorpore o fermento por último."},{"texto":"Despeje na forma untada e cubra com as bananas restantes fatiadas."},{"texto":"Polvilhe canela e açúcar mascavo por cima e asse a 180 °C por 40 minutos."}]'::jsonb, '["Quanto mais madura a banana, mais doce e úmido o bolo — é a receita ideal para aproveitar as escuras.","Sem cobertura, ele viaja bem e é uma boa opção para vender em marmita de lanche."]'::jsonb,
+  '3 dias em temperatura ambiente ou 6 refrigerado. Congela bem por 2 meses.', '["Tigela","Garfo","Forma retangular"]'::jsonb, '{"banana","aveia","saudável","café da manhã","barato"}',
+  '{"familia","venda","delivery"}', 'bolos', true,
+  0.35, 0.8,
+  23.33, '2026-07-26', null,
+  true, false, false
+)
+on conflict (slug) do update set
+  nome = excluded.nome,
+  descricao = excluded.descricao,
+  categoria_slug = excluded.categoria_slug,
+  subcategoria = excluded.subcategoria,
+  tempo_minutos = excluded.tempo_minutos,
+  dificuldade = excluded.dificuldade,
+  rendimento = excluded.rendimento,
+  rendimento_unidade = excluded.rendimento_unidade,
+  preparo = excluded.preparo,
+  dicas = excluded.dicas,
+  conservacao = excluded.conservacao,
+  equipamentos = excluded.equipamentos,
+  tags = excluded.tags,
+  objetivos = excluded.objetivos,
+  linha = excluded.linha,
+  para_vender = excluded.para_vender,
+  embalagem_por_unidade = excluded.embalagem_por_unidade,
+  margem_sugerida = excluded.margem_sugerida,
+  custo_estimado = excluded.custo_estimado,
+  publicada_em = excluded.publicada_em,
+  novidade_ate = excluded.novidade_ate,
+  publicada = excluded.publicada,
+  destaque = excluded.destaque,
+  demonstracao = excluded.demonstracao,
+  atualizada_em = now();
+
+-- ingredientes de bolo-de-banana-com-aveia
+delete from public.receita_ingredientes
+where receita_id = (select id from public.receitas where slug = 'bolo-de-banana-com-aveia');
+
+insert into public.receita_ingredientes
+  (receita_id, insumo_chave, qtd, unidade, base, grupo, observacao, opcional, ordem)
+values
+  ((select id from public.receitas where slug = 'bolo-de-banana-com-aveia'), 'banana', 6, 'unidade', 6, null, null, false, 0),
+  ((select id from public.receitas where slug = 'bolo-de-banana-com-aveia'), 'ovo', 3, 'unidade', 3, null, null, false, 1),
+  ((select id from public.receitas where slug = 'bolo-de-banana-com-aveia'), 'acucar-mascavo', 200, 'g', 200, null, null, false, 2),
+  ((select id from public.receitas where slug = 'bolo-de-banana-com-aveia'), 'oleo-soja', 0.5, 'xícara (chá)', 120, null, null, false, 3),
+  ((select id from public.receitas where slug = 'bolo-de-banana-com-aveia'), 'aveia', 150, 'g', 150, null, null, false, 4),
+  ((select id from public.receitas where slug = 'bolo-de-banana-com-aveia'), 'farinha-trigo', 1.5, 'xícara (chá)', 180, null, null, false, 5),
+  ((select id from public.receitas where slug = 'bolo-de-banana-com-aveia'), 'canela-po', 1, 'colher (chá)', 3, null, null, false, 6),
+  ((select id from public.receitas where slug = 'bolo-de-banana-com-aveia'), 'fermento-quimico', 1, 'colher (sopa)', 12, null, null, false, 7);
 
 -- Coxinha de Frango com Catupiry
 insert into public.receitas (
