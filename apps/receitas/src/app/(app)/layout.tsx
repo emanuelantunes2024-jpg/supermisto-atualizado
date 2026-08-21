@@ -1,7 +1,9 @@
+import { AcessoBloqueado } from "@/components/layout/AcessoBloqueado";
 import { BarraCelular } from "@/components/layout/BarraCelular";
 import { BarraLateral } from "@/components/layout/BarraLateral";
 import { BarraTopo } from "@/components/layout/BarraTopo";
 import { obterSessao } from "@/lib/auth";
+import { supabaseConfigurado } from "@/lib/config";
 import { obterNovidades } from "@/lib/queries";
 
 /**
@@ -10,6 +12,11 @@ import { obterNovidades } from "@/lib/queries";
  */
 export default async function LayoutAplicacao({ children }: { children: React.ReactNode }) {
   const [sessao, novidades] = await Promise.all([obterSessao(), obterNovidades(1)]);
+
+  // Conta existe, mas a compra foi reembolsada, contestada ou bloqueada.
+  if (supabaseConfigurado && sessao.user && !sessao.liberado) {
+    return <AcessoBloqueado perfil={sessao.perfil} />;
+  }
 
   return (
     <div className="min-h-screen bg-cream-100">

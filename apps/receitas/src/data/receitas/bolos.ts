@@ -118,7 +118,6 @@ export const BOLOS: Receita[] = [
     rendimentoUnidade: "potes",
     linha: "bolos",
     paraVender: true,
-    embalagemPorUnidade: 0.64,
     margemSugerida: 0.7,
     objetivos: ["encomenda", "venda", "delivery"],
     tags: ["bolo no pote", "morango", "chocolate", "delivery", "doce para vender"],

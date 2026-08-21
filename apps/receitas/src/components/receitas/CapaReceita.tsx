@@ -12,15 +12,15 @@ import { ICONE_CATEGORIA, Icone } from "@/components/ui/Icone";
  */
 
 const GRADIENTES: Record<string, string> = {
-  bolos: "from-amber-200 via-orange-200 to-brand-300",
-  doces: "from-rose-200 via-brand-200 to-brand-300",
-  salgados: "from-orange-200 via-amber-200 to-amber-400",
-  paes: "from-yellow-200 via-amber-200 to-orange-200",
-  "sorvetes-picoles": "from-pink-200 via-fuchsia-200 to-purple-200",
-  sobremesas: "from-purple-200 via-pink-200 to-rose-200",
-  "massas-pizzas": "from-red-200 via-orange-200 to-amber-300",
-  "biscoitos-cookies": "from-lime-200 via-amber-200 to-yellow-300",
-  "geleias-molhos": "from-emerald-200 via-lime-200 to-amber-200",
+  bolos: "from-amber-300 via-orange-400 to-brand-500",
+  doces: "from-rose-300 via-brand-400 to-brand-600",
+  salgados: "from-amber-300 via-orange-400 to-amber-600",
+  paes: "from-yellow-300 via-amber-400 to-orange-400",
+  "sorvetes-picoles": "from-pink-300 via-fuchsia-400 to-purple-400",
+  sobremesas: "from-purple-300 via-pink-400 to-rose-400",
+  "massas-pizzas": "from-orange-300 via-red-400 to-red-500",
+  "biscoitos-cookies": "from-lime-300 via-amber-400 to-yellow-500",
+  "geleias-molhos": "from-emerald-300 via-lime-400 to-amber-400",
 };
 
 interface Props {
@@ -58,10 +58,17 @@ export function CapaReceita({
 
   return (
     <div
-      className={`flex h-full w-full items-center justify-center bg-gradient-to-br ${gradiente} ${className}`}
+      className={`relative flex h-full w-full items-center justify-center overflow-hidden bg-gradient-to-br ${gradiente} ${className}`}
       aria-hidden="true"
     >
-      <Icone nome={icone} tamanho={64} className="text-white/70 drop-shadow-sm" strokeWidth={1.2} />
+      {/* Brilho suave no canto, para a capa não ficar chapada. */}
+      <span className="absolute -right-6 -top-8 h-24 w-24 rounded-full bg-white/25 blur-2xl" />
+      <Icone
+        nome={icone}
+        tamanho={62}
+        strokeWidth={1.4}
+        className="relative text-white drop-shadow-[0_2px_6px_rgba(120,50,20,0.35)]"
+      />
     </div>
   );
 }

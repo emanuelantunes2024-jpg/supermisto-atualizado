@@ -320,17 +320,19 @@ export async function contarReceitas(): Promise<number> {
 
   if (!supabase) return RECEITAS.filter((r) => r.publicada).length;
 
-  const { count, error } = await supabase
+  // A contagem passa por uma função do banco: assim a página pública mostra
+  // o número real sem que o visitante consiga ler o catálogo inteiro.
+  const { data, error } = await supabase.rpc("total_receitas_publicadas");
+
+  if (!error && typeof data === "number") return data;
+  if (error) console.error("[queries] contarReceitas:", error.message);
+
+  const { count } = await supabase
     .from("receitas")
     .select("id", { count: "exact", head: true })
     .eq("publicada", true);
 
-  if (error) {
-    console.error("[queries] contarReceitas:", error.message);
-    return RECEITAS.filter((r) => r.publicada).length;
-  }
-
-  return count ?? 0;
+  return count ?? RECEITAS.filter((r) => r.publicada).length;
 }
 
 function diasAtras(dias: number): string {
@@ -373,13 +375,11 @@ export async function listarCategorias(): Promise<Array<Categoria & { total: num
     }));
   }
 
-  const { data, error } = await supabase
-    .from("receitas")
-    .select("categoria_slug")
-    .eq("publicada", true);
+  // Mesma ideia da contagem total: uma função do banco devolve só os números.
+  const { data, error } = await supabase.rpc("contagem_por_categoria");
 
-  if (error) {
-    console.error("[queries] listarCategorias:", error.message);
+  if (error || !Array.isArray(data)) {
+    if (error) console.error("[queries] listarCategorias:", error.message);
     return CATEGORIAS.map((c) => ({
       ...c,
       total: RECEITAS.filter((r) => r.categoria === c.slug && r.publicada).length,
@@ -387,8 +387,8 @@ export async function listarCategorias(): Promise<Array<Categoria & { total: num
   }
 
   const contagem = new Map<string, number>();
-  for (const linha of data as Array<{ categoria_slug: string }>) {
-    contagem.set(linha.categoria_slug, (contagem.get(linha.categoria_slug) ?? 0) + 1);
+  for (const linha of data as Array<{ categoria_slug: string; total: number }>) {
+    contagem.set(linha.categoria_slug, Number(linha.total));
   }
 
   return CATEGORIAS.map((c) => ({ ...c, total: contagem.get(c.slug) ?? 0 }));

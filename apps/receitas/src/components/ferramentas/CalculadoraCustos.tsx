@@ -69,7 +69,7 @@ export function CalculadoraCustos({ receitas, slugInicial, rendimentoInicial }: 
   const precoSugerido = arredondarPrecoComercial(custo.custoPorUnidade * (1 + margem));
 
   return (
-    <div className="grid gap-4 app:grid-cols-[1.4fr_1fr] app:items-start">
+    <div className="grid gap-4 app:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] app:items-start">
       <div className="flex flex-col gap-4">
         <div className="cartao p-4">
           <div className="grid gap-3 sm:grid-cols-2">

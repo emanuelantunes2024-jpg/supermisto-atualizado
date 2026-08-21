@@ -28,6 +28,8 @@ export const metadata: Metadata = {
   description:
     "Biblioteca de receitas brasileiras com calculadora de custos, preço de venda, lista de compras e planejamento de produção. Um aplicativo web para quem cozinha e para quem quer produzir para vender.",
   applicationName: NOME_PRODUTO,
+  // Permite "adicionar à tela de início" e abrir sem a barra do navegador.
+  manifest: "/manifest.webmanifest",
   appleWebApp: { capable: true, statusBarStyle: "default", title: NOME_PRODUTO },
   openGraph: {
     type: "website",

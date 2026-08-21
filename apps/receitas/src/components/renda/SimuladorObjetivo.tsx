@@ -43,7 +43,7 @@ export function SimuladorObjetivo({ receitas }: { receitas: Receita[] }) {
   const metas = tipo === "faturamento" ? METAS_FATURAMENTO : METAS_UNIDADES;
 
   return (
-    <div className="grid gap-4 app:grid-cols-[1fr_1fr] app:items-start">
+    <div className="grid gap-4 app:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] app:items-start">
       <div className="cartao flex flex-col gap-4 p-4 app:p-5">
         <div>
           <span className="rotulo">Qual é o seu objetivo?</span>

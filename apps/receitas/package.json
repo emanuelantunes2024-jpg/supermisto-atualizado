@@ -9,7 +9,8 @@
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
-    "gerar:seed": "node scripts/gerar-seed.mjs"
+    "gerar:seed": "node scripts/gerar-seed.mjs",
+    "testar": "node scripts/testar-navegador.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "0.12.4",

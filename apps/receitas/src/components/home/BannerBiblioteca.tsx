@@ -17,7 +17,7 @@ interface Props {
  */
 export function BannerBiblioteca({ total, novasSemana }: Props) {
   return (
-    <section className="grid gap-3 app:grid-cols-[1.55fr_1fr]">
+    <section className="grid gap-3 app:grid-cols-[minmax(0,1.55fr)_minmax(0,1fr)]">
       <div className="relative overflow-hidden rounded-card bg-gradient-to-br from-panel-900 via-panel-800 to-brand-800 px-5 py-6 text-white app:px-7 app:py-8">
         <div
           aria-hidden="true"
