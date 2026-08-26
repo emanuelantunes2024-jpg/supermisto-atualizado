@@ -139,3 +139,35 @@ function translate(message: string): string {
   }
   return `Error al guardar: ${message}`;
 }
+
+/** Validez del enlace firmado que se entrega al administrador. */
+const ADMIN_SIGNED_URL_TTL_SECONDS = 60 * 10;
+
+/**
+ * Genera un enlace de descarga temporal para el propio administrador,
+ * directamente desde el bucket privado — sin pasar por el flujo de compra.
+ * Es la "bóveda" privada: solo entra quien pasa por `requireAdmin()`.
+ */
+export async function downloadTemplatePackage(formData: FormData): Promise<void> {
+  const session = await requireAdmin();
+  if (!session) return;
+
+  const supabase = createAdminClient();
+  if (!supabase) return;
+
+  const id = String(formData.get("id") ?? "").trim();
+  if (!id) return;
+
+  const { data: template } = await supabase.from("templates").select("file_url").eq("id", id).maybeSingle();
+  const fileUrl = template?.file_url as string | null | undefined;
+  if (!fileUrl) return;
+
+  const objectPath = fileUrl.replace(/^\/*/, "");
+  const { data: signed, error } = await supabase.storage
+    .from(TEMPLATE_FILES_BUCKET)
+    .createSignedUrl(objectPath, ADMIN_SIGNED_URL_TTL_SECONDS, { download: true });
+
+  if (error || !signed?.signedUrl) return;
+
+  redirect(signed.signedUrl);
+}
