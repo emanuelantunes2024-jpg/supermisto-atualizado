@@ -1,14 +1,15 @@
 /* ==========================================================================
-   Pet Shop — carrito, favoritos y menú
-   Todo ocurre en el navegador. Al pedir, se abre WhatsApp con el detalle.
+   Electromax — carrito y cajón lateral
+   Todo ocurre en el navegador. Al finalizar el pedido se abre WhatsApp
+   con el detalle de la compra.
    ========================================================================== */
 (function () {
   'use strict';
 
   var CATALOGO = leerJSON('datosCatalogo', []);
   var ENVIO    = leerJSON('datosEnvio', { whatsapp: '', negocio: '' });
-  var LLAVE    = 'petshop_carrito';
-  var LLAVE_FAV = 'petshop_favoritos';
+  var LLAVE    = 'muebles_carrito';
+  var LLAVE_FAV = 'muebles_favoritos';
 
   function leerJSON(id, respaldo) {
     var el = document.getElementById(id);
@@ -77,10 +78,9 @@
     try { localStorage.setItem(LLAVE_FAV, JSON.stringify(favoritos)); } catch (e) { /* modo privado */ }
   }
 
-  /* ---------------- Pintar ---------------- */
+  /* ---------------- Pintar el cajón ---------------- */
 
   var elNum    = document.getElementById('carritoNum');
-  var elTotal  = document.getElementById('carritoTotal');
   var elCuerpo = document.getElementById('cajonCuerpo');
   var elPie    = document.getElementById('cajonPie');
 
@@ -99,7 +99,6 @@
           '<button type="button" class="linea-quitar" data-quitar="' + id + '">Quitar</button>' +
         '</div>' +
       '</div>' +
-      '<div class="linea-precio">' + euros(p.precio * n) + '</div>' +
     '</div>';
   }
 
@@ -107,63 +106,52 @@
     var ids = Object.keys(carrito);
     var total = unidades();
 
-    if (elNum) {
-      elNum.textContent = total;
-      elNum.hidden = total === 0;
-    }
-    if (elTotal) elTotal.textContent = euros(subtotal());
+    if (elNum) elNum.textContent = total;
 
     if (elCuerpo) {
       elCuerpo.innerHTML = ids.length
         ? ids.map(lineaHTML).join('')
-        : '<div class="vacio">' +
-            '<svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">' +
-            '<circle cx="9.5" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/>' +
-            '<path d="M2.5 3.5h2.7l2.4 11h11l2-8H6.3"/></svg>' +
-            '<p>Tu carrito está vacío.<br>Añade algún producto del catálogo.</p>' +
-          '</div>';
+        : '<div class="cajon-vacio">Tu carrito está vacío.<br>Añade algún producto del catálogo.</div>';
     }
 
     if (elPie) {
       if (!ids.length) {
         elPie.innerHTML = '';
       } else {
-        var sub = subtotal();
         elPie.innerHTML =
-          '<div class="total grande"><span>Total</span><b>' + euros(sub) + '</b></div>' +
-          '<button type="button" class="btn btn-terra" style="width:100%;margin-top:14px" id="finalizarPedido">Finalizar pedido</button>';
+          '<div class="cajon-total"><span>Total</span><b>' + euros(subtotal()) + '</b></div>' +
+          '<button type="button" class="boton-primario" id="finalizarPedido">Finalizar pedido</button>';
       }
     }
   }
 
   function pintarFavoritos() {
-    [].forEach.call(document.querySelectorAll('[data-fav]'), function (b) {
-      var art = b.closest('.prod');
-      var boton = art ? art.querySelector('.anadir') : null;
-      var id = boton ? boton.dataset.id : null;
+    [].forEach.call(document.querySelectorAll('.prod-fav'), function (b) {
+      var art = b.closest('[data-anadir]');
+      var id = art ? art.dataset.anadir : null;
       var activo = id && favoritos.indexOf(id) !== -1;
-      b.classList.toggle('act', !!activo);
+      b.classList.toggle('activo', !!activo);
       if (id) b.dataset.favId = id;
     });
   }
 
-  /* ---------------- Abrir y cerrar el carrito ---------------- */
+  /* ---------------- Abrir y cerrar el cajón ---------------- */
 
-  var velo  = document.getElementById('velo');
+  var fondo = document.getElementById('cajonFondo');
   var cajon = document.getElementById('cajon');
 
   function abrirCarrito(abrir) {
-    if (!cajon || !velo) return;
-    cajon.classList.toggle('ver', abrir);
-    velo.classList.toggle('ver', abrir);
+    if (!cajon || !fondo) return;
+    cajon.classList.toggle('abierto', abrir);
+    fondo.classList.toggle('abierto', abrir);
     document.body.style.overflow = abrir ? 'hidden' : '';
   }
 
-  var btnAbrir = document.getElementById('abrirCarrito');
+  var btnAbrir = document.getElementById('botonCarrito');
   if (btnAbrir) btnAbrir.addEventListener('click', function () { abrirCarrito(true); });
-  var btnCerrar = document.getElementById('cerrarCarrito');
+  var btnCerrar = document.getElementById('cajonCerrar');
   if (btnCerrar) btnCerrar.addEventListener('click', function () { abrirCarrito(false); });
-  if (velo) velo.addEventListener('click', function () { abrirCarrito(false); });
+  if (fondo) fondo.addEventListener('click', function () { abrirCarrito(false); });
   document.addEventListener('keydown', function (ev) {
     if (ev.key === 'Escape') abrirCarrito(false);
   });
@@ -171,11 +159,10 @@
   /* ---------------- Clics: añadir, favoritos, cantidad ---------------- */
 
   document.addEventListener('click', function (ev) {
-    var fav = ev.target.closest('[data-fav]');
+    var fav = ev.target.closest('.prod-fav');
     if (fav) {
-      var art = fav.closest('.prod');
-      var boton = art ? art.querySelector('.anadir') : null;
-      var id = boton ? boton.dataset.id : null;
+      var art = fav.closest('[data-anadir]');
+      var id = art ? art.dataset.anadir : null;
       if (id) {
         var pos = favoritos.indexOf(id);
         if (pos === -1) favoritos.push(id); else favoritos.splice(pos, 1);
@@ -185,13 +172,21 @@
       return;
     }
 
+    var tarjeta = ev.target.closest('.prod-card[data-anadir]');
+    if (tarjeta) {
+      anadir(tarjeta.dataset.anadir, 1);
+      tarjeta.classList.add('anadido');
+      setTimeout(function () { tarjeta.classList.remove('anadido'); }, 900);
+      return;
+    }
+
     var b = ev.target.closest('button, a');
     if (!b) return;
 
-    if (b.classList.contains('anadir')) {
-      anadir(b.dataset.id, 1);
+    if (b.dataset.anadir) {
+      anadir(b.dataset.anadir, 1);
       var antes = b.innerHTML;
-      b.innerHTML = '✓';
+      b.innerHTML = '✓ Añadido';
       b.disabled = true;
       setTimeout(function () { b.innerHTML = antes; b.disabled = false; }, 900);
       return;
@@ -216,74 +211,50 @@
       abrirCarrito(false);
       return;
     }
+
+    if (b.closest('.destacados-tabs')) {
+      [].forEach.call(document.querySelectorAll('.destacados-tabs button'), function (o) { o.classList.remove('activo'); });
+      b.classList.add('activo');
+      return;
+    }
+
+    if (b.classList.contains('prod-flecha-der') || b.classList.contains('prod-flecha-izq')) {
+      var fila = document.querySelector('.prod-fila');
+      if (fila) {
+        var paso = fila.clientWidth * 0.6;
+        fila.scrollBy({ left: b.classList.contains('prod-flecha-der') ? paso : -paso, behavior: 'smooth' });
+      }
+      return;
+    }
   });
 
-  /* ---------------- Menú móvil ---------------- */
-
-  var boton = document.getElementById('abrirMenu');
-  var menu  = document.getElementById('menuMovil');
-  if (boton && menu) {
-    boton.addEventListener('click', function () {
-      var abierto = menu.classList.toggle('ver');
-      boton.setAttribute('aria-expanded', abierto ? 'true' : 'false');
-    });
-    menu.addEventListener('click', function (ev) {
-      if (ev.target.closest('a')) {
-        menu.classList.remove('ver');
-        boton.setAttribute('aria-expanded', 'false');
-      }
-    });
-  }
-
-  /* ---------------- Marcar la sección que se ve ---------------- */
-
-  var destinos = [].slice.call(document.querySelectorAll('.menu a[href^="#"]'))
-    .map(function (a) { return { a: a, sec: document.querySelector(a.getAttribute('href')) }; })
-    .filter(function (d) { return d.sec; });
-
-  if (destinos.length) {
-    var repintar = function () {
-      var y = window.scrollY + 150, activo = null;
-      destinos.forEach(function (d) { if (d.sec.offsetTop <= y) activo = d; });
-      destinos.forEach(function (d) { d.a.classList.toggle('act', d === activo); });
-    };
-    var esperando = false;
-    window.addEventListener('scroll', function () {
-      if (esperando) return;
-      esperando = true;
-      window.requestAnimationFrame(function () { repintar(); esperando = false; });
-    }, { passive: true });
-    repintar();
-  }
-
-  /* ---------------- Carrusel de la portada ---------------- */
-
-  var puntos = [].slice.call(document.querySelectorAll('.puntos .punto'));
-  if (puntos.length > 1) {
-    var actual = 0;
-    var avanzar = function () {
-      actual = (actual + 1) % puntos.length;
-      puntos.forEach(function (p, i) { p.classList.toggle('act', i === actual); });
-    };
-    setInterval(avanzar, 4500);
-    var flecha = document.querySelector('.flecha');
-    if (flecha) flecha.addEventListener('click', avanzar);
-  }
-
-  /* ---------------- Newsletter ---------------- */
-
-  var nlForm = document.getElementById('formNewsletter');
-  if (nlForm) {
-    nlForm.addEventListener('submit', function (ev) {
-      ev.preventDefault();
-      var btn = nlForm.querySelector('button');
-      if (btn) { btn.textContent = '✓ ¡Gracias!'; setTimeout(function () { btn.textContent = 'Suscribirme'; nlForm.reset(); }, 2200); }
-    });
-  }
-
-  var anio = document.getElementById('anio');
-  if (anio) anio.textContent = new Date().getFullYear();
+  document.addEventListener('keydown', function (ev) {
+    if (ev.key !== 'Enter' && ev.key !== ' ') return;
+    var tarjeta = ev.target.closest && ev.target.closest('.prod-card[data-anadir]');
+    if (!tarjeta) return;
+    ev.preventDefault();
+    anadir(tarjeta.dataset.anadir, 1);
+    tarjeta.classList.add('anadido');
+    setTimeout(function () { tarjeta.classList.remove('anadido'); }, 900);
+  });
 
   pintar();
   pintarFavoritos();
+
+  /* ---------------- Newsletter ---------------- */
+
+  window.enviarNewsletter = function (ev) {
+    ev.preventDefault();
+    var form = ev.target;
+    var boton = form.querySelector('button');
+    var antes = boton.textContent;
+    boton.textContent = '¡Gracias!';
+    boton.disabled = true;
+    setTimeout(function () {
+      boton.textContent = antes;
+      boton.disabled = false;
+      form.reset();
+    }, 1800);
+    return false;
+  };
 })();
