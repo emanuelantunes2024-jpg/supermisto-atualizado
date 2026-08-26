@@ -607,6 +607,50 @@ const seed: SeedTemplate[] = [
       SEO,
     ],
   },
+  {
+    id: `${TPL}25`,
+    categorySlug: "inmobiliaria",
+    title: "Agencia Inmobiliaria Premium",
+    slug: "inmobiliaria-premium",
+    short_description: "Inmobiliaria con 10 servicios, valoración gratuita y formulario de contacto.",
+    full_description:
+      "Para agencias inmobiliarias: diez áreas de servicio con ficha propia (venta, alquiler, obra nueva, valoración, asesoría hipotecaria...), proceso de trabajo en cuatro pasos, cifras de la agencia, opiniones de clientes, blog y formulario de contacto con validación. Paleta azul noche + dorado, tipografía Playfair Display. No necesita fotos: todo en vectores, carga al instante.",
+    price_cents: 22900,
+    preview_url: "/demos/inmobiliaria-premium/index.html",
+    gradient: "linear-gradient(160deg,#0b1424,#16243d 55%,#080e1a)",
+    features: [
+      "10 áreas de servicio con icono propio",
+      "Formulario de contacto con validación",
+      "Proceso de trabajo en cuatro pasos",
+      "Blog y preguntas frecuentes",
+      "Botones de WhatsApp, teléfono y email",
+      "Sin fotos: todo en vectores, carga al instante",
+      RESPONSIVE,
+      SEO,
+    ],
+  },
+  {
+    id: `${TPL}26`,
+    categorySlug: "hotel",
+    title: "Hotel Premium",
+    slug: "hotel-premium",
+    short_description: "Hotel con 10 servicios, reserva directa y formulario de contacto.",
+    full_description:
+      "Para hoteles y alojamientos: diez áreas de servicio con ficha propia (habitaciones, suites, restaurante, spa, eventos...), proceso de reserva en cuatro pasos, cifras del hotel, opiniones de huéspedes, blog y formulario de reserva con validación. Paleta azul noche + dorado, tipografía Playfair Display. No necesita fotos: todo en vectores, carga al instante.",
+    price_cents: 22900,
+    preview_url: "/demos/hotel-premium/index.html",
+    gradient: "linear-gradient(160deg,#0b1424,#16243d 55%,#080e1a)",
+    features: [
+      "10 áreas de servicio con icono propio",
+      "Formulario de reserva con validación",
+      "Proceso de reserva en cuatro pasos",
+      "Blog y preguntas frecuentes",
+      "Botones de WhatsApp, teléfono y email",
+      "Sin fotos: todo en vectores, carga al instante",
+      RESPONSIVE,
+      SEO,
+    ],
+  },
 ];
 
 /** Degradado por slug — respaldo de miniatura en las tarjetas. */

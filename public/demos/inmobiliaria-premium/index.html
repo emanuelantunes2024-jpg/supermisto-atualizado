@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inmobiliaria Prisma — Compra, Venta y Alquiler | Valoración gratis</title>
+<meta name="description" content="Agencia inmobiliaria: compra, venta y alquiler de pisos, casas y locales. Valoración gratuita y gestión integral de tu propiedad.">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="aviso-demo">Plantilla demostrativa. Nombre, datos y contenidos ficticios.</div>
+
+<!-- Barra superior -->
+<div class="barra-top">
+  <div class="env">
+    <div class="izq">
+      <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21.5s7-6.2 7-11.1A7 7 0 1 0 5 10.4c0 4.9 7 11.1 7 11.1z"/><circle cx="12" cy="10" r="2.6"/></svg>Paseo de la Castellana, 150 · 28046 Madrid</span>
+      <a href="tel:+34910234567"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 16.5v2.6a1.9 1.9 0 0 1-2.1 1.9 18.8 18.8 0 0 1-8.2-2.9 18.4 18.4 0 0 1-5.7-5.7A18.8 18.8 0 0 1 2.1 4.1 1.9 1.9 0 0 1 4 2h2.6a1.9 1.9 0 0 1 1.9 1.6c.1.9.3 1.8.7 2.7a1.9 1.9 0 0 1-.4 2L7.6 9.5a15 15 0 0 0 5.7 5.7l1.2-1.2a1.9 1.9 0 0 1 2-.4c.9.3 1.8.6 2.7.7A1.9 1.9 0 0 1 21 16.5z"/></svg>+34 910 234 567</a>
+      <a href="mailto:info@inmobiliariaprisma.es"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><path d="M2.5 7l9.5 6.5L21.5 7"/></svg>info@inmobiliariaprisma.es</a>
+    </div>
+    <div class="redes-top">
+              <a href="#" aria-label="Facebook" target="_blank" rel="noopener">f</a>
+              <a href="#" aria-label="Instagram" target="_blank" rel="noopener">ig</a>
+          </div>
+  </div>
+</div>
+
+<!-- Cabecera -->
+<header class="cab">
+  <div class="env">
+    <a href="#inicio" class="marca">
+      <svg class="marca-emblema" width="42" height="42" viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M24 3l17 6v13c0 10-7 18.5-17 22C14 40.5 7 32 7 22V9z" fill="none" stroke="#c9a227" stroke-width="1.6"/><text x="24" y="25" text-anchor="middle" dominant-baseline="central" font-family="Playfair Display, Georgia, serif" font-weight="700" font-size="19" fill="#e2c874">I</text></svg>      <span class="marca-txt">
+        <strong>Inmobiliaria</strong>
+        <span>Prisma</span>
+      </span>
+    </a>
+    <nav class="menu">
+      <a href="#inicio">Inicio</a><a href="#nosotros">Nosotros</a><a href="#areas">Áreas</a><a href="#servicios">Servicios</a><a href="#blog">Blog</a><a href="#contacto">Contacto</a>    </nav>
+    <a href="#contacto" class="btn btn-oro btn-peq" style="margin-left:22px">Consulta online</a>
+    <button class="abrir-menu" id="abrirMenu" aria-expanded="false" aria-label="Abrir menú">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+    </button>
+  </div>
+  <nav class="menu-movil" id="menuMovil">
+    <a href="#inicio">Inicio</a><a href="#nosotros">Nosotros</a><a href="#areas">Áreas</a><a href="#servicios">Servicios</a><a href="#blog">Blog</a><a href="#contacto">Contacto</a>    <a href="#contacto" class="btn btn-oro">Consulta online</a>
+  </nav>
+</header>
+
+<!-- Portada -->
+<section class="portada" id="inicio">
+  <div class="portada-fondo">
+          <svg class="portada-arte" viewBox="0 0 520 520" fill="none" aria-hidden="true">
+  <defs>
+    <radialGradient id="brillo" cx="50%" cy="46%" r="52%">
+      <stop offset="0%" stop-color="#c9a227" stop-opacity=".30"/>
+      <stop offset="60%" stop-color="#c9a227" stop-opacity=".07"/>
+      <stop offset="100%" stop-color="#c9a227" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="metal" gradientUnits="userSpaceOnUse" x1="260" y1="100" x2="260" y2="400">
+      <stop offset="0%" stop-color="#f0dca4"/>
+      <stop offset="55%" stop-color="#c9a227"/>
+      <stop offset="100%" stop-color="#8c6f18"/>
+    </linearGradient>
+  </defs>
+
+  <circle cx="260" cy="248" r="238" fill="url(#brillo)"/>
+  <circle cx="260" cy="248" r="196" stroke="#c9a227" stroke-opacity=".16" stroke-width="1"/>
+  <circle cx="260" cy="248" r="168" stroke="#c9a227" stroke-opacity=".10" stroke-width="1"/>
+
+  <g transform="translate(200,188)"><svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="url(#metal)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5L12 3l9 7.5"/><path d="M5 9.8V20h14V9.8"/><path d="M10 20v-5.5h4V20"/></svg></g>
+</svg>      </div>
+  <div class="portada-vel"></div>
+  <div class="env">
+    <div class="portada-in">
+      <h1>Encuentra el hogar que estás buscando, con el asesoramiento de un equipo experto en el mercado inmobiliario.</h1>
+      <div class="raya"></div>
+      <p>Compra, venta y alquiler de pisos, casas y locales comerciales con gestión integral.</p>
+      <div class="portada-botones">
+        <a href="#contacto" class="btn btn-oro">Solicitar valoración</a>
+        <a href="#areas" class="btn btn-linea">Ver propiedades</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Ventajas -->
+<section class="ventajas">
+  <div class="env" style="padding:0">
+    <div class="ventajas-rejilla">
+              <div class="ventaja">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M2.5 20c0-3.3 2.9-5.5 6.5-5.5s6.5 2.2 6.5 5.5"/><path d="M16.5 6.2a3 3 0 0 1 0 5.6M18.5 14.4c1.9.7 3 2.2 3 4.1"/></svg>          <div>
+            <strong>Valoración Gratuita</strong>
+            <p>Sabrás el valor real de tu propiedad.</p>
+          </div>
+        </div>
+              <div class="ventaja">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.4"/><path d="M4.5 20.5c0-3.7 3.4-6.5 7.5-6.5s7.5 2.8 7.5 6.5"/></svg>          <div>
+            <strong>Gestión Integral</strong>
+            <p>Nos encargamos de todo el proceso.</p>
+          </div>
+        </div>
+              <div class="ventaja">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16.5" rx="2"/><path d="M3 10h18M8 2.5v5M16 2.5v5"/><path d="M8 14h3v3H8z"/></svg>          <div>
+            <strong>Amplia Cartera</strong>
+            <p>Cientos de propiedades disponibles.</p>
+          </div>
+        </div>
+              <div class="ventaja">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="10" width="15" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><path d="M12 14.5v2.5"/></svg>          <div>
+            <strong>Asesoría Legal</strong>
+            <p>Contratos y trámites sin sorpresas.</p>
+          </div>
+        </div>
+          </div>
+  </div>
+</section>
+
+<!-- Áreas -->
+<section class="areas" id="areas">
+  <div class="env">
+    <div class="cabecera-sec centro">
+      <div class="rotulo">Especialidades</div>
+      <h2>Nuestras 10 Áreas de Especialización</h2>
+      <p>Un solo proveedor para todo lo que tú o tu empresa podáis necesitar.
+      Sin intermediarios y con un trato cercano desde el primer día.</p>
+    </div>
+    <div class="areas-rejilla">
+              <article class="area">
+          <div class="area-icono"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5L12 3l9 7.5"/><path d="M5 9.8V20h14V9.8"/><path d="M10 20v-5.5h4V20"/></svg></div>
+          <h3><em>1.</em> Venta de Pisos</h3>
+          <p>Encuentra tu vivienda ideal en cualquier zona.</p>
+        </article>
+              <article class="area">
+          <div class="area-icono"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5L12 3l9 7.5"/><path d="M5 9.8V20h14V9.8"/><path d="M10 20v-5.5h4V20"/></svg></div>
+          <h3><em>2.</em> Alquiler de Pisos</h3>
+          <p>Amplia oferta de pisos en alquiler.</p>
+        </article>
+              <article class="area">
+          <div class="area-icono"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5L12 3l9 7.5"/><path d="M5 9.8V20h14V9.8"/><path d="M10 20v-5.5h4V20"/></svg></div>
+          <h3><em>3.</em> Venta de Casas y Chalets</h3>
+          <p>Viviendas unifamiliares con jardín y garaje.</p>
+        </article>
+              <article class="area">
+          <div class="area-icono"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="7" width="19" height="13.5" rx="2"/><path d="M8.5 7V5a1.8 1.8 0 0 1 1.8-1.8h3.4A1.8 1.8 0 0 1 15.5 5v2"/><path d="M2.5 12.5h19M10.5 12.5v2h3v-2"/></svg></div>
+          <h3><em>4.</em> Locales Comerciales</h3>
+          <p>Espacios para tu negocio en las mejores zonas.</p>
+        </article>
+              <article class="area">
+          <div class="area-icono"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="7" width="19" height="13.5" rx="2"/><path d="M8.5 7V5a1.8 1.8 0 0 1 1.8-1.8h3.4A1.8 1.8 0 0 1 15.5 5v2"/><path d="M2.5 12.5h19M10.5 12.5v2h3v-2"/></svg></div>
+          <h3><em>5.</em> Oficinas</h3>
+          <p>Espacios de trabajo adaptados a tu empresa.</p>
+        </article>
+              <article class="area">
+          <div class="area-icono"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="6" width="19" height="12" rx="1.4"/><path d="M2.5 12h6M12.5 6v6M8.5 12v6M16.5 12v6M12.5 12h9"/></svg></div>
+          <h3><em>6.</em> Obra Nueva</h3>
+          <p>Promociones de vivienda nueva a estrenar.</p>
+        </article>
+              <article class="area">
+          <div class="area-icono"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="2.5" width="16" height="19" rx="2"/><path d="M7.5 6.5h9v3.5h-9z"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 17.5h.01M12 17.5h.01M16 17.5h.01"/></svg></div>
+          <h3><em>7.</em> Valoración de Inmuebles</h3>
+          <p>Sabrás el precio real de tu propiedad, gratis.</p>
+        </article>
+              <article class="area">
+          <div class="area-icono"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2.5H6.5A1.5 1.5 0 0 0 5 4v16a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 20V7.5z"/><path d="M14 2.5V7.5H19"/><path d="M8.5 12.5h7M8.5 16h7M8.5 9h2.5"/></svg></div>
+          <h3><em>8.</em> Gestión de Alquileres</h3>
+          <p>Administramos tu propiedad de alquiler.</p>
+        </article>
+              <article class="area">
+          <div class="area-icono"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="2.5" width="16" height="19" rx="2"/><path d="M7.5 6.5h9v3.5h-9z"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 17.5h.01M12 17.5h.01M16 17.5h.01"/></svg></div>
+          <h3><em>9.</em> Asesoría Hipotecaria</h3>
+          <p>Te ayudamos a conseguir la mejor financiación.</p>
+        </article>
+              <article class="area">
+          <div class="area-icono"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20.5h18"/><path d="M3 20.5V4"/><path d="M7 16.5v-4M11.5 16.5V9M16 16.5v-6.5M20.5 16.5V6"/><path d="M6 8.5l4.5-3 4 2.5L20 3"/></svg></div>
+          <h3><em>10.</em> Inversión Inmobiliaria</h3>
+          <p>Oportunidades para hacer crecer tu patrimonio.</p>
+        </article>
+          </div>
+  </div>
+</section>
+
+<!-- Llamada -->
+<section class="llamada">
+  <div class="env">
+    <div class="llamada-txt">
+      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8.5 8.5 0 0 1-12.2 7.7L3 21l1.3-5.8A8.5 8.5 0 1 1 21 12z"/><path d="M8.5 11h.01M12 11h.01M15.5 11h.01"/></svg>      <div>
+        <strong>¿Quieres vender o alquilar tu propiedad?</strong>
+        <span>Pide una valoración gratuita hoy mismo.</span>
+      </div>
+    </div>
+    <a href="#contacto" class="btn btn-oscuro">Solicitar valoración</a>
+  </div>
+</section>
+
+<!-- Cifras -->
+<section class="cifras">
+  <div class="env">
+    <div class="cifras-rejilla">
+              <div class="cifra">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="M9 14.2L7.5 21.5l4.5-2.4 4.5 2.4L15 14.2"/><path d="M12 6.2l1 2 2.2.3-1.6 1.6.4 2.2-2-1-2 1 .4-2.2L8.8 8.5l2.2-.3z"/></svg>          <div>
+            <strong>+18</strong>
+            <span>Años de experiencia</span>
+          </div>
+        </div>
+              <div class="cifra">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M2.5 20c0-3.3 2.9-5.5 6.5-5.5s6.5 2.2 6.5 5.5"/><path d="M16.5 6.2a3 3 0 0 1 0 5.6M18.5 14.4c1.9.7 3 2.2 3 4.1"/></svg>          <div>
+            <strong>+1.200</strong>
+            <span>Propiedades gestionadas</span>
+          </div>
+        </div>
+              <div class="cifra">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.2l2.6 2.6L16 9.4"/></svg>          <div>
+            <strong>4,8/5</strong>
+            <span>Valoración de clientes</span>
+          </div>
+        </div>
+              <div class="cifra">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.5l8 3v6c0 4.7-3.3 8.9-8 10.2-4.7-1.3-8-5.5-8-10.2v-6z"/><path d="M9 12l2.2 2.2L15.5 10"/></svg>          <div>
+            <strong>100%</strong>
+            <span>Gestión legal incluida</span>
+          </div>
+        </div>
+          </div>
+  </div>
+</section>
+
+<!-- Nosotros -->
+<section class="nosotros" id="nosotros">
+  <div class="env">
+    <div class="nos-rejilla">
+      <div class="nos-foto">
+                  <div style="height:430px;display:flex;align-items:center;justify-content:center;
+            background:linear-gradient(150deg,#111d33,#0b1424);border:1px solid var(--linea);border-radius:var(--radio)">
+            <svg class="marca-emblema" width="150" height="150" viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M24 3l17 6v13c0 10-7 18.5-17 22C14 40.5 7 32 7 22V9z" fill="none" stroke="#c9a227" stroke-width="1.6"/><text x="24" y="25" text-anchor="middle" dominant-baseline="central" font-family="Playfair Display, Georgia, serif" font-weight="700" font-size="19" fill="#e2c874">I</text></svg>          </div>
+                <div class="nos-sello">
+          <strong>+18</strong>
+          <span>años de experiencia</span>
+        </div>
+      </div>
+      <div class="nos-texto">
+        <div class="rotulo">Sobre nosotros</div>
+        <h2>Una inmobiliaria que te acompaña en cada paso</h2>
+        <p>Somos una agencia inmobiliaria con más de 18 años de experiencia en compra, venta y alquiler de propiedades residenciales y comerciales.</p>
+        <p>Te acompañamos desde la primera visita hasta la firma, con gestión legal y asesoramiento hipotecario incluidos, para que todo el proceso sea sencillo y transparente.</p>
+        <ul class="nos-lista">
+                      <li><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Valoración gratuita y sin compromiso.</span></li>
+                      <li><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Un agente responsable de tu caso, siempre el mismo.</span></li>
+                      <li><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Gestión legal y de contratos incluida.</span></li>
+                      <li><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Difusión en los principales portales inmobiliarios.</span></li>
+                  </ul>
+        <a href="#contacto" class="btn btn-oro">Solicitar valoración</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Cómo trabajamos -->
+<section id="servicios">
+  <div class="env">
+    <div class="cabecera-sec centro">
+      <div class="rotulo">Cómo trabajamos</div>
+      <h2>De la primera llamada a la solución</h2>
+      <p>Un proceso claro, para que en todo momento sepas en qué punto está tu asunto.</p>
+    </div>
+    <div class="pasos-rejilla">
+              <div class="paso">
+          <div class="paso-num">01</div>
+          <h3>Nos cuentas qué buscas</h3>
+          <p>O nos enseñas tu propiedad, si quieres venderla o alquilarla.</p>
+        </div>
+              <div class="paso">
+          <div class="paso-num">02</div>
+          <h3>Valoramos y asesoramos</h3>
+          <p>Te damos una valoración real y sin compromiso.</p>
+        </div>
+              <div class="paso">
+          <div class="paso-num">03</div>
+          <h3>Gestionamos todo</h3>
+          <p>Visitas, negociación, contratos y trámites legales.</p>
+        </div>
+              <div class="paso">
+          <div class="paso-num">04</div>
+          <h3>Firmamos con tranquilidad</h3>
+          <p>Te acompañamos hasta el último papel.</p>
+        </div>
+          </div>
+  </div>
+</section>
+
+<!-- Opiniones -->
+<section class="opiniones">
+  <div class="env">
+    <div class="cabecera-sec centro">
+      <div class="rotulo">Clientes</div>
+      <h2>Lo que dicen de nosotros</h2>
+    </div>
+    <div class="op-rejilla">
+              <article class="op">
+          <div class="op-comillas">&ldquo;</div>
+          <p>Vendieron nuestro piso en menos de un mes y al precio que esperábamos. Gestión impecable.</p>
+          <div class="op-quien">
+            <div class="op-ini">IM</div>
+            <div>
+              <strong>Isabel Moreno</strong>
+              <span>Clienta particular</span>
+            </div>
+          </div>
+        </article>
+              <article class="op">
+          <div class="op-comillas">&ldquo;</div>
+          <p>Nos ayudaron con la hipoteca y todos los trámites. Un proceso mucho más sencillo de lo que pensábamos.</p>
+          <div class="op-quien">
+            <div class="op-ini">RC</div>
+            <div>
+              <strong>Rubén Castro</strong>
+              <span>Cliente particular</span>
+            </div>
+          </div>
+        </article>
+              <article class="op">
+          <div class="op-comillas">&ldquo;</div>
+          <p>Gestionan el alquiler de nuestros locales desde hace años, siempre con total transparencia.</p>
+          <div class="op-quien">
+            <div class="op-ini">GI</div>
+            <div>
+              <strong>Grupo Inversor Delta</strong>
+              <span>Cliente empresa</span>
+            </div>
+          </div>
+        </article>
+          </div>
+  </div>
+</section>
+
+<!-- Blog -->
+<section id="blog">
+  <div class="env">
+    <div class="cabecera-sec centro">
+      <div class="rotulo">Blog</div>
+      <h2>Artículos que resuelven dudas reales</h2>
+    </div>
+    <div class="blog-rejilla">
+              <article class="post">
+          <span class="post-tag">Venta</span>
+          <h3>Qué documentación necesitas para vender tu piso</h3>
+          <p>La lista completa de papeles que te pedirán antes de firmar.</p>
+          <a href="#contacto" class="enlace-flecha">Leer más →</a>
+        </article>
+              <article class="post">
+          <span class="post-tag">Valoración</span>
+          <h3>Cómo saber si el precio de una vivienda es justo</h3>
+          <p>Los factores que determinan el valor real de una propiedad.</p>
+          <a href="#contacto" class="enlace-flecha">Leer más →</a>
+        </article>
+              <article class="post">
+          <span class="post-tag">Alquiler</span>
+          <h3>Alquilar con confianza: qué revisar en el contrato</h3>
+          <p>Cláusulas clave para evitar problemas futuros.</p>
+          <a href="#contacto" class="enlace-flecha">Leer más →</a>
+        </article>
+          </div>
+  </div>
+</section>
+
+<!-- Preguntas -->
+<section class="opiniones">
+  <div class="env">
+    <div class="cabecera-sec centro">
+      <div class="rotulo">Preguntas frecuentes</div>
+      <h2>Lo que más nos preguntan</h2>
+    </div>
+    <div class="faq-lista">
+              <details class="faq">
+          <summary>¿La primera valoración tiene coste?</summary>
+          <p>No. Te decimos con honestidad qué necesitas y cuánto cuesta antes de empezar nada.</p>
+        </details>
+              <details class="faq">
+          <summary>¿Dais presupuesto cerrado?</summary>
+          <p>Sí, por escrito y antes de empezar. Sin sorpresas ni letra pequeña.</p>
+        </details>
+              <details class="faq">
+          <summary>¿En qué zonas trabaja Inmobiliaria Prisma?</summary>
+          <p>Trabajamos en toda la provincia y alrededores. Consúltanos tu caso concreto.</p>
+        </details>
+              <details class="faq">
+          <summary>¿Puedo pagar a plazos?</summary>
+          <p>Sí, ofrecemos financiación para los trabajos de mayor importe.</p>
+        </details>
+          </div>
+  </div>
+</section>
+
+<!-- Contacto -->
+<section class="contacto" id="contacto">
+  <div class="env">
+    <div class="cont-rejilla">
+      <div>
+        <div class="rotulo">Contacto</div>
+        <h2 style="margin-bottom:16px">Cuéntanos qué necesitas</h2>
+        <p style="color:var(--apagado);margin-bottom:32px">La primera valoración no tiene coste. Escríbenos y te decimos con
+        honestidad si podemos ayudarte.</p>
+        <div class="cont-dato"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21.5s7-6.2 7-11.1A7 7 0 1 0 5 10.4c0 4.9 7 11.1 7 11.1z"/><circle cx="12" cy="10" r="2.6"/></svg><div><strong>Dirección</strong><span>Paseo de la Castellana, 150 · 28046 Madrid</span></div></div>
+        <div class="cont-dato"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 16.5v2.6a1.9 1.9 0 0 1-2.1 1.9 18.8 18.8 0 0 1-8.2-2.9 18.4 18.4 0 0 1-5.7-5.7A18.8 18.8 0 0 1 2.1 4.1 1.9 1.9 0 0 1 4 2h2.6a1.9 1.9 0 0 1 1.9 1.6c.1.9.3 1.8.7 2.7a1.9 1.9 0 0 1-.4 2L7.6 9.5a15 15 0 0 0 5.7 5.7l1.2-1.2a1.9 1.9 0 0 1 2-.4c.9.3 1.8.6 2.7.7A1.9 1.9 0 0 1 21 16.5z"/></svg><div><strong>Teléfono</strong><span>+34 910 234 567</span></div></div>
+        <div class="cont-dato"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><path d="M2.5 7l9.5 6.5L21.5 7"/></svg><div><strong>Email</strong><span>info@inmobiliariaprisma.es</span></div></div>
+        <div class="cont-dato"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5.2l3.3 2"/></svg><div><strong>Horario</strong><span>Lunes a Viernes: 9:00 - 19:00 · Sábado: 10:00 - 14:00</span></div></div>
+      </div>
+
+      <form class="formulario" id="formConsulta" novalidate>
+        <div class="dos">
+          <div class="campo"><label for="nombre">Nombre y apellidos</label><input type="text" id="nombre" name="nombre" autocomplete="name"></div>
+          <div class="campo"><label for="telefono">Teléfono</label><input type="tel" id="telefono" name="telefono" autocomplete="tel"></div>
+        </div>
+        <div class="campo"><label for="email">Correo electrónico</label><input type="email" id="email" name="email" autocomplete="email"></div>
+        <div class="campo">
+          <label for="area">¿Sobre qué servicio es tu consulta?</label>
+          <select id="area" name="area">
+                          <option>Venta de Pisos</option>
+                          <option>Alquiler de Pisos</option>
+                          <option>Venta de Casas y Chalets</option>
+                          <option>Locales Comerciales</option>
+                          <option>Oficinas</option>
+                          <option>Obra Nueva</option>
+                          <option>Valoración de Inmuebles</option>
+                          <option>Gestión de Alquileres</option>
+                          <option>Asesoría Hipotecaria</option>
+                          <option>Inversión Inmobiliaria</option>
+                        <option>Otro asunto</option>
+          </select>
+        </div>
+        <div class="campo"><label for="mensaje">Cuéntanos brevemente qué necesitas</label><textarea id="mensaje" name="mensaje" rows="4"></textarea></div>
+        <label style="display:flex;gap:10px;align-items:flex-start;font-size:12.5px;color:var(--apagado);cursor:pointer">
+          <input type="checkbox" name="privacidad" style="width:16px;height:16px;margin-top:2px;accent-color:var(--oro)">
+          <span>He leído y acepto la política de privacidad. Mis datos se usarán solo para responder a esta consulta.</span>
+        </label>
+        <button type="submit" class="btn btn-oro" style="width:100%;margin-top:20px">Enviar solicitud</button>
+        <div class="aviso-form" id="avisoForm" role="status"></div>
+        <p class="legal-mini">Tu consulta se trata con total confidencialidad.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Pie -->
+<footer class="pie">
+  <div class="env">
+    <div class="pie-rejilla">
+      <div>
+        <div class="marca" style="margin-bottom:16px">
+          <svg class="marca-emblema" width="38" height="38" viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M24 3l17 6v13c0 10-7 18.5-17 22C14 40.5 7 32 7 22V9z" fill="none" stroke="#c9a227" stroke-width="1.6"/><text x="24" y="25" text-anchor="middle" dominant-baseline="central" font-family="Playfair Display, Georgia, serif" font-weight="700" font-size="19" fill="#e2c874">I</text></svg>          <span class="marca-txt">
+            <strong>Inmobiliaria</strong>
+            <span>Prisma</span>
+          </span>
+        </div>
+        <p>Paseo de la Castellana, 150 · 28046 Madrid<br>+34 910 234 567<br>info@inmobiliariaprisma.es</p>
+      </div>
+      <div>
+        <h4>Áreas</h4>
+                  <a href="#areas">Venta de Pisos</a>
+                  <a href="#areas">Alquiler de Pisos</a>
+                  <a href="#areas">Venta de Casas y Chalets</a>
+                  <a href="#areas">Locales Comerciales</a>
+                  <a href="#areas">Oficinas</a>
+              </div>
+      <div>
+        <h4>&nbsp;</h4>
+                  <a href="#areas">Obra Nueva</a>
+                  <a href="#areas">Valoración de Inmuebles</a>
+                  <a href="#areas">Gestión de Alquileres</a>
+                  <a href="#areas">Asesoría Hipotecaria</a>
+                  <a href="#areas">Inversión Inmobiliaria</a>
+              </div>
+      <div>
+        <h4>Despacho</h4>
+        <a href="#nosotros">Sobre nosotros</a>
+        <a href="#servicios">Cómo trabajamos</a>
+        <a href="#blog">Blog</a>
+        <a href="#contacto">Contacto</a>
+      </div>
+    </div>
+    <div class="pie-abajo">
+      <span>© <span id="anio">2026</span> Inmobiliaria Prisma. Todos los derechos reservados.</span>
+      <span>Plantilla demostrativa · Aviso legal · Privacidad · Cookies</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Botones flotantes -->
+<div class="flotantes">
+      <a class="wa" href="https://wa.me/34600234567?text=Hola%2C%20me%20gustar%C3%ADa%20informaci%C3%B3n%20sobre%20una%20propiedad." target="_blank" rel="noopener" aria-label="WhatsApp"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 11.6a8.5 8.5 0 0 1-12.6 7.5L3.5 20.5l1.4-4.3A8.5 8.5 0 1 1 20.5 11.6z"/><path d="M8.9 8.4c.3-.7.6-.7.9-.7h.6c.2 0 .5 0 .7.5l.8 1.9c.1.2 0 .4-.1.6l-.4.5c-.1.2-.3.4-.1.7.2.4.9 1.4 1.9 2 1.2.7 1.4.5 1.7.5.2-.1.6-.5.7-.7.2-.2.3-.2.5-.1l1.8.9c.3.1.4.2.5.4 0 .2 0 .9-.3 1.3-.4.5-1.1.9-1.6.9-1.1.1-2.6-.3-4.4-1.5-2.1-1.4-3.4-3.5-3.5-3.7-.1-.2-.8-1.2-.8-2.3 0-1 .5-1.5.7-1.7z"/></svg></a>
+    <a href="tel:+34910234567" aria-label="Llamar"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 16.5v2.6a1.9 1.9 0 0 1-2.1 1.9 18.8 18.8 0 0 1-8.2-2.9 18.4 18.4 0 0 1-5.7-5.7A18.8 18.8 0 0 1 2.1 4.1 1.9 1.9 0 0 1 4 2h2.6a1.9 1.9 0 0 1 1.9 1.6c.1.9.3 1.8.7 2.7a1.9 1.9 0 0 1-.4 2L7.6 9.5a15 15 0 0 0 5.7 5.7l1.2-1.2a1.9 1.9 0 0 1 2-.4c.9.3 1.8.6 2.7.7A1.9 1.9 0 0 1 21 16.5z"/></svg></a>
+  <a href="mailto:info@inmobiliariaprisma.es" aria-label="Email"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><path d="M2.5 7l9.5 6.5L21.5 7"/></svg></a>
+</div>
+
+<script src="js/main.js"></script>
+</body>
+</html>
