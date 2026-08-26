@@ -210,6 +210,29 @@ const seed: SeedTemplate[] = [
       SEO,
     ],
   },
+  {
+    id: `${TPL}07`,
+    categorySlug: "pet-shop",
+    title: "Pet Shop Premium",
+    slug: "pet-shop-premium",
+    short_description:
+      "Tienda de mascotas con catálogo, carrito, favoritos y servicios de peluquería y hotel.",
+    full_description:
+      "Para tiendas de animales y centros de estética canina: catálogo de productos con etiquetas de oferta y novedad, valoraciones con estrellas, carrito de la compra con favoritos que recuerda lo elegido, ocho categorías filtrables (perros, gatos, pequeños animales...), franja de servicios (baño y peluquería, hotel, guardería, adiestramiento) y pedido que se envía por WhatsApp. Paleta azul petróleo + terracota, tipografía Inter.",
+    price_cents: 21900,
+    preview_url: "/demos/pet-shop-premium/index.html",
+    gradient: "linear-gradient(160deg,#0e4c6b,#3b7a9c 55%,#0a3650)",
+    features: [
+      "Catálogo con ofertas, novedades y valoraciones",
+      "Carrito de la compra con favoritos",
+      "8 categorías filtrables",
+      "Servicios de peluquería, hotel y guardería",
+      "El pedido llega por WhatsApp",
+      "Newsletter y franja de confianza",
+      RESPONSIVE,
+      SEO,
+    ],
+  },
 ];
 
 /** Degradado por slug — respaldo de miniatura en las tarjetas. */

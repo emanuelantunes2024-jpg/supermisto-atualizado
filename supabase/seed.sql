@@ -96,6 +96,15 @@ values
    'Para clínicas veterinarias y centros de salud animal: ocho servicios con ficha propia, franja de urgencias 24 horas con llamada directa, tres planes de salud por cuota mensual (cachorro, adulto y sénior) con el plan destacado resaltado en color, equipo con su especialidad, formulario de cita que pregunta qué animal es y valida teléfono, correo y fechas pasadas, opiniones y preguntas frecuentes. Paleta verde + melocotón, tipografía Playfair Display. No necesita fotos: la portada dibuja un perro y un gato ilustrados, los servicios llevan iconos y el equipo se muestra con sus iniciales, así que se ve nítido en cualquier pantalla y carga al instante.',
    22900, '/demos/veterinaria-premium/index.html', '/thumbnails/veterinaria-premium.jpg',
    '["Tres planes de salud por cuota mensual", "Franja de urgencias 24h con llamada directa", "8 servicios con icono propio", "Cita online que pregunta qué animal es", "Sin fotos: todo ilustrado, carga al instante", "Equipo, opiniones y preguntas frecuentes", "Responsive (móvil, tablet y desktop)", "Optimizado para Google (SEO)"]'::jsonb,
+   'published'),
+
+  ('22222222-2222-4222-8222-000000000007',
+   '11111111-1111-4111-8111-000000000003',
+   'Pet Shop Premium', 'pet-shop-premium',
+   'Tienda de mascotas con catálogo, carrito, favoritos y servicios de peluquería y hotel.',
+   'Para tiendas de animales y centros de estética canina: catálogo de productos con etiquetas de oferta y novedad, valoraciones con estrellas, carrito de la compra con favoritos que recuerda lo elegido, ocho categorías filtrables (perros, gatos, pequeños animales...), franja de servicios (baño y peluquería, hotel, guardería, adiestramiento) y pedido que se envía por WhatsApp. Paleta azul petróleo + terracota, tipografía Inter.',
+   21900, '/demos/pet-shop-premium/index.html', '/thumbnails/pet-shop-premium.jpg',
+   '["Catálogo con ofertas, novedades y valoraciones", "Carrito de la compra con favoritos", "8 categorías filtrables", "Servicios de peluquería, hotel y guardería", "El pedido llega por WhatsApp", "Newsletter y franja de confianza", "Responsive (móvil, tablet y desktop)", "Optimizado para Google (SEO)"]'::jsonb,
    'published')
 
 on conflict (id) do update
