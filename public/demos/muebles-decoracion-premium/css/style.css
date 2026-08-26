@@ -76,7 +76,7 @@ h1, h2, h3, h4 { margin: 0; font-weight: 800; }
 .portada-foto { position: relative; border-radius: var(--radio); overflow: hidden; }
 .portada-foto img { width: 100%; height: 300px; object-fit: cover; }
 .portada-puntos { position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; }
-.portada-puntos span { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,.5); }
+.portada-puntos span { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,.5); cursor: pointer; transition: width .2s; }
 .portada-puntos span.activo { background: #fff; width: 18px; border-radius: 4px; }
 .portada-confianza { display: flex; flex-direction: column; gap: 18px; grid-column: 5; }
 .pc-item { display: flex; align-items: flex-start; gap: 10px; }

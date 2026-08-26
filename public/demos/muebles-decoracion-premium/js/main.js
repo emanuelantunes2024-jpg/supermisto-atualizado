@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Electromax — carrito y cajón lateral
+   Muebles & Deco — carrito y cajón lateral
    Todo ocurre en el navegador. Al finalizar el pedido se abre WhatsApp
    con el detalle de la compra.
    ========================================================================== */
@@ -8,6 +8,7 @@
 
   var CATALOGO = leerJSON('datosCatalogo', []);
   var ENVIO    = leerJSON('datosEnvio', { whatsapp: '', negocio: '' });
+  var GALERIA  = leerJSON('datosGaleria', []);
   var LLAVE    = 'muebles_carrito';
   var LLAVE_FAV = 'muebles_favoritos';
 
@@ -215,6 +216,11 @@
     if (b.closest('.destacados-tabs')) {
       [].forEach.call(document.querySelectorAll('.destacados-tabs button'), function (o) { o.classList.remove('activo'); });
       b.classList.add('activo');
+      var filtro = b.dataset.filtro || 'todos';
+      [].forEach.call(document.querySelectorAll('#filaProductos .prod-card'), function (tarjeta) {
+        var grupos = (tarjeta.dataset.grupos || '').split(' ');
+        tarjeta.hidden = grupos.indexOf(filtro) === -1;
+      });
       return;
     }
 
@@ -227,6 +233,25 @@
       return;
     }
   });
+
+  /* ---------------- Galería de la portada (flechas y puntos reales) ---------------- */
+
+  var imgPortada = document.getElementById('portadaFotoImg');
+  var puntos = document.querySelectorAll('.portada-puntos span');
+  var slideActual = 0;
+
+  function irASlide(i) {
+    if (!imgPortada || !GALERIA.length) return;
+    slideActual = ((i % GALERIA.length) + GALERIA.length) % GALERIA.length;
+    imgPortada.src = GALERIA[slideActual];
+    puntos.forEach(function (p, idx) { p.classList.toggle('activo', idx === slideActual); });
+  }
+
+  var flechaIzq = document.querySelector('.portada-flecha-izq');
+  var flechaDer = document.querySelector('.portada-flecha-der');
+  if (flechaIzq) flechaIzq.addEventListener('click', function () { irASlide(slideActual - 1); });
+  if (flechaDer) flechaDer.addEventListener('click', function () { irASlide(slideActual + 1); });
+  puntos.forEach(function (p, idx) { p.addEventListener('click', function () { irASlide(idx); }); });
 
   document.addEventListener('keydown', function (ev) {
     if (ev.key !== 'Enter' && ev.key !== ' ') return;
