@@ -296,3 +296,4 @@ h3{font-size:19px;}
   .portada-botones .btn{flex:1;}
   .reserva-barra{margin-top:-30px;}
 }
+html,body{overflow-x:hidden;max-width:100%}

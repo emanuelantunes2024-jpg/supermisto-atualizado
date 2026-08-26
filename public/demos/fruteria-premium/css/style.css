@@ -36,7 +36,7 @@ h1, h2, h3, h4 { margin: 0; font-weight: 800; }
 /* ---------------- Barra superior ---------------- */
 .barra-top { background: var(--verde-osc); color: #cdd9bd; font-size: .74rem; }
 .barra-top-int { display: flex; align-items: center; justify-content: space-between; height: 34px; gap: 20px; flex-wrap: wrap; }
-.barra-top-izq, .barra-top-der { display: flex; align-items: center; gap: 18px; }
+.barra-top-izq, .barra-top-der { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; row-gap: 4px; }
 .barra-top-izq li { display: flex; align-items: center; gap: 6px; white-space: nowrap; }
 .barra-top-izq svg { color: var(--verde); flex: none; }
 .barra-top .bandera, .barra-top .moneda { cursor: pointer; display: flex; align-items: center; gap: 3px; }
@@ -261,3 +261,5 @@ h1, h2, h3, h4 { margin: 0; font-weight: 800; }
   .pie-grid { grid-template-columns: 1fr 1fr; }
   .accion-item span { display: none; }
 }
+
+html,body{overflow-x:hidden;max-width:100%}

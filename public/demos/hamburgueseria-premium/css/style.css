@@ -45,7 +45,7 @@ h1, h2, h3, h4 { margin: 0; font-weight: 800; }
 /* ---------------- Barra superior ---------------- */
 .barra-top { background: #000; font-size: .74rem; color: #cfc6bd; border-bottom: 1px solid var(--linea); }
 .barra-top-int { display: flex; align-items: center; justify-content: space-between; height: 34px; gap: 20px; flex-wrap: wrap; }
-.barra-top-izq, .barra-top-der { display: flex; align-items: center; gap: 20px; }
+.barra-top-izq, .barra-top-der { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; row-gap: 4px; }
 .barra-top-izq li, .barra-top-der li { display: flex; align-items: center; gap: 6px; white-space: nowrap; }
 .barra-top-izq svg, .barra-top-der svg { color: var(--naranja); flex: none; }
 .barra-top-der a { display: flex; align-items: center; gap: 6px; color: #cfc6bd; }
@@ -303,3 +303,5 @@ h1, h2, h3, h4 { margin: 0; font-weight: 800; }
   .portada-virtudes { grid-template-columns: repeat(2, 1fr); }
   .dos { grid-template-columns: 1fr; }
 }
+
+html,body{overflow-x:hidden;max-width:100%}

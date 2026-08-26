@@ -41,7 +41,7 @@ h1, h2, h3, h4 { margin: 0; font-weight: 800; }
 /* ---------------- Barra superior ---------------- */
 .barra-top { background: var(--negro2); font-size: .74rem; color: #cfc6bd; }
 .barra-top-int { display: flex; align-items: center; justify-content: space-between; height: 34px; gap: 20px; flex-wrap: wrap; }
-.barra-top-izq, .barra-top-der { display: flex; align-items: center; gap: 18px; }
+.barra-top-izq, .barra-top-der { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; row-gap: 4px; }
 .barra-top-izq li, .barra-top-der li { display: flex; align-items: center; gap: 6px; white-space: nowrap; }
 .barra-top-izq svg { color: var(--rojo); flex: none; }
 .barra-top-der a { display: flex; align-items: center; gap: 6px; color: #cfc6bd; }
@@ -274,3 +274,5 @@ h1, h2, h3, h4 { margin: 0; font-weight: 800; }
   .dos { grid-template-columns: 1fr; }
   .acc-item span { display: none; }
 }
+
+html,body{overflow-x:hidden;max-width:100%}

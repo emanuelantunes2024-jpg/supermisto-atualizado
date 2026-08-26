@@ -284,3 +284,5 @@ h1, h2, h3, h4 { margin: 0; font-weight: 800; }
   .pie-grid { grid-template-columns: 1fr 1fr; }
   .portada-texto h1 { font-size: 1.9rem; }
 }
+
+html,body{overflow-x:hidden;max-width:100%}

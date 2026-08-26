@@ -271,3 +271,4 @@ h3{font-size:18px}
   .portada-botones .btn{flex:1}
   .portada-sellos{gap:18px}
 }
+html,body{overflow-x:hidden;max-width:100%}

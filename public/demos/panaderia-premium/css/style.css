@@ -309,3 +309,4 @@ h3{font-size:18px}
   .tarj-pedido .bolsa{display:none}
   .tarj-pedido p{max-width:none}
 }
+html,body{overflow-x:hidden;max-width:100%}

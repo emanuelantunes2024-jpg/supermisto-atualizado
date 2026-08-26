@@ -269,3 +269,5 @@ footer{background:var(--teal-900);color:#b9d0ce;padding-top:52px;}
   .tb-hide{display:none;}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;} html{scroll-behavior:auto;}}
+
+html,body{overflow-x:hidden;max-width:100%}

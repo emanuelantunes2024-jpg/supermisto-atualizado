@@ -122,3 +122,5 @@ img{max-width:100%;display:block}a{color:inherit;text-decoration:none}ul{list-st
 @media(max-width:1150px){.portada-int{grid-template-columns:1fr}.cuerpo-grid{grid-template-columns:1fr}.fila{grid-template-columns:repeat(3,1fr)}.pie-grid{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:900px){.menu-principal{display:none}}
 @media(max-width:640px){.fila{grid-template-columns:repeat(2,1fr)}.pie-grid{grid-template-columns:1fr 1fr}.portada-texto h1{font-size:1.8rem}.rejilla3{grid-template-columns:1fr}}
+
+html,body{overflow-x:hidden;max-width:100%}

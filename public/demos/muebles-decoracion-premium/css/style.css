@@ -40,7 +40,7 @@ h1, h2, h3, h4 { margin: 0; font-weight: 800; }
 /* ---------------- Barra superior ---------------- */
 .barra-top { background: var(--verde-osc); color: #d9dcc9; font-size: .74rem; }
 .barra-top-int { display: flex; align-items: center; justify-content: space-between; height: 36px; gap: 20px; flex-wrap: wrap; }
-.barra-top-izq, .barra-top-der { display: flex; align-items: center; gap: 18px; }
+.barra-top-izq, .barra-top-der { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; row-gap: 4px; }
 .barra-top-izq li { display: flex; align-items: center; gap: 6px; white-space: nowrap; }
 .barra-top-izq svg { color: var(--dorado); flex: none; }
 .barra-top-der a { display: flex; align-items: center; gap: 5px; color: #d9dcc9; }
@@ -241,3 +241,5 @@ h1, h2, h3, h4 { margin: 0; font-weight: 800; }
   .portada-texto h1 { font-size: 1.8rem; }
   .accion-item span { display: none; }
 }
+
+html,body{overflow-x:hidden;max-width:100%}
