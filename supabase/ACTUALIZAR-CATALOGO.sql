@@ -320,6 +320,33 @@ values
    'Para hoteles y alojamientos: diez áreas de servicio con ficha propia (habitaciones, suites, restaurante, spa, eventos...), proceso de reserva en cuatro pasos, cifras del hotel, opiniones de huéspedes, blog y formulario de reserva con validación. Paleta azul noche + dorado, tipografía Playfair Display. No necesita fotos: todo en vectores, carga al instante.',
    22900, '/demos/hotel-premium/index.html', '/thumbnails/hotel-premium.jpg',
    '["10 áreas de servicio con icono propio", "Formulario de reserva con validación", "Proceso de reserva en cuatro pasos", "Blog y preguntas frecuentes", "Botones de WhatsApp, teléfono y email", "Sin fotos: todo en vectores, carga al instante", "Responsive (móvil, tablet y desktop)", "Optimizado para Google (SEO)"]'::jsonb,
+   'published'),
+
+  ('22222222-2222-4222-8222-000000000027',
+   '11111111-1111-4111-8111-000000000025',
+   'Alquiler de Coches Premium', 'alquiler-coches-premium',
+   'Alquiler de coches con flota propia, catálogo por categorías y reserva por WhatsApp.',
+   'Para empresas de alquiler de coches con flota propia: catálogo de vehículos por categorías (económicos, SUV, eléctricos, lujo...), carrito de reserva con favoritos y solicitud que se envía por WhatsApp. Paleta negro + amarillo, tipografía Inter. No necesita fotos de vehículo: todo se muestra con iconos propios.',
+   22900, '/demos/alquiler-coches-premium/index.html', '/thumbnails/alquiler-coches-premium.jpg',
+   '["Catálogo de vehículos por categorías", "Carrito de reserva con favoritos", "La solicitud llega por WhatsApp", "Sin fotos: todo ilustrado, carga al instante", "Newsletter y franja de confianza", "Pensado para empresas con flota propia", "Responsive (móvil, tablet y desktop)", "Optimizado para Google (SEO)"]'::jsonb,
+   'published'),
+
+  ('22222222-2222-4222-8222-000000000028',
+   '11111111-1111-4111-8111-000000000026',
+   'Concesionaria de Automóviles Premium', 'concesionaria-premium',
+   'Concesionaria con vehículos nuevos y de ocasión, catálogo y solicitud por WhatsApp.',
+   'Para concesionarias de automóviles: catálogo de vehículos nuevos y de ocasión por categorías, carrito de interés con favoritos y solicitud de información que se envía por WhatsApp. Paleta negro + amarillo, tipografía Inter. No necesita fotos de vehículo: todo se muestra con iconos propios.',
+   22900, '/demos/concesionaria-premium/index.html', '/thumbnails/concesionaria-premium.jpg',
+   '["Catálogo de nuevos y de ocasión por categorías", "Carrito de interés con favoritos", "La solicitud llega por WhatsApp", "Sin fotos: todo ilustrado, carga al instante", "Newsletter y franja de confianza", "Pensado para concesionarias con vehículos propios", "Responsive (móvil, tablet y desktop)", "Optimizado para Google (SEO)"]'::jsonb,
+   'published'),
+
+  ('22222222-2222-4222-8222-000000000029',
+   '11111111-1111-4111-8111-000000000027',
+   'Tienda de Instrumentos Musicales Premium', 'instrumentos-musicales-premium',
+   'Tienda de instrumentos musicales con catálogo, ofertas y carrito de compra.',
+   'Para tiendas de instrumentos musicales y equipos de sonido: catálogo con descuentos destacados, ocho categorías filtrables (guitarras, baterías, teclados, micrófonos...), carrito de la compra con favoritos y pedido que se envía por WhatsApp. Paleta negro + dorado, tipografía Inter. No necesita fotos de producto: todo se muestra con iconos propios.',
+   21900, '/demos/instrumentos-musicales-premium/index.html', '/thumbnails/instrumentos-musicales-premium.jpg',
+   '["Catálogo con descuentos destacados", "8 categorías filtrables", "Carrito de la compra con favoritos", "El pedido llega por WhatsApp", "Sin fotos: todo ilustrado, carga al instante", "Newsletter y franja de confianza", "Responsive (móvil, tablet y desktop)", "Optimizado para Google (SEO)"]'::jsonb,
    'published')
 
 on conflict (id) do update
