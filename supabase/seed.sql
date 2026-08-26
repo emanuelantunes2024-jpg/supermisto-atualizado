@@ -177,6 +177,42 @@ values
    'Para instaladoras y tiendas de energía solar: catálogo de placas, inversores, baterías y kits solares, ocho categorías filtrables, carrito de la compra con favoritos y pedido o solicitud de presupuesto que se envía por WhatsApp. Paleta azul noche + amarillo solar, tipografía Inter. No necesita fotos de producto: todo se muestra con iconos propios.',
    22900, '/demos/energia-solar-premium/index.html', '/thumbnails/energia-solar-premium.jpg',
    '["Catálogo con 8 categorías filtrables", "Carrito de la compra con favoritos", "El pedido o presupuesto llega por WhatsApp", "Sin fotos: todo ilustrado, carga al instante", "Newsletter y franja de confianza", "Pensado para instaladoras y tiendas técnicas", "Responsive (móvil, tablet y desktop)", "Optimizado para Google (SEO)"]'::jsonb,
+   'published'),
+
+  ('22222222-2222-4222-8222-000000000016',
+   '11111111-1111-4111-8111-000000000011',
+   'Taller Mecánico Premium', 'taller-mecanico-premium',
+   'Taller mecánico con cita online, 10 servicios y formulario de presupuesto.',
+   'Para talleres mecánicos y centros de diagnóstico: diez áreas de servicio con ficha propia (diagnóstico electrónico, frenos, neumáticos, ITV...), proceso de trabajo en cuatro pasos, cifras del taller, opiniones de clientes, blog y formulario de cita con validación. Paleta azul noche + dorado, tipografía Playfair Display. No necesita fotos: todo en vectores, carga al instante.',
+   22900, '/demos/taller-mecanico-premium/index.html', '/thumbnails/taller-mecanico-premium.jpg',
+   '["10 áreas de servicio con icono propio", "Formulario de cita con validación", "Proceso de trabajo en cuatro pasos", "Blog y preguntas frecuentes", "Botones de WhatsApp, teléfono y email", "Sin fotos: todo en vectores, carga al instante", "Responsive (móvil, tablet y desktop)", "Optimizado para Google (SEO)"]'::jsonb,
+   'published'),
+
+  ('22222222-2222-4222-8222-000000000017',
+   '11111111-1111-4111-8111-000000000013',
+   'Taller de Motos Premium', 'taller-motos-premium',
+   'Taller de motos con cita online, 10 servicios y formulario de presupuesto.',
+   'Para talleres especializados en motocicletas: diez áreas de servicio con ficha propia (mantenimiento, neumáticos, cadena, restauración...), proceso de trabajo en cuatro pasos, cifras del taller, opiniones de clientes, blog y formulario de cita con validación. Paleta azul noche + dorado, tipografía Playfair Display. No necesita fotos: todo en vectores, carga al instante.',
+   22900, '/demos/taller-motos-premium/index.html', '/thumbnails/taller-motos-premium.jpg',
+   '["10 áreas de servicio con icono propio", "Formulario de cita con validación", "Proceso de trabajo en cuatro pasos", "Blog y preguntas frecuentes", "Botones de WhatsApp, teléfono y email", "Sin fotos: todo en vectores, carga al instante", "Responsive (móvil, tablet y desktop)", "Optimizado para Google (SEO)"]'::jsonb,
+   'published'),
+
+  ('22222222-2222-4222-8222-000000000018',
+   '11111111-1111-4111-8111-000000000022',
+   'Mudanzas y Transportes Premium', 'mudanzas-transportes-premium',
+   'Empresa de mudanzas con 10 servicios y formulario de solicitud de presupuesto.',
+   'Para empresas de mudanzas y transporte: diez áreas de servicio con ficha propia (mudanzas particulares, internacionales, guarda-muebles...), proceso de trabajo en cuatro pasos, cifras de la empresa, opiniones de clientes, blog y formulario de presupuesto con validación. Paleta azul noche + dorado, tipografía Playfair Display. No necesita fotos: todo en vectores, carga al instante.',
+   22900, '/demos/mudanzas-transportes-premium/index.html', '/thumbnails/mudanzas-transportes-premium.jpg',
+   '["10 áreas de servicio con icono propio", "Formulario de presupuesto con validación", "Proceso de trabajo en cuatro pasos", "Blog y preguntas frecuentes", "Botones de WhatsApp, teléfono y email", "Sin fotos: todo en vectores, carga al instante", "Responsive (móvil, tablet y desktop)", "Optimizado para Google (SEO)"]'::jsonb,
+   'published'),
+
+  ('22222222-2222-4222-8222-000000000019',
+   '11111111-1111-4111-8111-000000000017',
+   'Obras y Construcción Premium', 'obras-construccion-premium',
+   'Empresa de construcción con 10 servicios y formulario de solicitud de presupuesto.',
+   'Para empresas de obras y construcción: diez áreas de servicio con ficha propia (reformas integrales, obra nueva, rehabilitación...), proceso de trabajo en cuatro pasos, cifras de la empresa, opiniones de clientes, blog y formulario de presupuesto con validación. Paleta azul noche + dorado, tipografía Playfair Display. No necesita fotos: todo en vectores, carga al instante.',
+   24900, '/demos/obras-construccion-premium/index.html', '/thumbnails/obras-construccion-premium.jpg',
+   '["10 áreas de servicio con icono propio", "Formulario de presupuesto con validación", "Proceso de trabajo en cuatro pasos", "Blog y preguntas frecuentes", "Botones de WhatsApp, teléfono y email", "Sin fotos: todo en vectores, carga al instante", "Responsive (móvil, tablet y desktop)", "Optimizado para Google (SEO)"]'::jsonb,
    'published')
 
 on conflict (id) do update
