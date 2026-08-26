@@ -249,6 +249,15 @@ values
    'Para almacenes de materiales de construcción y ferreterías: catálogo con ocho categorías filtrables (cemento, ladrillos, herramientas, maquinaria...), carrito de la compra con favoritos y pedido que se envía por WhatsApp. Paleta terracota + amarillo, tipografía Inter. No necesita fotos de producto: todo se muestra con iconos propios.',
    21900, '/demos/materiales-construccion-premium/index.html', '/thumbnails/materiales-construccion-premium.jpg',
    '["Catálogo con 8 categorías filtrables", "Carrito de la compra con favoritos", "El pedido llega por WhatsApp", "Sin fotos: todo ilustrado, carga al instante", "Newsletter y franja de confianza", "Pensado para almacenes y ferreterías", "Responsive (móvil, tablet y desktop)", "Optimizado para Google (SEO)"]'::jsonb,
+   'published'),
+
+  ('22222222-2222-4222-8222-000000000024',
+   '11111111-1111-4111-8111-000000000024',
+   'Hamburguesería Premium', 'hamburgueseria-premium',
+   'Hamburguesería con pedidos online, cesta de la compra y entrega o recogida en tienda.',
+   'Para hamburgueserías y locales de comida rápida de calidad: catálogo de hamburguesas por categorías con filtros, cesta de la compra que recuerda lo elegido, elección entre recoger en tienda o entrega a domicilio con su coste y su pedido mínimo, y un formulario que arma el pedido completo y lo manda al WhatsApp del negocio. Sin comisiones por pedido. Paleta negro + terracota, tipografía Playfair Display.',
+   19900, '/demos/hamburgueseria-premium/index.html', '/thumbnails/hamburgueseria-premium.jpg',
+   '["Catálogo de hamburguesas con filtros por categoría", "Cesta de la compra que no se pierde al cerrar", "Recogida en tienda o entrega, con pedido mínimo", "El pedido llega entero por WhatsApp", "Sin comisiones y sin pasarela que configurar", "Horarios, historia del negocio y contacto", "Responsive (móvil, tablet y desktop)", "Optimizado para Google (SEO)"]'::jsonb,
    'published')
 
 on conflict (id) do update

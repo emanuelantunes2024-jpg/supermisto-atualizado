@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Burger House — Hamburguesas Artesanales | Entrega en 30 min</title>
+<meta name="description" content="Hamburguesería con pedidos online: hamburguesas artesanales, carne 100% fresca, patatas y batidos. Entrega a domicilio o recogida en tienda.">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="aviso-demo">Plantilla demostrativa. Nombre, datos, productos y precios son ficticios.</div>
+
+<!-- Cabecera -->
+<header class="cab">
+  <div class="env">
+    <a href="#inicio" class="marca">
+      <svg width="46" height="46" viewBox="0 0 48 48" fill="none" aria-hidden="true"><circle cx="24" cy="24" r="20" fill="#c9542f"/><path d="M13 19a11 7 0 0 1 22 0z" fill="#fff"/><path d="M13 24h22M14 28.5h20M15 33h18" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg>      <span class="marca-txt">
+        <strong>Burger</strong>
+        <span>House</span>
+      </span>
+    </a>
+    <nav class="menu">
+      <a href="#inicio">Inicio</a><a href="#productos">Productos</a><a href="#pedidos">Pedidos Online</a><a href="#nosotros">Nosotros</a><a href="#contacto">Contacto</a>    </nav>
+    <div class="cab-acc">
+      <button type="button" class="btn btn-blanco btn-peq btn-carrito" id="abrirCarrito" aria-label="Ver la cesta">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9.5" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2.5 3.5h2.7l2.4 11h11l2-8H6.3"/></svg>        <span class="carrito-num" id="carritoNum" hidden>0</span>
+      </button>
+      <a href="#pedidos" class="btn btn-ambar btn-peq"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 8h13l1 12.5H4.5z"/><path d="M8.5 10.5V6.5a3.5 3.5 0 0 1 7 0v4"/></svg>Hacer pedido</a>
+      <button class="abrir-menu" id="abrirMenu" aria-expanded="false" aria-label="Abrir menú">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+  <nav class="menu-movil" id="menuMovil">
+    <a href="#inicio">Inicio</a><a href="#productos">Productos</a><a href="#pedidos">Pedidos Online</a><a href="#nosotros">Nosotros</a><a href="#contacto">Contacto</a>    <a href="#pedidos" class="btn btn-ambar">Hacer pedido</a>
+  </nav>
+</header>
+
+<!-- Portada -->
+<section class="portada" id="inicio">
+  <div class="env">
+    <div>
+      <span class="portada-pill"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5a8 5 0 0 1 16 0z"/><path d="M3.5 12.5h17M3.5 15h17M4.5 17.5h15"/></svg>Hamburgueserías Artesanales</span>
+      <h1>Hamburguesas artesanales<br>hechas con pasión</h1>
+      <p>Carne 100% fresca, pan brioche recién horneado e ingredientes de calidad. Pide online y te la llevamos calentita.</p>
+      <div class="portada-botones">
+        <a href="#pedidos" class="btn btn-ambar"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 8h13l1 12.5H4.5z"/><path d="M8.5 10.5V6.5a3.5 3.5 0 0 1 7 0v4"/></svg>Pedir ahora</a>
+        <a href="#productos" class="btn btn-linea">Ver la carta →</a>
+      </div>
+    </div>
+    <div class="portada-foto"><div style="width:100%;height:390px;display:flex;align-items:center;justify-content:center;background:var(--crema3);color:var(--ambar)"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21V9"/><path d="M12 9c-2.4 0-4.4-2-4.4-4.4C10 4.6 12 6.6 12 9zM12 9c2.4 0 4.4-2 4.4-4.4C14 4.6 12 6.6 12 9z"/><path d="M12 14.5c-2 0-3.7-1.7-3.7-3.7M12 14.5c2 0 3.7-1.7 3.7-3.7"/></svg></div></div>
+  </div>
+</section>
+
+<!-- Virtudes -->
+<div class="virtudes">
+  <div class="env">
+    <div class="virtudes-caja">
+              <div class="virtud">
+          <div class="virtud-ic"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 8h13l1 12.5H4.5z"/><path d="M8.5 10.5V6.5a3.5 3.5 0 0 1 7 0v4"/></svg></div>
+          <div>
+            <strong>Entrega Rápida</strong>
+            <span>En 30 minutos</span>
+          </div>
+        </div>
+              <div class="virtud">
+          <div class="virtud-ic"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 7h10.5v9H2.5z"/><path d="M13 10h3.6l3.4 3.4V16H13z"/><circle cx="6.5" cy="18" r="1.8"/><circle cx="16.5" cy="18" r="1.8"/></svg></div>
+          <div>
+            <strong>Recogida o Entrega</strong>
+            <span>Elige tu opción</span>
+          </div>
+        </div>
+              <div class="virtud">
+          <div class="virtud-ic"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21V9"/><path d="M12 9c-2.4 0-4.4-2-4.4-4.4C10 4.6 12 6.6 12 9zM12 9c2.4 0 4.4-2 4.4-4.4C14 4.6 12 6.6 12 9z"/><path d="M12 14.5c-2 0-3.7-1.7-3.7-3.7M12 14.5c2 0 3.7-1.7 3.7-3.7"/></svg></div>
+          <div>
+            <strong>Carne 100% Fresca</strong>
+            <span>Nunca congelada</span>
+          </div>
+        </div>
+              <div class="virtud">
+          <div class="virtud-ic"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9.5" r="5.5"/><path d="M9.4 14.3 8 21.5l4-2.2 4 2.2-1.4-7.2"/><path d="m12 7 .9 1.8 2 .3-1.4 1.4.3 2-1.8-1-1.8 1 .3-2L9.1 9.1l2-.3z"/></svg></div>
+          <div>
+            <strong>Pan Artesanal</strong>
+            <span>Horneado cada día</span>
+          </div>
+        </div>
+          </div>
+  </div>
+</div>
+
+<!-- Categorías + tarjeta de pedido -->
+<section>
+  <div class="env">
+    <div class="zona-cat">
+      <div>
+        <div class="cab-sec">
+          <span class="rotulo">Descubre lo mejor</span>
+          <h2>Nuestras categorías</h2>
+        </div>
+        <div class="cats">
+                      <a class="cat" href="#productos" data-cat="Hamburguesas Clásicas">
+              <div class="cat-foto"><div style="width:100%;height:118px;display:flex;align-items:center;justify-content:center;background:var(--crema3);color:var(--ambar)"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21V9"/><path d="M12 9c-2.4 0-4.4-2-4.4-4.4C10 4.6 12 6.6 12 9zM12 9c2.4 0 4.4-2 4.4-4.4C14 4.6 12 6.6 12 9z"/><path d="M12 14.5c-2 0-3.7-1.7-3.7-3.7M12 14.5c2 0 3.7-1.7 3.7-3.7"/></svg></div></div>
+              <div class="cat-cuerpo">
+                <h3>Hamburguesas Clásicas</h3>
+                <p>Las de toda la vida</p>
+              </div>
+            </a>
+                      <a class="cat" href="#productos" data-cat="Hamburguesas Especiales">
+              <div class="cat-foto"><div style="width:100%;height:118px;display:flex;align-items:center;justify-content:center;background:var(--crema3);color:var(--ambar)"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21V9"/><path d="M12 9c-2.4 0-4.4-2-4.4-4.4C10 4.6 12 6.6 12 9zM12 9c2.4 0 4.4-2 4.4-4.4C14 4.6 12 6.6 12 9z"/><path d="M12 14.5c-2 0-3.7-1.7-3.7-3.7M12 14.5c2 0 3.7-1.7 3.7-3.7"/></svg></div></div>
+              <div class="cat-cuerpo">
+                <h3>Hamburguesas Especiales</h3>
+                <p>Combinaciones únicas</p>
+              </div>
+            </a>
+                      <a class="cat" href="#productos" data-cat="Vegetarianas">
+              <div class="cat-foto"><div style="width:100%;height:118px;display:flex;align-items:center;justify-content:center;background:var(--crema3);color:var(--ambar)"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21V9"/><path d="M12 9c-2.4 0-4.4-2-4.4-4.4C10 4.6 12 6.6 12 9zM12 9c2.4 0 4.4-2 4.4-4.4C14 4.6 12 6.6 12 9z"/><path d="M12 14.5c-2 0-3.7-1.7-3.7-3.7M12 14.5c2 0 3.7-1.7 3.7-3.7"/></svg></div></div>
+              <div class="cat-cuerpo">
+                <h3>Vegetarianas</h3>
+                <p>100% vegetal</p>
+              </div>
+            </a>
+                      <a class="cat" href="#productos" data-cat="Menús">
+              <div class="cat-foto"><div style="width:100%;height:118px;display:flex;align-items:center;justify-content:center;background:var(--crema3);color:var(--ambar)"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21V9"/><path d="M12 9c-2.4 0-4.4-2-4.4-4.4C10 4.6 12 6.6 12 9zM12 9c2.4 0 4.4-2 4.4-4.4C14 4.6 12 6.6 12 9z"/><path d="M12 14.5c-2 0-3.7-1.7-3.7-3.7M12 14.5c2 0 3.7-1.7 3.7-3.7"/></svg></div></div>
+              <div class="cat-cuerpo">
+                <h3>Menús</h3>
+                <p>Con patatas y bebida</p>
+              </div>
+            </a>
+                      <a class="cat" href="#productos" data-cat="Patatas y Extras">
+              <div class="cat-foto"><div style="width:100%;height:118px;display:flex;align-items:center;justify-content:center;background:var(--crema3);color:var(--ambar)"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21V9"/><path d="M12 9c-2.4 0-4.4-2-4.4-4.4C10 4.6 12 6.6 12 9zM12 9c2.4 0 4.4-2 4.4-4.4C14 4.6 12 6.6 12 9z"/><path d="M12 14.5c-2 0-3.7-1.7-3.7-3.7M12 14.5c2 0 3.7-1.7 3.7-3.7"/></svg></div></div>
+              <div class="cat-cuerpo">
+                <h3>Patatas y Extras</h3>
+                <p>El acompañamiento perfecto</p>
+              </div>
+            </a>
+                      <a class="cat" href="#productos" data-cat="Bebidas">
+              <div class="cat-foto"><div style="width:100%;height:118px;display:flex;align-items:center;justify-content:center;background:var(--crema3);color:var(--ambar)"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21V9"/><path d="M12 9c-2.4 0-4.4-2-4.4-4.4C10 4.6 12 6.6 12 9zM12 9c2.4 0 4.4-2 4.4-4.4C14 4.6 12 6.6 12 9z"/><path d="M12 14.5c-2 0-3.7-1.7-3.7-3.7M12 14.5c2 0 3.7-1.7 3.7-3.7"/></svg></div></div>
+              <div class="cat-cuerpo">
+                <h3>Bebidas</h3>
+                <p>Refrescos y batidos</p>
+              </div>
+            </a>
+                      <a class="cat" href="#productos" data-cat="Postres">
+              <div class="cat-foto"><div style="width:100%;height:118px;display:flex;align-items:center;justify-content:center;background:var(--crema3);color:var(--ambar)"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21V9"/><path d="M12 9c-2.4 0-4.4-2-4.4-4.4C10 4.6 12 6.6 12 9zM12 9c2.4 0 4.4-2 4.4-4.4C14 4.6 12 6.6 12 9z"/><path d="M12 14.5c-2 0-3.7-1.7-3.7-3.7M12 14.5c2 0 3.7-1.7 3.7-3.7"/></svg></div></div>
+              <div class="cat-cuerpo">
+                <h3>Postres</h3>
+                <p>El final dulce</p>
+              </div>
+            </a>
+                      <a class="cat" href="#productos" data-cat="Ofertas">
+              <div class="cat-foto"><div style="width:100%;height:118px;display:flex;align-items:center;justify-content:center;background:var(--crema3);color:var(--ambar)"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21V9"/><path d="M12 9c-2.4 0-4.4-2-4.4-4.4C10 4.6 12 6.6 12 9zM12 9c2.4 0 4.4-2 4.4-4.4C14 4.6 12 6.6 12 9z"/><path d="M12 14.5c-2 0-3.7-1.7-3.7-3.7M12 14.5c2 0 3.7-1.7 3.7-3.7"/></svg></div></div>
+              <div class="cat-cuerpo">
+                <h3>Ofertas</h3>
+                <p>Precio especial</p>
+              </div>
+            </a>
+                  </div>
+      </div>
+
+      <div class="tarj-pedido">
+        <span class="rotulo">Haz tu pedido</span>
+        <h3>Pide online y ahorra tiempo</h3>
+        <p>Encarga tu hamburguesa favorita desde casa y recógela en tienda o recíbela donde estés.</p>
+        <a href="#pedidos" class="btn btn-ambar">Pedir ahora →</a>
+              </div>
+    </div>
+  </div>
+</section>
+
+<!-- Franja de confianza -->
+<section class="confianza">
+  <div class="env">
+          <div class="conf-item">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 7h10.5v9H2.5z"/><path d="M13 10h3.6l3.4 3.4V16H13z"/><circle cx="6.5" cy="18" r="1.8"/><circle cx="16.5" cy="18" r="1.8"/></svg>        <div>
+          <strong>Sin gastos de envío</strong>
+          <span>En pedidos superiores a 15€</span>
+        </div>
+      </div>
+          <div class="conf-item">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="10" width="15" height="11" rx="2.4"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><path d="M12 14.5v2.5"/></svg>        <div>
+          <strong>Pago 100% Seguro</strong>
+          <span>Tarjeta, Bizum y más</span>
+        </div>
+      </div>
+          <div class="conf-item">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="2.5" y="13" width="4" height="6" rx="1.8"/><rect x="17.5" y="13" width="4" height="6" rx="1.8"/></svg>        <div>
+          <strong>Seguimiento en tiempo real</strong>
+          <span>Sigue tu pedido en directo</span>
+        </div>
+      </div>
+        <a class="conf-tel" href="tel:910555123">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 16.5v2.6a1.9 1.9 0 0 1-2.1 1.9 18.8 18.8 0 0 1-8.2-2.9 18.4 18.4 0 0 1-5.7-5.7A18.8 18.8 0 0 1 2.1 4.1 1.9 1.9 0 0 1 4 2h2.6a1.9 1.9 0 0 1 1.9 1.6c.1.9.3 1.8.7 2.7a1.9 1.9 0 0 1-.4 2L7.6 9.5a15 15 0 0 0 5.7 5.7l1.2-1.2a1.9 1.9 0 0 1 2-.4c.9.3 1.8.6 2.7.7A1.9 1.9 0 0 1 21 16.5z"/></svg>      <span>
+        <strong>¿Dudas o consultas?</strong>
+        <span>Llámanos al 910 555 123</span>
+      </span>
+    </a>
+  </div>
+</section>
+
+<!-- Productos -->
+<section id="productos">
+  <div class="env">
+    <div class="cab-sec">
+      <span class="rotulo">Recién hechas</span>
+      <h2>Nuestros productos</h2>
+    </div>
+
+    <div class="filtros" id="filtros">
+      <button type="button" class="filtro act" data-filtro="todos">Todos</button>
+              <button type="button" class="filtro" data-filtro="Hamburguesas Clásicas">Hamburguesas Clásicas</button>
+              <button type="button" class="filtro" data-filtro="Hamburguesas Especiales">Hamburguesas Especiales</button>
+              <button type="button" class="filtro" data-filtro="Vegetarianas">Vegetarianas</button>
+              <button type="button" class="filtro" data-filtro="Menús">Menús</button>
+              <button type="button" class="filtro" data-filtro="Patatas y Extras">Patatas y Extras</button>
+              <button type="button" class="filtro" data-filtro="Bebidas">Bebidas</button>
+              <button type="button" class="filtro" data-filtro="Postres">Postres</button>
+              <button type="button" class="filtro" data-filtro="Ofertas">Ofertas</button>
+          </div>
+
+    <div class="productos" id="listaProductos">
+              <article class="prod" data-cat="Hamburguesas Clásicas">
+          <div class="prod-foto">
+            <div style="width:100%;height:150px;display:flex;align-items:center;justify-content:center;background:var(--crema3);color:var(--ambar)"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21V9"/><path d="M12 9c-2.4 0-4.4-2-4.4-4.4C10 4.6 12 6.6 12 9zM12 9c2.4 0 4.4-2 4.4-4.4C14 4.6 12 6.6 12 9z"/><path d="M12 14.5c-2 0-3.7-1.7-3.7-3.7M12 14.5c2 0 3.7-1.7 3.7-3.7"/></svg></div>                          <span class="prod-eti">Más pedida</span>
+                      </div>
+          <div class="prod-cuerpo">
+            <h3>Classic Burger</h3>
+            <p>Carne de vacuno, queso cheddar, lechuga, tomate y salsa de la casa.</p>
+            <div class="prod-pie">
+              <span class="prod-precio">9,90 €<small> / unidad</small></span>
+              <button type="button" class="btn btn-ambar btn-peq anadir" data-id="p0">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9.5" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2.5 3.5h2.7l2.4 11h11l2-8H6.3"/></svg>Añadir
+              </button>
+            </div>
+          </div>
+        </article>
+              <article class="prod" data-cat="Hamburguesas Especiales">
+          <div class="prod-foto">
+            <div style="width:100%;height:150px;display:flex;align-items:center;justify-content:center;background:var(--crema3);color:var(--ambar)"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21V9"/><path d="M12 9c-2.4 0-4.4-2-4.4-4.4C10 4.6 12 6.6 12 9zM12 9c2.4 0 4.4-2 4.4-4.4C14 4.6 12 6.6 12 9z"/><path d="M12 14.5c-2 0-3.7-1.7-3.7-3.7M12 14.5c2 0 3.7-1.7 3.7-3.7"/></svg></div>                      </div>
+          <div class="prod-cuerpo">
+            <h3>Bacon BBQ Burger</h3>
+            <p>Carne de vacuno, bacon crujiente, cebolla crispy y salsa BBQ.</p>
+            <div class="prod-pie">
+              <span class="prod-precio">11,50 €<small> / unidad</small></span>
+              <button type="button" class="btn btn-ambar btn-peq anadir" data-id="p1">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9.5" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2.5 3.5h2.7l2.4 11h11l2-8H6.3"/></svg>Añadir
+              </button>
+            </div>
+          </div>
+        </article>
+              <article class="prod" data-cat="Hamburguesas Especiales">
+          <div class="prod-foto">
+            <div style="width:100%;height:150px;display:flex;align-items:center;justify-content:center;background:var(--crema3);color:var(--ambar)"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21V9"/><path d="M12 9c-2.4 0-4.4-2-4.4-4.4C10 4.6 12 6.6 12 9zM12 9c2.4 0 4.4-2 4.4-4.4C14 4.6 12 6.6 12 9z"/><path d="M12 14.5c-2 0-3.7-1.7-3.7-3.7M12 14.5c2 0 3.7-1.7 3.7-3.7"/></svg></div>                          <span class="prod-eti">Novedad</span>
+                      </div>
+          <div class="prod-cuerpo">
+            <h3>Cheese Deluxe</h3>
+            <p>Doble carne, triple queso y salsa especial de la casa.</p>
+            <div class="prod-pie">
+              <span class="prod-precio">12,90 €<small> / unidad</small></span>
+              <button type="button" class="btn btn-ambar btn-peq anadir" data-id="p2">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9.5" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2.5 3.5h2.7l2.4 11h11l2-8H6.3"/></svg>Añadir
+              </button>
+            </div>
+          </div>
+        </article>
+              <article class="prod" data-cat="Vegetarianas">
+          <div class="prod-foto">
+            <div style="width:100%;height:150px;display:flex;align-items:center;justify-content:center;background:var(--crema3);color:var(--ambar)"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21V9"/><path d="M12 9c-2.4 0-4.4-2-4.4-4.4C10 4.6 12 6.6 12 9zM12 9c2.4 0 4.4-2 4.4-4.4C14 4.6 12 6.6 12 9z"/><path d="M12 14.5c-2 0-3.7-1.7-3.7-3.7M12 14.5c2 0 3.7-1.7 3.7-3.7"/></svg></div>                      </div>
+          <div class="prod-cuerpo">
+            <h3>Veggie Burger</h3>
+            <p>Hamburguesa de garbanzos y verduras, con aguacate y rúcula.</p>
+            <div class="prod-pie">
+              <span class="prod-precio">10,50 €<small> / unidad</small></span>
+              <button type="button" class="btn btn-ambar btn-peq anadir" data-id="p3">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9.5" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2.5 3.5h2.7l2.4 11h11l2-8H6.3"/></svg>Añadir
+              </button>
+            </div>
+          </div>
+        </article>
+              <article class="prod" data-cat="Patatas y Extras">
+          <div class="prod-foto">
+            <div style="width:100%;height:150px;display:flex;align-items:center;justify-content:center;background:var(--crema3);color:var(--ambar)"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21V9"/><path d="M12 9c-2.4 0-4.4-2-4.4-4.4C10 4.6 12 6.6 12 9zM12 9c2.4 0 4.4-2 4.4-4.4C14 4.6 12 6.6 12 9z"/><path d="M12 14.5c-2 0-3.7-1.7-3.7-3.7M12 14.5c2 0 3.7-1.7 3.7-3.7"/></svg></div>                      </div>
+          <div class="prod-cuerpo">
+            <h3>Patatas Fritas Grandes</h3>
+            <p>Crujientes por fuera, tiernas por dentro.</p>
+            <div class="prod-pie">
+              <span class="prod-precio">3,90 €<small> / unidad</small></span>
+              <button type="button" class="btn btn-ambar btn-peq anadir" data-id="p4">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9.5" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2.5 3.5h2.7l2.4 11h11l2-8H6.3"/></svg>Añadir
+              </button>
+            </div>
+          </div>
+        </article>
+              <article class="prod" data-cat="Menús">
+          <div class="prod-foto">
+            <div style="width:100%;height:150px;display:flex;align-items:center;justify-content:center;background:var(--crema3);color:var(--ambar)"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21V9"/><path d="M12 9c-2.4 0-4.4-2-4.4-4.4C10 4.6 12 6.6 12 9zM12 9c2.4 0 4.4-2 4.4-4.4C14 4.6 12 6.6 12 9z"/><path d="M12 14.5c-2 0-3.7-1.7-3.7-3.7M12 14.5c2 0 3.7-1.7 3.7-3.7"/></svg></div>                          <span class="prod-eti">Oferta</span>
+                      </div>
+          <div class="prod-cuerpo">
+            <h3>Menú Classic</h3>
+            <p>Classic Burger + patatas + bebida.</p>
+            <div class="prod-pie">
+              <span class="prod-precio">13,50 €<small> / menú</small></span>
+              <button type="button" class="btn btn-ambar btn-peq anadir" data-id="p5">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9.5" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2.5 3.5h2.7l2.4 11h11l2-8H6.3"/></svg>Añadir
+              </button>
+            </div>
+          </div>
+        </article>
+              <article class="prod" data-cat="Bebidas">
+          <div class="prod-foto">
+            <div style="width:100%;height:150px;display:flex;align-items:center;justify-content:center;background:var(--crema3);color:var(--ambar)"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21V9"/><path d="M12 9c-2.4 0-4.4-2-4.4-4.4C10 4.6 12 6.6 12 9zM12 9c2.4 0 4.4-2 4.4-4.4C14 4.6 12 6.6 12 9z"/><path d="M12 14.5c-2 0-3.7-1.7-3.7-3.7M12 14.5c2 0 3.7-1.7 3.7-3.7"/></svg></div>                      </div>
+          <div class="prod-cuerpo">
+            <h3>Batido de Oreo</h3>
+            <p>Cremoso y con trozos de galleta.</p>
+            <div class="prod-pie">
+              <span class="prod-precio">4,50 €<small> / unidad</small></span>
+              <button type="button" class="btn btn-ambar btn-peq anadir" data-id="p6">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9.5" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2.5 3.5h2.7l2.4 11h11l2-8H6.3"/></svg>Añadir
+              </button>
+            </div>
+          </div>
+        </article>
+              <article class="prod" data-cat="Postres">
+          <div class="prod-foto">
+            <div style="width:100%;height:150px;display:flex;align-items:center;justify-content:center;background:var(--crema3);color:var(--ambar)"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21V9"/><path d="M12 9c-2.4 0-4.4-2-4.4-4.4C10 4.6 12 6.6 12 9zM12 9c2.4 0 4.4-2 4.4-4.4C14 4.6 12 6.6 12 9z"/><path d="M12 14.5c-2 0-3.7-1.7-3.7-3.7M12 14.5c2 0 3.7-1.7 3.7-3.7"/></svg></div>                      </div>
+          <div class="prod-cuerpo">
+            <h3>Brownie con Helado</h3>
+            <p>Brownie casero recién hecho con helado de vainilla.</p>
+            <div class="prod-pie">
+              <span class="prod-precio">5,50 €<small> / unidad</small></span>
+              <button type="button" class="btn btn-ambar btn-peq anadir" data-id="p7">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9.5" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2.5 3.5h2.7l2.4 11h11l2-8H6.3"/></svg>Añadir
+              </button>
+            </div>
+          </div>
+        </article>
+          </div>
+  </div>
+</section>
+
+<!-- Pedido -->
+<section id="pedidos" style="background:var(--crema2)">
+  <div class="env">
+    <div class="cont-rejilla">
+      <div>
+        <span class="rotulo">Pedidos online</span>
+        <h2 style="margin-bottom:14px">Recoge en tienda o te lo llevamos</h2>
+        <p style="color:var(--apagado);margin-bottom:24px">Añade lo que quieras a la cesta,
+        elige cómo prefieres recibirlo y mándanos el pedido. Te confirmamos en unos minutos.</p>
+
+        <div class="cont-dato"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 9.5 5 4h14l1.5 5.5"/><path d="M3.5 9.5a2.8 2.8 0 0 0 5.6 0 2.8 2.8 0 0 0 5.8 0 2.8 2.8 0 0 0 5.6 0"/><path d="M5 12v8.5h14V12"/><path d="M9.5 20.5V15h5v5.5"/></svg><div>
+          <strong>Recogida en tienda</strong>
+          <span>Lista en 15-20 minutos</span></div></div>
+        <div class="cont-dato"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 7h10.5v9H2.5z"/><path d="M13 10h3.6l3.4 3.4V16H13z"/><circle cx="6.5" cy="18" r="1.8"/><circle cx="16.5" cy="18" r="1.8"/></svg><div>
+          <strong>Entrega a domicilio</strong>
+          <span>En 30 minutos. Pedido mínimo 12 €.</span></div></div>
+        <div class="cont-dato"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5.2l3.3 2"/></svg><div>
+          <strong>Pedidos para grupos</strong>
+          <span>Menús para eventos y grupos grandes, con 24 horas de antelación.</span></div></div>
+
+        <div class="horario" style="margin-top:26px">
+          <h3>Horario</h3>
+                      <div class="horario-fila"><b>Lunes a Domingo</b><span>12:00 - 23:30</span></div>
+                  </div>
+      </div>
+
+      <div class="horario">
+        <h3 style="margin-bottom:16px">Tu pedido</h3>
+        <div id="resumenPedido"></div>
+
+        <form id="formPedido" novalidate style="margin-top:18px">
+          <div class="opciones">
+            <label class="opcion">
+              <input type="radio" name="modo" value="recogida" checked>
+              <span><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 9.5 5 4h14l1.5 5.5"/><path d="M3.5 9.5a2.8 2.8 0 0 0 5.6 0 2.8 2.8 0 0 0 5.8 0 2.8 2.8 0 0 0 5.6 0"/><path d="M5 12v8.5h14V12"/><path d="M9.5 20.5V15h5v5.5"/></svg>Recoger en tienda<small>Gratis</small></span>
+            </label>
+            <label class="opcion">
+              <input type="radio" name="modo" value="entrega">
+              <span><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 7h10.5v9H2.5z"/><path d="M13 10h3.6l3.4 3.4V16H13z"/><circle cx="6.5" cy="18" r="1.8"/><circle cx="16.5" cy="18" r="1.8"/></svg>Entrega a domicilio<small>2,50 €</small></span>
+            </label>
+          </div>
+
+          <div class="dos">
+            <div class="campo"><label for="nombre">Nombre</label><input type="text" id="nombre" name="nombre" autocomplete="name"></div>
+            <div class="campo"><label for="telefono">Teléfono</label><input type="tel" id="telefono" name="telefono" autocomplete="tel"></div>
+          </div>
+          <div class="campo" id="campoDireccion" hidden>
+            <label for="direccion">Dirección de entrega</label>
+            <input type="text" id="direccion" name="direccion" autocomplete="street-address">
+          </div>
+          <div class="dos">
+            <div class="campo"><label for="dia">Día</label><input type="date" id="dia" name="dia"></div>
+            <div class="campo"><label for="hora">Hora</label>
+              <select id="hora" name="hora">
+                                  <option>09:00</option>
+                                  <option>10:00</option>
+                                  <option>11:00</option>
+                                  <option>12:00</option>
+                                  <option>13:00</option>
+                                  <option>17:00</option>
+                                  <option>18:00</option>
+                                  <option>19:00</option>
+                                  <option>20:00</option>
+                              </select>
+            </div>
+          </div>
+          <div class="campo"><label for="notas">Notas (alergias, celebración, etc.)</label><textarea id="notas" name="notas" rows="2"></textarea></div>
+
+          <button type="submit" class="btn btn-ambar" style="width:100%" id="btnEnviar"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 11.6a8.5 8.5 0 0 1-12.6 7.5L3.5 20.5l1.4-4.3A8.5 8.5 0 1 1 20.5 11.6z"/><path d="M8.9 8.4c.3-.7.6-.7.9-.7h.6c.2 0 .5 0 .7.5l.8 1.9c.1.2 0 .4-.1.6l-.4.5c-.1.2-.3.4-.1.7.2.4.9 1.4 1.9 2 1.2.7 1.4.5 1.7.5.2-.1.6-.5.7-.7.2-.2.3-.2.5-.1l1.8.9c.3.1.4.2.5.4 0 .2 0 .9-.3 1.3-.4.5-1.1.9-1.6.9-1.1.1-2.6-.3-4.4-1.5-2.1-1.4-3.4-3.5-3.5-3.7-.1-.2-.8-1.2-.8-2.3 0-1 .5-1.5.7-1.7z"/></svg>Enviar pedido por WhatsApp</button>
+          <div class="aviso-form" id="avisoPedido" role="status"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Nosotros -->
+<section id="nosotros">
+  <div class="env">
+    <div class="nos-rejilla">
+      <div class="nos-foto"><div style="width:100%;height:340px;display:flex;align-items:center;justify-content:center;background:var(--crema3);color:var(--ambar)"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21V9"/><path d="M12 9c-2.4 0-4.4-2-4.4-4.4C10 4.6 12 6.6 12 9zM12 9c2.4 0 4.4-2 4.4-4.4C14 4.6 12 6.6 12 9z"/><path d="M12 14.5c-2 0-3.7-1.7-3.7-3.7M12 14.5c2 0 3.7-1.7 3.7-3.7"/></svg></div></div>
+      <div class="nos-texto">
+        <span class="rotulo">Carne 100% fresca</span>
+        <h2 style="margin-bottom:14px">Hamburguesas hechas con pasión, cada día</h2>
+        <p>Somos una hamburguesería artesanal que trabaja con carne de vacuno 100% fresca, nunca congelada, y pan brioche horneado cada mañana.</p>
+        <p>Cada hamburguesa se hace al momento, a la plancha, con ingredientes seleccionados de proveedores locales.</p>
+        <ul class="nos-lista">
+                      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Carne de vacuno 100% fresca, nunca congelada.</span></li>
+                      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Pan brioche horneado cada día.</span></li>
+                      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Hecha al momento, nunca precocinada.</span></li>
+                      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Ingredientes de proveedores locales.</span></li>
+                  </ul>
+        <a href="#pedidos" class="btn btn-ambar">Hacer mi pedido</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contacto -->
+<section class="contacto" id="contacto">
+  <div class="env">
+    <div class="cont-rejilla">
+      <div>
+        <span class="rotulo">Dónde estamos</span>
+        <h2 style="margin-bottom:20px">Ven a vernos</h2>
+        <div class="cont-dato"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21.5s7-6.2 7-11.1A7 7 0 1 0 5 10.4c0 4.9 7 11.1 7 11.1z"/><circle cx="12" cy="10" r="2.6"/></svg><div><strong>Dirección</strong><span>Calle Gran Vía, 45 · 28013 Madrid</span></div></div>
+        <div class="cont-dato"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 16.5v2.6a1.9 1.9 0 0 1-2.1 1.9 18.8 18.8 0 0 1-8.2-2.9 18.4 18.4 0 0 1-5.7-5.7A18.8 18.8 0 0 1 2.1 4.1 1.9 1.9 0 0 1 4 2h2.6a1.9 1.9 0 0 1 1.9 1.6c.1.9.3 1.8.7 2.7a1.9 1.9 0 0 1-.4 2L7.6 9.5a15 15 0 0 0 5.7 5.7l1.2-1.2a1.9 1.9 0 0 1 2-.4c.9.3 1.8.6 2.7.7A1.9 1.9 0 0 1 21 16.5z"/></svg><div><strong>Teléfono</strong><span>910 555 123</span></div></div>
+        <div class="cont-dato"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2.4"/><path d="M2.5 7 12 13.5 21.5 7"/></svg><div><strong>Email</strong><span>pedidos@burgerhouse.es</span></div></div>
+      </div>
+      <div class="horario">
+        <h3>Horario de la tienda</h3>
+                  <div class="horario-fila"><b>Lunes a Domingo</b><span>12:00 - 23:30</span></div>
+              </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pie -->
+<footer class="pie">
+  <div class="env">
+    <div class="pie-rejilla">
+      <div>
+        <div class="marca" style="margin-bottom:14px">
+          <svg width="40" height="40" viewBox="0 0 48 48" fill="none" aria-hidden="true"><circle cx="24" cy="24" r="20" fill="#c9542f"/><path d="M13 19a11 7 0 0 1 22 0z" fill="#fff"/><path d="M13 24h22M14 28.5h20M15 33h18" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg>          <span class="marca-txt">
+            <strong>Burger</strong>
+            <span>House</span>
+          </span>
+        </div>
+        <p>Calle Gran Vía, 45 · 28013 Madrid<br>910 555 123<br>pedidos@burgerhouse.es</p>
+      </div>
+      <div>
+        <h4>Productos</h4>
+                  <a href="#productos">Hamburguesas Clásicas</a>
+                  <a href="#productos">Hamburguesas Especiales</a>
+                  <a href="#productos">Vegetarianas</a>
+                  <a href="#productos">Menús</a>
+                  <a href="#productos">Patatas y Extras</a>
+                  <a href="#productos">Bebidas</a>
+                  <a href="#productos">Postres</a>
+                  <a href="#productos">Ofertas</a>
+              </div>
+      <div>
+        <h4>Pedidos</h4>
+        <a href="#pedidos">Hacer un pedido</a>
+        <a href="#pedidos">Recogida en tienda</a>
+        <a href="#pedidos">Entrega a domicilio</a>
+        <a href="#pedidos">Encargos especiales</a>
+      </div>
+      <div>
+        <h4>Síguenos</h4>
+                  <a href="#" target="_blank" rel="noopener">Facebook</a>
+                  <a href="#" target="_blank" rel="noopener">Instagram</a>
+              </div>
+    </div>
+    <div class="pie-abajo">
+      <span>© <span id="anio">2026</span> Burger House. Todos los derechos reservados.</span>
+      <span>Plantilla demostrativa · Aviso legal · Privacidad · Cookies</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Cesta -->
+<div class="velo" id="velo"></div>
+<aside class="cajon" id="cajon" aria-label="Tu cesta">
+  <div class="cajon-cab">
+    <h2>Tu cesta</h2>
+    <button type="button" class="cerrar" id="cerrarCarrito" aria-label="Cerrar"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+  </div>
+  <div class="cajon-cuerpo" id="cajonCuerpo"></div>
+  <div class="cajon-pie" id="cajonPie"></div>
+</aside>
+
+  <a class="wa" href="https://wa.me/34600123456?text=Hola%2C%20me%20gustar%C3%ADa%20hacer%20un%20pedido." target="_blank" rel="noopener" aria-label="WhatsApp"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 11.6a8.5 8.5 0 0 1-12.6 7.5L3.5 20.5l1.4-4.3A8.5 8.5 0 1 1 20.5 11.6z"/><path d="M8.9 8.4c.3-.7.6-.7.9-.7h.6c.2 0 .5 0 .7.5l.8 1.9c.1.2 0 .4-.1.6l-.4.5c-.1.2-.3.4-.1.7.2.4.9 1.4 1.9 2 1.2.7 1.4.5 1.7.5.2-.1.6-.5.7-.7.2-.2.3-.2.5-.1l1.8.9c.3.1.4.2.5.4 0 .2 0 .9-.3 1.3-.4.5-1.1.9-1.6.9-1.1.1-2.6-.3-4.4-1.5-2.1-1.4-3.4-3.5-3.5-3.7-.1-.2-.8-1.2-.8-2.3 0-1 .5-1.5.7-1.7z"/></svg></a>
+
+<script type="application/json" id="datosCatalogo">[{"id":"p0","nombre":"Classic Burger","precio":9.9,"unidad":"unidad","imagen":""},{"id":"p1","nombre":"Bacon BBQ Burger","precio":11.5,"unidad":"unidad","imagen":""},{"id":"p2","nombre":"Cheese Deluxe","precio":12.9,"unidad":"unidad","imagen":""},{"id":"p3","nombre":"Veggie Burger","precio":10.5,"unidad":"unidad","imagen":""},{"id":"p4","nombre":"Patatas Fritas Grandes","precio":3.9,"unidad":"unidad","imagen":""},{"id":"p5","nombre":"Menú Classic","precio":13.5,"unidad":"menú","imagen":""},{"id":"p6","nombre":"Batido de Oreo","precio":4.5,"unidad":"unidad","imagen":""},{"id":"p7","nombre":"Brownie con Helado","precio":5.5,"unidad":"unidad","imagen":""}]</script>
+<script type="application/json" id="datosEnvio">{"coste":2.5,"minimo":12,"whatsapp":"34600123456","negocio":"Burger House"}</script>
+<script src="js/main.js"></script>
+</body>
+</html>

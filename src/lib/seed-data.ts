@@ -585,6 +585,28 @@ const seed: SeedTemplate[] = [
       SEO,
     ],
   },
+  {
+    id: `${TPL}24`,
+    categorySlug: "hamburgueseria",
+    title: "Hamburguesería Premium",
+    slug: "hamburgueseria-premium",
+    short_description: "Hamburguesería con pedidos online, cesta de la compra y entrega o recogida en tienda.",
+    full_description:
+      "Para hamburgueserías y locales de comida rápida de calidad: catálogo de hamburguesas por categorías con filtros, cesta de la compra que recuerda lo elegido, elección entre recoger en tienda o entrega a domicilio con su coste y su pedido mínimo, y un formulario que arma el pedido completo y lo manda al WhatsApp del negocio. Sin comisiones por pedido. Paleta negro + terracota, tipografía Playfair Display.",
+    price_cents: 19900,
+    preview_url: "/demos/hamburgueseria-premium/index.html",
+    gradient: "linear-gradient(160deg,#1a1210,#c9542f 55%,#0d0d0d)",
+    features: [
+      "Catálogo de hamburguesas con filtros por categoría",
+      "Cesta de la compra que no se pierde al cerrar",
+      "Recogida en tienda o entrega, con pedido mínimo",
+      "El pedido llega entero por WhatsApp",
+      "Sin comisiones y sin pasarela que configurar",
+      "Horarios, historia del negocio y contacto",
+      RESPONSIVE,
+      SEO,
+    ],
+  },
 ];
 
 /** Degradado por slug — respaldo de miniatura en las tarjetas. */
