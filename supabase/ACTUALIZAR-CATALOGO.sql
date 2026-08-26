@@ -25,6 +25,14 @@ select 'ANTES' as momento,
        (select count(*) from public.categories)                           as categorias,
        (select count(*) from public.templates where status = 'published') as plantillas;
 
+-- Cómo estaba cada plantilla ANTES de este script (para ver si tenía
+-- una preview_url o thumbnail_url vieja/rota). Compárala con la tabla
+-- de "DESPUÉS" al final: si aquí salía una ruta distinta a la de abajo,
+-- esa era la causa de la imagen o el enlace roto.
+select t.slug, t.preview_url, t.thumbnail_url, t.status
+  from public.templates t
+ order by t.slug;
+
 
 -- ------------------------------------------------------------
 --  PASO 1 — juntar las categorías de restaurante en una sola
@@ -377,6 +385,14 @@ select t.title, t.slug, c.name as categoria, t.price_cents / 100 as euros
  where t.status = 'published'
  order by c.name, t.price_cents desc;
 
+-- Preview y miniatura de cada plantilla, ya corregidas. Las 29 filas
+-- tienen que tener preview_url = /demos/<slug>/index.html y
+-- thumbnail_url = /thumbnails/<slug>.jpg. Si alguna sale distinta o
+-- vacía, avísame con el slug exacto.
+select t.slug, t.preview_url, t.thumbnail_url, t.status
+  from public.templates t
+ order by t.slug;
+
 -- Tiene que salir UNA sola fila de restaurante.
 select name, slug from public.categories where slug like '%restaurante%';
 
@@ -386,3 +402,13 @@ select t.title, t.slug, t.category_id
   from public.templates t
   left join public.categories c on c.id = t.category_id
  where t.status = 'published' and c.id is null;
+
+-- Tienen que salir exactamente 29 filas (una por categoría, ninguna
+-- categoría con más de una plantilla publicada faltando ni ninguna
+-- categoría sin plantilla). Si sale un número distinto de 29, dime
+-- cuáles categorías aparecen repetidas o cuáles no aparecen.
+select c.name as categoria, count(t.id) as plantillas_publicadas
+  from public.categories c
+  left join public.templates t on t.category_id = c.id and t.status = 'published'
+ group by c.name
+ order by plantillas_publicadas, c.name;
