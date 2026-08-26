@@ -168,6 +168,14 @@ h3{font-size:16px;font-weight:700}
 .portada h1 em{font-style:normal;color:var(--terra)}
 .portada p{color:#d6e6ee;margin-bottom:26px;max-width:420px}
 .portada-botones{display:flex;gap:12px;flex-wrap:wrap}
+.portada-figuras{position:absolute;z-index:2;right:6%;top:50%;transform:translateY(-50%);
+  width:280px;height:280px;pointer-events:none}
+.figura{position:absolute;display:flex;align-items:center;justify-content:center;
+  border-radius:50%;color:#fff;box-shadow:0 18px 40px rgba(0,0,0,.35)}
+.figura-0{top:6%;left:2%}
+.figura-1{bottom:8%;right:0}
+.figura-2{top:38%;right:32%}
+@media (max-width:900px){.portada-figuras{display:none}}
 .puntos{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);z-index:4;
   display:flex;gap:8px}
 .punto{width:8px;height:8px;border-radius:50%;border:1px solid rgba(255,255,255,.6);
