@@ -1,14 +1,15 @@
 /* ==========================================================================
-   Pet Shop — carrito, favoritos y menú
-   Todo ocurre en el navegador. Al pedir, se abre WhatsApp con el detalle.
+   Pet Shop Premium — carrito y cajón lateral
+   Todo ocurre en el navegador. Al finalizar el pedido se abre WhatsApp
+   con el detalle de la compra.
    ========================================================================== */
 (function () {
   'use strict';
 
   var CATALOGO = leerJSON('datosCatalogo', []);
   var ENVIO    = leerJSON('datosEnvio', { whatsapp: '', negocio: '' });
+  var GALERIA  = leerJSON('datosGaleria', []);
   var LLAVE    = 'petshop_carrito';
-  var LLAVE_FAV = 'petshop_favoritos';
 
   function leerJSON(id, respaldo) {
     var el = document.getElementById(id);
@@ -66,21 +67,9 @@
     pintar();
   }
 
-  /* ---------------- Favoritos ---------------- */
-
-  var favoritos = cargarFav();
-
-  function cargarFav() {
-    try { return JSON.parse(localStorage.getItem(LLAVE_FAV) || '[]'); } catch (e) { return []; }
-  }
-  function guardarFav() {
-    try { localStorage.setItem(LLAVE_FAV, JSON.stringify(favoritos)); } catch (e) { /* modo privado */ }
-  }
-
   /* ---------------- Pintar ---------------- */
 
   var elNum    = document.getElementById('carritoNum');
-  var elTotal  = document.getElementById('carritoTotal');
   var elCuerpo = document.getElementById('cajonCuerpo');
   var elPie    = document.getElementById('cajonPie');
 
@@ -99,7 +88,6 @@
           '<button type="button" class="linea-quitar" data-quitar="' + id + '">Quitar</button>' +
         '</div>' +
       '</div>' +
-      '<div class="linea-precio">' + euros(p.precio * n) + '</div>' +
     '</div>';
   }
 
@@ -107,84 +95,49 @@
     var ids = Object.keys(carrito);
     var total = unidades();
 
-    if (elNum) {
-      elNum.textContent = total;
-      elNum.hidden = total === 0;
-    }
-    if (elTotal) elTotal.textContent = euros(subtotal());
+    if (elNum) elNum.textContent = total;
 
     if (elCuerpo) {
       elCuerpo.innerHTML = ids.length
         ? ids.map(lineaHTML).join('')
-        : '<div class="vacio">' +
-            '<svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">' +
-            '<circle cx="9.5" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/>' +
-            '<path d="M2.5 3.5h2.7l2.4 11h11l2-8H6.3"/></svg>' +
-            '<p>Tu carrito está vacío.<br>Añade algún producto para tu mascota.</p>' +
-          '</div>';
+        : '<div class="cajon-vacio">Tu carrito está vacío.<br>Añade algún producto para tu mascota.</div>';
     }
 
     if (elPie) {
       if (!ids.length) {
         elPie.innerHTML = '';
       } else {
-        var sub = subtotal();
         elPie.innerHTML =
-          '<div class="total grande"><span>Total</span><b>' + euros(sub) + '</b></div>' +
-          '<button type="button" class="btn btn-terra" style="width:100%;margin-top:14px" id="finalizarPedido">Finalizar pedido</button>';
+          '<div class="cajon-total"><span>Total</span><b>' + euros(subtotal()) + '</b></div>' +
+          '<button type="button" class="boton-primario" id="finalizarPedido">Finalizar pedido</button>';
       }
     }
   }
 
-  function pintarFavoritos() {
-    [].forEach.call(document.querySelectorAll('[data-fav]'), function (b) {
-      var art = b.closest('.prod');
-      var boton = art ? art.querySelector('.anadir') : null;
-      var id = boton ? boton.dataset.id : null;
-      var activo = id && favoritos.indexOf(id) !== -1;
-      b.classList.toggle('act', !!activo);
-      if (id) b.dataset.favId = id;
-    });
-  }
+  /* ---------------- Abrir y cerrar el cajón ---------------- */
 
-  /* ---------------- Abrir y cerrar el carrito ---------------- */
-
-  var velo  = document.getElementById('velo');
+  var fondo = document.getElementById('cajonFondo');
   var cajon = document.getElementById('cajon');
 
   function abrirCarrito(abrir) {
-    if (!cajon || !velo) return;
-    cajon.classList.toggle('ver', abrir);
-    velo.classList.toggle('ver', abrir);
+    if (!cajon || !fondo) return;
+    cajon.classList.toggle('abierto', abrir);
+    fondo.classList.toggle('abierto', abrir);
     document.body.style.overflow = abrir ? 'hidden' : '';
   }
 
-  var btnAbrir = document.getElementById('abrirCarrito');
+  var btnAbrir = document.getElementById('botonCarrito');
   if (btnAbrir) btnAbrir.addEventListener('click', function () { abrirCarrito(true); });
-  var btnCerrar = document.getElementById('cerrarCarrito');
+  var btnCerrar = document.getElementById('cajonCerrar');
   if (btnCerrar) btnCerrar.addEventListener('click', function () { abrirCarrito(false); });
-  if (velo) velo.addEventListener('click', function () { abrirCarrito(false); });
+  if (fondo) fondo.addEventListener('click', function () { abrirCarrito(false); });
   document.addEventListener('keydown', function (ev) {
     if (ev.key === 'Escape') abrirCarrito(false);
   });
 
-  /* ---------------- Clics: añadir, favoritos, cantidad ---------------- */
+  /* ---------------- Clics: añadir y cantidad ---------------- */
 
   document.addEventListener('click', function (ev) {
-    var fav = ev.target.closest('[data-fav]');
-    if (fav) {
-      var art = fav.closest('.prod');
-      var boton = art ? art.querySelector('.anadir') : null;
-      var id = boton ? boton.dataset.id : null;
-      if (id) {
-        var pos = favoritos.indexOf(id);
-        if (pos === -1) favoritos.push(id); else favoritos.splice(pos, 1);
-        guardarFav();
-        pintarFavoritos();
-      }
-      return;
-    }
-
     var b = ev.target.closest('button, a');
     if (!b) return;
 
@@ -216,74 +169,35 @@
       abrirCarrito(false);
       return;
     }
+
+    if (b.classList.contains('prod-flecha-der') || b.classList.contains('prod-flecha-izq')) {
+      var fila = document.querySelector('.prod-fila');
+      if (fila) {
+        var paso = fila.clientWidth * 0.6;
+        fila.scrollBy({ left: b.classList.contains('prod-flecha-der') ? paso : -paso, behavior: 'smooth' });
+      }
+      return;
+    }
   });
 
-  /* ---------------- Menú móvil ---------------- */
+  /* ---------------- Galería de la portada (flechas y puntos reales) ---------------- */
 
-  var boton = document.getElementById('abrirMenu');
-  var menu  = document.getElementById('menuMovil');
-  if (boton && menu) {
-    boton.addEventListener('click', function () {
-      var abierto = menu.classList.toggle('ver');
-      boton.setAttribute('aria-expanded', abierto ? 'true' : 'false');
-    });
-    menu.addEventListener('click', function (ev) {
-      if (ev.target.closest('a')) {
-        menu.classList.remove('ver');
-        boton.setAttribute('aria-expanded', 'false');
-      }
-    });
+  var imgPortada = document.getElementById('portadaFotoImg');
+  var puntos = document.querySelectorAll('.portada-puntos span');
+  var slideActual = 0;
+
+  function irASlide(i) {
+    if (!imgPortada || !GALERIA.length) return;
+    slideActual = ((i % GALERIA.length) + GALERIA.length) % GALERIA.length;
+    imgPortada.src = GALERIA[slideActual];
+    puntos.forEach(function (p, idx) { p.classList.toggle('activo', idx === slideActual); });
   }
 
-  /* ---------------- Marcar la sección que se ve ---------------- */
-
-  var destinos = [].slice.call(document.querySelectorAll('.menu a[href^="#"]'))
-    .map(function (a) { return { a: a, sec: document.querySelector(a.getAttribute('href')) }; })
-    .filter(function (d) { return d.sec; });
-
-  if (destinos.length) {
-    var repintar = function () {
-      var y = window.scrollY + 150, activo = null;
-      destinos.forEach(function (d) { if (d.sec.offsetTop <= y) activo = d; });
-      destinos.forEach(function (d) { d.a.classList.toggle('act', d === activo); });
-    };
-    var esperando = false;
-    window.addEventListener('scroll', function () {
-      if (esperando) return;
-      esperando = true;
-      window.requestAnimationFrame(function () { repintar(); esperando = false; });
-    }, { passive: true });
-    repintar();
-  }
-
-  /* ---------------- Carrusel de la portada ---------------- */
-
-  var puntos = [].slice.call(document.querySelectorAll('.puntos .punto'));
-  if (puntos.length > 1) {
-    var actual = 0;
-    var avanzar = function () {
-      actual = (actual + 1) % puntos.length;
-      puntos.forEach(function (p, i) { p.classList.toggle('act', i === actual); });
-    };
-    setInterval(avanzar, 4500);
-    var flecha = document.querySelector('.flecha');
-    if (flecha) flecha.addEventListener('click', avanzar);
-  }
-
-  /* ---------------- Newsletter ---------------- */
-
-  var nlForm = document.getElementById('formNewsletter');
-  if (nlForm) {
-    nlForm.addEventListener('submit', function (ev) {
-      ev.preventDefault();
-      var btn = nlForm.querySelector('button');
-      if (btn) { btn.textContent = '✓ ¡Gracias!'; setTimeout(function () { btn.textContent = 'Suscribirme'; nlForm.reset(); }, 2200); }
-    });
-  }
-
-  var anio = document.getElementById('anio');
-  if (anio) anio.textContent = new Date().getFullYear();
+  var flechaIzq = document.querySelector('.portada-flecha-izq');
+  var flechaDer = document.querySelector('.portada-flecha-der');
+  if (flechaIzq) flechaIzq.addEventListener('click', function () { irASlide(slideActual - 1); });
+  if (flechaDer) flechaDer.addEventListener('click', function () { irASlide(slideActual + 1); });
+  puntos.forEach(function (p, idx) { p.addEventListener('click', function () { irASlide(idx); }); });
 
   pintar();
-  pintarFavoritos();
 })();
