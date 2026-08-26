@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Delicias Panadería — carrito y pedidos
+   BurgerMax — cesta y pedidos
    Todo ocurre en el navegador: no hace falta servidor para que el cliente
    monte su pedido. Al enviarlo se abre WhatsApp con el detalle escrito.
    ========================================================================== */
@@ -8,7 +8,7 @@
 
   var CATALOGO = leerJSON('datosCatalogo', []);
   var ENVIO    = leerJSON('datosEnvio', { coste: 0, minimo: 0, whatsapp: '', negocio: '' });
-  var LLAVE    = 'pizzeria_cesta';
+  var LLAVE    = 'pizza_cesta';
 
   function leerJSON(id, respaldo) {
     var el = document.getElementById(id);
@@ -34,7 +34,6 @@
   function cargar() {
     try {
       var guardado = JSON.parse(localStorage.getItem(LLAVE) || '{}');
-      // Solo conservamos lo que sigue existiendo en el catálogo.
       var limpia = {};
       Object.keys(guardado).forEach(function (id) {
         if (porId(id) && guardado[id] > 0) limpia[id] = Math.min(guardado[id], 99);
@@ -81,14 +80,12 @@
 
   function lineaHTML(id) {
     var p = porId(id), n = cesta[id];
-    var foto = p.imagen
-      ? '<img src="' + p.imagen + '" alt="">'
-      : '';
+    var foto = p.imagen ? '<img src="' + p.imagen + '" alt="">' : '';
     return '<div class="linea-prod">' +
       '<div class="linea-foto">' + foto + '</div>' +
       '<div class="linea-txt">' +
         '<strong>' + p.nombre + '</strong>' +
-        '<span>' + euros(p.precio) + (p.unidad ? ' / ' + p.unidad : '') + '</span>' +
+        '<span>' + euros(p.precio) + '</span>' +
         '<div class="contador">' +
           '<button type="button" data-menos="' + id + '" aria-label="Quitar uno">−</button>' +
           '<b>' + n + '</b>' +
@@ -132,7 +129,7 @@
             ? '<div class="total"><span>Entrega</span><span>' + euros(envio) + '</span></div>'
             : '<div class="total"><span>Recogida en tienda</span><span>Gratis</span></div>') +
           '<div class="total grande"><span>Total</span><b>' + euros(sub + envio) + '</b></div>' +
-          '<a href="#pedidos" class="btn btn-ambar" style="width:100%;margin-top:14px" id="irAPedido">Continuar con el pedido</a>';
+          '<a href="#pedidos" class="btn btn-naranja btn-ancho" style="margin-top:14px" id="irAPedido">Continuar con el pedido</a>';
       }
     }
 
@@ -140,7 +137,7 @@
       if (!ids.length) {
         elResumen.innerHTML = '<div class="vacio" style="padding:26px 8px">' +
           '<p>Todavía no has añadido nada.<br>' +
-          '<a href="#productos" style="color:var(--ambar-osc);text-decoration:underline">Ver los productos</a></p></div>';
+          '<a href="#productos" style="color:var(--naranja);text-decoration:underline">Ver el menú</a></p></div>';
       } else {
         var s = subtotal(), e2 = conEntrega() ? ENVIO.coste : 0;
         elResumen.innerHTML = ids.map(function (id) {
@@ -191,37 +188,24 @@
       setTimeout(function () { b.innerHTML = antes; b.disabled = false; }, 900);
       return;
     }
+    if (b.classList.contains('prod-fav')) {
+      b.classList.toggle('activo');
+      return;
+    }
     if (b.dataset.mas)    { anadir(b.dataset.mas, 1); return; }
     if (b.dataset.menos)  { anadir(b.dataset.menos, -1); return; }
     if (b.dataset.quitar) { delete cesta[b.dataset.quitar]; guardar(); pintar(); return; }
     if (b.id === 'irAPedido') { abrirCesta(false); return; }
   });
 
-  /* ---------------- Filtros de categoría ---------------- */
+  /* ---------------- Filtro de categorías (ancla directa a productos) ---------------- */
 
-  var filtros = document.getElementById('filtros');
-  if (filtros) {
-    var tarjetas = [].slice.call(document.querySelectorAll('.prod'));
-
-    var filtrar = function (valor) {
-      tarjetas.forEach(function (t) {
-        t.style.display = (valor === 'todos' || t.dataset.cat === valor) ? '' : 'none';
-      });
-      [].forEach.call(filtros.querySelectorAll('.filtro'), function (f) {
-        f.classList.toggle('act', f.dataset.filtro === valor);
-      });
-    };
-
-    filtros.addEventListener('click', function (ev) {
-      var f = ev.target.closest('.filtro');
-      if (f) filtrar(f.dataset.filtro);
+  [].forEach.call(document.querySelectorAll('.cat-item[data-cat]'), function (c) {
+    c.addEventListener('click', function () {
+      [].forEach.call(document.querySelectorAll('.cat-item'), function (o) { o.classList.remove('activo'); });
+      c.classList.add('activo');
     });
-
-    // Las tarjetas de categoría de arriba también filtran.
-    [].forEach.call(document.querySelectorAll('.cat[data-cat]'), function (c) {
-      c.addEventListener('click', function () { filtrar(c.dataset.cat); });
-    });
-  }
+  });
 
   /* ---------------- Menú móvil ---------------- */
 
@@ -250,7 +234,7 @@
     var repintar = function () {
       var y = window.scrollY + 150, activo = null;
       destinos.forEach(function (d) { if (d.sec.offsetTop <= y) activo = d; });
-      destinos.forEach(function (d) { d.a.classList.toggle('act', d === activo); });
+      destinos.forEach(function (d) { d.a.classList.toggle('activo', d === activo); });
     };
     var esperando = false;
     window.addEventListener('scroll', function () {
@@ -259,6 +243,22 @@
       window.requestAnimationFrame(function () { repintar(); esperando = false; });
     }, { passive: true });
     repintar();
+  }
+
+  /* ---------------- Tarjeta "Pide tu pedido" de la portada ---------------- */
+
+  var tabsPedido = document.querySelectorAll('.pedido-tab');
+  var campoDirPedido = document.getElementById('pedidoCampoDir');
+  if (tabsPedido.length) {
+    tabsPedido.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        tabsPedido.forEach(function (t) { t.classList.toggle('activo', t === tab); });
+        var modo = tab.dataset.modo;
+        var radio = document.querySelector('input[name="modo"][value="' + modo + '"]');
+        if (radio) { radio.checked = true; radio.dispatchEvent(new Event('change')); }
+        if (campoDirPedido) campoDirPedido.hidden = modo !== 'entrega';
+      });
+    });
   }
 
   /* ---------------- El formulario de pedido ---------------- */
@@ -270,7 +270,6 @@
 
     var decir = function (t, c) { aviso.textContent = t; aviso.className = 'aviso-form ' + c; };
 
-    // La dirección solo hace falta si te lo llevamos.
     [].forEach.call(form.querySelectorAll('input[name="modo"]'), function (r) {
       r.addEventListener('change', function () {
         if (campoDir) campoDir.hidden = !conEntrega();
@@ -278,12 +277,17 @@
       });
     });
 
-    // No se puede encargar para ayer.
     var hoy = new Date().toISOString().slice(0, 10);
     if (form.dia) { form.dia.min = hoy; if (!form.dia.value) form.dia.value = hoy; }
 
     form.addEventListener('submit', function (ev) {
       ev.preventDefault();
+
+      // Si el cliente escribió la dirección en la tarjeta de la portada, la copiamos aquí.
+      var dirPortada = document.getElementById('pedidoDireccion');
+      if (dirPortada && dirPortada.value.trim() && !form.direccion.value.trim()) {
+        form.direccion.value = dirPortada.value.trim();
+      }
 
       if (!Object.keys(cesta).length) {
         decir('Tu cesta está vacía. Añade algún producto antes de enviar el pedido.', 'mal');
@@ -311,7 +315,6 @@
         decir('Elige el día del pedido.', 'mal'); form.dia.focus(); return;
       }
 
-      // Armamos el mensaje con todo el detalle.
       var lineas = ['*Nuevo pedido — ' + ENVIO.negocio + '*', ''];
       Object.keys(cesta).forEach(function (id) {
         var p = porId(id);
@@ -343,6 +346,17 @@
 
   var anio = document.getElementById('anio');
   if (anio) anio.textContent = new Date().getFullYear();
+
+  window.enviarNewsletter = function (ev) {
+    ev.preventDefault();
+    var form2 = ev.target;
+    var boton2 = form2.querySelector('button');
+    var antes = boton2.textContent;
+    boton2.textContent = '¡Gracias!';
+    boton2.disabled = true;
+    setTimeout(function () { boton2.textContent = antes; boton2.disabled = false; form2.reset(); }, 1800);
+    return false;
+  };
 
   pintar();
 })();
