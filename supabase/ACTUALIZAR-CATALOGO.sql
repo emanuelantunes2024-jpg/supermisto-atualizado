@@ -266,6 +266,33 @@ values
    'Para pizzerías y restaurantes italianos que quieren vender sin depender de las plataformas de reparto: catálogo de pizzas por categorías con filtros, cesta de la compra que recuerda lo elegido, elección entre recoger en tienda o entrega a domicilio con su coste y su pedido mínimo, y un formulario que arma el pedido completo y lo manda al WhatsApp del negocio. Sin comisiones por pedido. Paleta negro + rojo italiano, tipografía Playfair Display.',
    19900, '/demos/pizzeria-premium/index.html', '/thumbnails/pizzeria-premium.jpg',
    '["Catálogo de pizzas con filtros por categoría", "Cesta de la compra que no se pierde al cerrar", "Recogida en tienda o entrega, con pedido mínimo", "El pedido llega entero por WhatsApp", "Sin comisiones y sin pasarela que configurar", "Horarios, historia del negocio y contacto", "Responsive (móvil, tablet y desktop)", "Optimizado para Google (SEO)"]'::jsonb,
+   'published'),
+
+  ('22222222-2222-4222-8222-000000000021',
+   '11111111-1111-4111-8111-000000000009',
+   'Boutique de Moda Premium', 'boutique-moda-premium',
+   'Boutique de moda online con catálogo, ofertas y carrito de compra.',
+   'Para boutiques de moda y tiendas de ropa: catálogo con descuentos destacados, ocho categorías filtrables (mujer, hombre, calzado, accesorios...), carrito de la compra con favoritos y pedido que se envía por WhatsApp. Paleta rosa + terracota, tipografía Inter. No necesita fotos de producto: todo se muestra con iconos propios.',
+   19900, '/demos/boutique-moda-premium/index.html', '/thumbnails/boutique-moda-premium.jpg',
+   '["Catálogo con descuentos destacados", "8 categorías filtrables", "Carrito de la compra con favoritos", "El pedido llega por WhatsApp", "Sin fotos: todo ilustrado, carga al instante", "Newsletter y franja de confianza", "Responsive (móvil, tablet y desktop)", "Optimizado para Google (SEO)"]'::jsonb,
+   'published'),
+
+  ('22222222-2222-4222-8222-000000000022',
+   '11111111-1111-4111-8111-000000000023',
+   'Electrónica Premium', 'electronica-premium',
+   'Tienda de electrónica con catálogo, ofertas y carrito de compra.',
+   'Para tiendas de electrónica y tecnología: catálogo con descuentos destacados, ocho categorías filtrables (móviles, portátiles, audio, gaming...), carrito de la compra con favoritos y pedido que se envía por WhatsApp. Paleta azul + morado, tipografía Inter. No necesita fotos de producto: todo se muestra con iconos propios.',
+   21900, '/demos/electronica-premium/index.html', '/thumbnails/electronica-premium.jpg',
+   '["Catálogo con descuentos destacados", "8 categorías filtrables", "Carrito de la compra con favoritos", "El pedido llega por WhatsApp", "Sin fotos: todo ilustrado, carga al instante", "Newsletter y franja de confianza", "Responsive (móvil, tablet y desktop)", "Optimizado para Google (SEO)"]'::jsonb,
+   'published'),
+
+  ('22222222-2222-4222-8222-000000000023',
+   '11111111-1111-4111-8111-000000000016',
+   'Materiales de Construcción Premium', 'materiales-construccion-premium',
+   'Almacén de materiales de construcción con catálogo y carrito de compra.',
+   'Para almacenes de materiales de construcción y ferreterías: catálogo con ocho categorías filtrables (cemento, ladrillos, herramientas, maquinaria...), carrito de la compra con favoritos y pedido que se envía por WhatsApp. Paleta terracota + amarillo, tipografía Inter. No necesita fotos de producto: todo se muestra con iconos propios.',
+   21900, '/demos/materiales-construccion-premium/index.html', '/thumbnails/materiales-construccion-premium.jpg',
+   '["Catálogo con 8 categorías filtrables", "Carrito de la compra con favoritos", "El pedido llega por WhatsApp", "Sin fotos: todo ilustrado, carga al instante", "Newsletter y franja de confianza", "Pensado para almacenes y ferreterías", "Responsive (móvil, tablet y desktop)", "Optimizado para Google (SEO)"]'::jsonb,
    'published')
 
 on conflict (id) do update
