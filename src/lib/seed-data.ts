@@ -497,6 +497,28 @@ const seed: SeedTemplate[] = [
       SEO,
     ],
   },
+  {
+    id: `${TPL}20`,
+    categorySlug: "pizzeria",
+    title: "Pizzería Premium",
+    slug: "pizzeria-premium",
+    short_description: "Pizzería con pedidos online, cesta de la compra y entrega o recogida en tienda.",
+    full_description:
+      "Para pizzerías y restaurantes italianos que quieren vender sin depender de las plataformas de reparto: catálogo de pizzas por categorías con filtros, cesta de la compra que recuerda lo elegido, elección entre recoger en tienda o entrega a domicilio con su coste y su pedido mínimo, y un formulario que arma el pedido completo y lo manda al WhatsApp del negocio. Sin comisiones por pedido. Paleta negro + rojo italiano, tipografía Playfair Display.",
+    price_cents: 19900,
+    preview_url: "/demos/pizzeria-premium/index.html",
+    gradient: "linear-gradient(160deg,#1a1210,#c0392b 55%,#0d0d0d)",
+    features: [
+      "Catálogo de pizzas con filtros por categoría",
+      "Cesta de la compra que no se pierde al cerrar",
+      "Recogida en tienda o entrega, con pedido mínimo",
+      "El pedido llega entero por WhatsApp",
+      "Sin comisiones y sin pasarela que configurar",
+      "Horarios, historia del negocio y contacto",
+      RESPONSIVE,
+      SEO,
+    ],
+  },
 ];
 
 /** Degradado por slug — respaldo de miniatura en las tarjetas. */

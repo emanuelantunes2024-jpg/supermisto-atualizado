@@ -257,6 +257,15 @@ values
    'Para empresas de obras y construcción: diez áreas de servicio con ficha propia (reformas integrales, obra nueva, rehabilitación...), proceso de trabajo en cuatro pasos, cifras de la empresa, opiniones de clientes, blog y formulario de presupuesto con validación. Paleta azul noche + dorado, tipografía Playfair Display. No necesita fotos: todo en vectores, carga al instante.',
    24900, '/demos/obras-construccion-premium/index.html', '/thumbnails/obras-construccion-premium.jpg',
    '["10 áreas de servicio con icono propio", "Formulario de presupuesto con validación", "Proceso de trabajo en cuatro pasos", "Blog y preguntas frecuentes", "Botones de WhatsApp, teléfono y email", "Sin fotos: todo en vectores, carga al instante", "Responsive (móvil, tablet y desktop)", "Optimizado para Google (SEO)"]'::jsonb,
+   'published'),
+
+  ('22222222-2222-4222-8222-000000000020',
+   '11111111-1111-4111-8111-000000000015',
+   'Pizzería Premium', 'pizzeria-premium',
+   'Pizzería con pedidos online, cesta de la compra y entrega o recogida en tienda.',
+   'Para pizzerías y restaurantes italianos que quieren vender sin depender de las plataformas de reparto: catálogo de pizzas por categorías con filtros, cesta de la compra que recuerda lo elegido, elección entre recoger en tienda o entrega a domicilio con su coste y su pedido mínimo, y un formulario que arma el pedido completo y lo manda al WhatsApp del negocio. Sin comisiones por pedido. Paleta negro + rojo italiano, tipografía Playfair Display.',
+   19900, '/demos/pizzeria-premium/index.html', '/thumbnails/pizzeria-premium.jpg',
+   '["Catálogo de pizzas con filtros por categoría", "Cesta de la compra que no se pierde al cerrar", "Recogida en tienda o entrega, con pedido mínimo", "El pedido llega entero por WhatsApp", "Sin comisiones y sin pasarela que configurar", "Horarios, historia del negocio y contacto", "Responsive (móvil, tablet y desktop)", "Optimizado para Google (SEO)"]'::jsonb,
    'published')
 
 on conflict (id) do update
