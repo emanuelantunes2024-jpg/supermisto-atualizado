@@ -332,5 +332,3 @@ h3{font-size:20px;}
   .llamada .env{flex-direction:column;align-items:flex-start;}
   .barra-top .izq span:nth-child(n+2){display:none;}
 }
-
-html,body{overflow-x:hidden;max-width:100%}
