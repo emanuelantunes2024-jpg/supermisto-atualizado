@@ -113,3 +113,27 @@ Dos formas, sin tocar código:
 El proyecto es una SPA estática: `npm run build` genera `/dist`, que puede
 subirse directamente a Vercel, Netlify, GitHub Pages o cualquier hosting estático.
 No requiere variables de entorno ni configuración de servidor.
+
+### Vercel — proyecto independiente (importante)
+
+Este repositorio también contiene el sitio principal de **Leuname Software**
+(Next.js, en la raíz). Son dos aplicaciones distintas que **no comparten
+proyecto de Vercel**. Para publicar Recetas & Rendimiento con su propia URL,
+sin tocar el proyecto del sitio principal:
+
+1. En Vercel → **Add New → Project**.
+2. Importá este mismo repositorio (`leuname-software`) **de nuevo**, como un
+   proyecto nuevo (no reutilices el proyecto del sitio principal).
+3. En **Root Directory**, elegí `recetas-rendimiento`.
+4. Framework Preset: **Vite** (se detecta solo gracias a `vercel.json`).
+   Build Command y Output Directory ya quedan definidos en ese archivo.
+5. Deploy.
+
+El archivo `recetas-rendimiento/vercel.json` ya trae el `buildCommand`, el
+`outputDirectory` y el rewrite catch-all necesario para que las rutas de
+React Router (`/recetas/algo`, `/admin`, etc.) funcionen al refrescar o
+entrar por link directo.
+
+El proyecto de Vercel del sitio principal sigue apuntando a la raíz del
+repo (`/`) y no necesita ningún cambio: seguirá compilando y sirviendo
+únicamente el sitio de Leuname Software, igual que antes.
