@@ -4,6 +4,13 @@
 //
 // Acepta el formato v2 de Hotmart (evento + data.buyer.email). Responde 200
 // siempre que el payload sea válido, como pide Hotmart para no reintentar.
+// No inventa endpoints ni credenciales: solo lee campos del payload oficial
+// de Hotmart (evento, comprador, compra, producto y — cuando el producto es
+// una suscripción recurrente — el bloque "subscription"). Los campos que
+// dependen del tipo de producto/plan (código de suscriptor, próxima fecha de
+// cobro) se leen de forma defensiva: si Hotmart no los manda en un evento
+// puntual, quedan en null sin romper nada — conviene revisar con un evento
+// real una vez conectada la cuenta.
 
 import { guardarAcceso } from './_lib/redis.js';
 
@@ -13,11 +20,14 @@ const EVENTOS_ACTIVAN = new Set([
   'SUBSCRIPTION_REACTIVATED',
 ]);
 
-const EVENTOS_DESACTIVAN = new Set([
+// Se distingue "expirado" (la suscripción llegó a su fin natural / venció el
+// pago) de "cancelado" (el cliente o Hotmart la dieron de baja antes) porque
+// el panel de clientes pide ese detalle.
+const EVENTOS_EXPIRAN = new Set(['PURCHASE_EXPIRED']);
+const EVENTOS_CANCELAN = new Set([
   'PURCHASE_CANCELED',
   'PURCHASE_REFUNDED',
   'PURCHASE_CHARGEBACK',
-  'PURCHASE_EXPIRED',
   'PURCHASE_PROTEST',
   'SUBSCRIPTION_CANCELLATION',
 ]);
@@ -27,6 +37,13 @@ function hottokValido(req, body) {
   if (!esperado) return false;
   const recibido = req.headers['x-hotmart-hottok'] || body?.hottok || req.query?.hottok;
   return recibido === esperado;
+}
+
+function epochAIso(valor) {
+  if (!valor) return null;
+  const n = Number(valor);
+  if (!Number.isFinite(n)) return null;
+  return new Date(n).toISOString();
 }
 
 export default async function handler(req, res) {
@@ -52,19 +69,21 @@ export default async function handler(req, res) {
     return;
   }
 
+  const datosComunes = {
+    evento,
+    plan: body.data?.subscription?.plan?.name || body.data?.product?.name || null,
+    hotmartTransactionId: body.data?.purchase?.transaction || null,
+    hotmartSubscriberCode: body.data?.subscription?.subscriber?.code || null,
+    fechaInicio: epochAIso(body.data?.purchase?.approved_date || body.data?.purchase?.date) || null,
+    fechaRenovacion: epochAIso(body.data?.subscription?.date_next_charge) || null,
+  };
+
   if (EVENTOS_ACTIVAN.has(evento)) {
-    await guardarAcceso(email, {
-      active: true,
-      evento,
-      producto: body.data?.product?.name || null,
-      transaccion: body.data?.purchase?.transaction || null,
-    });
-  } else if (EVENTOS_DESACTIVAN.has(evento)) {
-    await guardarAcceso(email, {
-      active: false,
-      evento,
-      producto: body.data?.product?.name || null,
-    });
+    await guardarAcceso(email, { ...datosComunes, active: true, status: 'activo' });
+  } else if (EVENTOS_EXPIRAN.has(evento)) {
+    await guardarAcceso(email, { ...datosComunes, active: false, status: 'expirado' });
+  } else if (EVENTOS_CANCELAN.has(evento)) {
+    await guardarAcceso(email, { ...datosComunes, active: false, status: 'cancelado' });
   }
   // Otros eventos (ej. PURCHASE_BILLET_PRINTED) no cambian el acceso.
 

@@ -26,13 +26,37 @@ export function redis() {
 }
 
 const clavePorEmail = (email) => `hotmart:acceso:${email.trim().toLowerCase()}`;
+const CLAVE_INDICE_CLIENTES = 'clientes:emails';
 
-/** Guarda o actualiza el estado de acceso de un email (llamado por el webhook). */
+/**
+ * Guarda o actualiza el registro de un cliente (llamado por el webhook de
+ * Hotmart). `datos` es la "ficha" del cliente: email, status (activo /
+ * cancelado / expirado), plan, fechas, identificadores de Hotmart, etc. —
+ * ver hotmart-webhook.js para el detalle de qué se guarda en cada evento.
+ * También indexa el email en un set aparte para poder listar todos los
+ * clientes desde el panel admin sin tener que recorrer todo Redis.
+ */
 export async function guardarAcceso(email, datos) {
-  await redis().set(clavePorEmail(email), { ...datos, actualizadoEn: new Date().toISOString() });
+  const emailNormalizado = email.trim().toLowerCase();
+  await redis().set(clavePorEmail(emailNormalizado), {
+    email: emailNormalizado,
+    ...datos,
+    actualizadoEn: new Date().toISOString(),
+  });
+  await redis().sadd(CLAVE_INDICE_CLIENTES, emailNormalizado);
 }
 
-/** Devuelve el estado de acceso de un email, o null si nunca compró. */
+/** Devuelve el registro de acceso de un email, o null si nunca compró. */
 export async function obtenerAcceso(email) {
   return redis().get(clavePorEmail(email));
+}
+
+/** Lista todos los clientes conocidos (para el panel admin — nunca se usa para decidir acceso). */
+export async function listarClientes() {
+  const emails = await redis().smembers(CLAVE_INDICE_CLIENTES);
+  if (!emails?.length) return [];
+  const registros = await Promise.all(emails.map((e) => obtenerAcceso(e)));
+  return registros
+    .filter(Boolean)
+    .sort((a, b) => (b.actualizadoEn || '').localeCompare(a.actualizadoEn || ''));
 }

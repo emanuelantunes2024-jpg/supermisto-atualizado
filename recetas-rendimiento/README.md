@@ -179,6 +179,40 @@ pide reembolso pierde el acceso en la siguiente carga de página.
 local), porque necesitan el runtime serverless. Para tocar el diseño en local
 alcanza con `npm run dev`; para probar el login hace falta el deploy.
 
+### Ficha de cliente (qué guarda cada suscriptor)
+
+Cada compra/suscripción que Hotmart notifica queda guardada en Redis con esta
+forma (clave `hotmart:acceso:<email>`), visible en el panel en **Clientes**
+(`/admin/usuarios`, solo lectura):
+
+| Campo | De dónde sale |
+|---|---|
+| `email` | `data.buyer.email` |
+| `status` | `activo` / `cancelado` / `expirado`, según el evento recibido |
+| `active` | booleano — es lo que usa el gate de acceso (`/api/session/*`) |
+| `plan` | `data.subscription.plan.name`, o si no hay, `data.product.name` |
+| `hotmartTransactionId` | `data.purchase.transaction` |
+| `hotmartSubscriberCode` | `data.subscription.subscriber.code` (si el producto es recurrente) |
+| `fechaInicio` | `data.purchase.approved_date` |
+| `fechaRenovacion` | `data.subscription.date_next_charge`, si Hotmart lo manda |
+| `evento` | el evento crudo de Hotmart que generó la última actualización |
+| `actualizadoEn` | cuándo se guardó este registro |
+
+`plan`, `hotmartSubscriberCode` y `fechaRenovacion` dependen de qué manda
+Hotmart en cada tipo de producto/evento — se leen de forma defensiva
+(`?.`), así que si faltan quedan en `null` sin romper nada. Conviene
+revisarlos con un evento real una vez conectada la cuenta de Hotmart.
+
+**Eventos oficiales que la app ya reconoce** (no hay que agregar nada, solo
+configurar el webhook en Hotmart):
+
+- Activan (`status: 'activo'`): `PURCHASE_APPROVED`, `PURCHASE_COMPLETE`, `SUBSCRIPTION_REACTIVATED`.
+- Marcan expirado: `PURCHASE_EXPIRED`.
+- Marcan cancelado: `PURCHASE_CANCELED`, `PURCHASE_REFUNDED`, `PURCHASE_CHARGEBACK`, `PURCHASE_PROTEST`, `SUBSCRIPTION_CANCELLATION`.
+
+Si Hotmart manda otro evento no listado acá (por ejemplo `PURCHASE_BILLET_PRINTED`),
+la app responde 200 (para que Hotmart no reintente) pero no cambia el acceso de nadie.
+
 ## Preparado para el futuro (sin implementarse aún, a propósito)
 
 - **Asistente IA**: ítem de menú y pantalla ya existen (`/asistente-ia`); no hay
