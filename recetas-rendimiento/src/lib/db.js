@@ -13,7 +13,7 @@ const KEYS = {
   version: 'rr.seed-version',
 };
 
-const SEED_VERSION = '1';
+const SEED_VERSION = '2';
 
 function leer(key, fallback) {
   try {
@@ -35,7 +35,12 @@ function escribir(key, value) {
 export function inicializarDatos() {
   const versionActual = leer(KEYS.version, null);
   if (versionActual !== SEED_VERSION || !localStorage.getItem(KEYS.recetas)) {
-    escribir(KEYS.recetas, RECETAS_SEED);
+    // Al actualizar el catálogo de demostración se conservan las recetas que
+    // haya creado la persona usuaria (las que no pertenecen a la semilla).
+    const previas = leer(KEYS.recetas, []);
+    const idsSemilla = new Set(RECETAS_SEED.map((r) => r.id));
+    const propias = Array.isArray(previas) ? previas.filter((r) => !idsSemilla.has(r.id)) : [];
+    escribir(KEYS.recetas, [...propias, ...RECETAS_SEED]);
     escribir(KEYS.version, SEED_VERSION);
   }
   if (!localStorage.getItem(KEYS.favoritos)) escribir(KEYS.favoritos, []);
