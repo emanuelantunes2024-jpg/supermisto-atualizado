@@ -1,0 +1,13 @@
+{
+  "name": "Central de Receitas & Renda",
+  "short_name": "Receitas & Renda",
+  "description": "Receitas brasileiras com calculadora de custos, preço de venda e planejamento de produção.",
+  "start_url": "/inicio",
+  "display": "standalone",
+  "background_color": "#FDF7F1",
+  "theme_color": "#F2643C",
+  "lang": "pt-BR",
+  "icons": [
+    { "src": "/apple-icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
