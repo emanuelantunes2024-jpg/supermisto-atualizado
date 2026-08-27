@@ -30,6 +30,9 @@ function Contenido({ onNavigate }) {
     <div className="flex h-full flex-col bg-[#1B1512] text-white">
       <div className="px-5 py-5">
         <Logo dark />
+        <p className="mt-2 text-[11px] font-semibold uppercase tracking-wide text-white/40">
+          Panel Admin · Recetas &amp; Rendimiento
+        </p>
       </div>
 
       <nav className="flex-1 space-y-0.5 overflow-y-auto px-3">
@@ -96,7 +99,7 @@ export default function AdminLayout() {
           >
             <Icon name="menu" className="w-5 h-5" />
           </button>
-          <p className="text-[13.5px] font-bold text-ink">Panel Administrativo</p>
+          <p className="text-[13.5px] font-bold text-ink">Panel Admin · Recetas &amp; Rendimiento</p>
           {modoAbierto && (
             <span className="hidden rounded-full bg-amber-100 px-2.5 py-1 text-[11px] font-semibold text-amber-700 sm:inline-block">
               🔓 Suscripción de Hotmart todavía no configurada — el sitio está abierto

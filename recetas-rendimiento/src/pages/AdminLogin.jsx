@@ -43,7 +43,9 @@ export default function AdminLogin() {
         </div>
 
         <div className="card p-6">
-          <p className="text-[11px] font-semibold uppercase tracking-wide text-ink/45">Panel administrativo</p>
+          <p className="text-[11px] font-semibold uppercase tracking-wide text-ink/45">
+            Panel Admin · Recetas &amp; Rendimiento
+          </p>
           <h1 className="mt-1 text-[19px] font-extrabold tracking-tight text-ink">Iniciar sesión</h1>
           <p className="mt-1.5 text-[12.5px] leading-relaxed text-ink/55">
             Acceso exclusivo para quien administra {BRAND.producto}.
