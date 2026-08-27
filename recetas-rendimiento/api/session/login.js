@@ -3,6 +3,7 @@
 
 import { obtenerAcceso } from '../_lib/redis.js';
 import { crearCookie } from '../_lib/cookie.js';
+import { suscripcionConfigurada } from '../_lib/config.js';
 
 function emailsAdmin() {
   return (process.env.ADMIN_EMAILS || '')
@@ -12,6 +13,11 @@ function emailsAdmin() {
 }
 
 export default async function handler(req, res) {
+  if (!suscripcionConfigurada()) {
+    res.status(200).json({ ok: true, email: null, isAdmin: true, modo: 'abierto' });
+    return;
+  }
+
   if (req.method !== 'POST') {
     res.status(405).json({ ok: false, error: 'method_not_allowed' });
     return;
