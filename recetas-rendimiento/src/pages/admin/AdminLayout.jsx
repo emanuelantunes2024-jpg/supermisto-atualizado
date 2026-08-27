@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { NavLink, Outlet, Link } from 'react-router-dom';
+import { NavLink, Outlet, Link, useNavigate } from 'react-router-dom';
 import Icon from '../../components/Icon.jsx';
 import Logo from '../../components/Logo.jsx';
 import { BRAND } from '../../lib/brand.js';
+import { useAuth } from '../../lib/AuthContext.jsx';
 
 // Área administrativa — separada de la interfaz del cliente.
 const NAV = [
@@ -17,6 +18,14 @@ const NAV = [
 ];
 
 function Contenido({ onNavigate }) {
+  const { logout } = useAuth();
+  const navigate = useNavigate();
+
+  async function salir() {
+    await logout();
+    navigate('/entrar');
+  }
+
   return (
     <div className="flex h-full flex-col bg-[#1B1512] text-white">
       <div className="px-5 py-5">
@@ -43,12 +52,15 @@ function Contenido({ onNavigate }) {
       </nav>
 
       <div className="px-3 pb-5 pt-2">
-        <Link
-          to="/"
-          className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-[13px] font-medium text-white/55 transition hover:bg-white/5 hover:text-white"
+        <button
+          onClick={() => {
+            salir();
+            onNavigate?.();
+          }}
+          className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-[13px] font-medium text-white/55 transition hover:bg-white/5 hover:text-white"
         >
           <Icon name="logout" className="w-[18px] h-[18px]" /> Salir
-        </Link>
+        </button>
       </div>
     </div>
   );

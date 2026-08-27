@@ -1,10 +1,11 @@
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import Icon from './Icon.jsx';
 import Logo from './Logo.jsx';
 import { NAV_PRINCIPAL, NAV_PIE } from '../lib/nav.js';
 import { traducir } from '../lib/i18n.js';
+import { useAuth } from '../lib/AuthContext.jsx';
 
-function NavItem({ item, idioma, onNavigate }) {
+function NavItem({ item, idioma, onNavigate, onLogout }) {
   const contenido = (
     <>
       <Icon name={item.icon} className="w-[18px] h-[18px] shrink-0" />
@@ -17,16 +18,18 @@ function NavItem({ item, idioma, onNavigate }) {
     </>
   );
 
-  // "Salir" no marca estado activo: es una acción, no una sección.
-  if (item.sinEstado) {
+  // "Salir" no marca estado activo ni navega: cierra la sesión.
+  if (item.accion === 'salir') {
     return (
-      <Link
-        to={item.to}
-        onClick={onNavigate}
-        className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-[13.5px] font-medium text-ink/60 transition hover:bg-brand-50/60 hover:text-ink"
+      <button
+        onClick={() => {
+          onLogout();
+          onNavigate?.();
+        }}
+        className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-[13.5px] font-medium text-ink/60 transition hover:bg-brand-50/60 hover:text-ink"
       >
         {contenido}
-      </Link>
+      </button>
     );
   }
 
@@ -47,6 +50,14 @@ function NavItem({ item, idioma, onNavigate }) {
 }
 
 export default function Sidebar({ idioma, onNavigate, onClose }) {
+  const { logout } = useAuth();
+  const navigate = useNavigate();
+
+  async function onLogout() {
+    await logout();
+    navigate('/entrar');
+  }
+
   return (
     <div className="flex h-full flex-col bg-white">
       <div className="flex items-start justify-between gap-2 px-5 py-5">
@@ -69,7 +80,7 @@ export default function Sidebar({ idioma, onNavigate, onClose }) {
 
       <nav className="space-y-0.5 px-3 pb-5">
         {NAV_PIE.map((item) => (
-          <NavItem key={item.to} item={item} idioma={idioma} onNavigate={onNavigate} />
+          <NavItem key={item.to} item={item} idioma={idioma} onNavigate={onNavigate} onLogout={onLogout} />
         ))}
       </nav>
     </div>

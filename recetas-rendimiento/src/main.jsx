@@ -5,15 +5,18 @@ import './index.css';
 import App from './App.jsx';
 import { StoreProvider } from './lib/StoreContext.jsx';
 import { IdiomaProvider } from './lib/IdiomaContext.jsx';
+import { AuthProvider } from './lib/AuthContext.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
-      <IdiomaProvider>
-        <StoreProvider>
-          <App />
-        </StoreProvider>
-      </IdiomaProvider>
+      <AuthProvider>
+        <IdiomaProvider>
+          <StoreProvider>
+            <App />
+          </StoreProvider>
+        </IdiomaProvider>
+      </AuthProvider>
     </BrowserRouter>
   </StrictMode>
 );
