@@ -85,6 +85,9 @@ export default async function handler(req, res) {
     res.status(200).json({ ok: true, email: nueva.email });
   } catch (err) {
     console.error('[admin/credentials]', err);
-    res.status(500).json({ ok: false, error: 'error_al_guardar' });
+    // El caso más común: todavía no se conectó Storage → Marketplace → Redis
+    // en Vercel. Sin eso no hay dónde guardar la credencial nueva.
+    const esRedisNoConfigurado = /redis no configurado/i.test(err?.message || '');
+    res.status(500).json({ ok: false, error: esRedisNoConfigurado ? 'redis_no_configurado' : 'error_al_guardar' });
   }
 }

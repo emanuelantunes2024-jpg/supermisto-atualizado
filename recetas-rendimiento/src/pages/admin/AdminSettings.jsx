@@ -12,6 +12,8 @@ const MENSAJES_ERROR = {
   no_autorizado: 'Tu sesión venció. Volvé a entrar e intentá de nuevo.',
   falta_admin_password_hash: 'El panel todavía no tiene una contraseña configurada en el servidor.',
   error_redis: 'No se pudo guardar: el almacenamiento del panel no está disponible en este momento.',
+  redis_no_configurado:
+    'Todavía falta conectar el almacenamiento en Vercel (Storage → Marketplace → Redis). Sin eso, el panel no puede guardar la contraseña nueva de forma permanente.',
   error_al_guardar: 'No se pudo guardar el cambio. Intentá de nuevo.',
   error_desconocido: 'No se pudo guardar el cambio. Intentá de nuevo.',
 };
