@@ -359,6 +359,18 @@ create trigger trg_favorites_count
   after insert or delete on public.favorites
   for each row execute function public.sync_recipe_favorites_count();
 
+-- Contador de visualizações: assinantes não têm (nem devem ter) permissão de
+-- UPDATE direto em recipes, então a ficha da receita chama esta função via
+-- RPC. security definer permite incrementar só essa coluna, sem abrir a
+-- tabela inteira para escrita por qualquer usuário logado.
+create or replace function public.increment_recipe_views(recipe_id uuid)
+returns void language sql security definer set search_path = public as $$
+  update public.recipes set views_count = views_count + 1
+  where id = recipe_id and published = true;
+$$;
+
+grant execute on function public.increment_recipe_views(uuid) to anon, authenticated;
+
 -- =========================================================================
 -- Row Level Security
 -- =========================================================================

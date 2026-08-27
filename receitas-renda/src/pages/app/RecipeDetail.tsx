@@ -32,7 +32,10 @@ export default function RecipeDetail() {
         if (data) {
           setRecipe(data as Full);
           setYieldQty((data as Full).yield_quantity);
-          supabase.from('recipes').update({ views_count: (data as Full).views_count + 1 }).eq('id', data.id).then();
+          // Assinantes não têm permissão de UPDATE direto em recipes (RLS
+          // exige recipes.manage) — a contagem de visualizações passa por
+          // uma função no banco que roda com privilégio elevado.
+          supabase.rpc('increment_recipe_views', { recipe_id: data.id }).then();
         }
       });
   }, [slug]);

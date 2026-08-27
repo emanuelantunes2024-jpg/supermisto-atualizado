@@ -83,12 +83,19 @@ export function AdminCrudTable<T extends { id: string; [k: string]: any }>({
 
   async function save() {
     setSaving(true);
+    // Só envia as colunas editáveis (nunca a linha inteira) — evita tentar
+    // regravar colunas geradas pelo banco (ex: ingredients.price_per_unit)
+    // ou campos como id/created_at que vieram junto ao editar um registro.
+    const payload: Record<string, unknown> = {};
+    fields.forEach((f) => {
+      payload[f.key] = form[f.key];
+    });
     if (editing) {
-      const { error } = await supabase.from(table).update(form).eq('id', editing.id);
-      if (!error) await logAction('update', entity, editing.id, form);
+      const { error } = await supabase.from(table).update(payload).eq('id', editing.id);
+      if (!error) await logAction('update', entity, editing.id, payload);
     } else {
-      const { data, error } = await supabase.from(table).insert(form).select().maybeSingle();
-      if (!error) await logAction('create', entity, data?.id ?? null, form);
+      const { data, error } = await supabase.from(table).insert(payload).select().maybeSingle();
+      if (!error) await logAction('create', entity, data?.id ?? null, payload);
     }
     setSaving(false);
     setShowForm(false);
