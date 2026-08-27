@@ -68,6 +68,7 @@ function Contenido({ onNavigate }) {
 
 export default function AdminLayout() {
   const [open, setOpen] = useState(false);
+  const { modoAbierto } = useAuth();
 
   return (
     <div className="flex min-h-screen bg-cream">
@@ -96,6 +97,11 @@ export default function AdminLayout() {
             <Icon name="menu" className="w-5 h-5" />
           </button>
           <p className="text-[13.5px] font-bold text-ink">Panel Administrativo</p>
+          {modoAbierto && (
+            <span className="hidden rounded-full bg-amber-100 px-2.5 py-1 text-[11px] font-semibold text-amber-700 sm:inline-block">
+              🔓 Suscripción de Hotmart todavía no configurada — el sitio está abierto
+            </span>
+          )}
           <Link
             to="/"
             className="ml-auto text-[12.5px] font-semibold text-ink/50 transition hover:text-brand-600"

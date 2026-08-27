@@ -18,6 +18,7 @@ export function AuthProvider({ children }) {
   const [estado, setEstado] = useState('cargando');
   const [email, setEmail] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [modoAbierto, setModoAbierto] = useState(false);
   const [error, setError] = useState(null);
 
   const revisarSesion = useCallback(async () => {
@@ -25,10 +26,12 @@ export function AuthProvider({ children }) {
     if (r.ok) {
       setEmail(r.email);
       setIsAdmin(!!r.isAdmin);
+      setModoAbierto(r.modo === 'abierto');
       setEstado('autenticado');
     } else {
       setEmail(null);
       setIsAdmin(false);
+      setModoAbierto(false);
       setEstado('anonimo');
     }
   }, []);
@@ -62,8 +65,8 @@ export function AuthProvider({ children }) {
   }, []);
 
   const value = useMemo(
-    () => ({ estado, email, isAdmin, error, login, logout }),
-    [estado, email, isAdmin, error, login, logout]
+    () => ({ estado, email, isAdmin, modoAbierto, error, login, logout }),
+    [estado, email, isAdmin, modoAbierto, error, login, logout]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
