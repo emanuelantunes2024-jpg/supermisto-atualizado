@@ -18,5 +18,5 @@ export const NAV_PRINCIPAL = [
 
 export const NAV_PIE = [
   { to: '/configuracion', key: 'nav.config', icon: 'settings' },
-  { to: '/', key: 'nav.salir', icon: 'logout', sinEstado: true },
+  { to: '/entrar', key: 'nav.salir', icon: 'logout', accion: 'salir' },
 ];

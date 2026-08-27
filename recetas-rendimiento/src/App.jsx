@@ -1,5 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout.jsx';
+import { RequireAuth, RequireAdmin } from './components/RequireAuth.jsx';
+import Paywall from './pages/Paywall.jsx';
 import Home from './pages/Home.jsx';
 import Recipes from './pages/Recipes.jsx';
 import RecipeDetail from './pages/RecipeDetail.jsx';
@@ -28,6 +30,9 @@ import AdminPlaceholder from './pages/admin/AdminPlaceholder.jsx';
 export default function App() {
   return (
     <Routes>
+      <Route path="/entrar" element={<Paywall />} />
+
+      <Route element={<RequireAuth />}>
       <Route element={<Layout />}>
         <Route path="/" element={<Home />} />
         <Route path="/recetas" element={<Recipes />} />
@@ -49,7 +54,9 @@ export default function App() {
         <Route path="/asistente-ia" element={<ComingSoon titulo="Asistente IA" asistente />} />
         <Route path="/configuracion" element={<Settings />} />
       </Route>
+      </Route>
 
+      <Route element={<RequireAdmin />}>
       <Route path="/admin" element={<AdminLayout />}>
         <Route index element={<Dashboard />} />
         <Route path="recetas" element={<RecipesAdmin />} />
@@ -61,6 +68,7 @@ export default function App() {
         <Route path="novedades" element={<AdminPlaceholder titulo="Novedades" icon="bell" descripcion="Podés marcar o desmarcar una receta como novedad desde la lista de Recetas." />} />
         <Route path="reportes" element={<AdminPlaceholder titulo="Reportes" icon="report" />} />
         <Route path="configuracion" element={<AdminPlaceholder titulo="Configuración" icon="settings" />} />
+      </Route>
       </Route>
 
       <Route path="*" element={<NotFound />} />

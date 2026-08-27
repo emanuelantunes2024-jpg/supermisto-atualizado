@@ -86,14 +86,47 @@ src/
 - Panel administrativo: dashboard con métricas, alta/edición/eliminación de recetas,
   publicar/despublicar, marcar como novedad, asignar categoría, y vista de categorías.
 
+## Suscripción con Hotmart (ya implementado)
+
+Toda la app (y el panel admin) está detrás de un login por email en `/entrar`.
+El flujo real, de punta a punta:
+
+1. Hotmart llama a `POST /api/hotmart-webhook` en cada compra/cancelación/reembolso.
+2. Ese webhook guarda en Redis si el email tiene acceso activo o no.
+3. `/api/session/login` (email) solo deja pasar si Redis dice que está activo,
+   y emite una cookie firmada (HMAC, sin librerías externas).
+4. `/api/session/me` **revalida contra Redis en cada carga** — si cancelás una
+   suscripción en Hotmart, el acceso se corta al instante, no espera a que la
+   cookie venza.
+
+Probado con 11 pruebas automatizadas que simulan el ciclo completo (compra →
+login → acceso → reembolso → pérdida de acceso) sin depender de Hotmart ni
+Vercel en vivo.
+
+### Puesta en marcha (3 pasos, todos en el dashboard de Vercel/Hotmart)
+
+1. **Vercel → Storage → Marketplace → Redis** (plan Free) → conectar a este
+   proyecto. Inyecta `KV_REST_API_URL` / `KV_REST_API_TOKEN` solo.
+2. **Vercel → Settings → Environment Variables**: agregar `SESSION_SECRET`
+   (cualquier texto largo aleatorio) y `ADMIN_EMAILS` (tu email, para entrar
+   sin pagar). Ver `.env.example`.
+3. **Hotmart → tu producto → Webhook**: URL `https://TU-DOMINIO/api/hotmart-webhook`,
+   copiar el "Hottok" a la variable `HOTMART_HOTTOK` en Vercel.
+
+Con eso, quien compre en Hotmart puede entrar con su email; quien cancela o
+pide reembolso pierde el acceso en la siguiente carga de página.
+
+**Nota:** las funciones `/api/*` solo corren en Vercel (no en `npm run dev`
+local), porque necesitan el runtime serverless. Para tocar el diseño en local
+alcanza con `npm run dev`; para probar el login hace falta el deploy.
+
 ## Preparado para el futuro (sin implementarse aún, a propósito)
 
 - **Asistente IA**: ítem de menú y pantalla ya existen (`/asistente-ia`); no hay
   integración de API ni claves cargadas.
-- **Hotmart / suscripciones**: pantalla `Mi Plan` (`/mi-plan`) lista como punto de
-  entrada; no hay autenticación ni control de acceso todavía.
-- **Backend real**: toda la lectura/escritura pasa por `src/lib/db.js`, así que
-  cambiar de localStorage a una API sólo implica reescribir ese archivo.
+- **Backend de recetas**: toda la lectura/escritura de recetas pasa por
+  `src/lib/db.js` (localStorage), así que cambiar a una API real sólo implica
+  reescribir ese archivo.
 
 ---
 

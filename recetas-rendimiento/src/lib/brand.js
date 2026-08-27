@@ -10,4 +10,7 @@ export const BRAND = {
   producto: 'Recetas & Rendimiento',
   empresa: 'Leuname Software',
   logoSrc: null,
+  // Link de checkout de Hotmart al que mandamos a quien todavía no compró.
+  // Reemplazar por la URL real del producto/oferta cuando esté creada en Hotmart.
+  hotmartCheckoutUrl: 'https://pay.hotmart.com/',
 };
