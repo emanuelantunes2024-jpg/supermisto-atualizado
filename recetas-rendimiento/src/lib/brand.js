@@ -1,11 +1,13 @@
-// Configuración de marca centralizada — un solo lugar para nombre, producto y logo.
-// Para reemplazar el logo en el futuro: agregar el archivo a /public/brand/ y cambiar
-// `logoSrc` a esa ruta (o dejar en null para usar el emoji de respaldo).
+// Configuración de marca centralizada — un solo lugar para el nombre y el logo.
+// Para cambiar el logo en el futuro: poné el archivo en /public/brand/ y apuntá
+// `logoSrc` a esa ruta. Ningún componente tiene el logo escrito a mano.
 
 export const BRAND = {
+  // El nombre se muestra en tres líneas, como en la referencia visual.
+  prefijo: 'Central de',
+  nombreA: 'Recetas',
+  nombreB: '& Rendimiento',
   producto: 'Recetas & Rendimiento',
   empresa: 'Leuname Software',
-  // Ruta a un logo-imagen (PNG/SVG) dentro de /public. Si es null, se usa `logoEmoji`.
   logoSrc: null,
-  logoEmoji: '👩‍🍳',
 };
