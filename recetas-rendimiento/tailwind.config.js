@@ -7,7 +7,8 @@ export default {
         sans: ['"Plus Jakarta Sans"', 'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
       colors: {
-        cream: '#FBF6EF',
+        cream: '#F3EBDF',
+        creamsoft: '#F8F2E9',
         ink: '#241C15',
         brand: {
           50: '#FFF3EC',

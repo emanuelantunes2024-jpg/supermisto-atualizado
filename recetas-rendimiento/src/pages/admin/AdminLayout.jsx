@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { NavLink, Outlet, Link } from 'react-router-dom';
 import Icon from '../../components/Icon.jsx';
+import Logo from '../../components/Logo.jsx';
+import { BRAND } from '../../lib/brand.js';
 
 const NAV = [
   { to: '/admin', label: 'Dashboard', icon: 'dashboard', end: true },
@@ -11,14 +13,9 @@ const NAV = [
 function SidebarContent({ onNavigate }) {
   return (
     <div className="flex h-full flex-col bg-[#181113] text-white">
-      <div className="flex items-center gap-2.5 px-5 py-5">
-        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-brand-400 to-brand-600 text-lg">
-          👩‍🍳
-        </div>
-        <div className="leading-tight">
-          <p className="text-sm font-extrabold">Panel Administrativo</p>
-          <p className="text-[11px] font-semibold uppercase tracking-wide text-brand-400">Leuname Software</p>
-        </div>
+      <div className="px-5 py-5">
+        <Logo dark />
+        <p className="mt-2 text-[11px] font-semibold uppercase tracking-wide text-brand-400">Panel Administrativo</p>
       </div>
 
       <nav className="flex-1 space-y-1 px-3">
@@ -57,7 +54,7 @@ export default function AdminLayout() {
 
   return (
     <div className="min-h-screen bg-cream lg:flex">
-      <aside className="hidden w-64 shrink-0 lg:block">
+      <aside className="hidden w-72 shrink-0 lg:block">
         <div className="sticky top-0 h-screen">
           <SidebarContent />
         </div>
@@ -66,7 +63,7 @@ export default function AdminLayout() {
       {open && (
         <div className="fixed inset-0 z-40 lg:hidden">
           <div className="absolute inset-0 bg-black/40" onClick={() => setOpen(false)} />
-          <div className="absolute left-0 top-0 h-full w-64 shadow-2xl">
+          <div className="absolute left-0 top-0 h-full w-72 shadow-2xl">
             <SidebarContent onNavigate={() => setOpen(false)} />
           </div>
         </div>
@@ -77,7 +74,7 @@ export default function AdminLayout() {
           <button onClick={() => setOpen(true)} className="rounded-xl border border-black/10 p-2 text-ink/70 lg:hidden">
             <Icon name="menu" className="w-5 h-5" />
           </button>
-          <p className="text-sm font-bold text-ink">Recetas & Rendimiento · Administración</p>
+          <p className="text-sm font-bold text-ink">{BRAND.producto} · Administración</p>
         </header>
         <main className="mx-auto max-w-7xl px-4 py-6 lg:px-8 lg:py-8">
           <Outlet />

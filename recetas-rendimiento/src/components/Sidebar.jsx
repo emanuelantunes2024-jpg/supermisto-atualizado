@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import Icon from './Icon.jsx';
+import Logo from './Logo.jsx';
 import { NAV_PRINCIPAL, NAV_HERRAMIENTAS, NAV_MIS_RECETAS, NAV_CUENTA } from '../lib/nav.js';
 
 function NavItem({ item, onNavigate }) {
@@ -42,17 +43,7 @@ export default function Sidebar({ onNavigate, onClose }) {
   return (
     <div className="flex h-full flex-col bg-white">
       <div className="flex items-center justify-between gap-2 px-4 py-5">
-        <div className="flex items-center gap-2.5">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-brand-400 to-brand-600 text-lg shadow-soft">
-            👩‍🍳
-          </div>
-          <div className="leading-tight">
-            <p className="text-sm font-extrabold text-ink">Recetas & Rendimiento</p>
-            <p className="text-[11px] font-semibold uppercase tracking-wide text-brand-500">
-              Leuname Software
-            </p>
-          </div>
-        </div>
+        <Logo />
         {onClose && (
           <button onClick={onClose} className="rounded-lg p-1.5 text-ink/50 hover:bg-black/5 lg:hidden">
             <Icon name="x" className="w-5 h-5" />
