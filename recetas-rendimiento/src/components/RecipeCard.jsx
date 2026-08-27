@@ -1,13 +1,12 @@
 import { Link } from 'react-router-dom';
 import Icon from './Icon.jsx';
 import { useStore } from '../lib/StoreContext.jsx';
-import { categoryBySlug } from '../data/categories.js';
 import { formatoTiempo } from '../lib/calc.js';
 
 export default function RecipeCard({ receta, compact = false }) {
-  const { favoritos, alternarFavorito } = useStore();
+  const { favoritos, alternarFavorito, categoriaBySlug } = useStore();
   const esFavorito = favoritos.includes(receta.id);
-  const cat = categoryBySlug(receta.categoria);
+  const cat = categoriaBySlug(receta.categoria);
 
   return (
     <Link

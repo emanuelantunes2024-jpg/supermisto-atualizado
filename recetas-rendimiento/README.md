@@ -3,8 +3,9 @@
 **Leuname Software** — PWA de recetas, costos y ganancias para quienes cocinan y venden.
 
 Aplicación 100% en español, responsiva (celular y computadora), instalable como PWA, con
-panel administrativo funcional y datos persistidos en el navegador (localStorage), lista
-para conectarse a un backend real más adelante.
+panel administrativo real (login propio, protegido en el servidor) y contenido
+(recetas/categorías) persistido en Redis — lo que el admin publica lo ve cualquier
+visitante, no solo su propio navegador.
 
 ---
 
@@ -83,8 +84,46 @@ src/
   de partir de una receta existente).
 - Central de Rendimiento: sugiere recetas según presupuesto, categoría y canal de venta.
 - Recetas para Vender y Novedades.
-- Panel administrativo: dashboard con métricas, alta/edición/eliminación de recetas,
-  publicar/despublicar, marcar como novedad, asignar categoría, y vista de categorías.
+- Panel administrativo (`/admin`, login propio en `/admin/entrar`): dashboard con
+  métricas, alta/edición/eliminación de recetas, publicar/despublicar, marcar como
+  novedad, y alta/edición/eliminación de categorías. Todo lo que se guarda ahí queda
+  persistido en el servidor (Redis) y lo ve cualquier visitante del sitio — no es solo
+  local al navegador del admin.
+
+## Panel administrativo — seguridad y configuración
+
+El panel es una zona separada del resto de la app, con su propio login por
+contraseña:
+
+- **`/admin/entrar`** — pantalla de login exclusiva del panel (email + contraseña).
+  No aparece ningún link hacia ella en el menú público.
+- **`/admin`** y todas sus subrutas están protegidas por `RequireAdmin`: quien no
+  tenga una sesión de administrador válida es redirigido automáticamente a
+  `/admin/entrar`.
+- La validación real ocurre **en el servidor**, en cada llamada a `/api/admin/*`
+  (crear/editar/eliminar receta o categoría) — no alcanza con "engañar" al frontend,
+  porque la API vuelve a chequear la cookie de sesión firmada.
+- La contraseña nunca está en el código ni en texto plano: se guarda como hash
+  (scrypt + salt) en la variable de entorno `ADMIN_PASSWORD_HASH`.
+
+### Variables de entorno necesarias (Vercel → Settings → Environment Variables)
+
+| Variable | Para qué sirve |
+|---|---|
+| `SESSION_SECRET` | Firma las cookies de sesión (cualquier texto largo aleatorio). |
+| `ADMIN_EMAILS` | Emails autorizados a intentar loguearse como admin (separados por coma). |
+| `ADMIN_PASSWORD_HASH` | Hash de la contraseña del panel. Generalo con `node scripts/gerar-senha-admin.mjs`. |
+| `KV_REST_API_URL` / `KV_REST_API_TOKEN` | Las agrega solo Vercel al conectar **Storage → Marketplace → Redis**. Sin esto, el panel no puede guardar cambios (el sitio público sigue funcionando con el catálogo semilla). |
+
+### Crear/cambiar la contraseña del administrador
+
+```bash
+node scripts/gerar-senha-admin.mjs
+```
+
+Copiá el valor `ADMIN_PASSWORD_HASH` que imprime y pegalo en Vercel. Guardá la
+contraseña (la que también imprime) en un lugar seguro — es la única vez que se
+muestra en texto plano.
 
 ## Suscripción con Hotmart (ya implementado)
 
@@ -124,9 +163,16 @@ alcanza con `npm run dev`; para probar el login hace falta el deploy.
 
 - **Asistente IA**: ítem de menú y pantalla ya existen (`/asistente-ia`); no hay
   integración de API ni claves cargadas.
-- **Backend de recetas**: toda la lectura/escritura de recetas pasa por
-  `src/lib/db.js` (localStorage), así que cambiar a una API real sólo implica
-  reescribir ese archivo.
+
+## Persistencia de datos
+
+- **Recetas y categorías** (contenido editable desde `/admin`): persisten en Redis
+  del lado del servidor (`api/_lib/contentStore.js`), vía las rutas `/api/content/*`
+  (lectura pública) y `/api/admin/*` (escritura, protegida). Así lo que publica el
+  admin lo ve cualquier visitante, no solo su propio navegador.
+- **Favoritos, colecciones y lista de compras**: siguen siendo datos propios de
+  cada dispositivo, en `localStorage` (`src/lib/db.js`) — tiene sentido que sean
+  así, nadie más los necesita ver.
 
 ---
 

@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom';
 import { useStore } from '../../lib/StoreContext.jsx';
 import Icon from '../../components/Icon.jsx';
 import EmptyState from '../../components/EmptyState.jsx';
-import { CATEGORIES, categoryBySlug } from '../../data/categories.js';
 
 export default function RecipesAdmin() {
-  const { recetas, guardarReceta, eliminarReceta } = useStore();
+  const { recetas, guardarReceta, eliminarReceta, categorias, categoriaBySlug } = useStore();
   const [q, setQ] = useState('');
   const [categoria, setCategoria] = useState('');
   const [confirmarId, setConfirmarId] = useState(null);
+  const [error, setError] = useState(null);
 
   const filtradas = recetas.filter((r) => {
     if (categoria && r.categoria !== categoria) return false;
@@ -18,13 +18,13 @@ export default function RecipesAdmin() {
   });
 
   function alternarPublicada(r) {
-    guardarReceta({ ...r, publicada: !r.publicada });
+    guardarReceta({ ...r, publicada: !r.publicada }).catch(() => setError('No se pudo actualizar la receta.'));
   }
   function alternarNovedad(r) {
-    guardarReceta({ ...r, novedad: !r.novedad });
+    guardarReceta({ ...r, novedad: !r.novedad }).catch(() => setError('No se pudo actualizar la receta.'));
   }
   function confirmarEliminar(id) {
-    eliminarReceta(id);
+    eliminarReceta(id).catch(() => setError('No se pudo eliminar la receta.'));
     setConfirmarId(null);
   }
 
@@ -40,11 +40,17 @@ export default function RecipesAdmin() {
         </Link>
       </div>
 
+      {error && (
+        <div className="rounded-xl border border-amber-200 bg-amber-50 p-3.5">
+          <p className="text-[12.5px] font-semibold text-amber-800">{error}</p>
+        </div>
+      )}
+
       <div className="flex flex-wrap gap-3">
         <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Buscar por nombre…" className="input max-w-xs" />
         <select value={categoria} onChange={(e) => setCategoria(e.target.value)} className="input max-w-[220px]">
           <option value="">Todas las categorías</option>
-          {CATEGORIES.map((c) => (
+          {categorias.map((c) => (
             <option key={c.slug} value={c.slug}>
               {c.name}
             </option>
@@ -78,7 +84,7 @@ export default function RecipesAdmin() {
                       </div>
                     </div>
                   </td>
-                  <td className="px-4 py-3 text-ink/70">{categoryBySlug(r.categoria)?.name}</td>
+                  <td className="px-4 py-3 text-ink/70">{categoriaBySlug(r.categoria)?.name}</td>
                   <td className="px-4 py-3">
                     <button
                       onClick={() => alternarPublicada(r)}

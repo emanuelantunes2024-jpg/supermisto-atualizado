@@ -4,17 +4,13 @@
 import { obtenerAcceso } from '../_lib/redis.js';
 import { crearCookie } from '../_lib/cookie.js';
 import { suscripcionConfigurada } from '../_lib/config.js';
-
-function emailsAdmin() {
-  return (process.env.ADMIN_EMAILS || '')
-    .split(',')
-    .map((e) => e.trim().toLowerCase())
-    .filter(Boolean);
-}
+import { emailsAdmin } from '../_lib/adminAuth.js';
 
 export default async function handler(req, res) {
   if (!suscripcionConfigurada()) {
-    res.status(200).json({ ok: true, email: null, isAdmin: true, modo: 'abierto' });
+    // Sitio abierto para suscriptores (todavía no se configuró Hotmart/Redis),
+    // pero el panel admin nunca se concede por acá — ver /api/admin/login.
+    res.status(200).json({ ok: true, email: null, isAdmin: false, modo: 'abierto' });
     return;
   }
 
@@ -37,6 +33,9 @@ export default async function handler(req, res) {
     return;
   }
 
+  // Este login es de suscriptor: nunca otorga el rol de administrador, aunque
+  // el email esté en ADMIN_EMAILS (eso solo bypassea la exigencia de compra
+  // en Hotmart). El acceso al panel /admin exige /api/admin/login con clave.
   res.setHeader('Set-Cookie', crearCookie({ email }));
-  res.status(200).json({ ok: true, email, isAdmin: esAdmin });
+  res.status(200).json({ ok: true, email, isAdmin: false });
 }

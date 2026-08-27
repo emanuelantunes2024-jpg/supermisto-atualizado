@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useStore } from '../../lib/StoreContext.jsx';
 import Icon from '../../components/Icon.jsx';
-import { categoryBySlug } from '../../data/categories.js';
 
 function Stat({ icon, tono, valor, label }) {
   return (
@@ -35,7 +34,7 @@ const ACCIONES = [
 ];
 
 export default function Dashboard() {
-  const { recetas, favoritos } = useStore();
+  const { recetas, favoritos, categoriaBySlug } = useStore();
   const publicadas = recetas.filter((r) => r.publicada);
   const novedades = recetas.filter((r) => r.novedad);
   const recientes = [...recetas]
@@ -71,7 +70,7 @@ export default function Dashboard() {
                 <img src={r.imagen} alt="" className="h-9 w-9 shrink-0 rounded-lg object-cover" />
                 <span className="min-w-0 flex-1 truncate text-[12.5px] font-semibold text-ink">{r.nombre}</span>
                 <span className="hidden shrink-0 text-[11.5px] text-ink/45 sm:block">
-                  {categoryBySlug(r.categoria)?.name}
+                  {categoriaBySlug(r.categoria)?.name}
                 </span>
                 <span className="w-[92px] shrink-0 text-right text-[11.5px] text-ink/40">
                   {haceCuanto(r.creadoEn)}

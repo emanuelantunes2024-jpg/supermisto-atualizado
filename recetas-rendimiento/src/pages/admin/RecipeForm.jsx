@@ -1,7 +1,6 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import { useStore } from '../../lib/StoreContext.jsx';
-import { CATEGORIES } from '../../data/categories.js';
 import Icon from '../../components/Icon.jsx';
 
 const DIFICULTADES = ['Fácil', 'Medio', 'Difícil'];
@@ -17,7 +16,7 @@ function slugificar(texto) {
 
 const RECETA_VACIA = {
   nombre: '',
-  categoria: CATEGORIES[0].slug,
+  categoria: '',
   descripcion: '',
   imagen: '',
   tiempoMinutos: 30,
@@ -39,9 +38,19 @@ const RECETA_VACIA = {
 export default function RecipeForm() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { recetas, guardarReceta } = useStore();
+  const { recetas, guardarReceta, categorias } = useStore();
   const existente = useMemo(() => recetas.find((r) => r.id === id), [recetas, id]);
   const [form, setForm] = useState(() => (existente ? { ...existente } : { ...RECETA_VACIA }));
+  const [error, setError] = useState(null);
+  const [guardando, setGuardando] = useState(false);
+
+  // Categorías cargan de forma asíncrona: al crear una receta nueva, apenas
+  // llegan, se preselecciona la primera.
+  useEffect(() => {
+    if (!existente && !form.categoria && categorias[0]) {
+      setForm((f) => ({ ...f, categoria: categorias[0].slug }));
+    }
+  }, [existente, categorias]); // eslint-disable-line react-hooks/exhaustive-deps
 
   function set(campo, valor) {
     setForm((f) => ({ ...f, [campo]: valor }));
@@ -83,7 +92,7 @@ export default function RecipeForm() {
     reader.readAsDataURL(file);
   }
 
-  function onSubmit(e) {
+  async function onSubmit(e) {
     e.preventDefault();
     const nombre = form.nombre.trim();
     if (!nombre) return;
@@ -121,8 +130,16 @@ export default function RecipeForm() {
       creadoEn: existente?.creadoEn || new Date().toISOString().slice(0, 10),
     };
 
-    guardarReceta(receta);
-    navigate('/admin/recetas');
+    setError(null);
+    setGuardando(true);
+    try {
+      await guardarReceta(receta);
+      navigate('/admin/recetas');
+    } catch {
+      setError('No se pudo guardar la receta. Revisá tu conexión e intentá de nuevo.');
+    } finally {
+      setGuardando(false);
+    }
   }
 
   return (
@@ -143,7 +160,7 @@ export default function RecipeForm() {
           <div>
             <label className="label">Categoría</label>
             <select value={form.categoria} onChange={(e) => set('categoria', e.target.value)} className="input mt-1.5">
-              {CATEGORIES.map((c) => (
+              {categorias.map((c) => (
                 <option key={c.slug} value={c.slug}>
                   {c.name}
                 </option>
@@ -303,12 +320,18 @@ export default function RecipeForm() {
           </div>
         </div>
 
+        {error && (
+          <div className="rounded-xl border border-amber-200 bg-amber-50 p-3.5">
+            <p className="text-[12.5px] font-semibold text-amber-800">{error}</p>
+          </div>
+        )}
+
         <div className="flex justify-end gap-2">
           <Link to="/admin/recetas" className="btn-secondary">
             Cancelar
           </Link>
-          <button type="submit" className="btn-primary">
-            <Icon name="check" className="w-4 h-4" /> Guardar receta
+          <button type="submit" disabled={guardando} className="btn-primary">
+            <Icon name="check" className="w-4 h-4" /> {guardando ? 'Guardando…' : 'Guardar receta'}
           </button>
         </div>
       </form>

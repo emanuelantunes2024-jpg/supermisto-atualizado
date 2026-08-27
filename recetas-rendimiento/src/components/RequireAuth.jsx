@@ -18,11 +18,10 @@ export function RequireAuth({ children }) {
   return children ?? <Outlet />;
 }
 
-/** Exige además que la sesión sea de administrador. */
+/** Exige una sesión de administrador real (role:'admin' verificado en el servidor). */
 export function RequireAdmin({ children }) {
   const { estado, isAdmin } = useAuth();
   if (estado === 'cargando') return <Cargando />;
-  if (estado === 'anonimo') return <Navigate to="/entrar" replace />;
-  if (!isAdmin) return <Navigate to="/" replace />;
+  if (!isAdmin) return <Navigate to="/admin/entrar" replace />;
   return children ?? <Outlet />;
 }

@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useStore } from '../lib/StoreContext.jsx';
-import { categoryBySlug } from '../data/categories.js';
 import Icon from '../components/Icon.jsx';
 import RecipeCard from '../components/RecipeCard.jsx';
 import EmptyState from '../components/EmptyState.jsx';
@@ -37,7 +36,7 @@ const TABS = [
 export default function RecipeDetail() {
   const { slug } = useParams();
   const navigate = useNavigate();
-  const { recetasPublicadas, favoritos, alternarFavorito, agregarAListaCompras } = useStore();
+  const { recetasPublicadas, favoritos, alternarFavorito, agregarAListaCompras, categoriaBySlug } = useStore();
   const receta = recetasPublicadas.find((r) => r.slug === slug);
 
   const [tab, setTab] = useState('Ingredientes');
@@ -74,7 +73,7 @@ export default function RecipeDetail() {
     );
   }
 
-  const cat = categoryBySlug(receta.categoria);
+  const cat = categoriaBySlug(receta.categoria);
   const esFavorito = favoritos.includes(receta.id);
   const unidad = receta.unidadRendimiento;
   const unidadSingular = unidad.replace(/s$/, '');

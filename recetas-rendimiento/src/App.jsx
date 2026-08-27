@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout.jsx';
 import { RequireAuth, RequireAdmin } from './components/RequireAuth.jsx';
 import Paywall from './pages/Paywall.jsx';
+import AdminLogin from './pages/AdminLogin.jsx';
 import Home from './pages/Home.jsx';
 import Recipes from './pages/Recipes.jsx';
 import RecipeDetail from './pages/RecipeDetail.jsx';
@@ -31,6 +32,7 @@ export default function App() {
   return (
     <Routes>
       <Route path="/entrar" element={<Paywall />} />
+      <Route path="/admin/entrar" element={<AdminLogin />} />
 
       <Route element={<RequireAuth />}>
       <Route element={<Layout />}>

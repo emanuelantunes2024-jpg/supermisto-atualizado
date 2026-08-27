@@ -1,16 +1,15 @@
 import { useMemo, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useStore } from '../lib/StoreContext.jsx';
-import { CATEGORIES, categoryBySlug } from '../data/categories.js';
 import RecipeCard from '../components/RecipeCard.jsx';
 import EmptyState from '../components/EmptyState.jsx';
 
 export default function Recipes() {
   const { slug } = useParams();
   const navigate = useNavigate();
-  const { recetasPublicadas } = useStore();
+  const { recetasPublicadas, categorias, categoriaBySlug } = useStore();
   const [dificultad, setDificultad] = useState('');
-  const cat = slug ? categoryBySlug(slug) : null;
+  const cat = slug ? categoriaBySlug(slug) : null;
 
   const recetas = useMemo(() => {
     return recetasPublicadas.filter((r) => {
@@ -31,7 +30,7 @@ export default function Recipes() {
         <button onClick={() => navigate('/recetas')} className={`pill ${!slug ? 'pill-active' : ''}`}>
           Todas
         </button>
-        {CATEGORIES.map((c) => (
+        {categorias.map((c) => (
           <button
             key={c.slug}
             onClick={() => navigate(`/categorias/${c.slug}`)}

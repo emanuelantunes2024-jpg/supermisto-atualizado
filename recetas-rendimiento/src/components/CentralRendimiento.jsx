@@ -2,7 +2,6 @@ import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Icon from './Icon.jsx';
 import { useStore } from '../lib/StoreContext.jsx';
-import { CATEGORIES } from '../data/categories.js';
 import {
   costoTotalReceta,
   precioSugerido,
@@ -52,7 +51,7 @@ function Tile({ activo, icono, emoji, tono, label, onClick }) {
 }
 
 export default function CentralRendimiento({ layout = 'ancho', conEncabezado = true }) {
-  const { recetasPublicadas } = useStore();
+  const { recetasPublicadas, categorias } = useStore();
   const [presupuesto, setPresupuesto] = useState(50);
   const [otroValor, setOtroValor] = useState('');
   const [categoria, setCategoria] = useState('');
@@ -115,7 +114,7 @@ export default function CentralRendimiento({ layout = 'ancho', conEncabezado = t
             label="Todas"
             onClick={() => setCategoria('')}
           />
-          {CATEGORIES.map((c, i) => (
+          {categorias.map((c, i) => (
             <Tile
               key={c.slug}
               activo={categoria === c.slug}

@@ -1,9 +1,8 @@
 import { Link } from 'react-router-dom';
 import { useStore } from '../lib/StoreContext.jsx';
-import { CATEGORIES } from '../data/categories.js';
 
 export default function Categories() {
-  const { recetasPublicadas } = useStore();
+  const { recetasPublicadas, categorias } = useStore();
 
   return (
     <div className="space-y-6">
@@ -13,7 +12,7 @@ export default function Categories() {
       </div>
 
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-        {CATEGORIES.map((c) => {
+        {categorias.map((c) => {
           const total = recetasPublicadas.filter((r) => r.categoria === c.slug).length;
           return (
             <Link

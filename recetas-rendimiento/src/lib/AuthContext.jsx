@@ -57,6 +57,24 @@ export function AuthProvider({ children }) {
     return { ok: false, error: r.error };
   }, []);
 
+  /** Login exclusivo del panel administrativo (email + contraseña). */
+  const loginAdmin = useCallback(async (correo, password) => {
+    setError(null);
+    const r = await llamar('/api/admin/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: correo, password }),
+    });
+    if (r.ok) {
+      setEmail(r.email);
+      setIsAdmin(!!r.isAdmin);
+      setEstado('autenticado');
+      return { ok: true };
+    }
+    setError(r.error || 'error_desconocido');
+    return { ok: false, error: r.error };
+  }, []);
+
   const logout = useCallback(async () => {
     await llamar('/api/session/logout', { method: 'POST' });
     setEmail(null);
@@ -65,8 +83,8 @@ export function AuthProvider({ children }) {
   }, []);
 
   const value = useMemo(
-    () => ({ estado, email, isAdmin, modoAbierto, error, login, logout }),
-    [estado, email, isAdmin, modoAbierto, error, login, logout]
+    () => ({ estado, email, isAdmin, modoAbierto, error, login, loginAdmin, logout }),
+    [estado, email, isAdmin, modoAbierto, error, login, loginAdmin, logout]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
