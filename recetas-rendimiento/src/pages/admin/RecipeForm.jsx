@@ -24,11 +24,12 @@ const RECETA_VACIA = {
   dificultad: 'Fácil',
   rendimientoBase: 1,
   unidadRendimiento: 'unidades',
-  ingredientes: [{ nombre: '', cantidad: '', unidad: '', costo: '' }],
+  ingredientes: [{ nombre: '', grupo: '', cantidad: '', unidad: '', costo: '' }],
   pasos: [''],
   consejos: [],
   conservacion: '',
   costosExtra: 0,
+  costoEmpaque: 0,
   margenSugerido: 70,
   paraVender: false,
   novedad: false,
@@ -54,7 +55,7 @@ export default function RecipeForm() {
     });
   }
   function agregarIngrediente() {
-    setForm((f) => ({ ...f, ingredientes: [...f.ingredientes, { nombre: '', cantidad: '', unidad: '', costo: '' }] }));
+    setForm((f) => ({ ...f, ingredientes: [...f.ingredientes, { nombre: '', grupo: '', cantidad: '', unidad: '', costo: '' }] }));
   }
   function quitarIngrediente(idx) {
     setForm((f) => ({ ...f, ingredientes: f.ingredientes.filter((_, i) => i !== idx) }));
@@ -105,11 +106,17 @@ export default function RecipeForm() {
       tiempoMinutos: Number(form.tiempoMinutos) || 0,
       rendimientoBase: Number(form.rendimientoBase) || 1,
       costosExtra: Number(form.costosExtra) || 0,
+      costoEmpaque: Number(form.costoEmpaque) || 0,
       margenSugerido: Number(form.margenSugerido) || 0,
       imagen: form.imagen || '/images/recipes/brigadeiro-gourmet.svg',
       ingredientes: form.ingredientes
         .filter((i) => i.nombre.trim())
-        .map((i) => ({ ...i, cantidad: Number(i.cantidad) || 0, costo: Number(i.costo) || 0 })),
+        .map((i) => ({
+          ...i,
+          grupo: (i.grupo || '').trim(),
+          cantidad: Number(i.cantidad) || 0,
+          costo: Number(i.costo) || 0,
+        })),
       pasos: form.pasos.filter((p) => p.trim()),
       creadoEn: existente?.creadoEn || new Date().toISOString().slice(0, 10),
     };
@@ -201,7 +208,13 @@ export default function RecipeForm() {
                   value={ing.nombre}
                   onChange={(e) => setIngrediente(idx, 'nombre', e.target.value)}
                   placeholder="Ingrediente"
-                  className="input col-span-5"
+                  className="input col-span-3"
+                />
+                <input
+                  value={ing.grupo || ''}
+                  onChange={(e) => setIngrediente(idx, 'grupo', e.target.value)}
+                  placeholder="Sección"
+                  className="input col-span-2"
                 />
                 <input
                   value={ing.cantidad}
@@ -257,6 +270,10 @@ export default function RecipeForm() {
 
         {/* Costos y estado */}
         <div className="card grid gap-4 p-5 sm:grid-cols-2">
+          <div>
+            <label className="label">Costo de embalaje ($)</label>
+            <input type="number" min="0" step="0.01" value={form.costoEmpaque} onChange={(e) => set('costoEmpaque', e.target.value)} className="input mt-1.5" />
+          </div>
           <div>
             <label className="label">Otros costos ($)</label>
             <input type="number" min="0" step="0.01" value={form.costosExtra} onChange={(e) => set('costosExtra', e.target.value)} className="input mt-1.5" />

@@ -1,88 +1,109 @@
 import { Link } from 'react-router-dom';
 import { useStore } from '../lib/StoreContext.jsx';
+import { useIdioma } from '../lib/IdiomaContext.jsx';
 import Icon from '../components/Icon.jsx';
 import RecipeCard from '../components/RecipeCard.jsx';
-import SectionHeader from '../components/SectionHeader.jsx';
 import EmptyState from '../components/EmptyState.jsx';
+import ToolsBar from '../components/ToolsBar.jsx';
 
 const ACCIONES = [
-  { to: '/recetas', icon: 'search', color: 'bg-violet-100 text-violet-600', title: 'Encontrar una receta', subtitle: 'Explora el catálogo completo' },
-  { to: '/vender', icon: 'bolt', color: 'bg-brand-100 text-brand-600', title: 'Empezar a vender', subtitle: 'Recetas rentables para vender' },
-  { to: '/calculadoras/costos', icon: 'calculator', color: 'bg-pink-100 text-pink-600', title: 'Calcular costos', subtitle: 'Sabé cuánto vas a gastar' },
-  { to: '/lista-compras', icon: 'cart', color: 'bg-amber-100 text-amber-600', title: 'Lista de compras', subtitle: 'Organizá tus ingredientes' },
-  { to: '/central-de-rendimiento', icon: 'scale', color: 'bg-emerald-100 text-emerald-600', title: 'Central de Rendimiento', subtitle: 'Planificá tu producción' },
-  { to: '/favoritos', icon: 'heart', color: 'bg-rose-100 text-rose-600', title: 'Mis favoritas', subtitle: 'Accedé a tus recetas guardadas' },
-];
-
-const ACCESOS = [
-  { to: '/calculadoras/costos', icon: 'calculator', color: 'text-emerald-600 bg-emerald-50', title: 'Calculadora de Costos', subtitle: 'Calculá el costo de tus ingredientes' },
-  { to: '/calculadoras/precios', icon: 'trending', color: 'text-brand-600 bg-brand-50', title: 'Calculadora de Precios', subtitle: 'Descubrí el precio ideal para vender' },
-  { to: '/central-de-rendimiento', icon: 'scale', color: 'text-sky-600 bg-sky-50', title: 'Central de Rendimiento', subtitle: 'Simulá y planificá tus ganancias' },
-  { to: '/lista-compras', icon: 'cart', color: 'text-amber-600 bg-amber-50', title: 'Lista de Compras', subtitle: 'Organizá y ordená tus compras' },
-  { to: '/colecciones', icon: 'folder', color: 'text-violet-600 bg-violet-50', title: 'Mis Colecciones', subtitle: 'Agrupá tus recetas favoritas' },
-  { to: '/admin', icon: 'dashboard', color: 'text-ink bg-black/5', title: 'Panel Administrativo', subtitle: 'Gestioná recetas y categorías' },
+  { to: '/recetas', icon: 'search', tono: 'bg-violet-100 text-violet-500', k: 'home.a1' },
+  { to: '/vender', icon: 'store', tono: 'bg-orange-100 text-orange-500', k: 'home.a2' },
+  { to: '/calculadoras/costos', icon: 'calculator', tono: 'bg-pink-100 text-pink-500', k: 'home.a3' },
+  { to: '/lista-compras', icon: 'cart', tono: 'bg-amber-100 text-amber-500', k: 'home.a4' },
+  { to: '/central-de-rendimiento', icon: 'box', tono: 'bg-emerald-100 text-emerald-500', k: 'home.a5' },
+  { to: '/favoritos', icon: 'heart', tono: 'bg-rose-100 text-rose-400', k: 'home.a6' },
 ];
 
 export default function Home() {
   const { recetasPublicadas } = useStore();
+  const { t } = useIdioma();
   const novedades = recetasPublicadas.filter((r) => r.novedad);
 
   return (
-    <div className="space-y-8">
-      <div>
-        <h1 className="text-2xl font-extrabold text-ink sm:text-3xl">¿Qué quieres hacer hoy?</h1>
-        <p className="mt-1 text-sm text-ink/50">Elegí una acción para empezar.</p>
-      </div>
+    <div className="space-y-6">
+      <h1 className="text-[22px] font-extrabold tracking-tight text-ink sm:text-[26px]">{t('home.titulo')}</h1>
 
+      {/* 6 accesos principales — contenido centrado, igual que la referencia */}
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
         {ACCIONES.map((a) => (
           <Link
-            key={a.to}
+            key={a.k}
             to={a.to}
-            className="card flex flex-col items-start gap-3 p-4 transition hover:-translate-y-0.5 hover:shadow-lg"
+            className="card flex flex-col items-center gap-2.5 px-3 py-5 text-center transition hover:-translate-y-0.5 hover:shadow-lift"
           >
-            <div className={`flex h-10 w-10 items-center justify-center rounded-xl ${a.color}`}>
+            <span className={`flex h-11 w-11 items-center justify-center rounded-full ${a.tono}`}>
               <Icon name={a.icon} className="w-5 h-5" />
-            </div>
-            <div>
-              <p className="text-sm font-bold leading-snug text-ink">{a.title}</p>
-              <p className="mt-0.5 text-xs text-ink/45">{a.subtitle}</p>
-            </div>
+            </span>
+            <span className="text-[13px] font-bold leading-tight text-ink">{t(a.k)}</span>
+            <span className="text-[11px] leading-snug text-ink/45">{t(`${a.k}s`)}</span>
           </Link>
         ))}
       </div>
 
-      <div className="grid gap-4 lg:grid-cols-2">
-        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#241C15] to-[#3A2A1E] p-6 text-white shadow-card">
-          <p className="text-sm font-semibold text-white/70">Biblioteca en expansión</p>
-          <p className="mt-2 text-4xl font-extrabold">{recetasPublicadas.length}+</p>
-          <p className="text-sm text-white/70">recetas disponibles</p>
-          <p className="mt-4 flex items-center gap-2 text-xs text-white/50">
-            <Icon name="trending" className="w-4 h-4 text-brand-400" />
-            Nuevas recetas agregadas cada semana
-          </p>
-        </div>
-        <div className="card flex flex-col justify-between gap-4 p-6 sm:flex-row sm:items-center">
-          <div>
-            <p className="flex items-center gap-1.5 text-sm font-bold text-ink">
-              <Icon name="bell" className="w-4 h-4 text-brand-500" /> ¡Novedades disponibles!
+      {/* Dos banners: biblioteca (ancho) + novedades */}
+      <div className="grid gap-4 lg:grid-cols-3">
+        <div className="relative min-h-[190px] overflow-hidden rounded-2xl bg-[#2A160D] shadow-card lg:col-span-2">
+          <img
+            src="/images/hero/torta-chocolate.png"
+            alt=""
+            className="absolute inset-y-0 right-0 h-full w-[58%] object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#2A160D] via-[#2A160D]/92 to-transparent" />
+          <div className="relative flex h-full flex-col justify-center gap-1 p-6">
+            <p className="text-[13px] font-semibold text-white/75">{t('home.biblioteca')}</p>
+            <p className="text-[34px] font-extrabold leading-none text-brand-400 sm:text-[40px]">
+              {recetasPublicadas.length}+
             </p>
-            <p className="mt-1 text-sm text-ink/50">
-              {novedades.length} recetas nuevas fueron agregadas recientemente.
-            </p>
+            <p className="text-[15px] font-semibold text-white">{t('home.disponibles')}</p>
+            <p className="mt-2 max-w-[190px] text-[11.5px] leading-snug text-white/55">{t('home.semanal')}</p>
           </div>
-          <Link to="/novedades" className="btn-primary shrink-0">
-            Ver novedades
-          </Link>
+          <span className="absolute bottom-6 right-6 flex h-12 w-12 items-center justify-center rounded-full bg-brand-500 text-white shadow-lift">
+            <Icon name="trending" className="w-5 h-5" strokeWidth={2.2} />
+          </span>
+        </div>
+
+        <div className="card relative min-h-[190px] overflow-hidden">
+          <img
+            src="/images/hero/cupcake.png"
+            alt=""
+            className="absolute inset-y-0 right-0 h-full w-[38%] object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-white from-55% via-white/85 to-transparent" />
+          <div className="relative flex h-full flex-col justify-center gap-2 p-6">
+            <p className="flex items-center gap-1.5 text-[14px] font-extrabold text-ink">
+              {t('home.novedadesTit')}
+              <Icon name="bell" className="w-4 h-4 text-brand-500" />
+            </p>
+            <p className="max-w-[210px] text-[12.5px] leading-snug text-ink/55">
+              {novedades.length} {t('home.novedadesTxt')}
+            </p>
+            <Link to="/novedades" className="btn-primary mt-1 w-fit !py-2 !text-[12.5px]">
+              {t('home.verNovedades')}
+            </Link>
+          </div>
         </div>
       </div>
 
+      {/* Nuevas recetas */}
       <div>
-        <SectionHeader title="Recetas nuevas" badge="Agregadas recientemente" action="Ver todas" actionTo="/novedades" />
+        <div className="mb-3.5 flex flex-wrap items-center gap-3">
+          <h2 className="text-[17px] font-extrabold tracking-tight text-ink">{t('home.nuevasRecetas')}</h2>
+          <span className="rounded-md bg-brand-50 px-2 py-1 text-[11px] font-semibold text-brand-600">
+            {t('home.agregadasSemana')}
+          </span>
+          <Link
+            to="/novedades"
+            className="ml-auto text-[12.5px] font-semibold text-ink/50 transition hover:text-brand-600"
+          >
+            {t('home.verTodas')} →
+          </Link>
+        </div>
+
         {novedades.length === 0 ? (
-          <EmptyState icon="sparkles" title="Todavía no hay novedades" description="Las recetas marcadas como novedad aparecerán aquí." />
+          <EmptyState icon="sparkles" title="Sin novedades por ahora" />
         ) : (
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+          <div className="grid grid-cols-2 gap-3.5 sm:grid-cols-3 lg:grid-cols-6">
             {novedades.slice(0, 6).map((r) => (
               <RecipeCard key={r.id} receta={r} />
             ))}
@@ -90,20 +111,8 @@ export default function Home() {
         )}
       </div>
 
-      <div>
-        <SectionHeader title="Accesos rápidos" />
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
-          {ACCESOS.map((a) => (
-            <Link key={a.to} to={a.to} className="card flex flex-col gap-2 p-4 transition hover:-translate-y-0.5 hover:shadow-lg">
-              <div className={`flex h-9 w-9 items-center justify-center rounded-lg ${a.color}`}>
-                <Icon name={a.icon} className="w-4.5 h-4.5" />
-              </div>
-              <p className="text-sm font-bold text-ink">{a.title}</p>
-              <p className="text-xs text-ink/45">{a.subtitle}</p>
-            </Link>
-          ))}
-        </div>
-      </div>
+      {/* Fila de herramientas — icono a la izquierda, texto a la derecha */}
+      <ToolsBar />
     </div>
   );
 }

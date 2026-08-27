@@ -4,21 +4,26 @@ import Icon from '../../components/Icon.jsx';
 import Logo from '../../components/Logo.jsx';
 import { BRAND } from '../../lib/brand.js';
 
+// Área administrativa — separada de la interfaz del cliente.
 const NAV = [
   { to: '/admin', label: 'Dashboard', icon: 'dashboard', end: true },
   { to: '/admin/recetas', label: 'Recetas', icon: 'book' },
   { to: '/admin/categorias', label: 'Categorías', icon: 'grid' },
+  { to: '/admin/etiquetas', label: 'Etiquetas', icon: 'tag' },
+  { to: '/admin/usuarios', label: 'Usuarios', icon: 'users' },
+  { to: '/admin/novedades', label: 'Novedades', icon: 'bell' },
+  { to: '/admin/reportes', label: 'Reportes', icon: 'report' },
+  { to: '/admin/configuracion', label: 'Configuración', icon: 'settings' },
 ];
 
-function SidebarContent({ onNavigate }) {
+function Contenido({ onNavigate }) {
   return (
-    <div className="flex h-full flex-col bg-[#181113] text-white">
+    <div className="flex h-full flex-col bg-[#1B1512] text-white">
       <div className="px-5 py-5">
         <Logo dark />
-        <p className="mt-2 text-[11px] font-semibold uppercase tracking-wide text-brand-400">Panel Administrativo</p>
       </div>
 
-      <nav className="flex-1 space-y-1 px-3">
+      <nav className="flex-1 space-y-0.5 overflow-y-auto px-3">
         {NAV.map((item) => (
           <NavLink
             key={item.to}
@@ -26,23 +31,23 @@ function SidebarContent({ onNavigate }) {
             end={item.end}
             onClick={onNavigate}
             className={({ isActive }) =>
-              `flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition ${
-                isActive ? 'bg-brand-500 text-white' : 'text-white/60 hover:bg-white/5 hover:text-white'
+              `flex items-center gap-3 rounded-xl px-3 py-2.5 text-[13px] font-medium transition ${
+                isActive ? 'bg-brand-500 text-white' : 'text-white/55 hover:bg-white/5 hover:text-white'
               }`
             }
           >
-            <Icon name={item.icon} className="w-5 h-5" />
+            <Icon name={item.icon} className="w-[18px] h-[18px]" />
             {item.label}
           </NavLink>
         ))}
       </nav>
 
-      <div className="space-y-1 border-t border-white/10 px-3 py-3">
-        <Link to="/" className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-white/60 hover:bg-white/5 hover:text-white">
-          <Icon name="home" className="w-5 h-5" /> Volver a la app
-        </Link>
-        <Link to="/" className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-white/60 hover:bg-white/5 hover:text-white">
-          <Icon name="logout" className="w-5 h-5" /> Salir
+      <div className="px-3 pb-5 pt-2">
+        <Link
+          to="/"
+          className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-[13px] font-medium text-white/55 transition hover:bg-white/5 hover:text-white"
+        >
+          <Icon name="logout" className="w-[18px] h-[18px]" /> Salir
         </Link>
       </div>
     </div>
@@ -53,30 +58,40 @@ export default function AdminLayout() {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-cream lg:flex">
-      <aside className="hidden w-72 shrink-0 lg:block">
+    <div className="flex min-h-screen bg-cream">
+      <aside className="hidden w-[236px] shrink-0 lg:block">
         <div className="sticky top-0 h-screen">
-          <SidebarContent />
+          <Contenido />
         </div>
       </aside>
 
       {open && (
         <div className="fixed inset-0 z-40 lg:hidden">
-          <div className="absolute inset-0 bg-black/40" onClick={() => setOpen(false)} />
-          <div className="absolute left-0 top-0 h-full w-72 shadow-2xl">
-            <SidebarContent onNavigate={() => setOpen(false)} />
+          <div className="absolute inset-0 bg-black/50" onClick={() => setOpen(false)} />
+          <div className="absolute left-0 top-0 h-full w-[248px] shadow-2xl">
+            <Contenido onNavigate={() => setOpen(false)} />
           </div>
         </div>
       )}
 
-      <div className="min-w-0 flex-1">
-        <header className="sticky top-0 z-30 flex items-center gap-3 border-b border-black/5 bg-white px-4 py-3 lg:px-8">
-          <button onClick={() => setOpen(true)} className="rounded-xl border border-black/10 p-2 text-ink/70 lg:hidden">
+      <div className="flex min-w-0 flex-1 flex-col">
+        <header className="sticky top-0 z-30 flex items-center gap-3 border-b border-line bg-white px-4 py-3 lg:px-6">
+          <button
+            onClick={() => setOpen(true)}
+            className="rounded-lg p-2 text-ink/60 transition hover:bg-black/5 lg:hidden"
+            aria-label="Abrir menú"
+          >
             <Icon name="menu" className="w-5 h-5" />
           </button>
-          <p className="text-sm font-bold text-ink">{BRAND.producto} · Administración</p>
+          <p className="text-[13.5px] font-bold text-ink">Panel Administrativo</p>
+          <Link
+            to="/"
+            className="ml-auto text-[12.5px] font-semibold text-ink/50 transition hover:text-brand-600"
+          >
+            Ver {BRAND.producto} →
+          </Link>
         </header>
-        <main className="mx-auto max-w-7xl px-4 py-6 lg:px-8 lg:py-8">
+        <main className="flex-1 px-4 py-6 lg:px-7 lg:py-7">
           <Outlet />
         </main>
       </div>

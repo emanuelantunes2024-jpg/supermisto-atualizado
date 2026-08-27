@@ -5,8 +5,16 @@ export function costoIngredientes(ingredientes = []) {
   return ingredientes.reduce((sum, i) => sum + (Number(i.costo) || 0), 0);
 }
 
+export function costoEmpaque(receta) {
+  return Number(receta.costoEmpaque) || 0;
+}
+
+export function otrosCostos(receta) {
+  return Number(receta.costosExtra) || 0;
+}
+
 export function costoTotalReceta(receta) {
-  return costoIngredientes(receta.ingredientes) + (Number(receta.costosExtra) || 0);
+  return costoIngredientes(receta.ingredientes) + costoEmpaque(receta) + otrosCostos(receta);
 }
 
 export function costoPorUnidad(receta) {
@@ -64,6 +72,34 @@ export function escalarIngredientes(receta, nuevoRendimiento) {
     cantidad: redondear(i.cantidad * factor, 2),
     costo: redondear(i.costo * factor, 2),
   }));
+}
+
+/**
+ * Devuelve la receta completa ajustada a un nuevo rendimiento: además de los
+ * ingredientes, el empaque y los otros costos también escalan (más porciones
+ * implican más empaque y más consumo).
+ */
+export function escalarReceta(receta, nuevoRendimiento) {
+  const rendimiento = Number(nuevoRendimiento) || 1;
+  const factor = rendimiento / (Number(receta.rendimientoBase) || 1);
+  return {
+    ...receta,
+    ingredientes: escalarIngredientes(receta, rendimiento),
+    costoEmpaque: redondear(costoEmpaque(receta) * factor, 2),
+    costosExtra: redondear(otrosCostos(receta) * factor, 2),
+    rendimientoBase: rendimiento,
+  };
+}
+
+/** Agrupa los ingredientes por su campo `grupo` (o un nombre por defecto). */
+export function agruparIngredientes(ingredientes = [], porDefecto = 'Ingredientes') {
+  const mapa = new Map();
+  for (const i of ingredientes) {
+    const g = i.grupo || porDefecto;
+    if (!mapa.has(g)) mapa.set(g, []);
+    mapa.get(g).push(i);
+  }
+  return [...mapa.entries()];
 }
 
 export function redondear(valor, decimales = 2) {

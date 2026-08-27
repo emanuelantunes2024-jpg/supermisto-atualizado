@@ -2,35 +2,47 @@ import { useEffect, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import Sidebar from './Sidebar.jsx';
 import Topbar from './Topbar.jsx';
+import { useIdioma } from '../lib/IdiomaContext.jsx';
 
 export default function Layout() {
-  const [open, setOpen] = useState(false);
+  const [drawer, setDrawer] = useState(false);
+  const [colapsado, setColapsado] = useState(false);
   const location = useLocation();
+  const { idioma } = useIdioma();
 
-  useEffect(() => setOpen(false), [location.pathname]);
+  useEffect(() => setDrawer(false), [location.pathname]);
+
+  function alternarMenu() {
+    if (window.innerWidth >= 1024) setColapsado((v) => !v);
+    else setDrawer(true);
+  }
 
   return (
-    <div className="min-h-screen bg-cream lg:flex">
-      {/* Sidebar de escritorio */}
-      <aside className="hidden w-72 shrink-0 border-r border-black/5 lg:block">
-        <div className="sticky top-0 h-screen">
-          <Sidebar />
+    <div className="flex min-h-screen bg-cream">
+      {/* Barra lateral fija en escritorio */}
+      <aside
+        className={`hidden shrink-0 border-r border-line transition-[width] duration-200 lg:block ${
+          colapsado ? 'w-0 overflow-hidden' : 'w-[248px]'
+        }`}
+      >
+        <div className="sticky top-0 h-screen w-[248px]">
+          <Sidebar idioma={idioma} />
         </div>
       </aside>
 
-      {/* Sidebar móvil (drawer) */}
-      {open && (
+      {/* Cajón en celular */}
+      {drawer && (
         <div className="fixed inset-0 z-40 lg:hidden">
-          <div className="absolute inset-0 bg-black/40" onClick={() => setOpen(false)} />
-          <div className="absolute left-0 top-0 h-full w-72 shadow-2xl">
-            <Sidebar onNavigate={() => setOpen(false)} onClose={() => setOpen(false)} />
+          <div className="absolute inset-0 bg-black/40" onClick={() => setDrawer(false)} />
+          <div className="absolute left-0 top-0 h-full w-[264px] shadow-2xl">
+            <Sidebar idioma={idioma} onNavigate={() => setDrawer(false)} onClose={() => setDrawer(false)} />
           </div>
         </div>
       )}
 
-      <div className="min-w-0 flex-1">
-        <Topbar onOpenMenu={() => setOpen(true)} />
-        <main className="mx-auto max-w-7xl px-4 py-6 lg:px-8 lg:py-8">
+      <div className="flex min-w-0 flex-1 flex-col">
+        <Topbar idioma={idioma} onOpenMenu={alternarMenu} />
+        <main className="flex-1 px-4 py-6 lg:px-7 lg:py-7">
           <Outlet />
         </main>
       </div>

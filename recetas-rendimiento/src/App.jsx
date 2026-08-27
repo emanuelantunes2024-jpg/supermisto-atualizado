@@ -13,7 +13,9 @@ import IncomeCenter from './pages/IncomeCenter.jsx';
 import SellRecipes from './pages/SellRecipes.jsx';
 import News from './pages/News.jsx';
 import ComingSoon from './pages/ComingSoon.jsx';
+import Settings from './pages/Settings.jsx';
 import NotFound from './pages/NotFound.jsx';
+import CalculatorsIndex from './pages/calculators/CalculatorsIndex.jsx';
 import CostCalculator from './pages/calculators/CostCalculator.jsx';
 import PriceCalculator from './pages/calculators/PriceCalculator.jsx';
 import AdminLayout from './pages/admin/AdminLayout.jsx';
@@ -21,6 +23,7 @@ import Dashboard from './pages/admin/Dashboard.jsx';
 import RecipesAdmin from './pages/admin/RecipesAdmin.jsx';
 import RecipeForm from './pages/admin/RecipeForm.jsx';
 import CategoriesAdmin from './pages/admin/CategoriesAdmin.jsx';
+import AdminPlaceholder from './pages/admin/AdminPlaceholder.jsx';
 
 export default function App() {
   return (
@@ -39,11 +42,12 @@ export default function App() {
         <Route path="/central-de-rendimiento" element={<IncomeCenter />} />
         <Route path="/vender" element={<SellRecipes />} />
         <Route path="/novedades" element={<News />} />
+        <Route path="/calculadoras" element={<CalculatorsIndex />} />
         <Route path="/calculadoras/costos" element={<CostCalculator />} />
         <Route path="/calculadoras/precios" element={<PriceCalculator />} />
         <Route path="/mi-plan" element={<ComingSoon titulo="Mi Plan" />} />
         <Route path="/asistente-ia" element={<ComingSoon titulo="Asistente IA" asistente />} />
-        <Route path="/configuracion" element={<ComingSoon titulo="Configuración" />} />
+        <Route path="/configuracion" element={<Settings />} />
       </Route>
 
       <Route path="/admin" element={<AdminLayout />}>
@@ -52,6 +56,11 @@ export default function App() {
         <Route path="recetas/nueva" element={<RecipeForm />} />
         <Route path="recetas/:id/editar" element={<RecipeForm />} />
         <Route path="categorias" element={<CategoriesAdmin />} />
+        <Route path="etiquetas" element={<AdminPlaceholder titulo="Etiquetas" icon="tag" />} />
+        <Route path="usuarios" element={<AdminPlaceholder titulo="Usuarios" icon="users" descripcion="La gestión de usuarios llegará junto con la autenticación y el control de suscripción." />} />
+        <Route path="novedades" element={<AdminPlaceholder titulo="Novedades" icon="bell" descripcion="Podés marcar o desmarcar una receta como novedad desde la lista de Recetas." />} />
+        <Route path="reportes" element={<AdminPlaceholder titulo="Reportes" icon="report" />} />
+        <Route path="configuracion" element={<AdminPlaceholder titulo="Configuración" icon="settings" />} />
       </Route>
 
       <Route path="*" element={<NotFound />} />

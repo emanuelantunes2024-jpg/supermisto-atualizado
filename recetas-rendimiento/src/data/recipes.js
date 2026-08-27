@@ -4,6 +4,20 @@
 let uid = 0;
 const next = () => `r${++uid}`;
 
+// Los ingredientes que terminan en "(algo)" pertenecen a esa parte de la receta
+// (ganache, relleno, glaseado...). El resto va al bloque base.
+const BASE_POR_CATEGORIA = { pasteles: 'Masa', panes: 'Masa', bebidas: 'Ingredientes' };
+
+function conGrupos(ingredientes, categoria) {
+  const base = BASE_POR_CATEGORIA[categoria] || 'Ingredientes';
+  return ingredientes.map((i) => {
+    const m = i.nombre.match(/^(.*?)\s*\(([^()]+)\)$/);
+    if (!m) return { ...i, grupo: base };
+    const etiqueta = m[2].trim();
+    return { ...i, nombre: m[1].trim(), grupo: etiqueta.charAt(0).toUpperCase() + etiqueta.slice(1) };
+  });
+}
+
 function receta({
   nombre,
   categoria,
@@ -16,6 +30,7 @@ function receta({
   ingredientes,
   pasos,
   costosExtra = 0,
+  costoEmpaque = 0,
   margenSugerido = 70,
   paraVender = false,
   novedad = false,
@@ -39,11 +54,12 @@ function receta({
     dificultad,
     rendimientoBase,
     unidadRendimiento,
-    ingredientes,
+    ingredientes: conGrupos(ingredientes, categoria),
     pasos,
     consejos,
     conservacion,
     costosExtra,
+    costoEmpaque,
     margenSugerido,
     paraVender,
     novedad,
@@ -63,6 +79,7 @@ export const RECETAS_SEED = [
     dificultad: 'Fácil',
     rendimientoBase: 30,
     unidadRendimiento: 'unidades',
+    costoEmpaque: 3.0,
     paraVender: true,
     novedad: true,
     ingredientes: [
@@ -89,6 +106,7 @@ export const RECETAS_SEED = [
     dificultad: 'Medio',
     rendimientoBase: 24,
     unidadRendimiento: 'unidades',
+    costoEmpaque: 2.9,
     paraVender: true,
     ingredientes: [
       { nombre: 'Chocolate amargo 70%', cantidad: 300, unidad: 'g', costo: 12.5 },
@@ -113,6 +131,7 @@ export const RECETAS_SEED = [
     dificultad: 'Medio',
     rendimientoBase: 18,
     unidadRendimiento: 'unidades',
+    costoEmpaque: 2.7,
     paraVender: true,
     ingredientes: [
       { nombre: 'Maicena', cantidad: 300, unidad: 'g', costo: 3.6 },
@@ -141,6 +160,7 @@ export const RECETAS_SEED = [
     dificultad: 'Medio',
     rendimientoBase: 16,
     unidadRendimiento: 'porciones',
+    costoEmpaque: 2.5,
     paraVender: true,
     novedad: true,
     ingredientes: [
@@ -170,6 +190,7 @@ export const RECETAS_SEED = [
     dificultad: 'Medio',
     rendimientoBase: 12,
     unidadRendimiento: 'porciones',
+    costoEmpaque: 2.4,
     paraVender: true,
     novedad: true,
     ingredientes: [
@@ -197,6 +218,7 @@ export const RECETAS_SEED = [
     dificultad: 'Medio',
     rendimientoBase: 14,
     unidadRendimiento: 'porciones',
+    costoEmpaque: 2.4,
     ingredientes: [
       { nombre: 'Harina de trigo', cantidad: 2.5, unidad: 'tazas', costo: 1.5 },
       { nombre: 'Cacao en polvo', cantidad: 2, unidad: 'cucharadas', costo: 0.6 },
@@ -225,6 +247,7 @@ export const RECETAS_SEED = [
     dificultad: 'Medio',
     rendimientoBase: 10,
     unidadRendimiento: 'porciones',
+    costoEmpaque: 2.2,
     ingredientes: [
       { nombre: 'Bizcochos de champán', cantidad: 24, unidad: 'unidades', costo: 3.2 },
       { nombre: 'Café espresso', cantidad: 300, unidad: 'ml', costo: 1.2 },
@@ -250,6 +273,7 @@ export const RECETAS_SEED = [
     dificultad: 'Fácil',
     rendimientoBase: 8,
     unidadRendimiento: 'porciones',
+    costoEmpaque: 1.8,
     paraVender: true,
     ingredientes: [
       { nombre: 'Leche', cantidad: 500, unidad: 'ml', costo: 1.5 },
@@ -273,6 +297,7 @@ export const RECETAS_SEED = [
     dificultad: 'Fácil',
     rendimientoBase: 8,
     unidadRendimiento: 'porciones',
+    costoEmpaque: 2.0,
     ingredientes: [
       { nombre: 'Pulpa de maracuyá', cantidad: 200, unidad: 'ml', costo: 3.2 },
       { nombre: 'Leche condensada', cantidad: 1, unidad: 'lata', costo: 4.8 },
@@ -298,6 +323,7 @@ export const RECETAS_SEED = [
     dificultad: 'Medio',
     rendimientoBase: 20,
     unidadRendimiento: 'unidades',
+    costoEmpaque: 3.2,
     paraVender: true,
     novedad: true,
     ingredientes: [
@@ -325,6 +351,7 @@ export const RECETAS_SEED = [
     dificultad: 'Medio',
     rendimientoBase: 25,
     unidadRendimiento: 'unidades',
+    costoEmpaque: 3.4,
     paraVender: true,
     ingredientes: [
       { nombre: 'Pechuga de pollo cocida', cantidad: 300, unidad: 'g', costo: 4.5 },
@@ -350,6 +377,7 @@ export const RECETAS_SEED = [
     dificultad: 'Fácil',
     rendimientoBase: 30,
     unidadRendimiento: 'unidades',
+    costoEmpaque: 3.6,
     paraVender: true,
     ingredientes: [
       { nombre: 'Masa para tequeños', cantidad: 30, unidad: 'tiras', costo: 5.0 },
@@ -374,6 +402,7 @@ export const RECETAS_SEED = [
     dificultad: 'Fácil',
     rendimientoBase: 24,
     unidadRendimiento: 'unidades',
+    costoEmpaque: 2.6,
     paraVender: true,
     ingredientes: [
       { nombre: 'Almidón de yuca', cantidad: 500, unidad: 'g', costo: 4.5 },
@@ -398,6 +427,7 @@ export const RECETAS_SEED = [
     dificultad: 'Medio',
     rendimientoBase: 2,
     unidadRendimiento: 'panes',
+    costoEmpaque: 1.2,
     ingredientes: [
       { nombre: 'Harina integral', cantidad: 500, unidad: 'g', costo: 2.5 },
       { nombre: 'Agua tibia', cantidad: 320, unidad: 'ml', costo: 0.0 },
@@ -422,6 +452,7 @@ export const RECETAS_SEED = [
     dificultad: 'Medio',
     rendimientoBase: 12,
     unidadRendimiento: 'porciones',
+    costoEmpaque: 1.6,
     ingredientes: [
       { nombre: 'Harina de trigo', cantidad: 500, unidad: 'g', costo: 2.6 },
       { nombre: 'Agua tibia', cantidad: 350, unidad: 'ml', costo: 0.0 },
@@ -449,6 +480,7 @@ export const RECETAS_SEED = [
     dificultad: 'Fácil',
     rendimientoBase: 6,
     unidadRendimiento: 'vasos',
+    costoEmpaque: 1.5,
     paraVender: true,
     ingredientes: [
       { nombre: 'Limones', cantidad: 5, unidad: 'unidades', costo: 1.5 },
@@ -472,6 +504,7 @@ export const RECETAS_SEED = [
     dificultad: 'Fácil',
     rendimientoBase: 4,
     unidadRendimiento: 'vasos',
+    costoEmpaque: 1.4,
     paraVender: true,
     ingredientes: [
       { nombre: 'Café espresso frío', cantidad: 300, unidad: 'ml', costo: 1.4 },
@@ -495,6 +528,7 @@ export const RECETAS_SEED = [
     dificultad: 'Fácil',
     rendimientoBase: 4,
     unidadRendimiento: 'vasos',
+    costoEmpaque: 1.4,
     paraVender: true,
     ingredientes: [
       { nombre: 'Fresas', cantidad: 250, unidad: 'g', costo: 3.0 },
@@ -519,6 +553,7 @@ export const RECETAS_SEED = [
     dificultad: 'Medio',
     rendimientoBase: 12,
     unidadRendimiento: 'unidades',
+    costoEmpaque: 3.8,
     paraVender: true,
     novedad: true,
     ingredientes: [
@@ -547,6 +582,7 @@ export const RECETAS_SEED = [
     dificultad: 'Medio',
     rendimientoBase: 20,
     unidadRendimiento: 'unidades',
+    costoEmpaque: 4.2,
     paraVender: true,
     novedad: true,
     ingredientes: [

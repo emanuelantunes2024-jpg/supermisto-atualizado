@@ -79,7 +79,7 @@ function ItemFila({ item, onToggle, onRemove }) {
     <div className="flex items-center gap-3 px-4 py-3">
       <button
         onClick={() => onToggle(item.id)}
-        className={`flex h-5.5 w-5.5 shrink-0 items-center justify-center rounded-md border-2 transition ${
+        className={`flex h-[22px] w-[22px] shrink-0 items-center justify-center rounded-md border-2 transition ${
           item.marcado ? 'border-brand-500 bg-brand-500 text-white' : 'border-black/20'
         }`}
         aria-label="Marcar comprado"

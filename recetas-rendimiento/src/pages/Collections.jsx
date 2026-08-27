@@ -59,7 +59,7 @@ export default function Collections() {
                 className="rounded-lg p-2 text-ink/40 hover:bg-red-50 hover:text-red-600"
                 aria-label="Eliminar colección"
               >
-                <Icon name="trash" className="w-4.5 h-4.5" />
+                <Icon name="trash" className="w-[18px] h-[18px]" />
               </button>
             </div>
           ))}
