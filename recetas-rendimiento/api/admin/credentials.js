@@ -84,10 +84,10 @@ export default async function handler(req, res) {
     res.setHeader('Set-Cookie', cookieDeCierre());
     res.status(200).json({ ok: true, email: nueva.email });
   } catch (err) {
-    console.error('[admin/credentials]', err);
-    // El caso más común: todavía no se conectó Storage → Marketplace → Redis
-    // en Vercel. Sin eso no hay dónde guardar la credencial nueva.
-    const esRedisNoConfigurado = /redis no configurado/i.test(err?.message || '');
-    res.status(500).json({ ok: false, error: esRedisNoConfigurado ? 'redis_no_configurado' : 'error_al_guardar' });
+    // definirCredenciales() solo hace una escritura en Redis: cualquier error
+    // acá es un problema de almacenamiento (Redis no conectado, mal
+    // configurado, o inaccesible en este momento) — nunca un bug de lógica.
+    console.error('[admin/credentials] fallo al guardar en Redis:', err);
+    res.status(500).json({ ok: false, error: 'redis_no_configurado' });
   }
 }

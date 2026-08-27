@@ -1,7 +1,67 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../lib/AuthContext.jsx';
 import Icon from '../../components/Icon.jsx';
+
+const ITEMS_ESTADO = [
+  { clave: 'sessionSecret', label: 'Sesiones firmadas (SESSION_SECRET)' },
+  { clave: 'adminPasswordHash', label: 'Contraseña inicial del panel (ADMIN_PASSWORD_HASH)' },
+  { clave: 'redisConectado', label: 'Almacenamiento persistente (Redis)' },
+  { clave: 'hotmartHottok', label: 'Webhook de Hotmart (HOTMART_HOTTOK)' },
+];
+
+function EstadoSistema() {
+  const [estado, setEstado] = useState(null);
+
+  useEffect(() => {
+    let activo = true;
+    fetch('/api/admin/status', { credentials: 'include' })
+      .then((r) => r.json())
+      .then((d) => activo && setEstado(d))
+      .catch(() => activo && setEstado(false));
+    return () => {
+      activo = false;
+    };
+  }, []);
+
+  if (estado === null) return null;
+
+  return (
+    <div className="card p-5">
+      <p className="text-[13px] font-bold text-ink">Estado del sistema</p>
+      <p className="mt-1 text-[12.5px] leading-relaxed text-ink/50">
+        Qué está configurado en el servidor ahora mismo (sin mostrar ningún valor secreto).
+      </p>
+      <ul className="mt-3 space-y-2">
+        {ITEMS_ESTADO.map(({ clave, label }) => {
+          const ok = estado ? Boolean(estado[clave]) : false;
+          return (
+            <li key={clave} className="flex items-center gap-2.5 text-[12.5px]">
+              <span
+                className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full ${
+                  ok ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'
+                }`}
+              >
+                <Icon name={ok ? 'check' : 'x'} className="h-3 w-3" strokeWidth={3} />
+              </span>
+              <span className={ok ? 'text-ink/70' : 'font-semibold text-amber-800'}>{label}</span>
+            </li>
+          );
+        })}
+      </ul>
+      {estado && estado.redisEnvPresente && !estado.redisConectado && (
+        <p className="mt-3 text-[12px] font-semibold text-amber-800">
+          Redis tiene variables configuradas pero no respondió — revisá la integración en Vercel.
+        </p>
+      )}
+      {estado && !estado.redisEnvPresente && (
+        <p className="mt-3 text-[12px] font-semibold text-amber-800">
+          Falta conectar: Vercel → tu proyecto → Storage → Marketplace → Redis.
+        </p>
+      )}
+    </div>
+  );
+}
 
 const MENSAJES_ERROR = {
   falta_password_actual: 'Ingresá tu contraseña actual para confirmar el cambio.',
@@ -99,6 +159,8 @@ export default function AdminSettings() {
           Sesión actual: <span className="font-semibold text-ink/70">{email}</span>
         </p>
       </div>
+
+      <EstadoSistema />
 
       <div className="card p-5">
         <p className="text-[13px] font-bold text-ink">Cambiar email y/o contraseña</p>
