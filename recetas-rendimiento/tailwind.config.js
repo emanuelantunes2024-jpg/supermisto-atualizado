@@ -10,7 +10,7 @@ export default {
         cream: '#FAF6F1',
         shell: '#FFFFFF',
         ink: '#2B2118',
-        line: '#EFE7DC',
+        line: '#DCC9AF',
         brand: {
           50: '#FFF2EC',
           100: '#FFE2D5',

@@ -45,7 +45,7 @@ export default function RecipeCard({ receta, compact = false }) {
       {!compact && (
         <div className="flex flex-1 flex-col gap-1 p-4">
           <h3 className="line-clamp-2 text-[15px] font-bold leading-snug text-ink">{receta.nombre}</h3>
-          <p className="text-xs font-medium text-ink/45">{cat?.name}</p>
+          <p className="text-xs font-medium text-ink/60">{cat?.name}</p>
         </div>
       )}
     </Link>

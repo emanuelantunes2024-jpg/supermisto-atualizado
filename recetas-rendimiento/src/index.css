@@ -50,7 +50,7 @@ body {
     @apply inline-flex items-center justify-center gap-2 rounded-xl bg-brand-500 px-4 py-2.5 text-sm font-semibold text-white shadow-soft transition hover:bg-brand-600 active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none;
   }
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-white px-4 py-2.5 text-sm font-semibold text-ink border border-line transition hover:bg-brand-50 hover:border-brand-200 active:scale-[0.98];
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-white px-4 py-2.5 text-sm font-semibold text-ink border border-ink/15 transition hover:bg-brand-50 hover:border-brand-200 active:scale-[0.98];
   }
   .btn-ghost {
     @apply inline-flex items-center justify-center gap-2 rounded-xl px-3 py-2 text-sm font-medium text-ink/70 transition hover:bg-black/5 hover:text-ink;
@@ -62,7 +62,7 @@ body {
     @apply text-xs font-semibold uppercase tracking-wide text-ink/65;
   }
   .pill {
-    @apply inline-flex items-center gap-1.5 rounded-full border border-line bg-white px-3 py-1.5 text-sm font-medium text-ink/70 transition hover:border-brand-300 hover:text-brand-600;
+    @apply inline-flex items-center gap-1.5 rounded-full border border-ink/15 bg-white px-3 py-1.5 text-sm font-medium text-ink/80 transition hover:border-brand-300 hover:text-brand-600;
   }
   .pill-active {
     @apply border-brand-500 bg-brand-500 text-white hover:text-white;
