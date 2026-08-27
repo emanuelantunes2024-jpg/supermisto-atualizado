@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../lib/AuthContext.jsx';
 import { BRAND } from '../lib/brand.js';
 import Logo from '../components/Logo.jsx';
@@ -16,6 +16,8 @@ const MENSAJES_ERROR = {
 export default function AdminLogin() {
   const { loginAdmin } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+  const mensajeExito = location.state?.mensaje || null;
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [verPassword, setVerPassword] = useState(false);
@@ -50,6 +52,12 @@ export default function AdminLogin() {
           <p className="mt-1.5 text-[12.5px] leading-relaxed text-ink/55">
             Acceso exclusivo para quien administra {BRAND.producto}.
           </p>
+
+          {mensajeExito && (
+            <div className="mt-4 rounded-xl border border-emerald-200 bg-emerald-50 p-3.5">
+              <p className="text-[12.5px] font-semibold text-emerald-700">{mensajeExito}</p>
+            </div>
+          )}
 
           <form onSubmit={onSubmit} className="mt-5 space-y-3">
             <div>

@@ -26,6 +26,7 @@ import Dashboard from './pages/admin/Dashboard.jsx';
 import RecipesAdmin from './pages/admin/RecipesAdmin.jsx';
 import RecipeForm from './pages/admin/RecipeForm.jsx';
 import CategoriesAdmin from './pages/admin/CategoriesAdmin.jsx';
+import AdminSettings from './pages/admin/AdminSettings.jsx';
 import AdminPlaceholder from './pages/admin/AdminPlaceholder.jsx';
 
 export default function App() {
@@ -69,7 +70,7 @@ export default function App() {
         <Route path="usuarios" element={<AdminPlaceholder titulo="Usuarios" icon="users" descripcion="La gestión de usuarios llegará junto con la autenticación y el control de suscripción." />} />
         <Route path="novedades" element={<AdminPlaceholder titulo="Novedades" icon="bell" descripcion="Podés marcar o desmarcar una receta como novedad desde la lista de Recetas." />} />
         <Route path="reportes" element={<AdminPlaceholder titulo="Reportes" icon="report" />} />
-        <Route path="configuracion" element={<AdminPlaceholder titulo="Configuración" icon="settings" />} />
+        <Route path="configuracion" element={<AdminSettings />} />
       </Route>
       </Route>
 

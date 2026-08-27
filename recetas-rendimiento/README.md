@@ -115,7 +115,26 @@ contraseña:
 | `ADMIN_PASSWORD_HASH` | Hash de la contraseña del panel. Generalo con `node scripts/gerar-senha-admin.mjs`. |
 | `KV_REST_API_URL` / `KV_REST_API_TOKEN` | Las agrega solo Vercel al conectar **Storage → Marketplace → Redis**. Sin esto, el panel no puede guardar cambios (el sitio público sigue funcionando con el catálogo semilla). |
 
-### Crear/cambiar la contraseña del administrador
+### Cambiar el email/contraseña del administrador (sin tocar Vercel)
+
+Desde el propio panel: **`/admin/configuracion`** → "Cambiar email y/o
+contraseña". Pide la contraseña actual para confirmar, y:
+
+- transforma la contraseña nueva en hash (scrypt + salt) en el servidor —
+  nunca se guarda en texto plano, ni siquiera un instante;
+- guarda el email/hash nuevos en Redis (el mismo almacenamiento persistente
+  que ya usa el resto del panel) — sobrevive redeploys, no depende del
+  navegador ni de `localStorage`;
+- invalida automáticamente cualquier sesión de admin abierta con la
+  credencial anterior (la propia incluida): hay que volver a entrar con el
+  email y la contraseña nuevos.
+
+La credencial de `ADMIN_EMAILS` + `ADMIN_PASSWORD_HASH` (variables de Vercel)
+sigue funcionando como arranque inicial; en cuanto se guarda una credencial
+nueva desde `/admin/configuracion`, esa pasa a ser la única válida para
+entrar al panel.
+
+### Generar la contraseña inicial (antes del primer login)
 
 ```bash
 node scripts/gerar-senha-admin.mjs
@@ -123,7 +142,8 @@ node scripts/gerar-senha-admin.mjs
 
 Copiá el valor `ADMIN_PASSWORD_HASH` que imprime y pegalo en Vercel. Guardá la
 contraseña (la que también imprime) en un lugar seguro — es la única vez que se
-muestra en texto plano.
+muestra en texto plano. Después del primer login podés cambiarla desde el
+panel, sin volver a tocar Vercel.
 
 ## Suscripción con Hotmart (ya implementado)
 

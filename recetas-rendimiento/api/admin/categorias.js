@@ -5,7 +5,7 @@ import { obtenerAdminDeSesion } from '../_lib/adminAuth.js';
 import { obtenerCategoriasDB, guardarCategoriasDB, obtenerRecetasDB } from '../_lib/contentStore.js';
 
 export default async function handler(req, res) {
-  const admin = obtenerAdminDeSesion(req);
+  const admin = await obtenerAdminDeSesion(req);
   if (!admin) {
     res.status(401).json({ ok: false, error: 'no_autorizado' });
     return;

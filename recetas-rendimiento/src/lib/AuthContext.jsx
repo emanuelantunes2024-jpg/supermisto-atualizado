@@ -75,6 +75,28 @@ export function AuthProvider({ children }) {
     return { ok: false, error: r.error };
   }, []);
 
+  /**
+   * Cambia el email y/o la contraseña del panel admin (requiere la contraseña
+   * actual). Al guardarse con éxito el servidor cierra la sesión (la
+   * credencial anterior queda invalidada), así que acá también limpiamos el
+   * estado local — hay que volver a entrar con la credencial nueva.
+   */
+  const alterarCredencialesAdmin = useCallback(async ({ currentPassword, newEmail, newPassword }) => {
+    setError(null);
+    const r = await llamar('/api/admin/credentials', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ currentPassword, newEmail, newPassword }),
+    });
+    if (r.ok) {
+      setEmail(null);
+      setIsAdmin(false);
+      setEstado('anonimo');
+      return { ok: true, email: r.email };
+    }
+    return { ok: false, error: r.error };
+  }, []);
+
   const logout = useCallback(async () => {
     await llamar('/api/session/logout', { method: 'POST' });
     setEmail(null);
@@ -83,8 +105,8 @@ export function AuthProvider({ children }) {
   }, []);
 
   const value = useMemo(
-    () => ({ estado, email, isAdmin, modoAbierto, error, login, loginAdmin, logout }),
-    [estado, email, isAdmin, modoAbierto, error, login, loginAdmin, logout]
+    () => ({ estado, email, isAdmin, modoAbierto, error, login, loginAdmin, alterarCredencialesAdmin, logout }),
+    [estado, email, isAdmin, modoAbierto, error, login, loginAdmin, alterarCredencialesAdmin, logout]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
