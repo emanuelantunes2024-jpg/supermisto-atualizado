@@ -2,9 +2,19 @@ import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useStore } from '../../lib/StoreContext.jsx';
 import Icon from '../../components/Icon.jsx';
-import { calcularCosto, formatoMoneda } from '../../lib/calc.js';
+import { calcularCosto, costoDesdeCompra, formatoMoneda, redondear } from '../../lib/calc.js';
 
-const FILA_VACIA = () => ({ id: Math.random().toString(36).slice(2), nombre: '', costo: '' });
+const FILA_VACIA = () => ({
+  id: Math.random().toString(36).slice(2),
+  nombre: '',
+  cantidad: '',
+  unidad: '',
+  precioCompra: '',
+  cantidadCompra: '',
+  costo: '',
+});
+
+const CAMPOS_QUE_RECALCULAN = new Set(['cantidad', 'precioCompra', 'cantidadCompra']);
 
 export default function CostCalculator() {
   const { recetasPublicadas } = useStore();
@@ -24,7 +34,23 @@ export default function CostCalculator() {
   );
 
   function actualizarFila(id, campo, valor) {
-    setFilas((prev) => prev.map((f) => (f.id === id ? { ...f, [campo]: valor } : f)));
+    setFilas((prev) =>
+      prev.map((f) => {
+        if (f.id !== id) return f;
+        const actualizada = { ...f, [campo]: valor };
+        if (CAMPOS_QUE_RECALCULAN.has(campo) && actualizada.precioCompra && actualizada.cantidadCompra) {
+          actualizada.costo = redondear(
+            costoDesdeCompra({
+              precioCompra: actualizada.precioCompra,
+              cantidadCompra: actualizada.cantidadCompra,
+              cantidadUsada: actualizada.cantidad,
+            }),
+            2
+          );
+        }
+        return actualizada;
+      })
+    );
   }
 
   function agregarFila() {
@@ -40,7 +66,17 @@ export default function CostCalculator() {
     if (!slug) return;
     const receta = recetasPublicadas.find((r) => r.slug === slug);
     if (!receta) return;
-    setFilas(receta.ingredientes.map((i) => ({ id: Math.random().toString(36).slice(2), nombre: i.nombre, costo: i.costo })));
+    setFilas(
+      receta.ingredientes.map((i) => ({
+        id: Math.random().toString(36).slice(2),
+        nombre: i.nombre,
+        cantidad: i.cantidad || '',
+        unidad: i.unidad || '',
+        precioCompra: i.precioCompra || '',
+        cantidadCompra: i.cantidadCompra || '',
+        costo: i.costo,
+      }))
+    );
     setCostosExtra(receta.costosExtra || 0);
     setUnidades(receta.rendimientoBase);
   }
@@ -67,30 +103,80 @@ export default function CostCalculator() {
           </div>
 
           <div className="card p-5">
-            <p className="mb-3 text-sm font-bold text-ink">Ingredientes</p>
-            <div className="space-y-2">
-              {filas.map((f) => (
-                <div key={f.id} className="flex gap-2">
-                  <input
-                    value={f.nombre}
-                    onChange={(e) => actualizarFila(f.id, 'nombre', e.target.value)}
-                    placeholder="Ingrediente"
-                    className="input flex-1"
-                  />
-                  <input
-                    type="number"
-                    min="0"
-                    step="0.01"
-                    value={f.costo}
-                    onChange={(e) => actualizarFila(f.id, 'costo', e.target.value)}
-                    placeholder="Costo"
-                    className="input w-28"
-                  />
-                  <button onClick={() => quitarFila(f.id)} className="rounded-xl p-2.5 text-ink/40 hover:bg-red-50 hover:text-red-600">
-                    <Icon name="x" className="w-4 h-4" />
-                  </button>
-                </div>
-              ))}
+            <p className="text-sm font-bold text-ink">Ingredientes</p>
+            <p className="mt-1 text-[12.5px] leading-relaxed text-ink/50">
+              Cargá cuánto pagaste por el paquete completo y cuánto usa la receta — el costo se calcula
+              solo. Si preferís, también podés escribir el costo directamente.
+            </p>
+            <div className="mt-3 space-y-3">
+              {filas.map((f) => {
+                const autoCalculado = Boolean(f.precioCompra) && Boolean(f.cantidadCompra);
+                return (
+                  <div key={f.id} className="rounded-xl border border-ink/10 p-3">
+                    <div className="flex gap-2">
+                      <input
+                        value={f.nombre}
+                        onChange={(e) => actualizarFila(f.id, 'nombre', e.target.value)}
+                        placeholder="Ingrediente (ej: Harina)"
+                        className="input flex-1"
+                      />
+                      <input
+                        type="number"
+                        step="0.01"
+                        value={f.cantidad}
+                        onChange={(e) => actualizarFila(f.id, 'cantidad', e.target.value)}
+                        placeholder="Cant. usada"
+                        className="input w-28"
+                      />
+                      <input
+                        value={f.unidad}
+                        onChange={(e) => actualizarFila(f.id, 'unidad', e.target.value)}
+                        placeholder="Unidad"
+                        className="input w-24"
+                      />
+                      <button onClick={() => quitarFila(f.id)} className="rounded-xl p-2.5 text-ink/40 hover:bg-red-50 hover:text-red-600">
+                        <Icon name="x" className="w-4 h-4" />
+                      </button>
+                    </div>
+                    <div className="mt-2 grid grid-cols-3 gap-2">
+                      <input
+                        type="number"
+                        min="0"
+                        step="0.01"
+                        value={f.precioCompra}
+                        onChange={(e) => actualizarFila(f.id, 'precioCompra', e.target.value)}
+                        placeholder="Precio del paquete"
+                        className="input"
+                      />
+                      <input
+                        type="number"
+                        min="0"
+                        step="0.01"
+                        value={f.cantidadCompra}
+                        onChange={(e) => actualizarFila(f.id, 'cantidadCompra', e.target.value)}
+                        placeholder={`Cant. del paquete (${f.unidad || 'misma unidad'})`}
+                        className="input"
+                      />
+                      <div className="relative">
+                        <input
+                          type="number"
+                          min="0"
+                          step="0.01"
+                          value={f.costo}
+                          onChange={(e) => actualizarFila(f.id, 'costo', e.target.value)}
+                          placeholder="Costo"
+                          className="input pr-14"
+                        />
+                        {autoCalculado && (
+                          <span className="absolute right-2.5 top-1/2 -translate-y-1/2 rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-emerald-700">
+                            Auto
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
             <button onClick={agregarFila} className="btn-secondary mt-3">
               <Icon name="plus" className="w-4 h-4" /> Agregar ingrediente
