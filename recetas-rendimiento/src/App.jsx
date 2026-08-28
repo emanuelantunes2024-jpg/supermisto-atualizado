@@ -29,6 +29,7 @@ import CategoriesAdmin from './pages/admin/CategoriesAdmin.jsx';
 import AdminSettings from './pages/admin/AdminSettings.jsx';
 import ClientesAdmin from './pages/admin/ClientesAdmin.jsx';
 import AdminPlaceholder from './pages/admin/AdminPlaceholder.jsx';
+import NewsAdmin from './pages/admin/NewsAdmin.jsx';
 
 export default function App() {
   return (
@@ -69,7 +70,7 @@ export default function App() {
         <Route path="categorias" element={<CategoriesAdmin />} />
         <Route path="etiquetas" element={<AdminPlaceholder titulo="Etiquetas" icon="tag" />} />
         <Route path="usuarios" element={<ClientesAdmin />} />
-        <Route path="novedades" element={<AdminPlaceholder titulo="Novedades" icon="bell" descripcion="Podés marcar o desmarcar una receta como novedad desde la lista de Recetas." />} />
+        <Route path="novedades" element={<NewsAdmin />} />
         <Route path="reportes" element={<AdminPlaceholder titulo="Reportes" icon="report" />} />
         <Route path="configuracion" element={<AdminSettings />} />
       </Route>
