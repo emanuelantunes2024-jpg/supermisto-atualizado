@@ -19,7 +19,13 @@ function revalidateStorefront(slug?: string) {
   revalidatePath("/");
   revalidatePath("/plantillas");
   revalidatePath("/admin/plantillas");
-  if (slug) revalidatePath(`/plantillas/${slug}`);
+  if (slug) {
+    revalidatePath(`/plantillas/${slug}`);
+    // La página de la demo a pantalla completa es una ruta aparte (SSG con
+    // su propio caché): sin esto, "Ver demo completa" podía seguir sirviendo
+    // durante minutos la versión vieja de preview_url tras guardar cambios.
+    revalidatePath(`/plantillas/${slug}/demo`);
+  }
 }
 
 /** Crea o actualiza una plantilla desde el formulario del panel. */
