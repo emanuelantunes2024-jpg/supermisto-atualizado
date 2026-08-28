@@ -4,8 +4,9 @@ import Link from "next/link";
 import { useActionState, useState } from "react";
 import { useFormStatus } from "react-dom";
 
-import { saveTemplate, uploadTemplateAsset, uploadTemplateDemo, type ActionState } from "@/app/admin/actions";
+import { saveTemplate, createUploadTicket, uploadTemplateDemo, type ActionState } from "@/app/admin/actions";
 import { slugify } from "@/lib/format";
+import { createClient } from "@/lib/supabase/client";
 import type { Category, Template } from "@/lib/types";
 
 interface TemplateFormProps {
@@ -308,19 +309,39 @@ function UploadField({ kind, slug, label, onUploaded }: UploadFieldProps) {
     setBusy(true);
     setMessage(null);
 
-    const data = new FormData();
-    data.set("file", file);
-    data.set("kind", kind);
-    data.set("slug", slug || "plantilla");
+    // 1. Pide al servidor una URL firmada (petición diminuta, sin el archivo).
+    const ticketForm = new FormData();
+    ticketForm.set("kind", kind);
+    ticketForm.set("slug", slug || "plantilla");
+    ticketForm.set("filename", file.name);
+    const ticket = await createUploadTicket({}, ticketForm);
 
-    const result = await uploadTemplateAsset({}, data);
-
-    if (result.error) setMessage(result.error);
-    else if (result.path) {
-      onUploaded(result.path);
-      setMessage("Subido correctamente.");
+    if (ticket.error || !ticket.path || !ticket.token || !ticket.bucket) {
+      setMessage(ticket.error ?? "No se pudo preparar la subida.");
+      setBusy(false);
+      return;
     }
 
+    // 2. Sube el archivo directo del navegador a Supabase Storage: no pasa
+    // por el servidor, así que no hay límite de tamaño de las Server Actions.
+    const supabase = createClient();
+    const { error } = await supabase.storage
+      .from(ticket.bucket)
+      .uploadToSignedUrl(ticket.path, ticket.token, file);
+
+    if (error) {
+      setMessage(`No se pudo subir el archivo: ${error.message}`);
+      setBusy(false);
+      return;
+    }
+
+    if (kind === "file") {
+      onUploaded(ticket.path);
+    } else {
+      const { data } = supabase.storage.from(ticket.bucket).getPublicUrl(ticket.path);
+      onUploaded(data.publicUrl);
+    }
+    setMessage("Subido correctamente.");
     setBusy(false);
     event.target.value = "";
   }

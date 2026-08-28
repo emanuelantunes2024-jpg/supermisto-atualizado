@@ -96,41 +96,37 @@ export async function setTemplateStatus(formData: FormData): Promise<void> {
   revalidateStorefront();
 }
 
-/** Sube un archivo al storage y devuelve la ruta/URL para el formulario. */
-export async function uploadTemplateAsset(
-  _prev: ActionState & { path?: string },
+/**
+ * Prepara una URL firmada de subida directa a Supabase Storage: el archivo
+ * viaja del navegador al bucket sin pasar por esta función, así que no hay
+ * límite de tamaño de las Server Actions (los .zip de plantillas con muchas
+ * fotos pueden pesar varios MB). Devuelve lo que el navegador necesita para
+ * subir con `uploadToSignedUrl`.
+ */
+export async function createUploadTicket(
+  _prev: ActionState & { path?: string; token?: string; bucket?: string },
   formData: FormData,
-): Promise<ActionState & { path?: string }> {
+): Promise<ActionState & { path?: string; token?: string; bucket?: string }> {
   const session = await requireAdmin();
   if (!session) return { error: "No tienes permisos para esta acción." };
 
   const supabase = createAdminClient();
   if (!supabase) return { error: "Supabase no está configurado (falta SUPABASE_SERVICE_ROLE_KEY)." };
 
-  const file = formData.get("file");
   const kind = String(formData.get("kind") ?? "asset");
   const slug = slugify(String(formData.get("slug") ?? "plantilla")) || "plantilla";
-
-  if (!(file instanceof File) || file.size === 0) return { error: "Selecciona un archivo." };
+  const filename = String(formData.get("filename") ?? "");
+  if (!filename) return { error: "Falta el nombre del archivo." };
 
   const isPrivate = kind === "file";
   const bucket = isPrivate ? TEMPLATE_FILES_BUCKET : TEMPLATE_ASSETS_BUCKET;
-  const extension = file.name.split(".").pop()?.toLowerCase() ?? "bin";
+  const extension = filename.split(".").pop()?.toLowerCase() || "bin";
   const objectPath = `${slug}/${Date.now()}.${extension}`;
 
-  const { error } = await supabase.storage
-    .from(bucket)
-    .upload(objectPath, file, { contentType: file.type || undefined, upsert: false });
+  const { data, error } = await supabase.storage.from(bucket).createSignedUploadUrl(objectPath);
+  if (error || !data) return { error: `No se pudo preparar la subida: ${error?.message ?? "error desconocido"}` };
 
-  if (error) return { error: `No se pudo subir el archivo: ${error.message}` };
-
-  if (isPrivate) {
-    // El .zip vive en un bucket privado: se guarda solo la ruta interna.
-    return { success: "Archivo subido.", path: objectPath };
-  }
-
-  const { data } = supabase.storage.from(bucket).getPublicUrl(objectPath);
-  return { success: "Imagen subida.", path: data.publicUrl };
+  return { success: "ok", path: objectPath, token: data.token, bucket };
 }
 
 function translate(message: string): string {

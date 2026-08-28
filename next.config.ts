@@ -11,6 +11,13 @@ const supabaseHost = (() => {
 })();
 
 const nextConfig: NextConfig = {
+  experimental: {
+    // Por defecto Next corta las Server Actions en 1 MB: los .zip de las
+    // plantillas (con fotos reales) suelen pesar más. La subida grande del
+    // .zip completo usa URL firmada directa a Supabase (no pasa por aquí),
+    // pero esto protege la subida de la carpeta de demo y otras acciones.
+    serverActions: { bodySizeLimit: "20mb" },
+  },
   images: {
     remotePatterns: [
       // Storage público de Supabase (miniaturas de plantillas).
