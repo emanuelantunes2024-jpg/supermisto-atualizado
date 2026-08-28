@@ -181,6 +181,8 @@ section{padding:52px 0}
 .filtro:not(.act):hover{border-color:var(--rojo);color:var(--rojo)}
 
 /* ---- Vehículos ---- */
+.vehiculos-vacio{text-align:center;padding:30px 16px;color:var(--gris);font-size:14px;background:var(--gris-cl);border-radius:var(--radio);margin-bottom:20px}
+.vehiculos-vacio button{color:var(--rojo);font-weight:700;text-decoration:underline}
 .vehiculos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .vehiculo{border:1px solid var(--borde);border-radius:var(--radio);overflow:hidden;background:#fff;transition:box-shadow .15s}
 .vehiculo:hover{box-shadow:var(--sombra)}
@@ -211,7 +213,8 @@ section{padding:52px 0}
 
 /* ---- Marcas ---- */
 .marcas-fila{display:flex;flex-wrap:wrap;gap:14px}
-.marca-logo{flex:1;min-width:110px;text-align:center;padding:18px 10px;border:1px solid var(--borde);border-radius:8px;font-weight:800;font-size:14px;color:var(--texto);letter-spacing:.3px}
+.marca-logo{flex:1;min-width:110px;display:flex;align-items:center;justify-content:center;text-align:center;padding:18px 10px;min-height:56px;border:1px solid var(--borde);border-radius:8px;font-weight:800;font-size:14px;color:var(--texto);letter-spacing:.3px}
+.marca-logo img{max-height:32px;width:auto;object-fit:contain}
 
 /* ---- Por qué comprar ---- */
 .porque-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:28px;align-items:stretch}

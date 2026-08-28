@@ -102,7 +102,7 @@
             </div>
                   </div>
         <div class="portada-botones">
-          <a href="#vehiculos" class="btn btn-rojo">Ver ofertas</a>
+          <button type="button" id="btnVerOfertas" class="btn btn-rojo">Ver ofertas</button>
           <a href="https://wa.me/34900123456?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20un%20veh%C3%ADculo." target="_blank" rel="noopener" class="btn btn-linea">Hablar con un asesor</a>
         </div>
       </div>
@@ -110,20 +110,18 @@
       <form class="portada-buscador" id="formBuscarVehiculo">
         <h2>Encuentra tu vehículo</h2>
         <label>Categoría</label>
-        <select name="categoria"><option>Todas las categorías</option>
-          <option>SUV</option><option>Berlina</option><option>Compacto</option><option>Furgoneta</option>        </select>
+        <select name="categoria"><option value="">Todas las categorías</option>
+          <option value="SUV">SUV</option><option value="Berlina">Berlina</option><option value="Compacto">Compacto</option><option value="Furgoneta">Furgoneta</option>        </select>
         <label>Marca</label>
-        <select name="marca"><option>Todas las marcas</option>
-          <option>BMW</option><option>Mercedes-Benz</option><option>Audi</option><option>Volkswagen</option><option>SEAT</option><option>Toyota</option><option>KIA</option><option>Hyundai</option><option>Renault</option><option>Ford</option>        </select>
-        <label>Modelo</label>
-        <select name="modelo"><option>Todos los modelos</option></select>
+        <select name="marca"><option value="">Todas las marcas</option>
+          <option value="BMW">BMW</option><option value="Mercedes-Benz">Mercedes-Benz</option><option value="Audi">Audi</option><option value="Volkswagen">Volkswagen</option><option value="SEAT">SEAT</option><option value="Toyota">Toyota</option><option value="KIA">KIA</option><option value="Hyundai">Hyundai</option><option value="Renault">Renault</option><option value="Ford">Ford</option>        </select>
         <label>Año</label>
         <div class="rejilla-2">
           <input type="number" name="anio_min" placeholder="Mínimo">
-          <input type="number" name="anio_max" placeholder="até Máximo">
+          <input type="number" name="anio_max" placeholder="Máximo">
         </div>
-        <label>Precio</label>
-        <div class="precio-rango"><span>0 €</span><input type="range" min="0" max="50000" value="50000"><span>50.000+ €</span></div>
+        <label>Precio máximo</label>
+        <div class="precio-rango"><span>0 €</span><input type="range" name="precio_max" min="5000" max="50000" step="1000" value="50000"><span id="precioMaxLbl">50.000+ €</span></div>
         <button type="submit" class="btn btn-rojo btn-ancho"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>Buscar vehículos</button>
         <a href="#vehiculos" class="busq-avanzada">Búsqueda avanzada</a>
       </form>
@@ -168,8 +166,9 @@
               </div>
       <a href="#vehiculos" class="enlace">Ver todos →</a>
     </div>
+    <p class="vehiculos-vacio" id="vehiculosVacio" hidden>No se han encontrado vehículos con esos filtros. <button type="button" id="limpiarFiltros">Quitar filtros</button></p>
     <div class="vehiculos-grid" id="vehiculosGrid">
-              <article class="vehiculo" data-filtro="SUV">
+              <article class="vehiculo" data-filtro="SUV" data-marca="Audi" data-anio="2023" data-precio="28900" data-oferta="0">
           <div class="vehiculo-foto">
             <img src="img/audi-q3.jpg" alt="" loading="lazy">            <span class="vehiculo-anio">2023</span>
             <span class="vehiculo-eti eti-rojo">NUEVO</span>            <button type="button" class="fav" aria-label="Añadir a favoritos" data-fav><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5S3.5 15.4 3.5 9.6A4.7 4.7 0 0 1 12 7.2a4.7 4.7 0 0 1 8.5 2.4c0 5.8-8.5 10.9-8.5 10.9z"/></svg></button>
@@ -185,7 +184,7 @@
             <a href="https://wa.me/34900123456?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20un%20veh%C3%ADculo." target="_blank" rel="noopener" class="btn btn-borde btn-ancho">Ver detalles</a>
           </div>
         </article>
-              <article class="vehiculo" data-filtro="Compacto">
+              <article class="vehiculo" data-filtro="Compacto" data-marca="BMW" data-anio="2022" data-precio="21500" data-oferta="0">
           <div class="vehiculo-foto">
             <img src="img/bmw-serie1.jpg" alt="" loading="lazy">            <span class="vehiculo-anio">2022</span>
             <span class="vehiculo-eti eti-azul">ÚNICO DUEÑO</span>            <button type="button" class="fav" aria-label="Añadir a favoritos" data-fav><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5S3.5 15.4 3.5 9.6A4.7 4.7 0 0 1 12 7.2a4.7 4.7 0 0 1 8.5 2.4c0 5.8-8.5 10.9-8.5 10.9z"/></svg></button>
@@ -201,7 +200,7 @@
             <a href="https://wa.me/34900123456?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20un%20veh%C3%ADculo." target="_blank" rel="noopener" class="btn btn-borde btn-ancho">Ver detalles</a>
           </div>
         </article>
-              <article class="vehiculo" data-filtro="SUV">
+              <article class="vehiculo" data-filtro="SUV" data-marca="Volkswagen" data-anio="2023" data-precio="29900" data-oferta="0">
           <div class="vehiculo-foto">
             <img src="img/vw-troc.jpg" alt="" loading="lazy">            <span class="vehiculo-anio">2023</span>
             <span class="vehiculo-eti eti-rojo">NUEVO</span>            <button type="button" class="fav" aria-label="Añadir a favoritos" data-fav><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5S3.5 15.4 3.5 9.6A4.7 4.7 0 0 1 12 7.2a4.7 4.7 0 0 1 8.5 2.4c0 5.8-8.5 10.9-8.5 10.9z"/></svg></button>
@@ -217,7 +216,7 @@
             <a href="https://wa.me/34900123456?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20un%20veh%C3%ADculo." target="_blank" rel="noopener" class="btn btn-borde btn-ancho">Ver detalles</a>
           </div>
         </article>
-              <article class="vehiculo" data-filtro="Berlina">
+              <article class="vehiculo" data-filtro="Berlina" data-marca="Mercedes-Benz" data-anio="2022" data-precio="24900" data-oferta="1">
           <div class="vehiculo-foto">
             <img src="img/mercedes-clasea.jpg" alt="" loading="lazy">            <span class="vehiculo-anio">2022</span>
             <span class="vehiculo-eti eti-rojo">OFERTA</span>            <button type="button" class="fav" aria-label="Añadir a favoritos" data-fav><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5S3.5 15.4 3.5 9.6A4.7 4.7 0 0 1 12 7.2a4.7 4.7 0 0 1 8.5 2.4c0 5.8-8.5 10.9-8.5 10.9z"/></svg></button>
@@ -233,7 +232,7 @@
             <a href="https://wa.me/34900123456?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20un%20veh%C3%ADculo." target="_blank" rel="noopener" class="btn btn-borde btn-ancho">Ver detalles</a>
           </div>
         </article>
-              <article class="vehiculo" data-filtro="SUV">
+              <article class="vehiculo" data-filtro="SUV" data-marca="Toyota" data-anio="2023" data-precio="26900" data-oferta="0">
           <div class="vehiculo-foto">
             <img src="img/toyota-chr.jpg" alt="" loading="lazy">            <span class="vehiculo-anio">2023</span>
             <span class="vehiculo-eti eti-azul">KM 0</span>            <button type="button" class="fav" aria-label="Añadir a favoritos" data-fav><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5S3.5 15.4 3.5 9.6A4.7 4.7 0 0 1 12 7.2a4.7 4.7 0 0 1 8.5 2.4c0 5.8-8.5 10.9-8.5 10.9z"/></svg></button>
@@ -249,7 +248,7 @@
             <a href="https://wa.me/34900123456?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20un%20veh%C3%ADculo." target="_blank" rel="noopener" class="btn btn-borde btn-ancho">Ver detalles</a>
           </div>
         </article>
-              <article class="vehiculo" data-filtro="SUV">
+              <article class="vehiculo" data-filtro="SUV" data-marca="Ford" data-anio="2022" data-precio="23900" data-oferta="1">
           <div class="vehiculo-foto">
             <img src="img/ford-kuga.jpg" alt="" loading="lazy">            <span class="vehiculo-anio">2022</span>
             <span class="vehiculo-eti eti-rojo">TURBO</span>            <button type="button" class="fav" aria-label="Añadir a favoritos" data-fav><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5S3.5 15.4 3.5 9.6A4.7 4.7 0 0 1 12 7.2a4.7 4.7 0 0 1 8.5 2.4c0 5.8-8.5 10.9-8.5 10.9z"/></svg></button>
@@ -377,23 +376,35 @@
     <div class="pie-grid">
       <div class="pie-marca">
         <span class="marca-txt"><strong>AUTO <em>PRIME</em></strong></span>
-        <p>Tu concesionario de confianza.<br>Los mejores vehículos, el mejor servicio.<br>Pasión por lo que hacemos.</p>
+        <p>Tu concesionario de confianza. Los mejores vehículos, el mejor servicio. Pasión por lo que hacemos.</p>
         <div class="pie-redes">
           <a href="#" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.5 3.5h5.7a1.8 1.8 0 0 1 1.8 1.8v5.7c0 .5-.2 1-.5 1.3l-8.4 8.4a1.8 1.8 0 0 1-2.6 0l-6.2-6.2a1.8 1.8 0 0 1 0-2.6l8.4-8.4c.3-.3.8-.5 1.3-.5z"/><circle cx="16" cy="8" r="1.4"/></svg></a>          <a href="#" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.5 3.5h5.7a1.8 1.8 0 0 1 1.8 1.8v5.7c0 .5-.2 1-.5 1.3l-8.4 8.4a1.8 1.8 0 0 1-2.6 0l-6.2-6.2a1.8 1.8 0 0 1 0-2.6l8.4-8.4c.3-.3.8-.5 1.3-.5z"/><circle cx="16" cy="8" r="1.4"/></svg></a>        </div>
       </div>
-      <div class="pie-col">
+            <div class="pie-col">
         <h4>Vehículos</h4>
-        <a href="#vehiculos">Coches nuevos</a><a href="#vehiculos">Seminuevos</a><a href="#vehiculos">KM 0</a><a href="#vehiculos">Furgonetas</a><a href="#vehiculos">Motos</a>
-      </div>
-      <div class="pie-col">
+                  <a href="#inicio">Coches nuevos</a>
+                  <a href="#inicio">Seminuevos</a>
+                  <a href="#inicio">KM 0</a>
+                  <a href="#inicio">Furgonetas</a>
+                  <a href="#inicio">Motos</a>
+              </div>
+            <div class="pie-col">
         <h4>Servicios</h4>
-        <a href="#servicios">Financiación</a><a href="#servicios">Seguro de coche</a><a href="#servicios">Tasación de vehículos</a><a href="#servicios">Taller y mantenimiento</a><a href="#servicios">Garantía extendida</a>
-      </div>
-      <div class="pie-col">
+                  <a href="#inicio">Financiación</a>
+                  <a href="#inicio">Seguro de coche</a>
+                  <a href="#inicio">Tasación de vehículos</a>
+                  <a href="#inicio">Taller y mantenimiento</a>
+                  <a href="#inicio">Garantía extendida</a>
+              </div>
+            <div class="pie-col">
         <h4>Información</h4>
-        <a href="#inicio">Quiénes somos</a><a href="#inicio">Preguntas frecuentes</a><a href="#inicio">Blog</a><a href="#inicio">Noticias</a><a href="#inicio">Contacto</a>
-      </div>
-      <div class="pie-col pie-contacto">
+                  <a href="#inicio">Quiénes somos</a>
+                  <a href="#inicio">Preguntas frecuentes</a>
+                  <a href="#inicio">Blog</a>
+                  <a href="#inicio">Noticias</a>
+                  <a href="#inicio">Contacto</a>
+              </div>
+            <div class="pie-col pie-contacto">
         <h4>Contacto</h4>
         <a href="tel:+34900123456"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 16.5v2.6a1.9 1.9 0 0 1-2.1 1.9 18.8 18.8 0 0 1-8.2-2.9 18.4 18.4 0 0 1-5.7-5.7A18.8 18.8 0 0 1 2.1 4.1 1.9 1.9 0 0 1 4 2h2.6a1.9 1.9 0 0 1 1.9 1.6c.1.9.3 1.8.7 2.7a1.9 1.9 0 0 1-.4 2L7.6 9.5a15 15 0 0 0 5.7 5.7l1.2-1.2a1.9 1.9 0 0 1 2-.4c.9.3 1.8.6 2.7.7A1.9 1.9 0 0 1 21 16.5z"/></svg>+34 900 123 456</a>
         <a href="mailto:info@autoprime.es"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2.4"/><path d="M2.5 7 12 13.5 21.5 7"/></svg>info@autoprime.es</a>
