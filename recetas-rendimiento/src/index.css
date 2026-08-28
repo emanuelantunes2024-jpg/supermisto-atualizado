@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root {
+  height: 100%;
+}
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #F2571F #F0E6DA;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', Inter, ui-sans-serif, system-ui, sans-serif;
+  background-color: #FAF6F1;
+  color: #2B2118;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #F0E6DA;
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #F2571F;
+  border-radius: 999px;
+  border: 2px solid #F0E6DA;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #DE4712;
+}
+
+.scroll-x {
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+.scroll-x::-webkit-scrollbar {
+  height: 6px;
+}
+
+@layer components {
+  .card {
+    @apply bg-white rounded-2xl border border-line shadow-card;
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-brand-500 px-4 py-2.5 text-sm font-semibold text-white shadow-soft transition hover:bg-brand-600 active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-white px-4 py-2.5 text-sm font-semibold text-ink border border-ink/15 transition hover:bg-brand-50 hover:border-brand-200 active:scale-[0.98];
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-3 py-2 text-sm font-medium text-ink/70 transition hover:bg-black/5 hover:text-ink;
+  }
+  .input {
+    @apply w-full rounded-xl border border-ink/15 bg-cream px-3.5 py-2.5 text-sm text-ink placeholder:text-ink/40 focus:border-brand-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-100;
+  }
+  .label {
+    @apply text-xs font-semibold uppercase tracking-wide text-ink/65;
+  }
+  .pill {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-ink/15 bg-white px-3 py-1.5 text-sm font-medium text-ink/80 transition hover:border-brand-300 hover:text-brand-600;
+  }
+  .pill-active {
+    @apply border-brand-500 bg-brand-500 text-white hover:text-white;
+  }
+}
