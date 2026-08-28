@@ -28,8 +28,9 @@ import RecipeForm from './pages/admin/RecipeForm.jsx';
 import CategoriesAdmin from './pages/admin/CategoriesAdmin.jsx';
 import AdminSettings from './pages/admin/AdminSettings.jsx';
 import ClientesAdmin from './pages/admin/ClientesAdmin.jsx';
-import AdminPlaceholder from './pages/admin/AdminPlaceholder.jsx';
 import NewsAdmin from './pages/admin/NewsAdmin.jsx';
+import TagsAdmin from './pages/admin/TagsAdmin.jsx';
+import ReportsAdmin from './pages/admin/ReportsAdmin.jsx';
 
 export default function App() {
   return (
@@ -68,10 +69,10 @@ export default function App() {
         <Route path="recetas/nueva" element={<RecipeForm />} />
         <Route path="recetas/:id/editar" element={<RecipeForm />} />
         <Route path="categorias" element={<CategoriesAdmin />} />
-        <Route path="etiquetas" element={<AdminPlaceholder titulo="Etiquetas" icon="tag" />} />
+        <Route path="etiquetas" element={<TagsAdmin />} />
         <Route path="usuarios" element={<ClientesAdmin />} />
         <Route path="novedades" element={<NewsAdmin />} />
-        <Route path="reportes" element={<AdminPlaceholder titulo="Reportes" icon="report" />} />
+        <Route path="reportes" element={<ReportsAdmin />} />
         <Route path="configuracion" element={<AdminSettings />} />
       </Route>
       </Route>

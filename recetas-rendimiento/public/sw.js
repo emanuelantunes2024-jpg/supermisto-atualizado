@@ -1,4 +1,4 @@
-const CACHE_NAME = 'recetas-rendimiento-v1';
+const CACHE_NAME = 'recetas-rendimiento-v2';
 const APP_SHELL = ['/', '/manifest.webmanifest', '/icons/icon-192.png', '/icons/icon-512.png'];
 
 self.addEventListener('install', (event) => {
@@ -17,21 +17,24 @@ self.addEventListener('activate', (event) => {
   self.clients.claim();
 });
 
-// Stale-while-revalidate for same-origin GET requests.
+// Network-first para pedidos GET del mismo origen: siempre se prioriza la
+// versión más nueva del sitio; el cache solo sirve de respaldo si no hay
+// conexión. (Antes era "stale-while-revalidate" — mostraba la versión vieja
+// guardada y recién actualizaba el cache para la próxima visita, así que un
+// cambio recién publicado no se veía hasta la segunda vez que se entraba.)
 self.addEventListener('fetch', (event) => {
   const { request } = event;
   if (request.method !== 'GET' || new URL(request.url).origin !== self.location.origin) return;
 
   event.respondWith(
-    caches.open(CACHE_NAME).then(async (cache) => {
-      const cached = await cache.match(request);
-      const network = fetch(request)
-        .then((response) => {
-          if (response && response.status === 200) cache.put(request, response.clone());
-          return response;
-        })
-        .catch(() => cached);
-      return cached || network;
-    })
+    fetch(request)
+      .then((response) => {
+        if (response && response.status === 200) {
+          const copia = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(request, copia));
+        }
+        return response;
+      })
+      .catch(() => caches.match(request))
   );
 });

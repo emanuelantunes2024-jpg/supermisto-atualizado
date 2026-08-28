@@ -11,6 +11,8 @@ import { CATEGORIES as CATEGORIAS_SEED } from '../../src/data/categories.js';
 const CLAVE_RECETAS = 'contenido:recetas';
 const CLAVE_CATEGORIAS = 'contenido:categorias';
 const CLAVE_CONFIG_SITIO = 'contenido:config-sitio';
+const CLAVE_ETIQUETAS = 'contenido:etiquetas';
+const CLAVE_VISTAS = 'contenido:vistas';
 
 // Imágenes de portada por defecto (las que ya traía el diseño original) —
 // se usan hasta que el admin suba las suyas propias desde el panel.
@@ -66,4 +68,42 @@ export async function guardarConfigSitioDB(config) {
   const nueva = { ...actual, ...config };
   await redis().set(CLAVE_CONFIG_SITIO, nueva);
   return nueva;
+}
+
+// Etiquetas (tags) libres que el admin arma y aplica a las recetas — el
+// cliente después puede filtrar el catálogo por ellas. No hay semilla: el
+// admin las va creando desde cero.
+export async function obtenerEtiquetasDB() {
+  try {
+    const guardadas = await redis().get(CLAVE_ETIQUETAS);
+    return Array.isArray(guardadas) ? guardadas : [];
+  } catch {
+    return [];
+  }
+}
+
+export async function guardarEtiquetasDB(lista) {
+  await redis().set(CLAVE_ETIQUETAS, lista);
+  return lista;
+}
+
+// Conteo de vistas por receta — un contador agregado (sin identificar
+// visitantes) que alimenta el reporte de "recetas más vistas". Se guarda en
+// un hash de Redis: campo = id de receta, valor = cantidad de vistas.
+export async function registrarVistaDB(recetaId) {
+  try {
+    await redis().hincrby(CLAVE_VISTAS, recetaId, 1);
+  } catch {
+    // Sin Redis configurado no hay dónde contar — se ignora, no debe romper
+    // la carga de la receta para el visitante.
+  }
+}
+
+export async function obtenerVistasDB() {
+  try {
+    const mapa = await redis().hgetall(CLAVE_VISTAS);
+    return mapa || {};
+  } catch {
+    return {};
+  }
 }

@@ -24,6 +24,7 @@ const RECETA_VACIA = {
   tiempoMinutos: 30,
   dificultad: 'Fácil',
   origen: '',
+  etiquetas: [],
   rendimientoBase: 1,
   unidadRendimiento: 'unidades',
   ingredientes: [{ nombre: '', grupo: '', cantidad: '', unidad: '', precioCompra: '', cantidadCompra: '', costo: '' }],
@@ -41,7 +42,7 @@ const RECETA_VACIA = {
 export default function RecipeForm() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { recetas, guardarReceta, categorias } = useStore();
+  const { recetas, guardarReceta, categorias, etiquetas } = useStore();
   const existente = useMemo(() => recetas.find((r) => r.id === id), [recetas, id]);
   const [form, setForm] = useState(() => (existente ? { ...existente } : { ...RECETA_VACIA }));
   const [error, setError] = useState(null);
@@ -219,6 +220,43 @@ export default function RecipeForm() {
                 ))}
               </select>
             </div>
+          </div>
+
+          <div className="sm:col-span-2">
+            <label className="label">Etiquetas (opcional)</label>
+            {etiquetas.length === 0 ? (
+              <p className="mt-1.5 text-[12px] text-ink/45">
+                Todavía no creaste ninguna etiqueta.{' '}
+                <Link to="/admin/etiquetas" className="font-semibold text-brand-600 hover:underline">
+                  Crear etiquetas
+                </Link>
+              </p>
+            ) : (
+              <div className="mt-1.5 flex flex-wrap gap-1.5">
+                {etiquetas.map((et) => {
+                  const activa = (form.etiquetas || []).includes(et.id);
+                  return (
+                    <button
+                      key={et.id}
+                      type="button"
+                      onClick={() =>
+                        set(
+                          'etiquetas',
+                          activa
+                            ? (form.etiquetas || []).filter((id) => id !== et.id)
+                            : [...(form.etiquetas || []), et.id]
+                        )
+                      }
+                      className={`rounded-full px-2.5 py-1 text-xs font-semibold transition ${
+                        activa ? 'bg-brand-500 text-white' : 'bg-black/5 text-ink/60 hover:bg-black/10'
+                      }`}
+                    >
+                      {et.nombre}
+                    </button>
+                  );
+                })}
+              </div>
+            )}
           </div>
 
           <div className="sm:col-span-2">

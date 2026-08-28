@@ -21,6 +21,7 @@ async function llamarJSON(url, opciones) {
 export function StoreProvider({ children }) {
   const [recetas, setRecetas] = useState([]);
   const [categorias, setCategorias] = useState(CATEGORIAS_SEED);
+  const [etiquetas, setEtiquetas] = useState([]);
   const [favoritos, setFavoritos] = useState([]);
   const [colecciones, setColecciones] = useState([]);
   const [lista, setLista] = useState([]);
@@ -41,14 +42,16 @@ export function StoreProvider({ children }) {
     // cualquier visitante.
     (async () => {
       try {
-        const [rRecetas, rCategorias, rConfig] = await Promise.all([
+        const [rRecetas, rCategorias, rConfig, rEtiquetas] = await Promise.all([
           fetch('/api/content/recetas', { credentials: 'include' }).then((r) => r.json()),
           fetch('/api/content/categorias', { credentials: 'include' }).then((r) => r.json()),
           fetch('/api/content/config', { credentials: 'include' }).then((r) => r.json()),
+          fetch('/api/content/etiquetas', { credentials: 'include' }).then((r) => r.json()),
         ]);
         if (rRecetas?.ok) setRecetas(rRecetas.recetas);
         if (rCategorias?.ok) setCategorias(rCategorias.categorias);
         if (rConfig?.ok) setConfigSitio(rConfig.config);
+        if (rEtiquetas?.ok) setEtiquetas(rEtiquetas.etiquetas);
       } catch {
         // Sin conexión con el backend de contenido: seguimos con el catálogo semilla.
       } finally {
@@ -91,6 +94,23 @@ export function StoreProvider({ children }) {
 
   const categoriaBySlug = useCallback((slug) => categorias.find((c) => c.slug === slug), [categorias]);
 
+  const guardarEtiqueta = useCallback(async (etiqueta) => {
+    const r = await llamarJSON('/api/admin/etiquetas', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(etiqueta),
+    });
+    setEtiquetas(r.etiquetas);
+    return r.etiquetas;
+  }, []);
+
+  const eliminarEtiqueta = useCallback(async (id) => {
+    const r = await llamarJSON(`/api/admin/etiquetas?id=${encodeURIComponent(id)}`, { method: 'DELETE' });
+    setEtiquetas(r.etiquetas);
+    setRecetas((rs) => rs.map((r) => (r.etiquetas?.includes(id) ? { ...r, etiquetas: r.etiquetas.filter((e) => e !== id) } : r)));
+    return r.etiquetas;
+  }, []);
+
   const guardarConfigSitio = useCallback(async (cambios) => {
     const r = await llamarJSON('/api/admin/config', {
       method: 'POST',
@@ -127,6 +147,9 @@ export function StoreProvider({ children }) {
       recetasPublicadas: recetas.filter((r) => r.publicada),
       categorias,
       categoriaBySlug,
+      etiquetas,
+      guardarEtiqueta,
+      eliminarEtiqueta,
       configSitio,
       guardarConfigSitio,
       favoritos,
@@ -151,6 +174,9 @@ export function StoreProvider({ children }) {
       recetas,
       categorias,
       categoriaBySlug,
+      etiquetas,
+      guardarEtiqueta,
+      eliminarEtiqueta,
       configSitio,
       guardarConfigSitio,
       favoritos,

@@ -7,17 +7,26 @@ import EmptyState from '../components/EmptyState.jsx';
 export default function Recipes() {
   const { slug } = useParams();
   const navigate = useNavigate();
-  const { recetasPublicadas, categorias, categoriaBySlug } = useStore();
+  const { recetasPublicadas, categorias, categoriaBySlug, etiquetas } = useStore();
   const [dificultad, setDificultad] = useState('');
+  const [etiqueta, setEtiqueta] = useState('');
   const cat = slug ? categoriaBySlug(slug) : null;
+
+  // Solo se ofrecen para filtrar las etiquetas que efectivamente tiene
+  // alguna receta publicada — evita mostrar etiquetas "vacías".
+  const etiquetasUsadas = useMemo(
+    () => etiquetas.filter((et) => recetasPublicadas.some((r) => r.etiquetas?.includes(et.id))),
+    [etiquetas, recetasPublicadas]
+  );
 
   const recetas = useMemo(() => {
     return recetasPublicadas.filter((r) => {
       if (slug && r.categoria !== slug) return false;
       if (dificultad && r.dificultad !== dificultad) return false;
+      if (etiqueta && !r.etiquetas?.includes(etiqueta)) return false;
       return true;
     });
-  }, [recetasPublicadas, slug, dificultad]);
+  }, [recetasPublicadas, slug, dificultad, etiqueta]);
 
   return (
     <div className="space-y-6">
@@ -53,6 +62,27 @@ export default function Recipes() {
           </button>
         ))}
       </div>
+
+      {etiquetasUsadas.length > 0 && (
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="label">Etiquetas</span>
+          <button
+            onClick={() => setEtiqueta('')}
+            className={`pill !py-1 !px-2.5 text-xs ${!etiqueta ? 'pill-active' : ''}`}
+          >
+            Todas
+          </button>
+          {etiquetasUsadas.map((et) => (
+            <button
+              key={et.id}
+              onClick={() => setEtiqueta(et.id)}
+              className={`pill !py-1 !px-2.5 text-xs ${etiqueta === et.id ? 'pill-active' : ''}`}
+            >
+              {et.nombre}
+            </button>
+          ))}
+        </div>
+      )}
 
       {recetas.length === 0 ? (
         <EmptyState

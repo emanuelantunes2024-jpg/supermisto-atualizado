@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useStore } from '../lib/StoreContext.jsx';
+import { useAuth } from '../lib/AuthContext.jsx';
 import Icon from '../components/Icon.jsx';
 import RecipeCard from '../components/RecipeCard.jsx';
 import EmptyState from '../components/EmptyState.jsx';
@@ -28,18 +29,19 @@ import {
 } from '../lib/calc.js';
 
 const TABS = [
-  'Ingredientes',
-  'Modo de preparación',
-  'Consejos',
-  'Conservación',
-  'Equipamiento',
-  'Información',
+  { id: 'Ingredientes', icon: 'box' },
+  { id: 'Modo de preparación', icon: 'chef' },
+  { id: 'Consejos', icon: 'sparkles' },
+  { id: 'Conservación', icon: 'folder' },
+  { id: 'Equipamiento', icon: 'settings' },
+  { id: 'Información', icon: 'report' },
 ];
 
 export default function RecipeDetail() {
   const { slug } = useParams();
   const navigate = useNavigate();
-  const { recetasPublicadas, favoritos, alternarFavorito, agregarAListaCompras, categoriaBySlug } = useStore();
+  const { recetasPublicadas, favoritos, alternarFavorito, agregarAListaCompras, categoriaBySlug, etiquetas } = useStore();
+  const { isAdmin } = useAuth();
   const receta = recetasPublicadas.find((r) => r.slug === slug);
 
   const [tab, setTab] = useState('Ingredientes');
@@ -59,6 +61,20 @@ export default function RecipeDetail() {
   useEffect(() => {
     if (receta) setCompras(obtenerComprasReceta(receta.id));
   }, [receta?.id]);
+
+  // Vista registrada (contador agregado, sin identificar al visitante) para
+  // el reporte de "recetas más vistas" — se excluye al admin para que sus
+  // propias entradas de prueba no ensucien el ranking. Mejor esfuerzo: si
+  // falla, no afecta la carga de la página.
+  useEffect(() => {
+    if (receta && !isAdmin) {
+      fetch('/api/content/vista', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ recetaId: receta.id }),
+      }).catch(() => {});
+    }
+  }, [receta?.id, isAdmin]);
 
   function actualizarCompra(nombreIngrediente, campo, valor) {
     if (!receta) return;
@@ -171,12 +187,28 @@ export default function RecipeDetail() {
                   <span className="text-ink/25">·</span>
                   <span>{receta.dificultad}</span>
                   <span className="text-ink/25">·</span>
-                  <span>{formatoTiempo(receta.tiempoMinutos)}</span>
+                  <span className="inline-flex items-center gap-1">
+                    <Icon name="clock" className="w-3 h-3" /> {formatoTiempo(receta.tiempoMinutos)}
+                  </span>
                   <span className="text-ink/25">·</span>
                   <span>Rinde {rendimiento} {unidad}</span>
                 </p>
 
                 <p className="text-[11.5px] leading-relaxed text-ink/60">{receta.descripcion}</p>
+
+                {receta.etiquetas?.length > 0 && (
+                  <div className="flex flex-wrap gap-1.5">
+                    {receta.etiquetas.map((id) => {
+                      const et = etiquetas.find((e) => e.id === id);
+                      if (!et) return null;
+                      return (
+                        <span key={id} className="rounded-full bg-brand-50 px-2 py-0.5 text-[10.5px] font-semibold text-brand-700">
+                          {et.nombre}
+                        </span>
+                      );
+                    })}
+                  </div>
+                )}
 
                 <div className="flex flex-wrap gap-1.5">
                   <button
@@ -225,15 +257,16 @@ export default function RecipeDetail() {
 
           {/* 3. Pestañas */}
           <div className="flex flex-wrap gap-x-1 border-b border-line">
-            {TABS.map((x) => (
+            {TABS.map(({ id, icon }) => (
               <button
-                key={x}
-                onClick={() => setTab(x)}
-                className={`shrink-0 border-b-2 px-3 pb-2.5 text-[11.5px] font-semibold transition ${
-                  tab === x ? 'border-brand-500 text-brand-600' : 'border-transparent text-ink/45 hover:text-ink'
+                key={id}
+                onClick={() => setTab(id)}
+                className={`flex shrink-0 items-center gap-1.5 border-b-2 px-3 pb-2.5 text-[11.5px] font-semibold transition ${
+                  tab === id ? 'border-brand-500 text-brand-600' : 'border-transparent text-ink/45 hover:text-ink'
                 }`}
               >
-                {x}
+                <Icon name={icon} className="w-3.5 h-3.5" />
+                {id}
               </button>
             ))}
           </div>
