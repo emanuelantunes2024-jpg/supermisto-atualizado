@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { downloadTemplatePackage, setTemplateStatus } from "@/app/admin/actions";
+import { DeleteTemplateButton } from "@/components/admin/DeleteTemplateButton";
 import { formatPrice } from "@/lib/format";
 import { getAllTemplates } from "@/lib/queries";
 import type { TemplateStatus } from "@/lib/types";
@@ -118,6 +119,8 @@ export default async function AdminTemplatesPage() {
                     >
                       Ver
                     </Link>
+
+                    <DeleteTemplateButton id={template.id} title={template.title} />
                   </div>
                 </td>
               </tr>

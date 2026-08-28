@@ -82,6 +82,24 @@ export async function saveTemplate(_prev: ActionState, formData: FormData): Prom
   redirect("/admin/plantillas?guardado=1");
 }
 
+/** Borra una plantilla por completo (fila de la tabla). Los archivos que ya subió a Storage no se tocan. */
+export async function deleteTemplate(formData: FormData): Promise<void> {
+  const session = await requireAdmin();
+  if (!session) return;
+
+  const supabase = createAdminClient();
+  if (!supabase) return;
+
+  const id = String(formData.get("id") ?? "").trim();
+  if (!id) return;
+
+  const { data: template } = await supabase.from("templates").select("slug").eq("id", id).maybeSingle();
+
+  await supabase.from("templates").delete().eq("id", id);
+
+  revalidateStorefront(template?.slug ?? undefined);
+}
+
 /** Cambia el estado de una plantilla (publicar / archivar / volver a borrador). */
 export async function setTemplateStatus(formData: FormData): Promise<void> {
   const session = await requireAdmin();
