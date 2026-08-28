@@ -4,7 +4,15 @@
 import { obtenerAdminDeSesion } from '../_lib/adminAuth.js';
 import { guardarConfigSitioDB } from '../_lib/contentStore.js';
 
-const CAMPOS_PERMITIDOS = ['bannerBibliotecaImagen', 'bannerNovedadesImagen'];
+const CAMPOS_PERMITIDOS = [
+  'bannerBibliotecaImagen',
+  'bannerNovedadesImagen',
+  'marcaPrefijo',
+  'marcaNombreA',
+  'marcaNombreB',
+  'marcaEmpresa',
+  'marcaLogo',
+];
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {

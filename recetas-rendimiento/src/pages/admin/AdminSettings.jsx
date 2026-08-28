@@ -129,6 +129,136 @@ function ImagenesPortada() {
   );
 }
 
+function MarcaAdmin() {
+  const { configSitio, guardarConfigSitio } = useStore();
+  const [form, setForm] = useState({
+    marcaPrefijo: configSitio.marcaPrefijo,
+    marcaNombreA: configSitio.marcaNombreA,
+    marcaNombreB: configSitio.marcaNombreB,
+    marcaEmpresa: configSitio.marcaEmpresa,
+  });
+  const [subiendoLogo, setSubiendoLogo] = useState(false);
+  const [guardando, setGuardando] = useState(false);
+  const [guardado, setGuardado] = useState(false);
+  const [error, setError] = useState(null);
+
+  // La config real llega de forma asíncrona (fetch al backend) después del
+  // primer render — cuando llega, el formulario se actualiza para mostrar
+  // el nombre que el admin ya haya guardado antes (si lo hizo).
+  useEffect(() => {
+    setForm({
+      marcaPrefijo: configSitio.marcaPrefijo,
+      marcaNombreA: configSitio.marcaNombreA,
+      marcaNombreB: configSitio.marcaNombreB,
+      marcaEmpresa: configSitio.marcaEmpresa,
+    });
+  }, [configSitio.marcaPrefijo, configSitio.marcaNombreA, configSitio.marcaNombreB, configSitio.marcaEmpresa]);
+
+  function onLogo(e) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setError(null);
+    setSubiendoLogo(true);
+    const reader = new FileReader();
+    reader.onload = async () => {
+      try {
+        await guardarConfigSitio({ marcaLogo: reader.result });
+      } catch {
+        setError('No se pudo guardar el logo. Revisá que el almacenamiento (Redis) esté conectado.');
+      } finally {
+        setSubiendoLogo(false);
+      }
+    };
+    reader.readAsDataURL(file);
+  }
+
+  async function onSubmit(e) {
+    e.preventDefault();
+    setError(null);
+    setGuardando(true);
+    try {
+      await guardarConfigSitio(form);
+      setGuardado(true);
+      setTimeout(() => setGuardado(false), 2500);
+    } catch {
+      setError('No se pudo guardar. Revisá que el almacenamiento (Redis) esté conectado.');
+    } finally {
+      setGuardando(false);
+    }
+  }
+
+  return (
+    <div className="card p-5">
+      <p className="text-[13px] font-bold text-ink">Marca (perfil del sitio)</p>
+      <p className="mt-1 text-[12.5px] leading-relaxed text-ink/50">
+        El nombre y el logo que aparecen arriba de todo, en el menú y en la pantalla de entrada.
+      </p>
+
+      <div className="mt-4 flex items-center gap-3 rounded-xl border border-ink/10 p-3">
+        <img
+          src={configSitio.marcaLogo || '/icons/icon-192.png'}
+          alt=""
+          className="h-14 w-14 shrink-0 rounded-2xl object-cover"
+        />
+        <div className="min-w-0 flex-1">
+          <p className="text-[12.5px] font-semibold text-ink">Logo</p>
+          <p className="text-[11.5px] text-ink/50">Si no subís uno propio, se usa el gorro de chef del diseño original.</p>
+        </div>
+        <label className="btn-secondary shrink-0 cursor-pointer !py-1.5 !text-[11.5px]">
+          <Icon name="upload" className="w-3.5 h-3.5" /> {subiendoLogo ? 'Subiendo…' : 'Cambiar'}
+          <input type="file" accept="image/*" onChange={onLogo} className="hidden" disabled={subiendoLogo} />
+        </label>
+      </div>
+
+      <form onSubmit={onSubmit} className="mt-4 space-y-3">
+        <div className="grid grid-cols-2 gap-3">
+          <div>
+            <label className="label">Texto arriba del nombre</label>
+            <input
+              value={form.marcaPrefijo}
+              onChange={(e) => setForm((f) => ({ ...f, marcaPrefijo: e.target.value }))}
+              className="input mt-1.5"
+            />
+          </div>
+          <div>
+            <label className="label">Nombre de la empresa</label>
+            <input
+              value={form.marcaEmpresa}
+              onChange={(e) => setForm((f) => ({ ...f, marcaEmpresa: e.target.value }))}
+              className="input mt-1.5"
+            />
+          </div>
+          <div>
+            <label className="label">Nombre (línea 1, resaltada)</label>
+            <input
+              value={form.marcaNombreA}
+              onChange={(e) => setForm((f) => ({ ...f, marcaNombreA: e.target.value }))}
+              className="input mt-1.5"
+            />
+          </div>
+          <div>
+            <label className="label">Nombre (línea 2)</label>
+            <input
+              value={form.marcaNombreB}
+              onChange={(e) => setForm((f) => ({ ...f, marcaNombreB: e.target.value }))}
+              className="input mt-1.5"
+            />
+          </div>
+        </div>
+        <button type="submit" disabled={guardando} className="btn-primary !py-2 !text-[12.5px]">
+          {guardando ? 'Guardando…' : guardado ? 'Guardado ✓' : 'Guardar nombre'}
+        </button>
+      </form>
+
+      {error && (
+        <div className="mt-3 rounded-xl border border-amber-200 bg-amber-50 p-3.5">
+          <p className="text-[12.5px] font-semibold text-amber-800">{error}</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
 const MENSAJES_ERROR = {
   falta_password_actual: 'Ingresá tu contraseña actual para confirmar el cambio.',
   nada_para_cambiar: 'Completá un email nuevo y/o una contraseña nueva.',
@@ -227,6 +357,8 @@ export default function AdminSettings() {
       </div>
 
       <EstadoSistema />
+
+      <MarcaAdmin />
 
       <ImagenesPortada />
 

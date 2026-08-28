@@ -174,3 +174,70 @@ export function formatoCantidad(cantidad) {
   if (Number.isInteger(n)) return String(n);
   return n.toFixed(2).replace(/\.?0+$/, '');
 }
+
+const UNIDADES_CONOCIDAS = [
+  'kg', 'kilo', 'kilos', 'g', 'gr', 'gramo', 'gramos',
+  'l', 'lt', 'litro', 'litros', 'ml',
+  'taza', 'tazas', 'cucharada', 'cucharadas', 'cucharadita', 'cucharaditas',
+  'unidad', 'unidades', 'un', 'u', 'pizca', 'diente', 'dientes',
+];
+
+const ENCABEZADOS_INGREDIENTES = /^(ingredientes?)\s*:?\s*$/i;
+const ENCABEZADOS_PASOS = /^(modo de preparaci[oó]n|preparaci[oó]n|instrucciones|pasos|procedimiento)\s*:?\s*$/i;
+
+function limpiarViñeta(linea) {
+  return linea.replace(/^\s*(?:[-•*]|\d+[.)])\s*/, '').trim();
+}
+
+/**
+ * Interpreta texto pegado (por ejemplo, una receta escrita por el admin en
+ * ChatGPT u otro lado) buscando dos secciones — "Ingredientes" y "Modo de
+ * preparación" — para no tener que cargar cada ingrediente y cada paso a
+ * mano, uno por uno. Es heurístico, no magia: si el texto no trae esos
+ * encabezados, no adivina nada y devuelve listas vacías.
+ */
+export function parsearRecetaPegada(texto) {
+  const lineas = String(texto || '')
+    .split('\n')
+    .map((l) => l.trim())
+    .filter(Boolean);
+
+  const ingredientes = [];
+  const pasos = [];
+  let seccion = null;
+
+  for (const linea of lineas) {
+    if (ENCABEZADOS_INGREDIENTES.test(linea)) {
+      seccion = 'ingredientes';
+      continue;
+    }
+    if (ENCABEZADOS_PASOS.test(linea)) {
+      seccion = 'pasos';
+      continue;
+    }
+    if (seccion === 'ingredientes') {
+      const texto = limpiarViñeta(linea);
+      if (!texto) continue;
+      // Ej: "200g de chocolate amargo" / "2 tazas de harina" / "1 pizca de sal"
+      const m = texto.match(/^([\d.,]+)\s*([a-záéíóúñ]+)?\s*(?:de\s+)?(.+)$/i);
+      if (m && UNIDADES_CONOCIDAS.includes((m[2] || '').toLowerCase())) {
+        ingredientes.push({
+          nombre: m[3].trim(),
+          grupo: '',
+          cantidad: m[1].replace(',', '.'),
+          unidad: m[2].toLowerCase(),
+          precioCompra: '',
+          cantidadCompra: '',
+          costo: '',
+        });
+      } else {
+        ingredientes.push({ nombre: texto, grupo: '', cantidad: '', unidad: '', precioCompra: '', cantidadCompra: '', costo: '' });
+      }
+    } else if (seccion === 'pasos') {
+      const texto = limpiarViñeta(linea);
+      if (texto) pasos.push(texto);
+    }
+  }
+
+  return { ingredientes, pasos };
+}

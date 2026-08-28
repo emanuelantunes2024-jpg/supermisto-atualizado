@@ -1,4 +1,5 @@
 import { BRAND } from '../lib/brand.js';
+import { useStore } from '../lib/StoreContext.jsx';
 
 /**
  * Marca de la aplicación — gorro de chef + nombre en tres líneas, igual que la
@@ -25,13 +26,28 @@ export default function Logo({ withText = true, dark = false, size = 'md' }) {
   const box = size === 'sm' ? 'h-10 w-10' : 'h-11 w-11';
   const glyph = size === 'sm' ? 'w-5 h-5' : 'w-6 h-6';
 
+  // El logo y el nombre se pueden editar desde el panel (Configuración →
+  // Marca) — mientras no se hayan cargado (o el admin nunca los cambió),
+  // se usan los valores originales del diseño en src/lib/brand.js.
+  let config = null;
+  try {
+    config = useStore().configSitio;
+  } catch {
+    // Logo se usa también fuera del <StoreProvider> en algún caso puntual
+    // (tests, previews) — ahí simplemente se cae a los valores por defecto.
+  }
+  const logoSrc = config?.marcaLogo ?? BRAND.logoSrc;
+  const prefijo = config?.marcaPrefijo ?? BRAND.prefijo;
+  const nombreA = config?.marcaNombreA ?? BRAND.nombreA;
+  const nombreB = config?.marcaNombreB ?? BRAND.nombreB;
+
   return (
     <div className="flex items-center gap-3">
       <div
         className={`flex shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-400 to-brand-600 text-white shadow-soft ${box}`}
       >
-        {BRAND.logoSrc ? (
-          <img src={BRAND.logoSrc} alt={BRAND.producto} className="h-full w-full rounded-2xl object-cover" />
+        {logoSrc ? (
+          <img src={logoSrc} alt={nombreA} className="h-full w-full rounded-2xl object-cover" />
         ) : (
           <GorroChef className={glyph} />
         )}
@@ -39,12 +55,10 @@ export default function Logo({ withText = true, dark = false, size = 'md' }) {
 
       {withText && (
         <div className="min-w-0 leading-[1.05]">
-          <p className={`text-[10px] font-semibold ${dark ? 'text-white/55' : 'text-ink/45'}`}>
-            {BRAND.prefijo}
-          </p>
-          <p className="text-[15px] font-extrabold tracking-tight text-brand-500">{BRAND.nombreA}</p>
+          <p className={`text-[10px] font-semibold ${dark ? 'text-white/55' : 'text-ink/45'}`}>{prefijo}</p>
+          <p className="text-[15px] font-extrabold tracking-tight text-brand-500">{nombreA}</p>
           <p className={`text-[15px] font-extrabold tracking-tight ${dark ? 'text-white' : 'text-ink'}`}>
-            {BRAND.nombreB}
+            {nombreB}
           </p>
         </div>
       )}

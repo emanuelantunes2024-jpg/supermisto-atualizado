@@ -14,11 +14,17 @@ const CLAVE_CONFIG_SITIO = 'contenido:config-sitio';
 const CLAVE_ETIQUETAS = 'contenido:etiquetas';
 const CLAVE_VISTAS = 'contenido:vistas';
 
-// Imágenes de portada por defecto (las que ya traía el diseño original) —
-// se usan hasta que el admin suba las suyas propias desde el panel.
+// Imágenes de portada y datos de marca por defecto (los que ya traía el
+// diseño original) — se usan hasta que el admin suba/edite los suyos desde
+// el panel (Configuración → Imágenes de portada / Marca).
 const CONFIG_SITIO_POR_DEFECTO = {
   bannerBibliotecaImagen: '/images/hero/torta-chocolate.png',
   bannerNovedadesImagen: '/images/hero/cupcake.png',
+  marcaPrefijo: 'Central de',
+  marcaNombreA: 'Recetas',
+  marcaNombreB: '& Rendimiento',
+  marcaEmpresa: 'Leuname Software',
+  marcaLogo: null,
 };
 
 export async function obtenerRecetasDB() {

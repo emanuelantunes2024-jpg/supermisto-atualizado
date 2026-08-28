@@ -9,6 +9,9 @@ export default function RecipesAdmin() {
   const [q, setQ] = useState('');
   const [categoria, setCategoria] = useState('');
   const [confirmarId, setConfirmarId] = useState(null);
+  const [seleccionadas, setSeleccionadas] = useState([]);
+  const [confirmarLote, setConfirmarLote] = useState(false);
+  const [eliminandoLote, setEliminandoLote] = useState(false);
   const [error, setError] = useState(null);
 
   const filtradas = recetas.filter((r) => {
@@ -28,6 +31,29 @@ export default function RecipesAdmin() {
     setConfirmarId(null);
   }
 
+  function alternarSeleccion(id) {
+    setSeleccionadas((sel) => (sel.includes(id) ? sel.filter((x) => x !== id) : [...sel, id]));
+  }
+  function alternarSeleccionarTodas() {
+    setSeleccionadas((sel) => (sel.length === filtradas.length ? [] : filtradas.map((r) => r.id)));
+  }
+  async function confirmarEliminarLote() {
+    setEliminandoLote(true);
+    setError(null);
+    try {
+      for (const id of seleccionadas) {
+        // eslint-disable-next-line no-await-in-loop
+        await eliminarReceta(id);
+      }
+      setSeleccionadas([]);
+    } catch {
+      setError('No se pudieron eliminar todas las recetas seleccionadas. Revisá cuáles quedaron y reintentá.');
+    } finally {
+      setEliminandoLote(false);
+      setConfirmarLote(false);
+    }
+  }
+
   return (
     <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
@@ -35,9 +61,16 @@ export default function RecipesAdmin() {
           <h1 className="text-2xl font-extrabold text-ink">Recetas</h1>
           <p className="mt-1 text-sm text-ink/50">{recetas.length} recetas en total</p>
         </div>
-        <Link to="/admin/recetas/nueva" className="btn-primary">
-          <Icon name="plus" className="w-4 h-4" /> Nueva receta
-        </Link>
+        <div className="flex items-center gap-2">
+          {seleccionadas.length > 0 && (
+            <button onClick={() => setConfirmarLote(true)} className="btn-secondary !text-red-600">
+              <Icon name="trash" className="w-4 h-4" /> Eliminar {seleccionadas.length} seleccionadas
+            </button>
+          )}
+          <Link to="/admin/recetas/nueva" className="btn-primary">
+            <Icon name="plus" className="w-4 h-4" /> Nueva receta
+          </Link>
+        </div>
       </div>
 
       {error && (
@@ -65,6 +98,15 @@ export default function RecipesAdmin() {
           <table className="w-full min-w-[760px] text-left text-sm">
             <thead className="border-b border-black/5 text-xs uppercase tracking-wide text-ink/45">
               <tr>
+                <th className="w-10 px-4 py-3">
+                  <input
+                    type="checkbox"
+                    checked={filtradas.length > 0 && seleccionadas.length === filtradas.length}
+                    onChange={alternarSeleccionarTodas}
+                    className="h-4 w-4 accent-brand-500"
+                    aria-label="Seleccionar todas"
+                  />
+                </th>
                 <th className="px-4 py-3 font-semibold">Receta</th>
                 <th className="px-4 py-3 font-semibold">Categoría</th>
                 <th className="px-4 py-3 font-semibold">Publicada</th>
@@ -75,6 +117,15 @@ export default function RecipesAdmin() {
             <tbody className="divide-y divide-black/5">
               {filtradas.map((r) => (
                 <tr key={r.id}>
+                  <td className="px-4 py-3">
+                    <input
+                      type="checkbox"
+                      checked={seleccionadas.includes(r.id)}
+                      onChange={() => alternarSeleccion(r.id)}
+                      className="h-4 w-4 accent-brand-500"
+                      aria-label={`Seleccionar ${r.nombre}`}
+                    />
+                  </td>
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-3">
                       <img src={r.imagen} alt={r.nombre} className="h-10 w-10 rounded-lg object-cover" />
@@ -122,6 +173,31 @@ export default function RecipesAdmin() {
               ))}
             </tbody>
           </table>
+        </div>
+      )}
+
+      {confirmarLote && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-black/40" onClick={() => setConfirmarLote(false)} />
+          <div className="relative w-full max-w-sm rounded-2xl bg-white p-5 shadow-2xl">
+            <p className="text-base font-bold text-ink">¿Eliminar {seleccionadas.length} recetas?</p>
+            <p className="mt-1 text-sm text-ink/50">
+              Útil para borrar de una sola vez las recetas de ejemplo que no querés usar. Esta acción no se
+              puede deshacer.
+            </p>
+            <div className="mt-4 flex justify-end gap-2">
+              <button onClick={() => setConfirmarLote(false)} className="btn-secondary">
+                Cancelar
+              </button>
+              <button
+                onClick={confirmarEliminarLote}
+                disabled={eliminandoLote}
+                className="inline-flex items-center gap-2 rounded-xl bg-red-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-red-700 disabled:opacity-60"
+              >
+                {eliminandoLote ? 'Eliminando…' : 'Eliminar todas'}
+              </button>
+            </div>
+          </div>
         </div>
       )}
 

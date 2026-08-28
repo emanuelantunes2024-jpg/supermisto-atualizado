@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useMemo, useState, useCallback } from 'react';
 import * as db from './db.js';
 import { CATEGORIES as CATEGORIAS_SEED } from '../data/categories.js';
+import { RECETAS_SEED } from '../data/recipes.js';
 
 const StoreContext = createContext(null);
 
@@ -9,6 +10,11 @@ const StoreContext = createContext(null);
 const CONFIG_SITIO_POR_DEFECTO = {
   bannerBibliotecaImagen: '/images/hero/torta-chocolate.png',
   bannerNovedadesImagen: '/images/hero/cupcake.png',
+  marcaPrefijo: 'Central de',
+  marcaNombreA: 'Recetas',
+  marcaNombreB: '& Rendimiento',
+  marcaEmpresa: 'Leuname Software',
+  marcaLogo: null,
 };
 
 async function llamarJSON(url, opciones) {
@@ -19,7 +25,7 @@ async function llamarJSON(url, opciones) {
 }
 
 export function StoreProvider({ children }) {
-  const [recetas, setRecetas] = useState([]);
+  const [recetas, setRecetas] = useState(RECETAS_SEED);
   const [categorias, setCategorias] = useState(CATEGORIAS_SEED);
   const [etiquetas, setEtiquetas] = useState([]);
   const [favoritos, setFavoritos] = useState([]);

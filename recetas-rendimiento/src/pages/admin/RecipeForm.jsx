@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import { useStore } from '../../lib/StoreContext.jsx';
 import Icon from '../../components/Icon.jsx';
-import { costoDesdeCompra, redondear } from '../../lib/calc.js';
+import { costoDesdeCompra, redondear, parsearRecetaPegada } from '../../lib/calc.js';
 import { PAISES, banderaDesdePais } from '../../lib/paises.js';
 
 const DIFICULTADES = ['Fácil', 'Medio', 'Difícil'];
@@ -47,6 +47,8 @@ export default function RecipeForm() {
   const [form, setForm] = useState(() => (existente ? { ...existente } : { ...RECETA_VACIA }));
   const [error, setError] = useState(null);
   const [guardando, setGuardando] = useState(false);
+  const [modalPegar, setModalPegar] = useState(false);
+  const [textoPegado, setTextoPegado] = useState('');
 
   // Categorías cargan de forma asíncrona: al crear una receta nueva, apenas
   // llegan, se preselecciona la primera.
@@ -110,6 +112,18 @@ export default function RecipeForm() {
   }
   function quitarPaso(idx) {
     setForm((f) => ({ ...f, pasos: f.pasos.filter((_, i) => i !== idx) }));
+  }
+
+  function aplicarTextoPegado() {
+    const { ingredientes, pasos } = parsearRecetaPegada(textoPegado);
+    if (ingredientes.length === 0 && pasos.length === 0) return;
+    setForm((f) => ({
+      ...f,
+      ingredientes: ingredientes.length > 0 ? ingredientes : f.ingredientes,
+      pasos: pasos.length > 0 ? pasos : f.pasos,
+    }));
+    setModalPegar(false);
+    setTextoPegado('');
   }
 
   function onImagenSubida(e) {
@@ -178,7 +192,42 @@ export default function RecipeForm() {
         <Icon name="chevronLeft" className="w-4 h-4" /> Volver a recetas
       </Link>
 
-      <h1 className="text-2xl font-extrabold text-ink">{existente ? 'Editar receta' : 'Nueva receta'}</h1>
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <h1 className="text-2xl font-extrabold text-ink">{existente ? 'Editar receta' : 'Nueva receta'}</h1>
+        <button type="button" onClick={() => setModalPegar(true)} className="btn-secondary !text-[12.5px]">
+          <Icon name="download" className="w-3.5 h-3.5" /> Pegar receta desde texto
+        </button>
+      </div>
+
+      {modalPegar && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-black/40" onClick={() => setModalPegar(false)} />
+          <div className="relative w-full max-w-lg rounded-2xl bg-white p-5 shadow-2xl">
+            <p className="text-base font-bold text-ink">Pegar receta desde texto</p>
+            <p className="mt-1 text-[12.5px] leading-relaxed text-ink/50">
+              Pegá acá el texto de la receta (por ejemplo, uno que armaste con ChatGPT), con dos partes
+              tituladas <strong>"Ingredientes"</strong> y <strong>"Modo de preparación"</strong>, cada una
+              con un ítem por línea. El sistema completa los ingredientes y los pasos solo — después
+              ajustás lo que haga falta a mano.
+            </p>
+            <textarea
+              value={textoPegado}
+              onChange={(e) => setTextoPegado(e.target.value)}
+              rows={10}
+              placeholder={'Ingredientes:\n200g de chocolate amargo\n100ml de crema de leche\n\nModo de preparación:\n1. Derretí el chocolate a baño maría.\n2. Mezclá con la crema de leche.'}
+              className="input mt-3 font-mono !text-[11.5px]"
+            />
+            <div className="mt-4 flex justify-end gap-2">
+              <button type="button" onClick={() => setModalPegar(false)} className="btn-secondary">
+                Cancelar
+              </button>
+              <button type="button" onClick={aplicarTextoPegado} disabled={!textoPegado.trim()} className="btn-primary">
+                Usar esta receta
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <form onSubmit={onSubmit} className="space-y-6">
         <div className="card grid gap-4 p-5 sm:grid-cols-2">
