@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { getCategories, getCategoryCounts } from "@/lib/queries";
+import { NewCategoryForm } from "@/components/admin/NewCategoryForm";
 
 export const dynamic = "force-dynamic";
 
@@ -12,9 +13,14 @@ export default async function AdminCategoriesPage() {
       <div>
         <h2 className="text-xl">Categorías ({categories.length})</h2>
         <p className="mt-1 text-[13px] text-ink-muted">
-          Las categorías se gestionan directamente en Supabase (tabla <code>categories</code>). Aquí puedes ver
-          cuántas plantillas publicadas tiene cada una.
+          Crea aquí las categorías nuevas. Después, al crear una plantilla, ya aparecerán en el desplegable
+          &quot;Categoría&quot;.
         </p>
+      </div>
+
+      <div className="panel max-w-lg space-y-4">
+        <h3 className="text-[15px]">Nueva categoría</h3>
+        <NewCategoryForm />
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useActionState, useState } from "react";
 import { useFormStatus } from "react-dom";
 
-import { saveTemplate, uploadTemplateAsset, type ActionState } from "@/app/admin/actions";
+import { saveTemplate, uploadTemplateAsset, uploadTemplateDemo, type ActionState } from "@/app/admin/actions";
 import { slugify } from "@/lib/format";
 import type { Category, Template } from "@/lib/types";
 
@@ -18,6 +18,7 @@ export function TemplateForm({ categories, template }: TemplateFormProps) {
 
   const [title, setTitle] = useState(template?.title ?? "");
   const [slug, setSlug] = useState(template?.slug ?? "");
+  const [previewUrl, setPreviewUrl] = useState(template?.preview_url ?? "");
   const [thumbnailUrl, setThumbnailUrl] = useState(template?.thumbnail_url ?? "");
   const [fileUrl, setFileUrl] = useState(template?.file_url ?? "");
   const [slugTouched, setSlugTouched] = useState(Boolean(template?.slug));
@@ -169,10 +170,16 @@ export function TemplateForm({ categories, template }: TemplateFormProps) {
           <input
             id="preview_url"
             name="preview_url"
-            defaultValue={template?.preview_url ?? ""}
+            value={previewUrl}
+            onChange={(event) => setPreviewUrl(event.target.value)}
             placeholder="/demos/barberia/index.html o https://demo.tudominio.com"
             className="field-input"
           />
+          <DemoUploadField slug={effectiveSlug} onUploaded={setPreviewUrl} />
+          <p className="mt-2 text-[11.5px] text-ink-muted">
+            Sube aquí el .zip de la carpeta <code>3-DEMO-EN-CARPETA</code> que viene dentro del paquete de la
+            plantilla (index.html + css + js + img) y esta URL se rellena sola.
+          </p>
         </div>
 
         <div>
@@ -232,6 +239,50 @@ function SubmitButton({ isEdit }: { isEdit: boolean }) {
     <button type="submit" disabled={pending} className="btn btn-gold btn-lg">
       {pending ? "Guardando…" : isEdit ? "Guardar cambios" : "Crear plantilla"}
     </button>
+  );
+}
+
+interface DemoUploadFieldProps {
+  slug: string;
+  onUploaded: (url: string) => void;
+}
+
+/** Sube el .zip de una carpeta de demo entera y publica su index.html. */
+function DemoUploadField({ slug, onUploaded }: DemoUploadFieldProps) {
+  const [busy, setBusy] = useState(false);
+  const [message, setMessage] = useState<string | null>(null);
+
+  async function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    setBusy(true);
+    setMessage(null);
+
+    const data = new FormData();
+    data.set("file", file);
+    data.set("slug", slug || "plantilla");
+
+    const result = await uploadTemplateDemo({}, data);
+
+    if (result.error) setMessage(result.error);
+    else if (result.path) {
+      onUploaded(result.path);
+      setMessage("✓ Demo publicada.");
+    }
+
+    setBusy(false);
+    event.target.value = "";
+  }
+
+  return (
+    <div className="mt-2 flex flex-wrap items-center gap-3">
+      <label className="btn btn-ghost cursor-pointer text-[13px]">
+        {busy ? "Subiendo…" : "Subir carpeta de demo (.zip)"}
+        <input type="file" className="hidden" disabled={busy} accept=".zip" onChange={handleChange} />
+      </label>
+      {message && <span className="text-[12px] text-ink-muted">{message}</span>}
+    </div>
   );
 }
 
