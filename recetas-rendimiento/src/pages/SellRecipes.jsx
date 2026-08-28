@@ -2,12 +2,14 @@ import { Link } from 'react-router-dom';
 import { useStore } from '../lib/StoreContext.jsx';
 import Icon from '../components/Icon.jsx';
 import EmptyState from '../components/EmptyState.jsx';
-import { costoTotalReceta, precioSugerido, gananciaTotal, formatoMoneda } from '../lib/calc.js';
+import { obtenerComprasReceta } from '../lib/db.js';
+import { costoTotalReceta, precioSugerido, gananciaTotal, aplicarComprasAReceta, formatoMoneda } from '../lib/calc.js';
 
 export default function SellRecipes() {
   const { recetasPublicadas } = useStore();
   const recetas = recetasPublicadas
     .filter((r) => r.paraVender)
+    .map((r) => aplicarComprasAReceta(r, obtenerComprasReceta(r.id)))
     .sort((a, b) => gananciaTotal(b) - gananciaTotal(a));
 
   return (

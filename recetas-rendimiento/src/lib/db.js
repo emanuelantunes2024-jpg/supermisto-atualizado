@@ -4,6 +4,7 @@
 // y del StoreContext).
 
 import { RECETAS_SEED } from '../data/recipes.js';
+import { normalizarNombreIngrediente } from './calc.js';
 
 const KEYS = {
   recetas: 'rr.recetas',
@@ -171,10 +172,6 @@ export function vaciarLista() {
 // Es un dato propio del dispositivo (no del admin, no se comparte entre
 // personas): cada quien carga sus propios precios, y con eso la receta
 // calcula sola cuánto le costó hacerla y cuánto le sobró.
-
-export function normalizarNombreIngrediente(nombre) {
-  return (nombre || '').trim().toLowerCase();
-}
 
 export function obtenerComprasReceta(recetaId) {
   const todas = leer(KEYS.compras, {});

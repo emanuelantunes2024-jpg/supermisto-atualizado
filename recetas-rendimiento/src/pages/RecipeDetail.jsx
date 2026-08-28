@@ -7,12 +7,7 @@ import EmptyState from '../components/EmptyState.jsx';
 import ToolsBar from '../components/ToolsBar.jsx';
 import CentralRendimiento from '../components/CentralRendimiento.jsx';
 import AddToCollectionModal from '../components/AddToCollectionModal.jsx';
-import {
-  obtenerComprasReceta,
-  guardarCompraIngrediente,
-  borrarComprasReceta,
-  normalizarNombreIngrediente,
-} from '../lib/db.js';
+import { obtenerComprasReceta, guardarCompraIngrediente, borrarComprasReceta } from '../lib/db.js';
 import {
   costoIngredientes,
   costoEmpaque,
@@ -25,11 +20,10 @@ import {
   facturacionTotal,
   escalarReceta,
   agruparIngredientes,
-  costoDesdeCompra,
+  aplicarComprasAReceta,
   formatoMoneda,
   formatoTiempo,
   formatoCantidad,
-  redondear,
 } from '../lib/calc.js';
 
 const TABS = [
@@ -86,27 +80,14 @@ export default function RecipeDetail() {
   // Si vos (quien mira la receta) cargaste cuánto pagaste por el paquete que
   // compraste de cada ingrediente, el costo de esa receta se calcula con TU
   // precio en vez del que haya dejado el admin — es tu propio gasto real.
-  const ingredientesConMisPrecios = useMemo(() => {
-    if (!escalada) return [];
-    return escalada.ingredientes.map((i) => {
-      const compra = compras[normalizarNombreIngrediente(i.nombre)];
-      const cantidadComprada = compra?.cantidadComprada;
-      const precioPagado = compra?.precioPagado;
-      const tieneCompra = Boolean(cantidadComprada) && Boolean(precioPagado);
-      const costo = tieneCompra
-        ? redondear(costoDesdeCompra({ precioCompra: precioPagado, cantidadCompra: cantidadComprada, cantidadUsada: i.cantidad }), 2)
-        : i.costo;
-      const sobranteCantidad = tieneCompra ? redondear(Number(cantidadComprada) - i.cantidad, 2) : 0;
-      const sobranteValor = tieneCompra ? redondear(Number(precioPagado) - costo, 2) : 0;
-      return { ...i, cantidadComprada, precioPagado, costo, tieneCompra, sobranteCantidad, sobranteValor };
-    });
-  }, [escalada, compras]);
-
+  // Misma función que usan la Central de Rendimiento y Recetas para vender,
+  // para que el costo de una receta nunca sea distinto según dónde se mire.
   const recetaConMisPrecios = useMemo(
-    () => (escalada ? { ...escalada, ingredientes: ingredientesConMisPrecios } : null),
-    [escalada, ingredientesConMisPrecios]
+    () => (escalada ? aplicarComprasAReceta(escalada, compras) : null),
+    [escalada, compras]
   );
 
+  const ingredientesConMisPrecios = recetaConMisPrecios?.ingredientes ?? [];
   const totalPagado = ingredientesConMisPrecios.reduce((sum, i) => sum + (Number(i.precioPagado) || 0), 0);
   const totalSobranteValor = ingredientesConMisPrecios.reduce((sum, i) => sum + (i.tieneCompra ? i.sobranteValor : 0), 0);
   const hayCompras = ingredientesConMisPrecios.some((i) => i.tieneCompra);

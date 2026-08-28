@@ -2,11 +2,13 @@ import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Icon from './Icon.jsx';
 import { useStore } from '../lib/StoreContext.jsx';
+import { obtenerComprasReceta } from '../lib/db.js';
 import {
   costoTotalReceta,
   precioSugerido,
   facturacionTotal,
   gananciaTotal,
+  aplicarComprasAReceta,
   formatoMoneda,
 } from '../lib/calc.js';
 
@@ -60,7 +62,12 @@ export default function CentralRendimiento({ layout = 'ancho', conEncabezado = t
 
   const sugerencias = useMemo(() => {
     if (!buscado) return [];
+    // Usa TU precio real (lo que cargaste en "Tus compras" de cada receta)
+    // en vez del costo de referencia del admin — así una sugerencia con
+    // presupuesto de $30 nunca muestra una receta que en realidad te sale
+    // más cara, ni al revés.
     return recetasPublicadas
+      .map((r) => aplicarComprasAReceta(r, obtenerComprasReceta(r.id)))
       .filter((r) => (categoria ? r.categoria === categoria : true))
       .filter((r) => costoTotalReceta(r) <= Number(presupuesto))
       .sort((a, b) => gananciaTotal(b) - gananciaTotal(a))

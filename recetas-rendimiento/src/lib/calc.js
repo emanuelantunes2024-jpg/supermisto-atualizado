@@ -20,6 +20,40 @@ export function costoDesdeCompra({ precioCompra, cantidadCompra, cantidadUsada }
   return (precio / cantComprada) * cantUsada;
 }
 
+export function normalizarNombreIngrediente(nombre) {
+  return (nombre || '').trim().toLowerCase();
+}
+
+/**
+ * Devuelve una copia de la receta con el costo de cada ingrediente
+ * reemplazado por lo que le costó a quien la está mirando, según lo que
+ * haya cargado en "Tus compras" (cuánto compró y cuánto pagó de cada
+ * ingrediente). Si no cargó nada para un ingrediente puntual, se usa el
+ * costo que haya dejado el admin como referencia (o 0).
+ *
+ * `compras` tiene la forma que devuelve obtenerComprasReceta() en db.js:
+ * { [nombreDeIngredienteNormalizado]: { cantidadComprada, precioPagado } }.
+ * Se usa tanto en la ficha de una receta como en cualquier listado que
+ * muestre costos (Central de Rendimiento, Recetas para vender), para que
+ * todos coincidan en el mismo número — nunca uno con precio real y otro en
+ * $0 para la misma receta.
+ */
+export function aplicarComprasAReceta(receta, compras = {}) {
+  const ingredientes = (receta.ingredientes || []).map((i) => {
+    const compra = compras[normalizarNombreIngrediente(i.nombre)];
+    const cantidadComprada = compra?.cantidadComprada;
+    const precioPagado = compra?.precioPagado;
+    const tieneCompra = Boolean(cantidadComprada) && Boolean(precioPagado);
+    const costo = tieneCompra
+      ? redondear(costoDesdeCompra({ precioCompra: precioPagado, cantidadCompra: cantidadComprada, cantidadUsada: i.cantidad }), 2)
+      : Number(i.costo) || 0;
+    const sobranteCantidad = tieneCompra ? redondear(Number(cantidadComprada) - i.cantidad, 2) : 0;
+    const sobranteValor = tieneCompra ? redondear(Number(precioPagado) - costo, 2) : 0;
+    return { ...i, cantidadComprada, precioPagado, costo, tieneCompra, sobranteCantidad, sobranteValor };
+  });
+  return { ...receta, ingredientes };
+}
+
 export function costoEmpaque(receta) {
   return Number(receta.costoEmpaque) || 0;
 }
