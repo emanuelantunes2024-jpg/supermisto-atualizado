@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import Icon from './Icon.jsx';
 import { useStore } from '../lib/StoreContext.jsx';
 import { formatoTiempo } from '../lib/calc.js';
+import { banderaDesdePais, nombrePais } from '../lib/paises.js';
 
 export default function RecipeCard({ receta, compact = false }) {
   const { favoritos, alternarFavorito, categoriaBySlug } = useStore();
@@ -44,7 +45,14 @@ export default function RecipeCard({ receta, compact = false }) {
       </div>
       {!compact && (
         <div className="flex flex-1 flex-col gap-1 p-4">
-          <h3 className="line-clamp-2 text-[15px] font-bold leading-snug text-ink">{receta.nombre}</h3>
+          <h3 className="line-clamp-2 text-[15px] font-bold leading-snug text-ink">
+            {receta.origen && (
+              <span className="mr-1" title={nombrePais(receta.origen)}>
+                {banderaDesdePais(receta.origen)}
+              </span>
+            )}
+            {receta.nombre}
+          </h3>
           <p className="text-xs font-medium text-ink/60">{cat?.name}</p>
         </div>
       )}

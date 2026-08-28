@@ -3,6 +3,7 @@ import { useNavigate, useParams, Link } from 'react-router-dom';
 import { useStore } from '../../lib/StoreContext.jsx';
 import Icon from '../../components/Icon.jsx';
 import { costoDesdeCompra, redondear } from '../../lib/calc.js';
+import { PAISES, banderaDesdePais } from '../../lib/paises.js';
 
 const DIFICULTADES = ['Fácil', 'Medio', 'Difícil'];
 
@@ -22,6 +23,7 @@ const RECETA_VACIA = {
   imagen: '',
   tiempoMinutos: 30,
   dificultad: 'Fácil',
+  origen: '',
   rendimientoBase: 1,
   unidadRendimiento: 'unidades',
   ingredientes: [{ nombre: '', grupo: '', cantidad: '', unidad: '', precioCompra: '', cantidadCompra: '', costo: '' }],
@@ -202,6 +204,21 @@ export default function RecipeForm() {
                 <option key={d}>{d}</option>
               ))}
             </select>
+          </div>
+
+          <div>
+            <label className="label">País de origen (opcional)</label>
+            <div className="mt-1.5 flex items-center gap-2">
+              {form.origen && <span className="text-xl">{banderaDesdePais(form.origen)}</span>}
+              <select value={form.origen} onChange={(e) => set('origen', e.target.value)} className="input flex-1">
+                <option value="">Sin especificar</option>
+                {PAISES.map((p) => (
+                  <option key={p.code} value={p.code}>
+                    {banderaDesdePais(p.code)} {p.nombre}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
 
           <div className="sm:col-span-2">

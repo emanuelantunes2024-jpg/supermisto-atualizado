@@ -8,6 +8,7 @@ import ToolsBar from '../components/ToolsBar.jsx';
 import CentralRendimiento from '../components/CentralRendimiento.jsx';
 import AddToCollectionModal from '../components/AddToCollectionModal.jsx';
 import { obtenerComprasReceta, guardarCompraIngrediente, borrarComprasReceta } from '../lib/db.js';
+import { banderaDesdePais, nombrePais } from '../lib/paises.js';
 import {
   costoIngredientes,
   costoEmpaque,
@@ -151,10 +152,21 @@ export default function RecipeDetail() {
 
               <div className="flex flex-col justify-center gap-2.5 p-4">
                 <h1 className="text-[20px] font-extrabold leading-tight tracking-tight text-ink">
+                  {receta.origen && (
+                    <span className="mr-1.5" title={nombrePais(receta.origen)}>
+                      {banderaDesdePais(receta.origen)}
+                    </span>
+                  )}
                   {receta.nombre}
                 </h1>
 
                 <p className="flex flex-wrap items-center gap-x-1.5 gap-y-1 text-[11.5px] font-medium text-ink/50">
+                  {receta.origen && (
+                    <>
+                      <span>{nombrePais(receta.origen)}</span>
+                      <span className="text-ink/25">·</span>
+                    </>
+                  )}
                   <span>{cat?.name}</span>
                   <span className="text-ink/25">·</span>
                   <span>{receta.dificultad}</span>
