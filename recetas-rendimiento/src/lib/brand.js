@@ -5,9 +5,9 @@
 export const BRAND = {
   // El nombre se muestra en tres líneas, como en la referencia visual.
   prefijo: 'Central de',
-  nombreA: 'Recetas',
-  nombreB: '& Rendimiento',
-  producto: 'Recetas & Rendimiento',
+  nombreA: 'Receitas',
+  nombreB: '& Renda',
+  producto: 'Receitas & Renda',
   empresa: 'Leuname Software',
   logoSrc: null,
   // Link de checkout de Hotmart al que mandamos a quien todavía no compró.

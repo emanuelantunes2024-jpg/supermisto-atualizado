@@ -11,8 +11,8 @@ const CONFIG_SITIO_POR_DEFECTO = {
   bannerBibliotecaImagen: '/images/hero/torta-chocolate.png',
   bannerNovedadesImagen: '/images/hero/cupcake.png',
   marcaPrefijo: 'Central de',
-  marcaNombreA: 'Recetas',
-  marcaNombreB: '& Rendimiento',
+  marcaNombreA: 'Receitas',
+  marcaNombreB: '& Renda',
   marcaEmpresa: 'Leuname Software',
   marcaLogo: null,
 };

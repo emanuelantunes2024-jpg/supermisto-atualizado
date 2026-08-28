@@ -3,9 +3,11 @@ import Icon from './Icon.jsx';
 import { useStore } from '../lib/StoreContext.jsx';
 import { formatoTiempo } from '../lib/calc.js';
 import { banderaDesdePais, nombrePais } from '../lib/paises.js';
+import { useIdioma } from '../lib/IdiomaContext.jsx';
 
 export default function RecipeCard({ receta, compact = false }) {
   const { favoritos, alternarFavorito, categoriaBySlug } = useStore();
+  const { t } = useIdioma();
   const esFavorito = favoritos.includes(receta.id);
   const cat = categoriaBySlug(receta.categoria);
 
@@ -22,8 +24,8 @@ export default function RecipeCard({ receta, compact = false }) {
           loading="lazy"
         />
         {receta.novedad && (
-          <span className="absolute left-2.5 top-2.5 rounded-full bg-brand-500 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-white shadow">
-            Nuevo
+          <span className="absolute left-2.5 top-2.5 rounded-full bg-violet-500 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-white shadow">
+            {t('nav.nuevo')}
           </span>
         )}
         <button
