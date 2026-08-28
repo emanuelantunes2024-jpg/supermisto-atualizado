@@ -49,7 +49,6 @@ export default function RecipeDetail() {
 
   const [tab, setTab] = useState('Ingredientes');
   const [modalColeccion, setModalColeccion] = useState(false);
-  const [copiado, setCopiado] = useState(false);
   const [agregado, setAgregado] = useState(false);
   const [rendimiento, setRendimiento] = useState(receta?.rendimientoBase ?? 1);
   const [compras, setCompras] = useState({});
@@ -136,17 +135,6 @@ export default function RecipeDetail() {
     .filter((r) => r.categoria === receta.categoria && r.id !== receta.id)
     .slice(0, 4);
 
-  function compartir() {
-    const url = window.location.href;
-    if (navigator.share) {
-      navigator.share({ title: receta.nombre, url }).catch(() => {});
-    } else {
-      navigator.clipboard?.writeText(url);
-      setCopiado(true);
-      setTimeout(() => setCopiado(false), 1800);
-    }
-  }
-
   function agregarTodo() {
     agregarAListaCompras(
       escalada.ingredientes.map((i) => ({
@@ -170,7 +158,7 @@ export default function RecipeDetail() {
           {/* 2. Cabecera: imagen + datos */}
           <div className="card overflow-hidden">
             <div className="grid gap-0 sm:grid-cols-[minmax(0,44%)_1fr]">
-              <div className="relative min-h-[190px] bg-brand-50">
+              <div className="relative h-[190px] self-start overflow-hidden bg-brand-50 sm:h-[260px]">
                 <img src={receta.imagen} alt={receta.nombre} className="h-full w-full object-cover" />
                 <button
                   onClick={() => navigate(-1)}
@@ -207,9 +195,6 @@ export default function RecipeDetail() {
                   </button>
                   <button onClick={() => setModalColeccion(true)} className="btn-secondary !px-2.5 !py-1.5 !text-[11.5px]">
                     <Icon name="folder" className="w-3.5 h-3.5" /> Agregar a lista
-                  </button>
-                  <button onClick={compartir} className="btn-secondary !px-2.5 !py-1.5 !text-[11.5px]">
-                    <Icon name="share" className="w-3.5 h-3.5" /> {copiado ? 'Copiado' : 'Compartir'}
                   </button>
                 </div>
 

@@ -132,6 +132,7 @@ export function agregarAListaCompras(items) {
   const nuevos = items.map((i) => ({
     id: `i${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
     marcado: false,
+    precio: '',
     ...i,
   }));
   const actualizada = [...lista, ...nuevos];
@@ -143,6 +144,13 @@ export function alternarItemLista(itemId) {
   const lista = obtenerListaCompras().map((i) =>
     i.id === itemId ? { ...i, marcado: !i.marcado } : i
   );
+  escribir(KEYS.lista, lista);
+  return lista;
+}
+
+/** Guarda cuánto pagó la persona por un ítem — para ver en vivo cuánto va gastando. */
+export function actualizarPrecioItemLista(itemId, precio) {
+  const lista = obtenerListaCompras().map((i) => (i.id === itemId ? { ...i, precio } : i));
   escribir(KEYS.lista, lista);
   return lista;
 }

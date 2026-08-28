@@ -96,6 +96,7 @@ export function StoreProvider({ children }) {
 
   const agregarAListaCompras = useCallback((items) => setLista(db.agregarAListaCompras(items)), []);
   const alternarItemLista = useCallback((id) => setLista(db.alternarItemLista(id)), []);
+  const actualizarPrecioItemLista = useCallback((id, precio) => setLista(db.actualizarPrecioItemLista(id, precio)), []);
   const eliminarItemLista = useCallback((id) => setLista(db.eliminarItemLista(id)), []);
   const vaciarLista = useCallback(() => setLista(db.vaciarLista()), []);
 
@@ -119,6 +120,7 @@ export function StoreProvider({ children }) {
       alternarRecetaEnColeccion,
       agregarAListaCompras,
       alternarItemLista,
+      actualizarPrecioItemLista,
       eliminarItemLista,
       vaciarLista,
     }),
@@ -140,6 +142,7 @@ export function StoreProvider({ children }) {
       alternarRecetaEnColeccion,
       agregarAListaCompras,
       alternarItemLista,
+      actualizarPrecioItemLista,
       eliminarItemLista,
       vaciarLista,
     ]

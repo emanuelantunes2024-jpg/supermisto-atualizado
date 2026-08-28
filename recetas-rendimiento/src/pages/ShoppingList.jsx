@@ -2,14 +2,18 @@ import { useState } from 'react';
 import { useStore } from '../lib/StoreContext.jsx';
 import Icon from '../components/Icon.jsx';
 import EmptyState from '../components/EmptyState.jsx';
+import { formatoMoneda } from '../lib/calc.js';
 
 export default function ShoppingList() {
-  const { lista, agregarAListaCompras, alternarItemLista, eliminarItemLista, vaciarLista } = useStore();
+  const { lista, agregarAListaCompras, alternarItemLista, actualizarPrecioItemLista, eliminarItemLista, vaciarLista } =
+    useStore();
   const [nombre, setNombre] = useState('');
   const [cantidad, setCantidad] = useState('');
 
   const pendientes = lista.filter((i) => !i.marcado);
   const marcados = lista.filter((i) => i.marcado);
+  const totalGastado = lista.reduce((sum, i) => sum + (Number(i.precio) || 0), 0);
+  const hayPrecios = lista.some((i) => Number(i.precio) > 0);
 
   function agregar(e) {
     e.preventDefault();
@@ -35,6 +39,13 @@ export default function ShoppingList() {
         )}
       </div>
 
+      {hayPrecios && (
+        <div className="card flex items-center justify-between p-4">
+          <p className="text-sm font-bold text-ink">Total gastado hasta ahora</p>
+          <p className="text-lg font-extrabold text-brand-600">{formatoMoneda(totalGastado)}</p>
+        </div>
+      )}
+
       <form onSubmit={agregar} className="card flex flex-col gap-2 p-4 sm:flex-row">
         <input value={nombre} onChange={(e) => setNombre(e.target.value)} placeholder="Ingrediente (ej: Harina)" className="input flex-1" />
         <input value={cantidad} onChange={(e) => setCantidad(e.target.value)} placeholder="Cantidad (ej: 1 kg)" className="input sm:w-40" />
@@ -54,16 +65,28 @@ export default function ShoppingList() {
           {pendientes.length > 0 && (
             <div className="card divide-y divide-black/5">
               {pendientes.map((item) => (
-                <ItemFila key={item.id} item={item} onToggle={alternarItemLista} onRemove={eliminarItemLista} />
+                <ItemFila
+                  key={item.id}
+                  item={item}
+                  onToggle={alternarItemLista}
+                  onPrecio={actualizarPrecioItemLista}
+                  onRemove={eliminarItemLista}
+                />
               ))}
             </div>
           )}
           {marcados.length > 0 && (
             <div>
               <p className="label mb-2">Comprado</p>
-              <div className="card divide-y divide-black/5 opacity-60">
+              <div className="card divide-y divide-black/5">
                 {marcados.map((item) => (
-                  <ItemFila key={item.id} item={item} onToggle={alternarItemLista} onRemove={eliminarItemLista} />
+                  <ItemFila
+                    key={item.id}
+                    item={item}
+                    onToggle={alternarItemLista}
+                    onPrecio={actualizarPrecioItemLista}
+                    onRemove={eliminarItemLista}
+                  />
                 ))}
               </div>
             </div>
@@ -74,7 +97,7 @@ export default function ShoppingList() {
   );
 }
 
-function ItemFila({ item, onToggle, onRemove }) {
+function ItemFila({ item, onToggle, onPrecio, onRemove }) {
   return (
     <div className="flex items-center gap-3 px-4 py-3">
       <button
@@ -91,6 +114,18 @@ function ItemFila({ item, onToggle, onRemove }) {
         <p className="text-xs text-ink/45">
           {item.cantidad} · {item.origen}
         </p>
+      </div>
+      <div className="relative shrink-0">
+        <span className="pointer-events-none absolute left-2.5 top-1/2 -translate-y-1/2 text-xs text-ink/40">$</span>
+        <input
+          type="number"
+          min="0"
+          step="0.01"
+          value={item.precio || ''}
+          onChange={(e) => onPrecio(item.id, e.target.value)}
+          placeholder="0.00"
+          className="input w-24 !py-1.5 !pl-5 !text-[12.5px]"
+        />
       </div>
       <button onClick={() => onRemove(item.id)} className="rounded-lg p-1.5 text-ink/30 hover:bg-red-50 hover:text-red-600">
         <Icon name="x" className="w-4 h-4" />
