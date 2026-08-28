@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import { useStore } from '../../lib/StoreContext.jsx';
 import Icon from '../../components/Icon.jsx';
+import { costoDesdeCompra, redondear } from '../../lib/calc.js';
 
 const DIFICULTADES = ['Fácil', 'Medio', 'Difícil'];
 
@@ -23,7 +24,7 @@ const RECETA_VACIA = {
   dificultad: 'Fácil',
   rendimientoBase: 1,
   unidadRendimiento: 'unidades',
-  ingredientes: [{ nombre: '', grupo: '', cantidad: '', unidad: '', costo: '' }],
+  ingredientes: [{ nombre: '', grupo: '', cantidad: '', unidad: '', precioCompra: '', cantidadCompra: '', costo: '' }],
   pasos: [''],
   consejos: [],
   conservacion: '',
@@ -56,15 +57,39 @@ export default function RecipeForm() {
     setForm((f) => ({ ...f, [campo]: valor }));
   }
 
+  // Campos que, al cambiar, recalculan el costo automáticamente a partir de
+  // lo que costó el paquete/envase completo que se compró (precioCompra
+  // dividido cantidadCompra, multiplicado por la cantidad que usa la
+  // receta). Si el ingrediente no tiene precio/cantidad de compra cargados,
+  // el costo se sigue pudiendo escribir a mano — no se fuerza nada.
+  const CAMPOS_QUE_RECALCULAN = new Set(['cantidad', 'precioCompra', 'cantidadCompra']);
+
   function setIngrediente(idx, campo, valor) {
     setForm((f) => {
       const ingredientes = [...f.ingredientes];
-      ingredientes[idx] = { ...ingredientes[idx], [campo]: valor };
+      const actual = { ...ingredientes[idx], [campo]: valor };
+      if (CAMPOS_QUE_RECALCULAN.has(campo) && actual.precioCompra && actual.cantidadCompra) {
+        actual.costo = redondear(
+          costoDesdeCompra({
+            precioCompra: actual.precioCompra,
+            cantidadCompra: actual.cantidadCompra,
+            cantidadUsada: actual.cantidad,
+          }),
+          2
+        );
+      }
+      ingredientes[idx] = actual;
       return { ...f, ingredientes };
     });
   }
   function agregarIngrediente() {
-    setForm((f) => ({ ...f, ingredientes: [...f.ingredientes, { nombre: '', grupo: '', cantidad: '', unidad: '', costo: '' }] }));
+    setForm((f) => ({
+      ...f,
+      ingredientes: [
+        ...f.ingredientes,
+        { nombre: '', grupo: '', cantidad: '', unidad: '', precioCompra: '', cantidadCompra: '', costo: '' },
+      ],
+    }));
   }
   function quitarIngrediente(idx) {
     setForm((f) => ({ ...f, ingredientes: f.ingredientes.filter((_, i) => i !== idx) }));
@@ -124,6 +149,8 @@ export default function RecipeForm() {
           ...i,
           grupo: (i.grupo || '').trim(),
           cantidad: Number(i.cantidad) || 0,
+          precioCompra: Number(i.precioCompra) || 0,
+          cantidadCompra: Number(i.cantidadCompra) || 0,
           costo: Number(i.costo) || 0,
         })),
       pasos: form.pasos.filter((p) => p.trim()),
@@ -217,49 +244,92 @@ export default function RecipeForm() {
 
         {/* Ingredientes */}
         <div className="card p-5">
-          <p className="mb-3 text-sm font-bold text-ink">Ingredientes</p>
-          <div className="space-y-2">
-            {form.ingredientes.map((ing, idx) => (
-              <div key={idx} className="grid grid-cols-12 gap-2">
-                <input
-                  value={ing.nombre}
-                  onChange={(e) => setIngrediente(idx, 'nombre', e.target.value)}
-                  placeholder="Ingrediente"
-                  className="input col-span-3"
-                />
-                <input
-                  value={ing.grupo || ''}
-                  onChange={(e) => setIngrediente(idx, 'grupo', e.target.value)}
-                  placeholder="Sección"
-                  className="input col-span-2"
-                />
-                <input
-                  value={ing.cantidad}
-                  onChange={(e) => setIngrediente(idx, 'cantidad', e.target.value)}
-                  placeholder="Cant."
-                  type="number"
-                  step="0.01"
-                  className="input col-span-2"
-                />
-                <input
-                  value={ing.unidad}
-                  onChange={(e) => setIngrediente(idx, 'unidad', e.target.value)}
-                  placeholder="Unidad"
-                  className="input col-span-2"
-                />
-                <input
-                  value={ing.costo}
-                  onChange={(e) => setIngrediente(idx, 'costo', e.target.value)}
-                  placeholder="Costo"
-                  type="number"
-                  step="0.01"
-                  className="input col-span-2"
-                />
-                <button type="button" onClick={() => quitarIngrediente(idx)} className="col-span-1 flex items-center justify-center rounded-xl text-ink/40 hover:bg-red-50 hover:text-red-600">
-                  <Icon name="x" className="w-4 h-4" />
-                </button>
-              </div>
-            ))}
+          <p className="text-sm font-bold text-ink">Ingredientes</p>
+          <p className="mt-1 text-[12.5px] leading-relaxed text-ink/50">
+            Cargá cuánto pagaste por el paquete/envase completo y cuánto usa la receta — el costo se
+            calcula solo. Si preferís, también podés escribir el costo directamente a mano.
+          </p>
+          <div className="mt-3 space-y-3">
+            {form.ingredientes.map((ing, idx) => {
+              const autoCalculado = Boolean(ing.precioCompra) && Boolean(ing.cantidadCompra);
+              return (
+                <div key={idx} className="rounded-xl border border-ink/10 p-3">
+                  <div className="grid grid-cols-12 gap-2">
+                    <input
+                      value={ing.nombre}
+                      onChange={(e) => setIngrediente(idx, 'nombre', e.target.value)}
+                      placeholder="Ingrediente (ej: Harina)"
+                      className="input col-span-4"
+                    />
+                    <input
+                      value={ing.grupo || ''}
+                      onChange={(e) => setIngrediente(idx, 'grupo', e.target.value)}
+                      placeholder="Sección"
+                      className="input col-span-3"
+                    />
+                    <input
+                      value={ing.cantidad}
+                      onChange={(e) => setIngrediente(idx, 'cantidad', e.target.value)}
+                      placeholder="Cant. usada"
+                      type="number"
+                      step="0.01"
+                      className="input col-span-2"
+                    />
+                    <input
+                      value={ing.unidad}
+                      onChange={(e) => setIngrediente(idx, 'unidad', e.target.value)}
+                      placeholder="Unidad"
+                      className="input col-span-2"
+                    />
+                    <button type="button" onClick={() => quitarIngrediente(idx)} className="col-span-1 flex items-center justify-center rounded-xl text-ink/40 hover:bg-red-50 hover:text-red-600">
+                      <Icon name="x" className="w-4 h-4" />
+                    </button>
+                  </div>
+
+                  <div className="mt-2 grid grid-cols-12 gap-2">
+                    <div className="col-span-4">
+                      <input
+                        value={ing.precioCompra || ''}
+                        onChange={(e) => setIngrediente(idx, 'precioCompra', e.target.value)}
+                        placeholder="Precio del paquete ($)"
+                        type="number"
+                        step="0.01"
+                        min="0"
+                        className="input"
+                      />
+                    </div>
+                    <div className="col-span-4">
+                      <input
+                        value={ing.cantidadCompra || ''}
+                        onChange={(e) => setIngrediente(idx, 'cantidadCompra', e.target.value)}
+                        placeholder={`Cant. del paquete (en ${ing.unidad || 'la misma unidad'})`}
+                        type="number"
+                        step="0.01"
+                        min="0"
+                        className="input"
+                      />
+                    </div>
+                    <div className="col-span-4">
+                      <div className="relative">
+                        <input
+                          value={ing.costo}
+                          onChange={(e) => setIngrediente(idx, 'costo', e.target.value)}
+                          placeholder="Costo en la receta ($)"
+                          type="number"
+                          step="0.01"
+                          className="input pr-14"
+                        />
+                        {autoCalculado && (
+                          <span className="absolute right-2.5 top-1/2 -translate-y-1/2 rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-emerald-700">
+                            Auto
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
           </div>
           <button type="button" onClick={agregarIngrediente} className="btn-secondary mt-3">
             <Icon name="plus" className="w-4 h-4" /> Agregar ingrediente

@@ -78,6 +78,11 @@ src/
 - Ficha de receta con pestañas (ingredientes, preparación, consejos, conservación),
   **ajuste de rendimiento en vivo** (recalcula cantidades y costos) y resumen de
   costos/precio/ganancia.
+- En el formulario del panel (`/admin/recetas/nueva`), el costo de cada ingrediente se
+  puede calcular solo: cargás cuánto pagaste por el paquete/envase completo (ej. 1 kg
+  de harina a $5) y cuánto usa la receta (ej. 500 g) — el costo de esa fracción
+  ($2.50) se calcula automáticamente. Si preferís, también se puede escribir el
+  costo a mano, como antes.
 - Favoritos y Colecciones (crear, agregar/quitar recetas, eliminar).
 - Lista de compras (manual o agregada desde cualquier receta).
 - Calculadora de Costos y Calculadora de Precio de Venta (independientes, con opción

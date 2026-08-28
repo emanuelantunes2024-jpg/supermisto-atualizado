@@ -5,6 +5,21 @@ export function costoIngredientes(ingredientes = []) {
   return ingredientes.reduce((sum, i) => sum + (Number(i.costo) || 0), 0);
 }
 
+/**
+ * Calcula el costo de la fracción de un ingrediente usada en la receta, a
+ * partir de lo que cuesta el paquete/envase completo que se compra.
+ * Ej: compraste 1 kg de harina por $5 y la receta usa 500 g → devuelve 2.5.
+ * `cantidadCompra` y `cantidadUsada` tienen que estar en la misma unidad
+ * (ambas en gramos, ambas en ml, etc.) — la calculadora no convierte unidades.
+ */
+export function costoDesdeCompra({ precioCompra, cantidadCompra, cantidadUsada }) {
+  const precio = Number(precioCompra) || 0;
+  const cantComprada = Number(cantidadCompra) || 0;
+  const cantUsada = Number(cantidadUsada) || 0;
+  if (precio <= 0 || cantComprada <= 0) return 0;
+  return (precio / cantComprada) * cantUsada;
+}
+
 export function costoEmpaque(receta) {
   return Number(receta.costoEmpaque) || 0;
 }
