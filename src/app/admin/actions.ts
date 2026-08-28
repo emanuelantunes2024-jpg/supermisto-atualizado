@@ -225,9 +225,13 @@ export async function uploadTemplateDemo(
     const bytes = await entry.async("uint8array");
     const objectPath = `${basePath}/${relPath}`;
 
+    // Se envuelve en un Blob con el tipo explícito: subir el Uint8Array a
+    // secas hace que Supabase adivine el tipo (deja el CSS/JS como
+    // "text/plain" y el navegador los rechaza como hoja de estilo/script).
+    const blob = new Blob([bytes as unknown as BlobPart], { type: contentType });
     const { error } = await supabase.storage
       .from(TEMPLATE_ASSETS_BUCKET)
-      .upload(objectPath, bytes, { contentType, upsert: false });
+      .upload(objectPath, blob, { contentType, upsert: false });
     if (error) return { error: `No se pudo subir "${relPath}": ${error.message}` };
 
     if (relPath.toLowerCase() === "index.html") indexPath = objectPath;
