@@ -8,6 +8,10 @@ import type { TemplateStatus } from "@/lib/types";
 
 export const dynamic = "force-dynamic";
 
+interface PageProps {
+  searchParams: Promise<{ error?: string; eliminado?: string; guardado?: string }>;
+}
+
 const statusStyles: Record<TemplateStatus, string> = {
   published: "bg-emerald-500/15 text-emerald-300",
   draft: "bg-amber-500/15 text-amber-300",
@@ -20,7 +24,8 @@ const statusLabels: Record<TemplateStatus, string> = {
   archived: "Archivada",
 };
 
-export default async function AdminTemplatesPage() {
+export default async function AdminTemplatesPage({ searchParams }: PageProps) {
+  const { error, eliminado, guardado } = await searchParams;
   const templates = await getAllTemplates();
   const conPaquete = templates.filter((t) => !!t.file_url).length;
 
@@ -32,6 +37,25 @@ export default async function AdminTemplatesPage() {
           + Nueva plantilla
         </Link>
       </div>
+
+      {error && (
+        <p className="rounded-lg border border-red-500/40 bg-red-500/10 px-4 py-3 text-[13px] text-red-300">
+          No se pudo eliminar: {error}
+          {error.toLowerCase().includes("foreign key") && (
+            <> — probablemente tiene pedidos asociados. Archívala en vez de eliminarla, o bórrala primero de la tabla &quot;orders&quot; en Supabase.</>
+          )}
+        </p>
+      )}
+      {eliminado && (
+        <p className="rounded-lg border border-emerald-500/40 bg-emerald-500/10 px-4 py-3 text-[13px] text-emerald-300">
+          ✓ Plantilla eliminada.
+        </p>
+      )}
+      {guardado && (
+        <p className="rounded-lg border border-emerald-500/40 bg-emerald-500/10 px-4 py-3 text-[13px] text-emerald-300">
+          ✓ Cambios guardados.
+        </p>
+      )}
 
       <div className="panel space-y-2">
         <h3 className="text-[15px] font-semibold">📦 Bóveda de paquetes</h3>

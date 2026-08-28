@@ -95,9 +95,18 @@ export async function deleteTemplate(formData: FormData): Promise<void> {
 
   const { data: template } = await supabase.from("templates").select("slug").eq("id", id).maybeSingle();
 
-  await supabase.from("templates").delete().eq("id", id);
+  const { error } = await supabase.from("templates").delete().eq("id", id);
 
   revalidateStorefront(template?.slug ?? undefined);
+
+  if (error) {
+    // Lo más habitual: hay pedidos que apuntan a esta plantilla y la base de
+    // datos no deja borrarla sin borrar antes esos pedidos. Antes esto
+    // fallaba en silencio y parecía que el botón "Eliminar" no hacía nada.
+    redirect(`/admin/plantillas?error=${encodeURIComponent(error.message)}`);
+  }
+
+  redirect("/admin/plantillas?eliminado=1");
 }
 
 /** Cambia el estado de una plantilla (publicar / archivar / volver a borrador). */
