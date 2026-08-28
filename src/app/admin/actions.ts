@@ -201,17 +201,30 @@ export async function uploadTemplateDemo(
     return { error: "No se ha podido leer el .zip. ¿Está corrupto?" };
   }
 
-  const entries = Object.values(zip.files).filter((entry) => !entry.dir);
-  if (entries.length === 0) return { error: "El .zip está vacío." };
-  if (entries.length > 300) return { error: "El .zip tiene demasiados archivos (máximo 300)." };
+  const allEntries = Object.values(zip.files).filter((entry) => !entry.dir);
+  if (allEntries.length === 0) return { error: "El .zip está vacío." };
+  if (allEntries.length > 800) return { error: "El .zip tiene demasiados archivos (máximo 800)." };
 
-  // Si el .zip trae todo dentro de una única carpeta raíz (p. ej. "demo/"),
-  // la quitamos para que index.html quede en la raíz del bucket.
-  const allPaths = entries.map((entry) => entry.name.replace(/^\/+/, ""));
-  const firstSegments = new Set(allPaths.map((path) => path.split("/")[0]));
-  const rootPrefix = firstSegments.size === 1 && allPaths.every((path) => path.includes("/"))
-    ? `${[...firstSegments][0]}/`
-    : "";
+  // Busca el index.html estando donde esté dentro del .zip: así da igual que
+  // suban solo la carpeta de demo (index.html en la raíz) o el paquete
+  // completo de venta (que trae el index.html dentro de
+  // "3-DEMO-EN-CARPETA/", junto a otros archivos que no son la demo). Se
+  // toma el que esté menos anidado y solo se sube lo que cuelga de su
+  // carpeta, ignorando el resto del paquete.
+  const withPaths = allEntries.map((entry) => ({ entry, path: entry.name.replace(/^\/+/, "") }));
+  const indexCandidates = withPaths
+    .filter(({ path }) => path.toLowerCase().split("/").pop() === "index.html")
+    .sort((a, b) => a.path.split("/").length - b.path.split("/").length);
+
+  if (indexCandidates.length === 0) {
+    return { error: 'El .zip no contiene ningún "index.html" (ni suelto ni dentro de una carpeta).' };
+  }
+
+  const indexRelDir = indexCandidates[0].path.split("/").slice(0, -1).join("/");
+  const rootPrefix = indexRelDir ? `${indexRelDir}/` : "";
+  const entries = withPaths
+    .filter(({ path }) => path.startsWith(rootPrefix))
+    .map(({ entry }) => entry);
 
   const stamp = Date.now();
   const basePath = `${slug}/demo-${stamp}`;
