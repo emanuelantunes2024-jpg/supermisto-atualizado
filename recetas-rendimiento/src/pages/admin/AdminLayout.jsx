@@ -74,7 +74,7 @@ export default function AdminLayout() {
   const { modoAbierto } = useAuth();
 
   return (
-    <div className="flex min-h-screen bg-cream">
+    <div className="flex min-h-screen bg-slate-100">
       <aside className="hidden w-[236px] shrink-0 lg:block">
         <div className="sticky top-0 h-screen">
           <Contenido />

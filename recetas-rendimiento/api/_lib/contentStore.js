@@ -10,6 +10,14 @@ import { CATEGORIES as CATEGORIAS_SEED } from '../../src/data/categories.js';
 
 const CLAVE_RECETAS = 'contenido:recetas';
 const CLAVE_CATEGORIAS = 'contenido:categorias';
+const CLAVE_CONFIG_SITIO = 'contenido:config-sitio';
+
+// Imágenes de portada por defecto (las que ya traía el diseño original) —
+// se usan hasta que el admin suba las suyas propias desde el panel.
+const CONFIG_SITIO_POR_DEFECTO = {
+  bannerBibliotecaImagen: '/images/hero/torta-chocolate.png',
+  bannerNovedadesImagen: '/images/hero/cupcake.png',
+};
 
 export async function obtenerRecetasDB() {
   try {
@@ -41,4 +49,21 @@ export async function obtenerCategoriasDB() {
 export async function guardarCategoriasDB(lista) {
   await redis().set(CLAVE_CATEGORIAS, lista);
   return lista;
+}
+
+export async function obtenerConfigSitioDB() {
+  try {
+    const guardada = await redis().get(CLAVE_CONFIG_SITIO);
+    if (guardada && typeof guardada === 'object') return { ...CONFIG_SITIO_POR_DEFECTO, ...guardada };
+    return CONFIG_SITIO_POR_DEFECTO;
+  } catch {
+    return CONFIG_SITIO_POR_DEFECTO;
+  }
+}
+
+export async function guardarConfigSitioDB(config) {
+  const actual = await obtenerConfigSitioDB();
+  const nueva = { ...actual, ...config };
+  await redis().set(CLAVE_CONFIG_SITIO, nueva);
+  return nueva;
 }

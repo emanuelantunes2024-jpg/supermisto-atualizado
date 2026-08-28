@@ -4,6 +4,13 @@ import { CATEGORIES as CATEGORIAS_SEED } from '../data/categories.js';
 
 const StoreContext = createContext(null);
 
+// Mismo valor por defecto que api/_lib/contentStore.js — hasta que el admin
+// suba las suyas propias, la home usa las imágenes originales del diseño.
+const CONFIG_SITIO_POR_DEFECTO = {
+  bannerBibliotecaImagen: '/images/hero/torta-chocolate.png',
+  bannerNovedadesImagen: '/images/hero/cupcake.png',
+};
+
 async function llamarJSON(url, opciones) {
   const r = await fetch(url, { credentials: 'include', ...opciones });
   const cuerpo = await r.json().catch(() => null);
@@ -17,6 +24,7 @@ export function StoreProvider({ children }) {
   const [favoritos, setFavoritos] = useState([]);
   const [colecciones, setColecciones] = useState([]);
   const [lista, setLista] = useState([]);
+  const [configSitio, setConfigSitio] = useState(CONFIG_SITIO_POR_DEFECTO);
   const [listo, setListo] = useState(false);
 
   useEffect(() => {
@@ -33,12 +41,14 @@ export function StoreProvider({ children }) {
     // cualquier visitante.
     (async () => {
       try {
-        const [rRecetas, rCategorias] = await Promise.all([
+        const [rRecetas, rCategorias, rConfig] = await Promise.all([
           fetch('/api/content/recetas', { credentials: 'include' }).then((r) => r.json()),
           fetch('/api/content/categorias', { credentials: 'include' }).then((r) => r.json()),
+          fetch('/api/content/config', { credentials: 'include' }).then((r) => r.json()),
         ]);
         if (rRecetas?.ok) setRecetas(rRecetas.recetas);
         if (rCategorias?.ok) setCategorias(rCategorias.categorias);
+        if (rConfig?.ok) setConfigSitio(rConfig.config);
       } catch {
         // Sin conexión con el backend de contenido: seguimos con el catálogo semilla.
       } finally {
@@ -81,6 +91,16 @@ export function StoreProvider({ children }) {
 
   const categoriaBySlug = useCallback((slug) => categorias.find((c) => c.slug === slug), [categorias]);
 
+  const guardarConfigSitio = useCallback(async (cambios) => {
+    const r = await llamarJSON('/api/admin/config', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(cambios),
+    });
+    setConfigSitio(r.config);
+    return r.config;
+  }, []);
+
   const alternarFavorito = useCallback((id) => setFavoritos(db.alternarFavorito(id)), []);
 
   const crearColeccion = useCallback((nombre) => {
@@ -107,6 +127,8 @@ export function StoreProvider({ children }) {
       recetasPublicadas: recetas.filter((r) => r.publicada),
       categorias,
       categoriaBySlug,
+      configSitio,
+      guardarConfigSitio,
       favoritos,
       colecciones,
       lista,
@@ -129,6 +151,8 @@ export function StoreProvider({ children }) {
       recetas,
       categorias,
       categoriaBySlug,
+      configSitio,
+      guardarConfigSitio,
       favoritos,
       colecciones,
       lista,

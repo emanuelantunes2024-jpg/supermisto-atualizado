@@ -2,11 +2,13 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Icon from './Icon.jsx';
 import { useStore } from '../lib/StoreContext.jsx';
-import { traducir } from '../lib/i18n.js';
+import { useIdioma } from '../lib/IdiomaContext.jsx';
+import { traducir, IDIOMAS } from '../lib/i18n.js';
 
 export default function Topbar({ idioma, onOpenMenu }) {
   const navigate = useNavigate();
   const { recetasPublicadas } = useStore();
+  const { setIdioma } = useIdioma();
   const [q, setQ] = useState('');
   const novedades = recetasPublicadas.filter((r) => r.novedad).length;
 
@@ -43,6 +45,22 @@ export default function Topbar({ idioma, onOpenMenu }) {
       </form>
 
       <div className="flex shrink-0 items-center gap-2 sm:gap-3">
+        <div className="relative">
+          <select
+            value={idioma}
+            onChange={(e) => setIdioma(e.target.value)}
+            aria-label="Idioma"
+            className="appearance-none rounded-lg border border-ink/15 bg-white py-1.5 pl-2.5 pr-6 text-[12px] font-semibold text-ink/70 transition hover:border-brand-300 focus:border-brand-400 focus:outline-none"
+          >
+            {IDIOMAS.map((i) => (
+              <option key={i.code} value={i.code}>
+                {i.code.toUpperCase()}
+              </option>
+            ))}
+          </select>
+          <Icon name="chevronDown" className="pointer-events-none absolute right-1.5 top-1/2 h-3 w-3 -translate-y-1/2 text-ink/40" />
+        </div>
+
         <button
           onClick={() => navigate('/novedades')}
           className="relative rounded-lg p-2 text-ink/60 transition hover:bg-black/5 hover:text-brand-600"

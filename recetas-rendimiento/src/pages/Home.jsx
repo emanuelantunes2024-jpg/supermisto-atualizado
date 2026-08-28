@@ -16,7 +16,7 @@ const ACCIONES = [
 ];
 
 export default function Home() {
-  const { recetasPublicadas } = useStore();
+  const { recetasPublicadas, configSitio } = useStore();
   const { t } = useIdioma();
   const novedades = recetasPublicadas.filter((r) => r.novedad);
 
@@ -45,7 +45,7 @@ export default function Home() {
       <div className="grid gap-4 lg:grid-cols-3">
         <div className="relative min-h-[190px] overflow-hidden rounded-2xl bg-[#2A160D] shadow-card lg:col-span-2">
           <img
-            src="/images/hero/torta-chocolate.png"
+            src={configSitio.bannerBibliotecaImagen}
             alt=""
             className="absolute inset-y-0 right-0 h-full w-[58%] object-cover"
           />
@@ -65,7 +65,7 @@ export default function Home() {
 
         <div className="card relative min-h-[190px] overflow-hidden">
           <img
-            src="/images/hero/cupcake.png"
+            src={configSitio.bannerNovedadesImagen}
             alt=""
             className="absolute inset-y-0 right-0 h-full w-[38%] object-cover"
           />

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../lib/AuthContext.jsx';
+import { useStore } from '../../lib/StoreContext.jsx';
 import Icon from '../../components/Icon.jsx';
 
 const ITEMS_ESTADO = [
@@ -58,6 +59,71 @@ function EstadoSistema() {
         <p className="mt-3 text-[12px] font-semibold text-amber-800">
           Falta conectar: Vercel → tu proyecto → Storage → Marketplace → Redis.
         </p>
+      )}
+    </div>
+  );
+}
+
+const BANNERS = [
+  { campo: 'bannerBibliotecaImagen', label: 'Banner grande de la home ("Biblioteca en expansión")' },
+  { campo: 'bannerNovedadesImagen', label: 'Banner chico de novedades' },
+];
+
+function ImagenesPortada() {
+  const { configSitio, guardarConfigSitio } = useStore();
+  const [subiendo, setSubiendo] = useState(null);
+  const [error, setError] = useState(null);
+  const [guardado, setGuardado] = useState(null);
+
+  function onArchivo(campo, e) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setError(null);
+    setGuardado(null);
+    setSubiendo(campo);
+    const reader = new FileReader();
+    reader.onload = async () => {
+      try {
+        await guardarConfigSitio({ [campo]: reader.result });
+        setGuardado(campo);
+        setTimeout(() => setGuardado(null), 2500);
+      } catch {
+        setError('No se pudo guardar la imagen. Revisá que el almacenamiento (Redis) esté conectado.');
+      } finally {
+        setSubiendo(null);
+      }
+    };
+    reader.readAsDataURL(file);
+  }
+
+  return (
+    <div className="card p-5">
+      <p className="text-[13px] font-bold text-ink">Imágenes de portada (home)</p>
+      <p className="mt-1 text-[12.5px] leading-relaxed text-ink/50">
+        Reemplazá las imágenes de los banners de la página de inicio. Se actualizan para todos los
+        visitantes en cuanto se guardan.
+      </p>
+
+      <div className="mt-4 space-y-3">
+        {BANNERS.map(({ campo, label }) => (
+          <div key={campo} className="flex items-center gap-3 rounded-xl border border-ink/10 p-3">
+            <img src={configSitio[campo]} alt="" className="h-14 w-14 shrink-0 rounded-lg object-cover" />
+            <div className="min-w-0 flex-1">
+              <p className="truncate text-[12.5px] font-semibold text-ink">{label}</p>
+              {guardado === campo && <p className="text-[11.5px] font-semibold text-emerald-600">Imagen actualizada ✓</p>}
+            </div>
+            <label className="btn-secondary shrink-0 cursor-pointer !py-1.5 !text-[11.5px]">
+              <Icon name="upload" className="w-3.5 h-3.5" /> {subiendo === campo ? 'Subiendo…' : 'Cambiar'}
+              <input type="file" accept="image/*" onChange={(e) => onArchivo(campo, e)} className="hidden" disabled={Boolean(subiendo)} />
+            </label>
+          </div>
+        ))}
+      </div>
+
+      {error && (
+        <div className="mt-3 rounded-xl border border-amber-200 bg-amber-50 p-3.5">
+          <p className="text-[12.5px] font-semibold text-amber-800">{error}</p>
+        </div>
       )}
     </div>
   );
@@ -161,6 +227,8 @@ export default function AdminSettings() {
       </div>
 
       <EstadoSistema />
+
+      <ImagenesPortada />
 
       <div className="card p-5">
         <p className="text-[13px] font-bold text-ink">Cambiar email y/o contraseña</p>
