@@ -199,10 +199,11 @@ export async function createCategory(_prev: ActionState, formData: FormData): Pr
 }
 
 /**
- * Sube una carpeta de demo completa (un .zip con index.html + css/js/img) al
- * bucket público, y devuelve la URL directa a su index.html — lista para
- * pegar en "URL de la demo en vivo". Así el propio administrador puede
- * publicar su propia demo sin tocar el repositorio ni pedirle nada a nadie.
+ * Sube la demo: acepta un único archivo "1-VER-LA-WEB.html" (todo inline:
+ * css, js y fotos en base64 dentro del mismo archivo — la forma más simple y
+ * a prueba de fallos, sin rutas relativas que puedan romperse) o, si hace
+ * falta, un .zip con index.html + css/js/img sueltos. Sube al bucket público
+ * y devuelve la URL directa — lista para pegar en "URL de la demo en vivo".
  */
 export async function uploadTemplateDemo(
   _prev: ActionState & { path?: string },
@@ -217,8 +218,25 @@ export async function uploadTemplateDemo(
   const file = formData.get("file");
   const slug = slugify(String(formData.get("slug") ?? "plantilla")) || "plantilla";
 
-  if (!(file instanceof File) || file.size === 0) return { error: "Selecciona el .zip de la demo." };
-  if (!file.name.toLowerCase().endsWith(".zip")) return { error: "El archivo debe ser un .zip." };
+  if (!(file instanceof File) || file.size === 0) return { error: "Selecciona el archivo de la demo." };
+
+  // Caso simple: un único .html con todo inline (p. ej. "1-VER-LA-WEB.html").
+  if (file.name.toLowerCase().endsWith(".html")) {
+    const bytes = new Uint8Array(await file.arrayBuffer());
+    const objectPath = `${slug}/demo-${Date.now()}/index.html`;
+    const blob = new Blob([bytes as unknown as BlobPart], { type: "text/html" });
+    const { error } = await supabase.storage
+      .from(TEMPLATE_ASSETS_BUCKET)
+      .upload(objectPath, blob, { contentType: "text/html", upsert: false });
+    if (error) return { error: `No se pudo subir el archivo: ${error.message}` };
+
+    const { data } = supabase.storage.from(TEMPLATE_ASSETS_BUCKET).getPublicUrl(objectPath);
+    return { success: "✓ Demo publicada.", path: data.publicUrl };
+  }
+
+  if (!file.name.toLowerCase().endsWith(".zip")) {
+    return { error: "El archivo debe ser un .html (recomendado) o un .zip." };
+  }
 
   const JSZip = (await import("jszip")).default;
   let zip: InstanceType<typeof JSZip>;

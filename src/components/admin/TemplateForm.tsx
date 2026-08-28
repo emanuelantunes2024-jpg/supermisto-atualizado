@@ -178,8 +178,9 @@ export function TemplateForm({ categories, template }: TemplateFormProps) {
           />
           <DemoUploadField slug={effectiveSlug} onUploaded={setPreviewUrl} />
           <p className="mt-2 text-[11.5px] text-ink-muted">
-            Sube aquí el .zip de la carpeta <code>3-DEMO-EN-CARPETA</code> que viene dentro del paquete de la
-            plantilla (index.html + css + js + img) y esta URL se rellena sola.
+            Sube aquí el archivo <code>1-VER-LA-WEB.html</code> que viene dentro del paquete de la plantilla (todo
+            en un único archivo, sin partes sueltas) y esta URL se rellena sola. También acepta un .zip con
+            index.html + css + js + img si lo prefieres.
           </p>
         </div>
 
@@ -279,8 +280,8 @@ function DemoUploadField({ slug, onUploaded }: DemoUploadFieldProps) {
   return (
     <div className="mt-2 flex flex-wrap items-center gap-3">
       <label className="btn btn-ghost cursor-pointer text-[13px]">
-        {busy ? "Subiendo…" : "Subir carpeta de demo (.zip)"}
-        <input type="file" className="hidden" disabled={busy} accept=".zip" onChange={handleChange} />
+        {busy ? "Subiendo…" : "Subir demo (1-VER-LA-WEB.html o .zip)"}
+        <input type="file" className="hidden" disabled={busy} accept=".html,.zip" onChange={handleChange} />
       </label>
       {message && <span className="text-[12px] text-ink-muted">{message}</span>}
     </div>
