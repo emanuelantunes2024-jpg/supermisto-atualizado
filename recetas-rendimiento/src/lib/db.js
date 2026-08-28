@@ -10,6 +10,7 @@ const KEYS = {
   favoritos: 'rr.favoritos',
   colecciones: 'rr.colecciones',
   lista: 'rr.lista-compras',
+  compras: 'rr.compras-recetas',
   version: 'rr.seed-version',
 };
 
@@ -155,4 +156,37 @@ export function eliminarItemLista(itemId) {
 export function vaciarLista() {
   escribir(KEYS.lista, []);
   return [];
+}
+
+// ---------- Mis compras por receta ----------
+// Cuánto pagó CADA visitante por los ingredientes que compró para una receta.
+// Es un dato propio del dispositivo (no del admin, no se comparte entre
+// personas): cada quien carga sus propios precios, y con eso la receta
+// calcula sola cuánto le costó hacerla y cuánto le sobró.
+
+export function normalizarNombreIngrediente(nombre) {
+  return (nombre || '').trim().toLowerCase();
+}
+
+export function obtenerComprasReceta(recetaId) {
+  const todas = leer(KEYS.compras, {});
+  return todas[recetaId] || {};
+}
+
+export function guardarCompraIngrediente(recetaId, nombreIngrediente, datos) {
+  const todas = leer(KEYS.compras, {});
+  const deEstaReceta = { ...(todas[recetaId] || {}) };
+  const clave = normalizarNombreIngrediente(nombreIngrediente);
+  deEstaReceta[clave] = { ...deEstaReceta[clave], ...datos };
+  const actualizadas = { ...todas, [recetaId]: deEstaReceta };
+  escribir(KEYS.compras, actualizadas);
+  return deEstaReceta;
+}
+
+export function borrarComprasReceta(recetaId) {
+  const todas = leer(KEYS.compras, {});
+  const actualizadas = { ...todas };
+  delete actualizadas[recetaId];
+  escribir(KEYS.compras, actualizadas);
+  return {};
 }

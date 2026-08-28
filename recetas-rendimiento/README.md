@@ -78,11 +78,17 @@ src/
 - Ficha de receta con pestañas (ingredientes, preparación, consejos, conservación),
   **ajuste de rendimiento en vivo** (recalcula cantidades y costos) y resumen de
   costos/precio/ganancia.
-- En el formulario del panel (`/admin/recetas/nueva`), el costo de cada ingrediente se
-  puede calcular solo: cargás cuánto pagaste por el paquete/envase completo (ej. 1 kg
-  de harina a $5) y cuánto usa la receta (ej. 500 g) — el costo de esa fracción
-  ($2.50) se calcula automáticamente. Si preferís, también se puede escribir el
-  costo a mano, como antes.
+- **"Tus compras" en la propia ficha de receta**: quien esté viendo la receta carga
+  cuánto compró y cuánto pagó de cada ingrediente (ej. "compré 1 kg de harina a $6"),
+  y el costo de esa receta se calcula solo, según la fracción que realmente usa (ej.
+  500 g → $3), mostrando también cuánto le sobra de material. Es un dato propio de
+  cada visitante (localStorage, `src/lib/db.js`) — el admin no carga precios, cada
+  quien pone los suyos. El Resumen de costos y el Precio sugerido de la receta usan
+  automáticamente esos precios en cuanto se cargan; si nadie cargó nada todavía, se
+  ve el costo de referencia que haya dejado el admin (o $0 si no cargó ninguno).
+- En el formulario del panel (`/admin/recetas/nueva`) y en la Calculadora de Costos
+  (`/calculadoras/costos`), el costo de cada ingrediente también se puede calcular
+  solo del mismo modo (precio del paquete ÷ cantidad del paquete × cantidad usada).
 - Favoritos y Colecciones (crear, agregar/quitar recetas, eliminar).
 - Lista de compras (manual o agregada desde cualquier receta).
 - Calculadora de Costos y Calculadora de Precio de Venta (independientes, con opción

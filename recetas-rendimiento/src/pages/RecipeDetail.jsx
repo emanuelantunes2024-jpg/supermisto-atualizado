@@ -8,6 +8,12 @@ import ToolsBar from '../components/ToolsBar.jsx';
 import CentralRendimiento from '../components/CentralRendimiento.jsx';
 import AddToCollectionModal from '../components/AddToCollectionModal.jsx';
 import {
+  obtenerComprasReceta,
+  guardarCompraIngrediente,
+  borrarComprasReceta,
+  normalizarNombreIngrediente,
+} from '../lib/db.js';
+import {
   costoIngredientes,
   costoEmpaque,
   otrosCostos,
@@ -19,9 +25,11 @@ import {
   facturacionTotal,
   escalarReceta,
   agruparIngredientes,
+  costoDesdeCompra,
   formatoMoneda,
   formatoTiempo,
   formatoCantidad,
+  redondear,
 } from '../lib/calc.js';
 
 const TABS = [
@@ -44,6 +52,7 @@ export default function RecipeDetail() {
   const [copiado, setCopiado] = useState(false);
   const [agregado, setAgregado] = useState(false);
   const [rendimiento, setRendimiento] = useState(receta?.rendimientoBase ?? 1);
+  const [compras, setCompras] = useState({});
 
   // El store carga de forma asíncrona: cuando llega la receta (o cambia),
   // el rendimiento vuelve a su valor base.
@@ -51,15 +60,61 @@ export default function RecipeDetail() {
     if (receta) setRendimiento(receta.rendimientoBase);
   }, [receta?.id, receta?.rendimientoBase]);
 
+  // "Mis compras" son propias de cada dispositivo (localStorage) — nadie más
+  // las ve, y no dependen de lo que el admin haya cargado como costo.
+  useEffect(() => {
+    if (receta) setCompras(obtenerComprasReceta(receta.id));
+  }, [receta?.id]);
+
+  function actualizarCompra(nombreIngrediente, campo, valor) {
+    if (!receta) return;
+    const actualizadas = guardarCompraIngrediente(receta.id, nombreIngrediente, { [campo]: valor });
+    setCompras(actualizadas);
+  }
+
+  function borrarMisCompras() {
+    if (!receta) return;
+    setCompras(borrarComprasReceta(receta.id));
+  }
+
   // Toda la ficha (ingredientes, empaque y otros costos) se recalcula al ajustar
   // el rendimiento.
   const escalada = useMemo(
     () => (receta ? escalarReceta(receta, rendimiento) : null),
     [receta, rendimiento]
   );
+
+  // Si vos (quien mira la receta) cargaste cuánto pagaste por el paquete que
+  // compraste de cada ingrediente, el costo de esa receta se calcula con TU
+  // precio en vez del que haya dejado el admin — es tu propio gasto real.
+  const ingredientesConMisPrecios = useMemo(() => {
+    if (!escalada) return [];
+    return escalada.ingredientes.map((i) => {
+      const compra = compras[normalizarNombreIngrediente(i.nombre)];
+      const cantidadComprada = compra?.cantidadComprada;
+      const precioPagado = compra?.precioPagado;
+      const tieneCompra = Boolean(cantidadComprada) && Boolean(precioPagado);
+      const costo = tieneCompra
+        ? redondear(costoDesdeCompra({ precioCompra: precioPagado, cantidadCompra: cantidadComprada, cantidadUsada: i.cantidad }), 2)
+        : i.costo;
+      const sobranteCantidad = tieneCompra ? redondear(Number(cantidadComprada) - i.cantidad, 2) : 0;
+      const sobranteValor = tieneCompra ? redondear(Number(precioPagado) - costo, 2) : 0;
+      return { ...i, cantidadComprada, precioPagado, costo, tieneCompra, sobranteCantidad, sobranteValor };
+    });
+  }, [escalada, compras]);
+
+  const recetaConMisPrecios = useMemo(
+    () => (escalada ? { ...escalada, ingredientes: ingredientesConMisPrecios } : null),
+    [escalada, ingredientesConMisPrecios]
+  );
+
+  const totalPagado = ingredientesConMisPrecios.reduce((sum, i) => sum + (Number(i.precioPagado) || 0), 0);
+  const totalSobranteValor = ingredientesConMisPrecios.reduce((sum, i) => sum + (i.tieneCompra ? i.sobranteValor : 0), 0);
+  const hayCompras = ingredientesConMisPrecios.some((i) => i.tieneCompra);
+
   const grupos = useMemo(
-    () => (escalada ? agruparIngredientes(escalada.ingredientes) : []),
-    [escalada]
+    () => (recetaConMisPrecios ? agruparIngredientes(recetaConMisPrecios.ingredientes) : []),
+    [recetaConMisPrecios]
   );
 
   if (!receta) {
@@ -294,15 +349,24 @@ export default function RecipeDetail() {
 
             {/* 5. Resumen de costos + 6. Precio sugerido */}
             <div className="space-y-3.5">
+              {!hayCompras && (
+                <div className="rounded-xl border border-amber-200 bg-amber-50 p-3">
+                  <p className="text-[11px] font-semibold leading-relaxed text-amber-800">
+                    Estos números todavía son de referencia. Cargá abajo, en <strong>"Tus compras"</strong>,
+                    cuánto pagaste por cada ingrediente que compraste — el costo se recalcula con tu
+                    precio real.
+                  </p>
+                </div>
+              )}
               <div className="card p-4">
                 <p className="mb-2.5 text-[12px] font-extrabold text-ink">Resumen de costos</p>
                 <dl className="space-y-1.5 text-[11.5px]">
-                  <Fila k="Costo total de ingredientes" v={formatoMoneda(costoIngredientes(escalada.ingredientes))} />
-                  <Fila k={`Costo por ${unidadSingular}`} v={formatoMoneda(costoPorUnidad(escalada))} acento />
-                  <Fila k="Costo de embalaje" v={formatoMoneda(costoEmpaque(escalada))} />
-                  <Fila k="Otros costos" v={formatoMoneda(otrosCostos(escalada))} />
+                  <Fila k="Costo total de ingredientes" v={formatoMoneda(costoIngredientes(recetaConMisPrecios.ingredientes))} />
+                  <Fila k={`Costo por ${unidadSingular}`} v={formatoMoneda(costoPorUnidad(recetaConMisPrecios))} acento />
+                  <Fila k="Costo de embalaje" v={formatoMoneda(costoEmpaque(recetaConMisPrecios))} />
+                  <Fila k="Otros costos" v={formatoMoneda(otrosCostos(recetaConMisPrecios))} />
                   <div className="mt-1 border-t border-line pt-2">
-                    <Fila k="Costo total de la receta" v={formatoMoneda(costoTotalReceta(escalada))} fuerte />
+                    <Fila k="Costo total de la receta" v={formatoMoneda(costoTotalReceta(recetaConMisPrecios))} fuerte />
                   </div>
                 </dl>
               </div>
@@ -310,24 +374,97 @@ export default function RecipeDetail() {
               <div className="card p-4">
                 <p className="mb-2.5 text-[12px] font-extrabold text-ink">Precio sugerido</p>
                 <dl className="space-y-1.5 text-[11.5px]">
-                  <Fila k={`Precio por ${unidadSingular}`} v={formatoMoneda(costoPorUnidad(escalada))} />
+                  <Fila k={`Precio por ${unidadSingular}`} v={formatoMoneda(costoPorUnidad(recetaConMisPrecios))} />
                   <Fila
                     k={`Margen de ganancia (${receta.margenSugerido}%)`}
-                    v={formatoMoneda(gananciaPorUnidad(escalada))}
+                    v={formatoMoneda(gananciaPorUnidad(recetaConMisPrecios))}
                     positivo
                   />
-                  <Fila k="Precio sugerido de venta" v={formatoMoneda(precioSugerido(escalada))} fuerte />
-                  <Fila k={`Facturación (${rendimiento} ${unidad})`} v={formatoMoneda(facturacionTotal(escalada))} />
-                  <Fila k="Ganancia estimada" v={formatoMoneda(gananciaTotal(escalada))} positivo />
+                  <Fila k="Precio sugerido de venta" v={formatoMoneda(precioSugerido(recetaConMisPrecios))} fuerte />
+                  <Fila k={`Facturación (${rendimiento} ${unidad})`} v={formatoMoneda(facturacionTotal(recetaConMisPrecios))} />
+                  <Fila k="Ganancia estimada" v={formatoMoneda(gananciaTotal(recetaConMisPrecios))} positivo />
                 </dl>
                 <Link
                   to="/calculadoras/precios"
+                  state={{ costoUnitario: costoPorUnidad(recetaConMisPrecios), unidades: rendimiento }}
                   className="btn-primary mt-3 w-full justify-center !py-2 !text-[11.5px]"
                 >
-                  Ver cálculos detallados
+                  Ajustar margen y ver más →
                 </Link>
               </div>
             </div>
+          </div>
+
+          {/* Tus compras: cuánto pagaste por cada ingrediente que compraste */}
+          <div className="card p-4">
+            <div className="flex flex-wrap items-start justify-between gap-2">
+              <div>
+                <p className="text-[12px] font-extrabold text-ink">Tus compras</p>
+                <p className="mt-0.5 text-[11px] leading-relaxed text-ink/50">
+                  Cargá cuánto compraste y cuánto pagaste de cada producto — el costo de la receta y lo
+                  que te sobra se calculan solos. Es un dato tuyo, guardado solo en este dispositivo.
+                </p>
+              </div>
+              {hayCompras && (
+                <button onClick={borrarMisCompras} className="btn-ghost !px-2 !py-1.5 !text-[11px] shrink-0">
+                  <Icon name="x" className="w-3.5 h-3.5" /> Borrar mis precios
+                </button>
+              )}
+            </div>
+
+            <div className="mt-3 space-y-2">
+              {ingredientesConMisPrecios.map((i, idx) => (
+                <div key={idx} className="rounded-xl border border-ink/10 p-2.5">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <p className="text-[11.5px] font-semibold text-ink">
+                      {i.nombre}
+                      <span className="ml-1.5 font-normal text-ink/45">
+                        · necesitás {formatoCantidad(i.cantidad)} {i.unidad}
+                      </span>
+                    </p>
+                    {i.tieneCompra && (
+                      <p className={`text-[11px] font-semibold ${i.sobranteCantidad < 0 ? 'text-red-600' : 'text-emerald-600'}`}>
+                        {i.sobranteCantidad < 0
+                          ? `Te falta ${formatoCantidad(Math.abs(i.sobranteCantidad))} ${i.unidad}`
+                          : `Te sobran ${formatoCantidad(i.sobranteCantidad)} ${i.unidad} (${formatoMoneda(i.sobranteValor)})`}
+                      </p>
+                    )}
+                  </div>
+                  <div className="mt-2 grid grid-cols-2 gap-2 sm:grid-cols-3">
+                    <input
+                      type="number"
+                      min="0"
+                      step="0.01"
+                      value={i.cantidadComprada || ''}
+                      onChange={(e) => actualizarCompra(i.nombre, 'cantidadComprada', e.target.value)}
+                      placeholder={`Compraste (${i.unidad || 'cant.'})`}
+                      className="input !py-1.5 !text-[11.5px]"
+                    />
+                    <input
+                      type="number"
+                      min="0"
+                      step="0.01"
+                      value={i.precioPagado || ''}
+                      onChange={(e) => actualizarCompra(i.nombre, 'precioPagado', e.target.value)}
+                      placeholder="Pagaste ($)"
+                      className="input !py-1.5 !text-[11.5px]"
+                    />
+                    <div className="col-span-2 flex items-center justify-between rounded-lg bg-cream px-2.5 text-[11.5px] sm:col-span-1">
+                      <span className="text-ink/45">Costo usado</span>
+                      <span className="font-bold text-brand-600">{formatoMoneda(i.costo)}</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {hayCompras && (
+              <div className="mt-3 grid grid-cols-2 gap-2 rounded-xl bg-cream p-3 text-[11.5px] sm:grid-cols-3">
+                <Fila k="Total que pagaste" v={formatoMoneda(totalPagado)} />
+                <Fila k="Total usado en la receta" v={formatoMoneda(costoIngredientes(recetaConMisPrecios.ingredientes))} acento />
+                <Fila k="Te sobra en material" v={formatoMoneda(totalSobranteValor)} positivo />
+              </div>
+            )}
           </div>
         </div>
 
