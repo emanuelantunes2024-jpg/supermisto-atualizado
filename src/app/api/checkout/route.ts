@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 
 import { getSession } from "@/lib/auth";
 import { siteConfig } from "@/lib/config";
+import { splitBundle } from "@/lib/combo";
 import { getStripe, stripeTaxEnabled } from "@/lib/stripe";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { getPublishedTemplates } from "@/lib/queries";
@@ -67,16 +68,40 @@ export async function POST(request: Request) {
   const catalog = await getPublishedTemplates();
   const bySlug = new Map(catalog.map((t) => [t.slug, t]));
 
-  const lines: { template: TemplateWithCategory; quantity: number }[] = [];
+  interface OrderLine {
+    template: TemplateWithCategory;
+    quantity: number;
+    unitPriceCents: number;
+    titleSnapshot: string;
+  }
+
+  const lines: OrderLine[] = [];
   for (const item of requestedItems) {
     const template = bySlug.get(item.slug);
     if (!template) {
       return NextResponse.json({ error: `La plantilla "${item.slug}" ya no está disponible.` }, { status: 404 });
     }
-    lines.push({ template, quantity: Math.min(item.quantity, 20) });
+    const quantity = Math.min(item.quantity, 20);
+
+    // Un combo no se entrega como un único archivo: son dos plantillas reales
+    // (el sitio y el PDV) que se reparten el precio del combo y se entregan
+    // por separado, cada una con su propia licencia y descarga.
+    const bundle = splitBundle(template, bySlug);
+    if (bundle) {
+      for (const part of bundle) {
+        lines.push({
+          template: part.template,
+          quantity,
+          unitPriceCents: part.unitPriceCents,
+          titleSnapshot: `${part.template.title} (parte del combo "${template.title}")`,
+        });
+      }
+    } else {
+      lines.push({ template, quantity, unitPriceCents: template.price_cents, titleSnapshot: template.title });
+    }
   }
 
-  const subtotalCents = lines.reduce((sum, line) => sum + line.template.price_cents * line.quantity, 0);
+  const subtotalCents = lines.reduce((sum, line) => sum + line.unitPriceCents * line.quantity, 0);
   const { user } = await getSession();
   const downloadToken = randomUUID();
 
@@ -108,8 +133,8 @@ export async function POST(request: Request) {
     lines.map((line) => ({
       order_id: order.id,
       template_id: line.template.id,
-      title_snapshot: line.template.title,
-      unit_price_cents: line.template.price_cents,
+      title_snapshot: line.titleSnapshot,
+      unit_price_cents: line.unitPriceCents,
       quantity: line.quantity,
     })),
   );
@@ -128,11 +153,11 @@ export async function POST(request: Request) {
         quantity: line.quantity,
         price_data: {
           currency: "eur",
-          unit_amount: line.template.price_cents,
+          unit_amount: line.unitPriceCents,
           // El precio mostrado ya incluye impuestos (normativa de consumo UE).
           ...(stripeTaxEnabled ? { tax_behavior: "inclusive" as const } : {}),
           product_data: {
-            name: line.template.title,
+            name: line.titleSnapshot,
             description: line.template.short_description,
             // Stripe exige una URL absoluta; thumbnail_url en la base de datos
             // es una ruta relativa (ej. "/thumbnails/foo.jpg").

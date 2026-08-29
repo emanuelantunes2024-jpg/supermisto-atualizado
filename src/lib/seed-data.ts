@@ -958,7 +958,10 @@ const seed: SeedTemplate[] = [
       "Ideal para restaurantes y comida rápida",
       "Dos archivos de descarga, uno por cada parte",
     ],
-    tags: ["combo", "restaurante", "demo:hamburgueseria-premium", "demo:pdv-retail-pro"],
+    tags: [
+      "combo", "restaurante", "demo:hamburgueseria-premium", "demo:pdv-retail-pro",
+      "incluye:sabor-express", "incluye:pdv-retail-pro",
+    ],
     thumbnailSlug: "sabor-express",
   },
   {
@@ -979,7 +982,10 @@ const seed: SeedTemplate[] = [
       "Ideal para concesionarias y talleres mecánicos",
       "Dos archivos de descarga, uno por cada parte",
     ],
-    tags: ["combo", "concesionaria", "taller-mecanico", "demo:concesionaria-premium", "demo:pdv-concesionaria-pro"],
+    tags: [
+      "combo", "concesionaria", "taller-mecanico", "demo:concesionaria-premium", "demo:pdv-concesionaria-pro",
+      "incluye:concesionaria-plus", "incluye:pdv-concesionaria-pro",
+    ],
     thumbnailSlug: "concesionaria-plus",
   },
 ];
