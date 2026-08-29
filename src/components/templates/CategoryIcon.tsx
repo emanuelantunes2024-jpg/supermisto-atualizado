@@ -309,6 +309,34 @@ const balanza: Icon = (
 );
 
 /* ------------------------------------------------------------------ */
+/*  Marketplace general (categorías "paraguas")                        */
+/* ------------------------------------------------------------------ */
+
+const maletin: Icon = (
+  <>
+    <rect x="3" y="7.5" width="18" height="12" rx="2" />
+    <path d="M8.5 7.5V5.5a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v2" />
+    <path d="M3 12.5h18" />
+  </>
+);
+
+const marco: Icon = (
+  <>
+    <rect x="3" y="3.5" width="18" height="17" rx="1.5" />
+    <circle cx="9" cy="10" r="2" />
+    <path d="M4 18.5 9.5 13l3.5 3.5 3-3 4 5" />
+  </>
+);
+
+const periodico: Icon = (
+  <>
+    <path d="M4 4.5h13a2.5 2.5 0 0 1 2.5 2.5v11.5H6.5A2.5 2.5 0 0 1 4 16z" />
+    <path d="M19.5 18.5a2.5 2.5 0 0 1-2.5-2.5V7" />
+    <path d="M7.5 8.5h6M7.5 11.5h6M7.5 14.5h4" />
+  </>
+);
+
+/* ------------------------------------------------------------------ */
 /*  Iconos de respaldo, para categorías escritas a mano                */
 /* ------------------------------------------------------------------ */
 
@@ -402,6 +430,12 @@ const bySlug: Record<string, Icon> = {
   relojeria: reloj,
   fruteria: manzana,
   abogados: balanza,
+  negocios: maletin,
+  "servicios-profesionales": maletin,
+  "tienda-online": carrito,
+  "salud-belleza": belleza,
+  portafolios: marco,
+  "blogs-revistas": periodico,
 };
 
 /**

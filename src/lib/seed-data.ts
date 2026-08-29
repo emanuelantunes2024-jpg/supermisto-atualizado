@@ -812,6 +812,86 @@ const seed: SeedTemplate[] = [
       SEO,
     ],
   },
+  {
+    id: `${TPL}34`,
+    categorySlug: "salud-belleza",
+    title: "GreenNature",
+    slug: "greennature-spa",
+    short_description: "Spa de bienestar natural con tratamientos, membresías y reserva online.",
+    full_description:
+      "Para spas, centros de bienestar y estética natural: catálogo de tratamientos con precio y duración, franja de filosofía de marca con cifras, tres planes de membresía mensual, equipo de terapeutas, formulario de reserva con validación, opiniones y preguntas frecuentes. Paleta verde + terracota, tipografía Playfair Display.",
+    price_cents: 5900,
+    preview_url: "/demos/greennature-spa/index.html",
+    gradient: "linear-gradient(160deg,#e8f2ea,#3f7d52 55%,#2c5b3b)",
+    features: [
+      "Catálogo de tratamientos con precio y duración",
+      "Tres planes de membresía mensual",
+      "Formulario de reserva con validación",
+      "Equipo, opiniones y preguntas frecuentes",
+      RESPONSIVE,
+      SEO,
+    ],
+  },
+  {
+    id: `${TPL}35`,
+    categorySlug: "negocios",
+    title: "Business Pro",
+    slug: "business-pro",
+    short_description: "Consultoría empresarial con servicios, casos de éxito y formulario de contacto.",
+    full_description:
+      "Para consultoras y agencias de negocio: seis servicios con ficha propia, proceso de trabajo en cuatro pasos, cifras de la empresa, casos de éxito con resultado destacado, equipo, testimonios y formulario de contacto con validación. Paleta verde azulado + lima, tipografía Sora + Inter.",
+    price_cents: 6900,
+    preview_url: "/demos/business-pro/index.html",
+    gradient: "linear-gradient(160deg,#0a3a3d,#1c7c80 55%,#0f5257)",
+    features: [
+      "6 servicios con icono propio",
+      "Casos de éxito con resultado destacado",
+      "Formulario de contacto con validación",
+      "Equipo, testimonios y cifras de la empresa",
+      RESPONSIVE,
+      SEO,
+    ],
+  },
+  {
+    id: `${TPL}36`,
+    categorySlug: "portafolios",
+    title: "Portfolio Creative",
+    slug: "portfolio-creative",
+    short_description: "Portafolio creativo con proyectos filtrables, sobre mí y formulario de contacto.",
+    full_description:
+      "Para diseñadores, fotógrafos y freelancers creativos: portafolio de proyectos con filtro por categoría, sección sobre mí con habilidades, servicios ofrecidos, testimonios de clientes y formulario de contacto. Paleta negro + coral, tipografía Sora + Inter.",
+    price_cents: 4900,
+    preview_url: "/demos/portfolio-creative/index.html",
+    gradient: "linear-gradient(160deg,#0d0d0f,#ff4d5e 55%,#18181c)",
+    features: [
+      "Portafolio de proyectos con filtro por categoría",
+      "Sección sobre mí con habilidades",
+      "Formulario de contacto con validación",
+      "Testimonios de clientes",
+      RESPONSIVE,
+      SEO,
+    ],
+  },
+  {
+    id: `${TPL}37`,
+    categorySlug: "blogs-revistas",
+    title: "Magazine Pro",
+    slug: "magazine-pro",
+    short_description: "Revista digital con artículo destacado, categorías y newsletter.",
+    full_description:
+      "Para revistas digitales y blogs editoriales: artículo destacado y secundarios en portada, últimos artículos con autor y tiempo de lectura, explorador por secciones y formulario de newsletter. Paleta negro + rojo, tipografía Playfair Display + Inter.",
+    price_cents: 4900,
+    preview_url: "/demos/magazine-pro/index.html",
+    gradient: "linear-gradient(160deg,#111113,#d1362f 55%,#1c1c1f)",
+    features: [
+      "Artículo destacado y secundarios en portada",
+      "Últimos artículos con autor y tiempo de lectura",
+      "Explorador por secciones",
+      "Formulario de newsletter",
+      RESPONSIVE,
+      SEO,
+    ],
+  },
 ];
 
 /** Degradado por slug — respaldo de miniatura en las tarjetas. */
@@ -820,7 +900,10 @@ export const templateGradients: Record<string, string> = Object.fromEntries(
 );
 
 /** Se muestran primero en "Templates Más Populares" mientras no haya ventas reales. */
-const FEATURED_SLUGS = ["concesionaria-plus", "techstore", "sabor-express", "servicios-pro"];
+const FEATURED_SLUGS = [
+  "concesionaria-plus", "techstore", "sabor-express", "servicios-pro",
+  "greennature-spa", "business-pro", "portfolio-creative", "magazine-pro",
+];
 
 export const seedTemplates: TemplateWithCategory[] = seed.map((t) => ({
   id: t.id,

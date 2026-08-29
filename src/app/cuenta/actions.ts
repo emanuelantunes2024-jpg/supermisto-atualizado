@@ -32,3 +32,23 @@ export async function updateProfile(_prev: ActionState, formData: FormData): Pro
   revalidatePath("/cuenta/perfil");
   return { success: "✓ Perfil actualizado." };
 }
+
+/** Cambia la contraseña del usuario autenticado. */
+export async function updatePassword(_prev: ActionState, formData: FormData): Promise<ActionState> {
+  const { user } = await getSession();
+  if (!user) return { error: "Tienes que iniciar sesión." };
+
+  const supabase = await createClient();
+  if (!supabase) return { error: "Supabase no está configurado." };
+
+  const password = String(formData.get("password") ?? "");
+  const confirm = String(formData.get("password_confirm") ?? "");
+
+  if (password.length < 8) return { error: "La contraseña debe tener al menos 8 caracteres." };
+  if (password !== confirm) return { error: "Las contraseñas no coinciden." };
+
+  const { error } = await supabase.auth.updateUser({ password });
+  if (error) return { error: `No se pudo cambiar la contraseña: ${error.message}` };
+
+  return { success: "✓ Contraseña actualizada. Úsala la próxima vez que inicies sesión." };
+}

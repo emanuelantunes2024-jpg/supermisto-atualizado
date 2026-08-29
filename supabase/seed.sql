@@ -345,6 +345,42 @@ values
    'Para despachos y consultoras de servicios profesionales: áreas de especialización con ficha propia, proceso de trabajo en cuatro pasos, opiniones de clientes, blog y formulario de consulta con validación. Paleta azul noche + oro, tipografía Playfair Display. No necesita fotos: todo en vectores, carga al instante.',
    6900, '/demos/consultoria-legal-premium/index.html', '/thumbnails/servicios-pro.jpg',
    '["Áreas de especialización con icono propio", "Formulario de consulta con validación", "Proceso de trabajo en cuatro pasos", "Blog y preguntas frecuentes", "Sin fotos: todo en vectores, carga al instante", "Responsive (móvil, tablet y desktop)", "Optimizado para Google (SEO)"]'::jsonb,
+   'published'),
+
+  ('22222222-2222-4222-8222-000000000034',
+   '11111111-1111-4111-8111-000000000034',
+   'GreenNature', 'greennature-spa',
+   'Spa de bienestar natural con tratamientos, membresías y reserva online.',
+   'Para spas, centros de bienestar y estética natural: catálogo de tratamientos con precio y duración, franja de filosofía de marca con cifras, tres planes de membresía mensual, equipo de terapeutas, formulario de reserva con validación, opiniones y preguntas frecuentes. Paleta verde + terracota, tipografía Playfair Display.',
+   5900, '/demos/greennature-spa/index.html', '/thumbnails/greennature-spa.jpg',
+   '["Catálogo de tratamientos con precio y duración", "Tres planes de membresía mensual", "Formulario de reserva con validación", "Equipo, opiniones y preguntas frecuentes", "Responsive (móvil, tablet y desktop)", "Optimizado para Google (SEO)"]'::jsonb,
+   'published'),
+
+  ('22222222-2222-4222-8222-000000000035',
+   '11111111-1111-4111-8111-000000000032',
+   'Business Pro', 'business-pro',
+   'Consultoría empresarial con servicios, casos de éxito y formulario de contacto.',
+   'Para consultoras y agencias de negocio: seis servicios con ficha propia, proceso de trabajo en cuatro pasos, cifras de la empresa, casos de éxito con resultado destacado, equipo, testimonios y formulario de contacto con validación. Paleta verde azulado + lima, tipografía Sora + Inter.',
+   6900, '/demos/business-pro/index.html', '/thumbnails/business-pro.jpg',
+   '["6 servicios con icono propio", "Casos de éxito con resultado destacado", "Formulario de contacto con validación", "Equipo, testimonios y cifras de la empresa", "Responsive (móvil, tablet y desktop)", "Optimizado para Google (SEO)"]'::jsonb,
+   'published'),
+
+  ('22222222-2222-4222-8222-000000000036',
+   '11111111-1111-4111-8111-000000000035',
+   'Portfolio Creative', 'portfolio-creative',
+   'Portafolio creativo con proyectos filtrables, sobre mí y formulario de contacto.',
+   'Para diseñadores, fotógrafos y freelancers creativos: portafolio de proyectos con filtro por categoría, sección sobre mí con habilidades, servicios ofrecidos, testimonios de clientes y formulario de contacto. Paleta negro + coral, tipografía Sora + Inter.',
+   4900, '/demos/portfolio-creative/index.html', '/thumbnails/portfolio-creative.jpg',
+   '["Portafolio de proyectos con filtro por categoría", "Sección sobre mí con habilidades", "Formulario de contacto con validación", "Testimonios de clientes", "Responsive (móvil, tablet y desktop)", "Optimizado para Google (SEO)"]'::jsonb,
+   'published'),
+
+  ('22222222-2222-4222-8222-000000000037',
+   '11111111-1111-4111-8111-000000000036',
+   'Magazine Pro', 'magazine-pro',
+   'Revista digital con artículo destacado, categorías y newsletter.',
+   'Para revistas digitales y blogs editoriales: artículo destacado y secundarios en portada, últimos artículos con autor y tiempo de lectura, explorador por secciones y formulario de newsletter. Paleta negro + rojo, tipografía Playfair Display + Inter.',
+   4900, '/demos/magazine-pro/index.html', '/thumbnails/magazine-pro.jpg',
+   '["Artículo destacado y secundarios en portada", "Últimos artículos con autor y tiempo de lectura", "Explorador por secciones", "Formulario de newsletter", "Responsive (móvil, tablet y desktop)", "Optimizado para Google (SEO)"]'::jsonb,
    'published')
 
 on conflict (id) do update
