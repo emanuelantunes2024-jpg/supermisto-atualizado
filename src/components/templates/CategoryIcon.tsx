@@ -436,6 +436,8 @@ const bySlug: Record<string, Icon> = {
   "salud-belleza": belleza,
   portafolios: marco,
   "blogs-revistas": periodico,
+  pdv: carrito,
+  combos: maletin,
 };
 
 /**

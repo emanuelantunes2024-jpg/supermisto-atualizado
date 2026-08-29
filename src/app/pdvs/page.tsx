@@ -1,13 +1,20 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+import { TemplateCard } from "@/components/templates/TemplateCard";
+import { getPublishedTemplates } from "@/lib/queries";
+
+export const revalidate = 300;
+
 export const metadata: Metadata = {
   title: "Sistemas PDV",
-  description: "Sistemas de punto de venta para todos los rubros de tu negocio — en desarrollo.",
+  description: "Sistemas de punto de venta listos para tiendas, cafeterías y kioscos. Pago único, descarga inmediata.",
   alternates: { canonical: "/pdvs" },
 };
 
-export default function PdvsPage() {
+export default async function PdvsPage() {
+  const templates = await getPublishedTemplates("pdv");
+
   return (
     <>
       <div className="container-shell breadcrumb">
@@ -16,18 +23,31 @@ export default function PdvsPage() {
         <span>PDVs</span>
       </div>
 
-      <section className="pb-24 pt-10">
-        <div className="container-shell max-w-[640px] text-center">
-          <span className="badge-pill mb-4">En desarrollo</span>
-          <h1 className="mb-4 text-[clamp(28px,4vw,40px)]">Sistemas PDV, muy pronto</h1>
-          <p className="mb-8 text-[16px] text-ink-muted">
-            Estamos construyendo sistemas de punto de venta modernos para cada tipo de negocio: ventas rápidas,
-            gestión de stock, reportes y multi-dispositivo. Todavía no están a la venta, pero puedes dejarnos tu
-            contacto para avisarte en cuanto estén listos.
-          </p>
-          <Link href="/contacto" className="btn btn-gold btn-lg">
-            Avísenme cuando esté listo
-          </Link>
+      <section className="pb-20 pt-8">
+        <div className="container-shell">
+          <div className="section-head">
+            <div className="eyebrow">Punto de venta</div>
+            <h2>Sistemas PDV para tu mostrador</h2>
+            <p>
+              Interfaces de venta táctiles, listas para tablet o pantalla: catálogo, carrito y cobro en un solo
+              lugar. Se personalizan igual que cualquier plantilla, sin conocimientos técnicos.
+            </p>
+          </div>
+
+          {templates.length === 0 ? (
+            <div className="panel text-center">
+              <p className="mb-4 text-ink-muted">Estamos preparando nuevos sistemas PDV. Vuelve pronto.</p>
+              <Link href="/contacto" className="btn btn-ghost">
+                Avísenme cuando esté listo
+              </Link>
+            </div>
+          ) : (
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {templates.map((template, index) => (
+                <TemplateCard key={template.id} template={template} priority={index < 3} />
+              ))}
+            </div>
+          )}
         </div>
       </section>
     </>

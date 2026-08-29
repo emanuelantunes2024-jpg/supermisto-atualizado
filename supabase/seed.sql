@@ -41,7 +41,9 @@ insert into public.categories (id, name, slug, icon) values
   ('11111111-1111-4111-8111-000000000034', 'Salud y Belleza', 'salud-belleza', '💆'),
   ('11111111-1111-4111-8111-000000000035', 'Portafolios', 'portafolios', '🖼️'),
   ('11111111-1111-4111-8111-000000000036', 'Blogs y Revistas', 'blogs-revistas', '📰'),
-  ('11111111-1111-4111-8111-000000000037', 'Servicios Profesionales', 'servicios-profesionales', '🤝')
+  ('11111111-1111-4111-8111-000000000037', 'Servicios Profesionales', 'servicios-profesionales', '🤝'),
+  ('11111111-1111-4111-8111-000000000038', 'Sistemas PDV', 'pdv', '🖥️'),
+  ('11111111-1111-4111-8111-000000000039', 'Combos (Web + PDV)', 'combos', '📦')
 on conflict (id) do update
   set name = excluded.name,
       slug = excluded.slug,
@@ -381,6 +383,24 @@ values
    'Para revistas digitales y blogs editoriales: artículo destacado y secundarios en portada, últimos artículos con autor y tiempo de lectura, explorador por secciones y formulario de newsletter. Paleta negro + rojo, tipografía Playfair Display + Inter.',
    4900, '/demos/magazine-pro/index.html', '/thumbnails/magazine-pro.jpg',
    '["Artículo destacado y secundarios en portada", "Últimos artículos con autor y tiempo de lectura", "Explorador por secciones", "Formulario de newsletter", "Responsive (móvil, tablet y desktop)", "Optimizado para Google (SEO)"]'::jsonb,
+   'published'),
+
+  ('22222222-2222-4222-8222-000000000038',
+   '11111111-1111-4111-8111-000000000038',
+   'PDV Retail Pro', 'pdv-retail-pro',
+   'Interfaz de punto de venta táctil: catálogo, carrito y cobro en pantalla.',
+   'Sistema de punto de venta (PDV) pensado para tiendas, kioscos y minimarkets. Catálogo por categorías, búsqueda de productos, carrito editable con cantidades, cálculo automático de IVA y tres métodos de pago (efectivo, tarjeta y móvil). Interfaz lista para tablet o pantalla táctil en el mostrador.',
+   8900, '/demos/pdv-retail-pro/index.html', '/thumbnails/pdv-retail-pro.jpg',
+   '["Catálogo por categorías", "Carrito con cantidades", "Cálculo automático de IVA", "3 métodos de pago", "Ticket de venta en pantalla", "Pensado para tablet táctil"]'::jsonb,
+   'published'),
+
+  ('22222222-2222-4222-8222-000000000039',
+   '11111111-1111-4111-8111-000000000039',
+   'Combo Restaurante: Web + PDV', 'combo-restaurante-pdv',
+   'El sitio web de Sabor Express + el sistema PDV Retail Pro, en un solo pack con descuento.',
+   'Combo pensado para restaurantes y locales de comida rápida: incluye el sitio web completo "Sabor Express" (menú digital, pedidos y reservas) junto con el sistema de punto de venta "PDV Retail Pro" para cobrar en el mostrador. Comprado por separado costaría 137,90 €; en combo, con descuento.',
+   9900, '/demos/pdv-retail-pro/index.html', '/thumbnails/combo-restaurante-pdv.jpg',
+   '["Incluye sitio web Sabor Express", "Incluye PDV Retail Pro", "Ahorra frente a la compra por separado", "Ideal para restaurantes y comida rápida", "Un único archivo de descarga con las dos partes"]'::jsonb,
    'published')
 
 on conflict (id) do update

@@ -60,6 +60,8 @@ export const seedCategories: Category[] = [
   { id: `${CAT}35`, name: "Portafolios", slug: "portafolios", icon: "🖼️" },
   { id: `${CAT}36`, name: "Blogs y Revistas", slug: "blogs-revistas", icon: "📰" },
   { id: `${CAT}37`, name: "Servicios Profesionales", slug: "servicios-profesionales", icon: "🤝" },
+  { id: `${CAT}38`, name: "Sistemas PDV", slug: "pdv", icon: "🖥️" },
+  { id: `${CAT}39`, name: "Combos (Web + PDV)", slug: "combos", icon: "📦" },
 ];
 
 const byslug = (slug: string) => seedCategories.find((c) => c.slug === slug)!;
@@ -890,6 +892,45 @@ const seed: SeedTemplate[] = [
       "Formulario de newsletter",
       RESPONSIVE,
       SEO,
+    ],
+  },
+  {
+    id: `${TPL}38`,
+    categorySlug: "pdv",
+    title: "PDV Retail Pro",
+    slug: "pdv-retail-pro",
+    short_description: "Interfaz de punto de venta táctil: catálogo, carrito y cobro en pantalla.",
+    full_description:
+      "Sistema de punto de venta (PDV) pensado para tiendas, kioscos y minimarkets. Catálogo por categorías, búsqueda de productos, carrito editable con cantidades, cálculo automático de IVA y tres métodos de pago (efectivo, tarjeta y móvil). Interfaz lista para tablet o pantalla táctil en el mostrador.",
+    price_cents: 8900,
+    preview_url: "/demos/pdv-retail-pro/index.html",
+    gradient: "linear-gradient(160deg,#14161b,#ff7a1a 55%,#14161b)",
+    features: [
+      "Catálogo por categorías",
+      "Carrito con cantidades",
+      "Cálculo automático de IVA",
+      "3 métodos de pago",
+      "Ticket de venta en pantalla",
+      "Pensado para tablet táctil",
+    ],
+  },
+  {
+    id: `${TPL}39`,
+    categorySlug: "combos",
+    title: "Combo Restaurante: Web + PDV",
+    slug: "combo-restaurante-pdv",
+    short_description: "El sitio web de Sabor Express + el sistema PDV Retail Pro, en un solo pack con descuento.",
+    full_description:
+      "Combo pensado para restaurantes y locales de comida rápida: incluye el sitio web completo \"Sabor Express\" (menú digital, pedidos y reservas) junto con el sistema de punto de venta \"PDV Retail Pro\" para cobrar en el mostrador. Comprado por separado costaría 137,90 €; en combo, con descuento.",
+    price_cents: 9900,
+    preview_url: "/demos/pdv-retail-pro/index.html",
+    gradient: "linear-gradient(160deg,#14161b,#ff7a1a 55%,#14161b)",
+    features: [
+      "Incluye sitio web Sabor Express",
+      "Incluye PDV Retail Pro",
+      "Ahorra frente a la compra por separado",
+      "Ideal para restaurantes y comida rápida",
+      "Un único archivo de descarga con las dos partes",
     ],
   },
 ];
