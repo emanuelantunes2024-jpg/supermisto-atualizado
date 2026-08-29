@@ -1,0 +1,287 @@
+#!/usr/bin/env python3
+"""
+Genera el paquete de venta (para Hotmart o cualquier marketplace) de una o
+todas las demos de `public/demos/`.
+
+Por cada plantilla crea `pacotes-hotmart/<slug>/`:
+  - LEIA-ME-PRIMEIRO.html   Guía de instalación/personalización (visual).
+  - VER-DEMONSTRACAO.html   La demo entera en un único archivo (CSS/JS/fotos
+                             en base64): doble clic y se abre, sin partes sueltas.
+  - site-completo/          Los archivos reales para subir a cualquier hosting.
+
+No inventa nada nuevo: es el mismo criterio ya usado a mano para el paquete
+de "concesionaria-premium", solo que generalizado y repetible.
+
+Uso:
+    python3 scripts/empaquetar-hotmart.py                  # todas las demos
+    python3 scripts/empaquetar-hotmart.py restaurante-premium clinica-dental-premium
+"""
+import base64
+import html
+import re
+import shutil
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+DEMOS = ROOT / "public" / "demos"
+OUT = ROOT / "pacotes-hotmart"
+SEED = ROOT / "src" / "lib" / "seed-data.ts"
+
+
+def load_titles() -> dict[str, str]:
+    """slug -> título, leído de seed-data.ts (misma fuente que alimenta el sitio)."""
+    src = SEED.read_text(encoding="utf-8")
+    titles = {}
+    for block in re.split(r"\n  \{\n", src)[1:]:
+        title_m = re.search(r'title:\s*"((?:[^"\\]|\\.)*)"', block)
+        slug_m = re.search(r'slug:\s*"((?:[^"\\]|\\.)*)"', block)
+        if title_m and slug_m:
+            titles[slug_m.group(1)] = title_m.group(1).replace('\\"', '"')
+    return titles
+
+
+def data_uri(path: Path) -> str:
+    ext = path.suffix.lstrip(".").lower()
+    mime = {"jpg": "image/jpeg", "jpeg": "image/jpeg", "png": "image/png",
+            "webp": "image/webp", "gif": "image/gif", "svg": "image/svg+xml"}.get(ext, "application/octet-stream")
+    return f"data:{mime};base64,{base64.b64encode(path.read_bytes()).decode('ascii')}"
+
+
+def inline_demo(demo_dir: Path) -> str:
+    """Toda la demo (CSS, JS, fotos) en un único HTML, para verla con doble clic."""
+    html_text = (demo_dir / "index.html").read_text(encoding="utf-8")
+
+    def repl_css(m):
+        path = demo_dir / m.group(1)
+        return f"<style>\n{path.read_text(encoding='utf-8')}\n</style>" if path.exists() else m.group(0)
+
+    html_text = re.sub(r'<link rel="stylesheet" href="([^"]+)">', repl_css, html_text)
+
+    def repl_asset(rel: str) -> str:
+        path = demo_dir / rel
+        return data_uri(path) if path.exists() else rel
+
+    html_text = re.sub(r'(src=")(img/[^"]+)(")', lambda m: m.group(1) + repl_asset(m.group(2)) + m.group(3), html_text)
+    html_text = re.sub(r'"imagen":"(img/[^"]+)"', lambda m: f'"imagen":"{repl_asset(m.group(1))}"', html_text)
+    html_text = re.sub(r'url\((img/[^)]+)\)', lambda m: f'url({repl_asset(m.group(1))})', html_text)
+
+    def repl_js(m):
+        path = demo_dir / m.group(1)
+        return f"<script>\n{path.read_text(encoding='utf-8')}\n</script>" if path.exists() else m.group(0)
+
+    html_text = re.sub(r'<script src="([^"]+)"></script>', repl_js, html_text)
+    return html_text
+
+
+GUIA_TEMPLATE = """<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guia — {titulo}</title>
+<style>
+  *{{margin:0;padding:0;box-sizing:border-box}}
+  :root{{--noite:#0d1220;--carta:#151d2f;--carta2:#1b2540;--ouro:#e0b64a;--ouro-cla:#f2d68a;
+    --ouro-esc:#a8832a;--texto:#e9edf5;--apagado:#93a0b8;--linha:rgba(224,182,74,.22)}}
+  body{{background:var(--noite);color:var(--texto);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    font-size:15px;line-height:1.6}}
+  .folha{{max-width:1000px;margin:0 auto;padding:30px 24px 60px}}
+  .cab{{display:flex;align-items:center;gap:22px;flex-wrap:wrap;border:1px solid var(--linha);border-radius:14px;
+    padding:24px 26px;background:linear-gradient(120deg,var(--carta),var(--noite))}}
+  .cab-num{{width:64px;height:64px;flex-shrink:0;border-radius:12px;background:linear-gradient(135deg,var(--ouro),var(--ouro-esc));
+    color:#1a1405;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:800}}
+  .cab h1{{font-size:21px;font-weight:800;line-height:1.25}}
+  .cab h1 span{{display:block;color:var(--ouro);font-size:24px}}
+  .cab p{{color:var(--apagado);font-size:13.5px;margin-top:5px}}
+  .cab-marca{{margin-left:auto;text-align:right}}
+  .cab-marca strong{{display:block;font-size:16px;letter-spacing:.16em;color:var(--ouro-cla)}}
+  .cab-marca span{{font-size:10px;letter-spacing:.3em;color:var(--apagado)}}
+  .destaque{{display:flex;gap:14px;margin-top:16px;padding:16px 20px;border:1px solid var(--linha);
+    border-left:4px solid var(--ouro);border-radius:10px;background:rgba(224,182,74,.07)}}
+  .destaque strong{{color:var(--ouro-cla)}}
+  .bloco{{margin-top:26px;border:1px solid rgba(255,255,255,.09);border-radius:14px;overflow:hidden;background:var(--carta)}}
+  .bloco-cab{{display:flex;align-items:center;gap:16px;padding:18px 22px;background:var(--carta2);
+    border-bottom:1px solid rgba(255,255,255,.07)}}
+  .bloco-num{{width:42px;height:42px;flex-shrink:0;border-radius:9px;border:1px solid var(--ouro);color:var(--ouro);
+    display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:800}}
+  .bloco-cab h2{{font-size:16px;font-weight:800;text-transform:uppercase}}
+  .bloco-cab p{{font-size:12.5px;color:var(--apagado);margin-top:2px}}
+  .passos{{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1px;background:rgba(255,255,255,.07)}}
+  .passo{{background:var(--carta);padding:20px}}
+  .passo-eti{{display:flex;align-items:center;gap:9px;margin-bottom:9px}}
+  .passo-eti i{{width:22px;height:22px;flex-shrink:0;border-radius:50%;background:var(--ouro);color:#1a1405;
+    font-style:normal;font-size:11.5px;font-weight:800;display:flex;align-items:center;justify-content:center}}
+  .passo-eti b{{font-size:12.5px;font-weight:800;text-transform:uppercase;color:var(--ouro-cla)}}
+  .passo p{{font-size:13.5px;color:var(--apagado)}}
+  .passo p+p{{margin-top:8px}}
+  code{{background:rgba(224,182,74,.13);color:var(--ouro-cla);padding:2px 7px;border-radius:5px;font-size:12.5px;
+    font-family:ui-monospace,Menlo,Consolas,monospace}}
+  .caixa{{margin-top:11px;padding:12px 14px;border-radius:8px;background:rgba(0,0,0,.28);
+    border:1px solid rgba(255,255,255,.08);font-size:13px}}
+  .lista{{list-style:none;margin-top:9px}}
+  .lista li{{display:flex;gap:9px;font-size:13px;color:var(--apagado);margin-bottom:7px}}
+  .lista li::before{{content:"";flex-shrink:0;width:7px;height:7px;margin-top:7px;border-radius:2px;background:var(--ouro)}}
+  .lista li b{{color:var(--texto)}}
+  .problemas{{margin-top:26px}}
+  .problema{{border:1px solid rgba(255,255,255,.09);border-radius:11px;padding:16px 20px;margin-bottom:10px;background:var(--carta)}}
+  .problema b{{display:block;color:#e2b13c;font-size:14px;margin-bottom:5px}}
+  .problema p{{font-size:13.5px;color:var(--apagado)}}
+  .pie{{margin-top:30px;padding-top:20px;border-top:1px solid var(--linha);display:flex;justify-content:space-between;
+    gap:16px;flex-wrap:wrap;font-size:12.5px;color:var(--apagado)}}
+  .pie b{{color:var(--ouro-cla)}}
+</style>
+</head>
+<body>
+<div class="folha">
+  <header class="cab">
+    <div class="cab-num">01</div>
+    <div>
+      <h1>Guia rápido<span>{titulo}</span></h1>
+      <p>Leia esta página antes de mexer em qualquer arquivo. Não precisa saber programar.</p>
+    </div>
+    <div class="cab-marca"><strong>LEUNAME</strong><span>SOFTWARE</span></div>
+  </header>
+
+  <div class="destaque">
+    <div><strong>Antes de tudo: extraia o ZIP.</strong>
+    <p>Se você abrir os arquivos de dentro do .zip, a página pode aparecer sem estilo ou sem fotos.
+    Clique com o botão direito no .zip &rsaquo; <b>Extrair tudo</b>, e trabalhe a partir da pasta extraída.</p></div>
+  </div>
+
+  <section class="bloco">
+    <div class="bloco-cab"><div class="bloco-num">01</div>
+      <div><h2>O que tem dentro do pacote</h2><p>Uma pasta é só para olhar; a outra é a que você publica.</p></div>
+    </div>
+    <div class="passos">
+      <div class="passo"><div class="passo-eti"><i>1</i><b>VER-DEMONSTRACAO.html</b></div>
+      <p>O site inteiro em um único arquivo, com as fotos já embutidas. Dê dois cliques e ele abre no
+      seu navegador, funcionando de verdade. Não precisa de internet nem de pasta ao lado.</p></div>
+      <div class="passo"><div class="passo-eti"><i>2</i><b>site-completo/</b></div>
+      <p><b style="color:var(--ouro-cla)">É esta pasta que você publica</b> na hospedagem ou envia como
+      arquivo do produto na Hotmart. Tem o <code>index.html</code> e as pastas <code>css/</code>,
+      <code>js/</code> e <code>img/</code> separadas.</p></div>
+    </div>
+  </section>
+
+  <section class="bloco">
+    <div class="bloco-cab"><div class="bloco-num">02</div>
+      <div><h2>O que é (e o que não é) este template</h2><p>Para vender com honestidade.</p></div>
+    </div>
+    <div class="passos">
+      <div class="passo"><div class="passo-eti"><i>✓</i><b>O que é</b></div>
+      <ul class="lista">
+        <li><span><b>Site 100% pronto e funcional</b> — HTML, CSS e JavaScript puros, sem servidor,
+        sem banco de dados.</span></li>
+        <li><span>Funciona em qualquer hospedagem, mesmo a mais simples — só precisa subir os arquivos.</span></li>
+      </ul></div>
+      <div class="passo"><div class="passo-eti"><i>✕</i><b>O que não é</b></div>
+      <ul class="lista">
+        <li><span>Não tem <b>painel administrativo</b> visual — trocar texto, telefone, preço ou imagens
+        é feito editando o <code>index.html</code> com o Bloco de Notas (é um "localizar e substituir").</span></li>
+      </ul></div>
+    </div>
+  </section>
+
+  <section class="bloco">
+    <div class="bloco-cab"><div class="bloco-num">03</div>
+      <div><h2>Personalizar</h2><p>Tudo dentro de <code>site-completo/index.html</code>.</p></div>
+    </div>
+    <div class="passos">
+      <div class="passo"><div class="passo-eti"><i>1</i><b>Textos e preços</b></div>
+      <p>Abra o arquivo com o Bloco de Notas (ou VS Code) e use "Localizar e substituir" (Ctrl+H)
+      para trocar nome, telefone, endereço e preços de exemplo pelos seus.</p></div>
+      <div class="passo"><div class="passo-eti"><i>2</i><b>WhatsApp</b></div>
+      <p>Procure por <code>wa.me/</code> e troque o número pelo seu, com código do país e DDD,
+      sem espaços e sem o sinal <b>+</b>. Exemplo Brasil: <code>5511987654321</code>.</p></div>
+      <div class="passo"><div class="passo-eti"><i>3</i><b>Fotos</b></div>
+      <p>Troque os arquivos dentro de <code>img/</code> mantendo os mesmos nomes. Use fotos de
+      uns 1200&nbsp;px de largura para não deixar o site lento.</p></div>
+      <div class="passo"><div class="passo-eti"><i>4</i><b>Cores</b></div>
+      <p>No arquivo <code>css/style.css</code>, logo no topo, dentro de <code>:root{{ }}</code>, troque
+      os códigos de cor pelos da sua marca.</p></div>
+    </div>
+  </section>
+
+  <section class="bloco">
+    <div class="bloco-cab"><div class="bloco-num">04</div>
+      <div><h2>Publicar</h2><p>Só HTML/CSS/JS — funciona em qualquer hospedagem.</p></div>
+    </div>
+    <div class="passos">
+      <div class="passo"><div class="passo-eti"><i>A</i><b>Hospedagem paga</b></div>
+      <p>Envie <b>o conteúdo</b> de <code>site-completo/</code> para a pasta pública
+      (<code>public_html</code>) — não a pasta inteira.</p></div>
+      <div class="passo"><div class="passo-eti"><i>B</i><b>Grátis</b></div>
+      <p>Arraste a pasta <code>site-completo/</code> para <code>app.netlify.com/drop</code>
+      e o site fica no ar em segundos.</p></div>
+    </div>
+  </section>
+
+  <section class="bloco">
+    <div class="bloco-cab"><div class="bloco-num">05</div>
+      <div><h2>Empacotar para vender na Hotmart</h2><p>O produto que você entrega ao comprador.</p></div>
+    </div>
+    <div class="passos">
+      <div class="passo"><div class="passo-eti"><i>1</i><b>O arquivo do produto</b></div>
+      <p>Depois de personalizar (ou deixando como modelo em branco), compacte a pasta
+      <code>site-completo/</code> em um novo .zip — é esse .zip que você sobe como "arquivo do produto".</p></div>
+      <div class="passo"><div class="passo-eti"><i>2</i><b>Capa do produto</b></div>
+      <p>Tire um print do <code>VER-DEMONSTRACAO.html</code> e use como capa do anúncio.</p></div>
+      <div class="passo"><div class="passo-eti"><i>3</i><b>Inclua este guia</b></div>
+      <p>Deixe este arquivo dentro do .zip que o comprador recebe — reduz mensagens de suporte.</p></div>
+    </div>
+  </section>
+
+  <section class="problemas">
+    <h2 style="font-size:16px;font-weight:800;text-transform:uppercase;margin-bottom:14px;color:var(--ouro-cla)">
+      Se algo não funcionar</h2>
+    <div class="problema"><b>A página abre em branco, sem cores nem fotos</b>
+    <p>Você está abrindo de dentro do .zip. Extraia primeiro e abra a partir da pasta extraída.</p></div>
+    <div class="problema"><b>O botão de WhatsApp não abre a conversa certa</b>
+    <p>Use só números no link <code>wa.me/...</code>: código do país + DDD + número, sem espaços,
+    sem parênteses e sem o sinal <b>+</b>.</p></div>
+  </section>
+
+  <footer class="pie">
+    <span><b>Leuname Software</b> · Templates completos, prontos para vender</span>
+    <span>Pacote: {titulo}</span>
+  </footer>
+</div>
+</body>
+</html>"""
+
+
+def empaquetar(slug: str, titulo: str) -> None:
+    demo_dir = DEMOS / slug
+    if not demo_dir.exists():
+        print(f"  ✕ {slug}: no existe public/demos/{slug}/")
+        return
+
+    dest = OUT / slug
+    site_completo = dest / "site-completo"
+    if site_completo.exists():
+        shutil.rmtree(site_completo)
+    shutil.copytree(demo_dir, site_completo)
+
+    (dest / "VER-DEMONSTRACAO.html").write_text(inline_demo(demo_dir), encoding="utf-8")
+    (dest / "LEIA-ME-PRIMEIRO.html").write_text(
+        GUIA_TEMPLATE.format(titulo=html.escape(titulo)), encoding="utf-8"
+    )
+    print(f"  ✓ {slug} → pacotes-hotmart/{slug}/")
+
+
+def main() -> int:
+    titles = load_titles()
+    args = sys.argv[1:]
+    slugs = args if args else sorted(p.name for p in DEMOS.iterdir() if p.is_dir())
+
+    OUT.mkdir(exist_ok=True)
+    print(f"Empacotando {len(slugs)} plantilla(s)...")
+    for slug in slugs:
+        titulo = titles.get(slug, slug.replace("-", " ").title())
+        empaquetar(slug, titulo)
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
