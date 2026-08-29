@@ -7,6 +7,7 @@ import {
   TestimonialsSection,
   WhyUsBand,
 } from "@/components/home/HomeSections";
+import { TiersSection } from "@/components/home/TiersSection";
 import { siteConfig } from "@/lib/config";
 import {
   getCategoryCounts,
@@ -46,6 +47,7 @@ export default async function HomePage() {
       <BenefitsRow benefits={content.benefits} />
       <CategoryGrid categories={categories} counts={counts} />
       <PopularTemplates templates={popular} />
+      <TiersSection />
       <WhyUsBand whyUs={content.why_us} />
       <TestimonialsSection testimonials={testimonials} />
       <NewsletterSection newsletter={content.newsletter} />

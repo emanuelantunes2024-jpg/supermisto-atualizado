@@ -81,6 +81,7 @@ export const mainNav = [
   { href: "/plantillas", label: "Categorías", menu: true },
   { href: "/pdvs", label: "PDVs", menu: true },
   { href: "/combos", label: "Combos", menu: true },
+  { href: "/logos", label: "Diseño de Logos" },
   { href: "/legal/terminos", label: "Licencias" },
   { href: "/#servicios", label: "Servicios" },
   { href: "/contacto", label: "Soporte" },
