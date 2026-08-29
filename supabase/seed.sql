@@ -407,9 +407,18 @@ values
    '11111111-1111-4111-8111-000000000039',
    'Combo Restaurante: Web + PDV', 'combo-restaurante-pdv',
    'El sitio web de Sabor Express + el sistema PDV Retail Pro, en un solo pack con descuento.',
-   'Combo pensado para restaurantes y locales de comida rápida: incluye el sitio web completo "Sabor Express" (menú digital, pedidos y reservas) junto con el sistema de punto de venta "PDV Retail Pro" para cobrar en el mostrador. Comprado por separado costaría 137,90 €; en combo, con descuento.',
-   9900, '/demos/pdv-retail-pro/index.html', '/thumbnails/combo-restaurante-pdv.jpg',
-   '["Incluye sitio web Sabor Express", "Incluye PDV Retail Pro", "Ahorra frente a la compra por separado", "Ideal para restaurantes y comida rápida", "Un único archivo de descarga con las dos partes"]'::jsonb,
+   'Combo pensado para restaurantes y locales de comida rápida: incluye el sitio web completo "Sabor Express" (menú digital, pedidos y reservas) junto con el sistema de punto de venta "PDV Retail Pro" para cobrar en el mostrador. Al comprar el combo se entregan las dos plantillas completas. Compradas por separado costarían 137,90 €; en combo, con descuento.',
+   9900, '/demos/hamburgueseria-premium/index.html', '/thumbnails/sabor-express.jpg',
+   '["Incluye sitio web Sabor Express", "Incluye PDV Retail Pro", "Ahorra frente a la compra por separado", "Ideal para restaurantes y comida rápida", "Dos archivos de descarga, uno por cada parte"]'::jsonb,
+   'published'),
+
+  ('22222222-2222-4222-8222-000000000041',
+   '11111111-1111-4111-8111-000000000039',
+   'Combo Concesionaria Premium', 'combo-concesionaria-pdv',
+   'El sitio web Concesionaria Plus + el sistema PDV Concesionaria Pro, en un solo pack con descuento.',
+   'Combo pensado para concesionarias y talleres mecánicos: incluye el sitio web completo "Concesionaria Plus" (catálogo de vehículos, financiación y solicitud por WhatsApp) junto con el sistema de punto de venta "PDV Concesionaria Pro" para gestionar órdenes de taller y venta de repuestos en el mostrador. Al comprar el combo se entregan las dos plantillas completas. Compradas por separado costarían 158 €; en combo, con descuento.',
+   11900, '/demos/concesionaria-premium/index.html', '/thumbnails/concesionaria-plus.jpg',
+   '["Incluye el sitio web Concesionaria Plus", "Incluye el PDV Concesionaria Pro", "Ahorra frente a la compra por separado", "Ideal para concesionarias y talleres mecánicos", "Dos archivos de descarga, uno por cada parte"]'::jsonb,
    'published')
 
 on conflict (id) do update

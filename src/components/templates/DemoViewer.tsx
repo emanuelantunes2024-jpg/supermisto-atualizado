@@ -7,6 +7,11 @@ import { Logo } from "@/components/site/Logo";
 import { AddToCartButton } from "@/components/templates/AddToCartButton";
 import type { TemplateWithCategory } from "@/lib/types";
 
+interface DemoPart {
+  label: string;
+  src: string;
+}
+
 interface DemoViewerProps {
   slug: string;
   title: string;
@@ -15,6 +20,8 @@ interface DemoViewerProps {
   /** Demo navegable. Si es null se muestra el aviso de "demo en preparación". */
   src: string | null;
   template: TemplateWithCategory;
+  /** Combos: más de una demo para alternar (p. ej. "Sitio web" y "Sistema PDV"). */
+  parts?: DemoPart[];
 }
 
 const devices = [
@@ -62,9 +69,11 @@ type DeviceId = (typeof devices)[number]["id"];
  * Se monta como capa fija por encima de la cabecera del sitio para que la
  * demo ocupe toda la pantalla.
  */
-export function DemoViewer({ slug, title, categoryName, priceLabel, src, template }: DemoViewerProps) {
+export function DemoViewer({ slug, title, categoryName, priceLabel, src, template, parts }: DemoViewerProps) {
   const [device, setDevice] = useState<DeviceId>("desktop");
+  const [partIndex, setPartIndex] = useState(0);
   const width = devices.find((item) => item.id === device)!.width;
+  const activeSrc = parts && parts.length > 0 ? parts[partIndex].src : src;
 
   return (
     <div className="on-dark fixed inset-0 z-[60] flex flex-col bg-navy-950">
@@ -91,7 +100,25 @@ export function DemoViewer({ slug, title, categoryName, priceLabel, src, templat
           </span>
         </div>
 
-        {src && (
+        {parts && parts.length > 1 && (
+          <div className="flex shrink-0 gap-1 rounded-lg border border-line p-1">
+            {parts.map((part, index) => (
+              <button
+                key={part.label}
+                type="button"
+                onClick={() => setPartIndex(index)}
+                aria-pressed={partIndex === index}
+                className={`rounded-md px-3 py-1.5 text-[12px] font-semibold transition-colors ${
+                  partIndex === index ? "bg-navy-700 text-gold-400" : "text-ink-muted hover:text-ink"
+                }`}
+              >
+                {part.label}
+              </button>
+            ))}
+          </div>
+        )}
+
+        {activeSrc && (
           <div className="flex shrink-0 gap-1 rounded-lg border border-line p-1">
             {devices.map((item) => (
               <button
@@ -114,9 +141,9 @@ export function DemoViewer({ slug, title, categoryName, priceLabel, src, templat
         )}
 
         <div className="flex shrink-0 items-center gap-3">
-          {src && (
+          {activeSrc && (
             <a
-              href={src}
+              href={activeSrc}
               target="_blank"
               rel="noreferrer"
               className="hidden items-center gap-1.5 text-[12.5px] text-ink-muted transition-colors hover:text-gold-400 sm:flex"
@@ -141,10 +168,11 @@ export function DemoViewer({ slug, title, categoryName, priceLabel, src, templat
       </div>
 
       {/* Lienzo de la demo */}
-      {src ? (
+      {activeSrc ? (
         <div className="flex flex-1 justify-center overflow-auto bg-navy-950 p-3">
           <iframe
-            src={src}
+            key={activeSrc}
+            src={activeSrc}
             title={`Demo de ${title}`}
             sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
             className="h-full rounded-lg border border-line bg-white transition-[width] duration-300"

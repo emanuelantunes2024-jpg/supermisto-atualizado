@@ -80,6 +80,8 @@ interface SeedTemplate {
   features: string[];
   /** Rubro dentro de /pdvs (además de "pdv" en sí); vacío para el resto del catálogo. */
   tags?: string[];
+  /** Solo para combos: la miniatura es la del producto incluido, no la del propio slug. */
+  thumbnailSlug?: string;
 }
 
 const TPL = "22222222-2222-4222-8222-0000000000";
@@ -945,17 +947,40 @@ const seed: SeedTemplate[] = [
     slug: "combo-restaurante-pdv",
     short_description: "El sitio web de Sabor Express + el sistema PDV Retail Pro, en un solo pack con descuento.",
     full_description:
-      "Combo pensado para restaurantes y locales de comida rápida: incluye el sitio web completo \"Sabor Express\" (menú digital, pedidos y reservas) junto con el sistema de punto de venta \"PDV Retail Pro\" para cobrar en el mostrador. Comprado por separado costaría 137,90 €; en combo, con descuento.",
+      "Combo pensado para restaurantes y locales de comida rápida: incluye el sitio web completo \"Sabor Express\" (menú digital, pedidos y reservas) junto con el sistema de punto de venta \"PDV Retail Pro\" para cobrar en el mostrador. Al comprar el combo se entregan las dos plantillas completas. Compradas por separado costarían 137,90 €; en combo, con descuento.",
     price_cents: 9900,
-    preview_url: "/demos/pdv-retail-pro/index.html",
+    preview_url: "/demos/hamburgueseria-premium/index.html",
     gradient: "linear-gradient(160deg,#14161b,#ff7a1a 55%,#14161b)",
     features: [
       "Incluye sitio web Sabor Express",
       "Incluye PDV Retail Pro",
       "Ahorra frente a la compra por separado",
       "Ideal para restaurantes y comida rápida",
-      "Un único archivo de descarga con las dos partes",
+      "Dos archivos de descarga, uno por cada parte",
     ],
+    tags: ["combo", "restaurante", "demo:hamburgueseria-premium", "demo:pdv-retail-pro"],
+    thumbnailSlug: "sabor-express",
+  },
+  {
+    id: `${TPL}41`,
+    categorySlug: "combos",
+    title: "Combo Concesionaria Premium",
+    slug: "combo-concesionaria-pdv",
+    short_description: "El sitio web Concesionaria Plus + el sistema PDV Concesionaria Pro, en un solo pack con descuento.",
+    full_description:
+      "Combo pensado para concesionarias y talleres mecánicos: incluye el sitio web completo \"Concesionaria Plus\" (catálogo de vehículos, financiación y solicitud por WhatsApp) junto con el sistema de punto de venta \"PDV Concesionaria Pro\" para gestionar órdenes de taller y venta de repuestos en el mostrador. Al comprar el combo se entregan las dos plantillas completas. Compradas por separado costarían 158 €; en combo, con descuento.",
+    price_cents: 11900,
+    preview_url: "/demos/concesionaria-premium/index.html",
+    gradient: "linear-gradient(160deg,#101522,#1e4fd6 55%,#101522)",
+    features: [
+      "Incluye el sitio web Concesionaria Plus",
+      "Incluye el PDV Concesionaria Pro",
+      "Ahorra frente a la compra por separado",
+      "Ideal para concesionarias y talleres mecánicos",
+      "Dos archivos de descarga, uno por cada parte",
+    ],
+    tags: ["combo", "concesionaria", "taller-mecanico", "demo:concesionaria-premium", "demo:pdv-concesionaria-pro"],
+    thumbnailSlug: "concesionaria-plus",
   },
 ];
 
@@ -981,7 +1006,7 @@ export const seedTemplates: TemplateWithCategory[] = seed.map((t) => ({
   compare_at_price_cents: null,
   preview_url: t.preview_url,
   // Maqueta del diseño real, generada por scripts/generate-thumbnails.mjs.
-  thumbnail_url: `/thumbnails/${t.slug}.jpg`,
+  thumbnail_url: `/thumbnails/${t.thumbnailSlug ?? t.slug}.jpg`,
   features: t.features,
   tags: t.tags ?? [],
   featured: FEATURED_SLUGS.includes(t.slug),

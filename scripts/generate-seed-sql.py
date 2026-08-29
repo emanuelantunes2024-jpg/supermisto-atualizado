@@ -68,6 +68,7 @@ def main() -> int:
             features.append(shortcuts.get(line, line.strip('"').replace('\\"', '"')))
 
         preview = field(block, "preview_url")
+        thumbnail_slug = field(block, "thumbnailSlug") or slug
         rows.append(
             "  ({},\n   {},\n   {}, {},\n   {},\n   {},\n   {}, {}, {},\n   {}::jsonb,\n   'published')".format(
                 sql_quote(tpl_prefix + re.search(r"id: `\$\{TPL\}(\d+)`", block).group(1)),
@@ -78,7 +79,7 @@ def main() -> int:
                 sql_quote(field(block, "full_description")),
                 int(re.search(r"price_cents: (\d+)", block).group(1)),
                 sql_quote(preview) if preview else "null",
-                sql_quote(f"/thumbnails/{slug}.jpg"),
+                sql_quote(f"/thumbnails/{thumbnail_slug}.jpg"),
                 sql_quote(json.dumps(features, ensure_ascii=False)),
             )
         )
