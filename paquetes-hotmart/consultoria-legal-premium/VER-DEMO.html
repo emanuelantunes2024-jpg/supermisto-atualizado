@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Consultoría Legal &amp; Empresarial Premium — Abogados en Madrid</title>
+<meta name="description" content="Despacho de abogados con 10 áreas de especialización: empresarial, laboral, familia, inmobiliario, civil, penal, fiscal, comercial, propiedad intelectual y consultoría. Primera consulta sin compromiso.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* En la web las fuentes se cargan desde Google Fonts (20 KB en vez de 400 KB).
+   El ZIP que descarga el cliente las lleva incrustadas, para funcionar sin conexion. */
+/* ==========================================================================
+   CONSULTORÍA LEGAL & EMPRESARIAL PREMIUM
+   Leuname Software · leunamesoftware.com
+   ========================================================================== */
+
+:root{
+  --noche:#080e1a; --noche-2:#0b1424; --carta:#111d33; --carta-2:#16243d;
+  --oro:#c9a227; --oro-claro:#e2c874; --oro-suave:#f0e0b0;
+  --claro:#f4f6f9; --claro-2:#e9edf3;
+  --texto:#e8edf5; --apagado:#93a2ba; --tinta:#0f1a2c; --tinta-suave:#54637c;
+  --linea:rgba(201,162,39,.22); --linea-clara:#dde3ec;
+  --serif:'Playfair Display',Georgia,'Times New Roman',serif;
+  --sans:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --radio:14px;
+  --ancho:1180px;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--noche);color:var(--texto);font-family:var(--sans);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;}
+img{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+:focus-visible{outline:2px solid var(--oro);outline-offset:3px;}
+
+.env{max-width:var(--ancho);margin:0 auto;padding:0 24px;}
+section{padding:86px 0;}
+
+h1,h2,h3,h4{font-family:var(--serif);font-weight:700;line-height:1.18;letter-spacing:-.01em;}
+h2{font-size:clamp(27px,3.4vw,40px);}
+h3{font-size:20px;}
+
+.rotulo{display:inline-flex;align-items:center;gap:9px;font-family:var(--sans);font-size:11.5px;
+  font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--oro);margin-bottom:14px;}
+.rotulo::before{content:"";width:26px;height:1px;background:var(--oro);}
+.cabecera-sec{max-width:660px;margin-bottom:46px;}
+.cabecera-sec.centro{margin-left:auto;margin-right:auto;text-align:center;}
+.cabecera-sec.centro .rotulo::after{content:"";width:26px;height:1px;background:var(--oro);}
+.cabecera-sec p{color:var(--apagado);margin-top:14px;font-size:16.5px;}
+
+/* ---------------- Botones ---------------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  padding:14px 28px;border:1px solid transparent;border-radius:6px;
+  font-family:var(--sans);font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  cursor:pointer;transition:.22s;white-space:nowrap;}
+.btn-oro{background:linear-gradient(135deg,#d8b743,var(--oro));color:#1a1405;
+  box-shadow:0 8px 26px rgba(201,162,39,.26);}
+.btn-oro:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(201,162,39,.36);}
+.btn-linea{border-color:rgba(226,200,116,.5);color:var(--oro-claro);background:transparent;}
+.btn-linea:hover{background:rgba(201,162,39,.1);border-color:var(--oro);}
+.btn-oscuro{background:var(--tinta);color:#fff;}
+.btn-oscuro:hover{background:#1c2c48;}
+.btn-peq{padding:10px 20px;font-size:11.5px;}
+
+/* ---------------- Barra superior ---------------- */
+.barra-top{background:#050a13;border-bottom:1px solid rgba(255,255,255,.06);font-size:12.5px;color:var(--apagado);}
+.barra-top .env{display:flex;align-items:center;justify-content:space-between;gap:18px;padding-top:10px;padding-bottom:10px;flex-wrap:wrap;}
+.barra-top .izq{display:flex;align-items:center;gap:26px;flex-wrap:wrap;}
+.barra-top span,.barra-top a{display:inline-flex;align-items:center;gap:8px;}
+.barra-top a:hover{color:var(--oro-claro);}
+.barra-top svg{color:var(--oro);flex-shrink:0;}
+.redes-top{display:flex;gap:8px;}
+.redes-top a{width:28px;height:28px;border:1px solid var(--linea);border-radius:50%;
+  align-items:center;justify-content:center;color:var(--oro-claro);transition:.2s;}
+.redes-top a:hover{background:var(--oro);color:#1a1405;border-color:var(--oro);}
+
+/* ---------------- Cabecera ---------------- */
+.cab{position:sticky;top:0;z-index:80;background:rgba(8,14,26,.94);backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(255,255,255,.07);}
+.cab .env{display:flex;align-items:center;gap:26px;padding-top:16px;padding-bottom:16px;}
+.marca{display:flex;align-items:center;gap:13px;flex-shrink:0;}
+.marca-emblema{width:42px;height:42px;flex-shrink:0;}
+.marca-txt strong{display:block;font-family:var(--serif);font-size:15px;font-weight:700;
+  letter-spacing:.05em;color:var(--oro-suave);line-height:1.2;text-transform:uppercase;}
+.marca-txt span{display:block;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--apagado);}
+.menu{display:flex;gap:28px;margin-left:auto;}
+.menu a{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--texto);
+  padding:6px 0;border-bottom:2px solid transparent;transition:.2s;}
+.menu a:hover,.menu a.act{color:var(--oro-claro);border-color:var(--oro);}
+.abrir-menu{display:none;background:none;border:1px solid var(--linea);border-radius:6px;
+  width:42px;height:42px;color:var(--oro-claro);margin-left:auto;cursor:pointer;align-items:center;justify-content:center;}
+.menu-movil{display:none;border-top:1px solid rgba(255,255,255,.07);background:var(--noche-2);}
+.menu-movil.ver{display:block;}
+.menu-movil a{display:block;padding:13px 24px;border-bottom:1px solid rgba(255,255,255,.05);
+  font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;}
+
+/* ---------------- Portada ---------------- */
+.portada{position:relative;overflow:hidden;padding:0;background:var(--noche-2);}
+.portada-fondo{position:absolute;inset:0;}
+.portada-fondo img{width:100%;height:100%;object-fit:cover;object-position:center right;opacity:.42;}
+.portada-vel{position:absolute;inset:0;
+  background:linear-gradient(100deg,rgba(8,14,26,.97) 0%,rgba(8,14,26,.9) 38%,rgba(8,14,26,.42) 68%,rgba(8,14,26,.2) 100%);}
+.portada-in{position:relative;z-index:2;padding:104px 0 96px;max-width:640px;}
+.portada h1{font-size:clamp(31px,4.6vw,54px);margin-bottom:26px;}
+.portada .raya{width:66px;height:3px;background:var(--oro);margin-bottom:26px;}
+.portada p{color:#c3cddd;font-size:16.5px;max-width:490px;margin-bottom:36px;}
+.portada-botones{display:flex;gap:14px;flex-wrap:wrap;}
+.portada-arte{position:absolute;right:-40px;top:50%;transform:translateY(-50%);
+  height:118%;width:auto;max-width:none;opacity:.85;pointer-events:none;}
+@media(max-width:900px){
+  .portada-arte{right:-140px;opacity:.4;height:96%;}
+}
+
+/* ---------------- Ventajas ---------------- */
+.ventajas{background:var(--carta);border-top:1px solid var(--linea);border-bottom:1px solid var(--linea);padding:0;}
+.ventajas-rejilla{display:grid;grid-template-columns:repeat(4,1fr);}
+.ventaja{display:flex;gap:15px;padding:32px 26px;border-right:1px solid rgba(255,255,255,.06);}
+.ventaja:last-child{border-right:none;}
+.ventaja svg{color:var(--oro);flex-shrink:0;margin-top:2px;}
+.ventaja strong{display:block;font-size:14.5px;font-weight:700;margin-bottom:5px;}
+.ventaja p{font-size:13px;color:var(--apagado);line-height:1.55;}
+
+/* ---------------- Áreas ---------------- */
+.areas{background:var(--claro);color:var(--tinta);}
+.areas h2,.areas .cabecera-sec p{color:var(--tinta);}
+.areas .cabecera-sec p{color:var(--tinta-suave);}
+.areas-rejilla{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;}
+.area{background:var(--carta);border:1px solid rgba(201,162,39,.16);border-radius:var(--radio);
+  padding:26px 20px 24px;text-align:center;transition:.24s;position:relative;overflow:hidden;}
+.area::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--oro);
+  transform:scaleX(0);transition:transform .28s;}
+.area:hover{transform:translateY(-5px);box-shadow:0 20px 42px rgba(8,14,26,.28);border-color:rgba(201,162,39,.4);}
+.area:hover::after{transform:scaleX(1);}
+.area-icono{color:var(--oro);margin:0 auto 15px;width:44px;height:44px;}
+.area h3{font-size:15.5px;color:var(--oro-suave);margin-bottom:9px;line-height:1.35;}
+.area h3 em{font-style:normal;color:var(--oro);}
+.area p{font-size:12.8px;color:#a8b6cc;line-height:1.55;}
+
+/* ---------------- Llamada dorada ---------------- */
+.llamada{background:linear-gradient(120deg,#d8b743,var(--oro));color:#1a1405;padding:0;}
+.llamada .env{display:flex;align-items:center;justify-content:space-between;gap:26px;
+  padding-top:30px;padding-bottom:30px;flex-wrap:wrap;}
+.llamada-txt{display:flex;align-items:center;gap:17px;}
+.llamada-txt svg{flex-shrink:0;}
+.llamada strong{display:block;font-family:var(--serif);font-size:22px;line-height:1.25;}
+.llamada span{font-size:14px;opacity:.82;}
+
+/* ---------------- Cifras ---------------- */
+.cifras{background:var(--noche);padding:64px 0;}
+.cifras-rejilla{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+.cifra{display:flex;align-items:center;gap:15px;justify-content:center;}
+.cifra svg{color:var(--oro);flex-shrink:0;}
+.cifra strong{display:block;font-family:var(--serif);font-size:33px;color:var(--oro-suave);line-height:1;}
+.cifra span{font-size:12.5px;color:var(--apagado);}
+
+/* ---------------- Nosotros ---------------- */
+.nosotros{background:var(--noche-2);}
+.nos-rejilla{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;}
+.nos-foto{position:relative;border-radius:var(--radio);overflow:hidden;}
+.nos-foto img{width:100%;height:430px;object-fit:cover;}
+.nos-sello{position:absolute;left:24px;bottom:24px;background:rgba(8,14,26,.9);
+  border:1px solid var(--linea);border-radius:11px;padding:15px 20px;backdrop-filter:blur(6px);}
+.nos-sello strong{display:block;font-family:var(--serif);font-size:27px;color:var(--oro-suave);line-height:1;}
+.nos-sello span{font-size:11.5px;color:var(--apagado);}
+.nos-texto p{color:var(--apagado);margin-bottom:16px;}
+.nos-lista{list-style:none;margin:24px 0 30px;}
+.nos-lista li{display:flex;gap:12px;margin-bottom:14px;font-size:14.5px;}
+.nos-lista svg{color:var(--oro);flex-shrink:0;margin-top:3px;}
+
+/* ---------------- Cómo trabajamos ---------------- */
+.pasos-rejilla{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+.paso{background:var(--carta);border:1px solid rgba(255,255,255,.06);border-radius:var(--radio);padding:30px 24px;position:relative;}
+.paso-num{font-family:var(--serif);font-size:44px;color:rgba(201,162,39,.24);line-height:1;margin-bottom:10px;}
+.paso h3{font-size:16.5px;color:var(--oro-suave);margin-bottom:9px;}
+.paso p{font-size:13.5px;color:var(--apagado);}
+
+/* ---------------- Opiniones ---------------- */
+.opiniones{background:var(--noche-2);}
+.op-rejilla{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+.op{background:var(--carta);border:1px solid rgba(255,255,255,.06);border-radius:var(--radio);padding:30px 26px;}
+.op-comillas{font-family:var(--serif);font-size:52px;color:rgba(201,162,39,.3);line-height:.7;margin-bottom:12px;}
+.op p{font-size:14.5px;color:#c6d0e0;margin-bottom:20px;font-style:italic;}
+.op-quien{display:flex;align-items:center;gap:12px;padding-top:18px;border-top:1px solid rgba(255,255,255,.07);}
+.op-ini{width:42px;height:42px;border-radius:50%;background:rgba(201,162,39,.15);border:1px solid var(--linea);
+  display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:var(--oro-claro);flex-shrink:0;}
+.op-quien strong{display:block;font-size:14px;}
+.op-quien span{font-size:12px;color:var(--apagado);}
+
+/* ---------------- Blog ---------------- */
+.blog-rejilla{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+.post{background:var(--carta);border:1px solid rgba(255,255,255,.06);border-radius:var(--radio);
+  padding:28px 25px;transition:.24s;}
+.post:hover{border-color:var(--linea);transform:translateY(-4px);}
+.post-tag{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--oro);border:1px solid var(--linea);border-radius:99px;padding:4px 12px;margin-bottom:14px;}
+.post h3{font-size:17.5px;margin-bottom:10px;line-height:1.35;}
+.post p{font-size:13.5px;color:var(--apagado);margin-bottom:16px;}
+.enlace-flecha{font-size:12.5px;font-weight:700;letter-spacing:.06em;color:var(--oro-claro);}
+.enlace-flecha:hover{color:var(--oro);}
+
+/* ---------------- Preguntas ---------------- */
+.faq-lista{max-width:820px;margin:0 auto;}
+.faq{border:1px solid rgba(255,255,255,.08);border-radius:10px;margin-bottom:12px;background:var(--carta);overflow:hidden;}
+.faq summary{cursor:pointer;padding:19px 24px;font-weight:600;font-size:15px;list-style:none;
+  display:flex;justify-content:space-between;align-items:center;gap:16px;}
+.faq summary::-webkit-details-marker{display:none;}
+.faq summary::after{content:"+";font-size:22px;color:var(--oro);flex-shrink:0;line-height:1;}
+.faq[open] summary::after{content:"−";}
+.faq[open] summary{color:var(--oro-suave);}
+.faq p{padding:0 24px 21px;font-size:14.5px;color:var(--apagado);}
+
+/* ---------------- Contacto ---------------- */
+.contacto{background:var(--noche-2);}
+.cont-rejilla{display:grid;grid-template-columns:1fr 1.15fr;gap:52px;}
+.cont-dato{display:flex;gap:15px;margin-bottom:24px;}
+.cont-dato svg{color:var(--oro);flex-shrink:0;margin-top:3px;}
+.cont-dato strong{display:block;font-size:14px;margin-bottom:3px;}
+.cont-dato span{font-size:13.5px;color:var(--apagado);}
+.formulario{background:var(--carta);border:1px solid rgba(255,255,255,.07);border-radius:var(--radio);padding:34px 30px;}
+.campo{margin-bottom:17px;}
+.campo label{display:block;font-size:12px;font-weight:600;letter-spacing:.05em;margin-bottom:7px;color:var(--texto);}
+.campo input,.campo select,.campo textarea{width:100%;padding:12px 14px;background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.12);border-radius:8px;color:var(--texto);font-family:inherit;font-size:14.5px;transition:.2s;}
+.campo input:focus,.campo select:focus,.campo textarea:focus{outline:none;border-color:var(--oro);
+  background:rgba(255,255,255,.06);box-shadow:0 0 0 3px rgba(201,162,39,.12);}
+.campo textarea{resize:vertical;min-height:96px;}
+.campo select option{background:var(--carta);color:var(--texto);}
+.dos{display:grid;grid-template-columns:1fr 1fr;gap:0 16px;}
+.aviso-form{margin-top:15px;padding:13px 16px;border-radius:8px;font-size:13.5px;display:none;}
+.aviso-form.ok{display:block;background:rgba(46,160,102,.14);border:1px solid rgba(46,160,102,.4);color:#7fe0ab;}
+.aviso-form.mal{display:block;background:rgba(214,69,45,.14);border:1px solid rgba(214,69,45,.4);color:#f5a48f;}
+.legal-mini{font-size:11.5px;color:var(--tinta-suave);margin-top:13px;color:var(--apagado);}
+
+/* ---------------- Pie ---------------- */
+.pie{background:#050a13;border-top:1px solid var(--linea);padding:58px 0 0;}
+.pie-rejilla{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:38px;padding-bottom:42px;}
+.pie h4{font-size:13px;font-family:var(--sans);font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--oro);margin-bottom:17px;}
+.pie p,.pie a{font-size:13.5px;color:var(--apagado);}
+.pie a{display:block;margin-bottom:9px;transition:.2s;}
+.pie a:hover{color:var(--oro-claro);}
+.pie-abajo{border-top:1px solid rgba(255,255,255,.07);padding:20px 0;font-size:12.5px;color:var(--tinta-suave);
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+.aviso-demo{background:rgba(201,162,39,.13);border-bottom:1px solid var(--linea);color:var(--oro-suave);
+  text-align:center;padding:9px 20px;font-size:12.5px;font-weight:600;}
+
+/* ---------------- Botones flotantes ---------------- */
+.flotantes{position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:70;display:flex;flex-direction:column;}
+.flotantes a{width:48px;height:48px;display:flex;align-items:center;justify-content:center;
+  background:var(--carta);color:var(--oro-claro);border:1px solid var(--linea);border-right:none;transition:.2s;}
+.flotantes a:first-child{border-radius:10px 0 0 0;}
+.flotantes a:last-child{border-radius:0 0 0 10px;}
+.flotantes a:hover{background:var(--oro);color:#1a1405;}
+.flotantes .wa:hover{background:#25d366;color:#fff;border-color:#25d366;}
+
+/* ---------------- Pantallas pequeñas ---------------- */
+@media(max-width:1080px){
+  .areas-rejilla{grid-template-columns:repeat(3,1fr);}
+  .ventajas-rejilla{grid-template-columns:repeat(2,1fr);}
+  .ventaja:nth-child(2){border-right:none;}
+  .ventaja:nth-child(1),.ventaja:nth-child(2){border-bottom:1px solid rgba(255,255,255,.06);}
+  .pasos-rejilla{grid-template-columns:repeat(2,1fr);}
+  .pie-rejilla{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:900px){
+  .menu{display:none;}
+  .cab .btn-peq{display:none;}   /* pasa al menú desplegable */
+  .abrir-menu{display:flex;}
+  .menu-movil .btn{display:flex;margin:14px 24px 18px;}
+  .nos-rejilla,.cont-rejilla{grid-template-columns:1fr;gap:34px;}
+  .op-rejilla,.blog-rejilla{grid-template-columns:1fr;}
+  .cifras-rejilla{grid-template-columns:repeat(2,1fr);gap:28px;}
+  .flotantes{top:auto;bottom:18px;right:18px;transform:none;flex-direction:row;}
+  .flotantes a{border:1px solid var(--linea);border-radius:50%;margin-left:9px;
+    box-shadow:0 6px 18px rgba(0,0,0,.35);}
+  .flotantes a:first-child,.flotantes a:last-child{border-radius:50%;}
+}
+@media(max-width:640px){
+  section{padding:60px 0;}
+  .env{padding:0 18px;}
+  .areas-rejilla{grid-template-columns:repeat(2,1fr);gap:13px;}
+  .ventajas-rejilla{grid-template-columns:1fr;}
+  .ventaja{border-right:none;border-bottom:1px solid rgba(255,255,255,.06);}
+  .portada-in{padding:66px 0 60px;}
+  .portada-botones .btn{flex:1;}
+  .dos{grid-template-columns:1fr;}
+  .pie-rejilla{grid-template-columns:1fr;gap:28px;}
+  .llamada .env{flex-direction:column;align-items:flex-start;}
+  .barra-top .izq span:nth-child(n+2){display:none;}
+}
+html,body{overflow-x:hidden;max-width:100%}
+
+</style>
+</head>
+<body>
+
+<div class="aviso-demo">Plantilla demostrativa. Nombre, datos y contenidos ficticios.</div>
+
+<!-- Barra superior -->
+<div class="barra-top">
+  <div class="env">
+    <div class="izq">
+      <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21.5s7-6.2 7-11.1A7 7 0 1 0 5 10.4c0 4.9 7 11.1 7 11.1z"/><circle cx="12" cy="10" r="2.6"/></svg>Paseo de la Castellana, 95 · 28046 Madrid</span>
+      <a href="tel:+34910123456"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 16.5v2.6a1.9 1.9 0 0 1-2.1 1.9 18.8 18.8 0 0 1-8.2-2.9 18.4 18.4 0 0 1-5.7-5.7A18.8 18.8 0 0 1 2.1 4.1 1.9 1.9 0 0 1 4 2h2.6a1.9 1.9 0 0 1 1.9 1.6c.1.9.3 1.8.7 2.7a1.9 1.9 0 0 1-.4 2L7.6 9.5a15 15 0 0 0 5.7 5.7l1.2-1.2a1.9 1.9 0 0 1 2-.4c.9.3 1.8.6 2.7.7A1.9 1.9 0 0 1 21 16.5z"/></svg>+34 910 123 456</a>
+      <a href="mailto:info@consultorialegal.es"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><path d="M2.5 7l9.5 6.5L21.5 7"/></svg>info@consultorialegal.es</a>
+    </div>
+    <div class="redes-top">
+              <a href="#" aria-label="Facebook" target="_blank" rel="noopener">f</a>
+              <a href="#" aria-label="Instagram" target="_blank" rel="noopener">ig</a>
+              <a href="#" aria-label="Twitter" target="_blank" rel="noopener">tw</a>
+              <a href="#" aria-label="Youtube" target="_blank" rel="noopener">yt</a>
+          </div>
+  </div>
+</div>
+
+<!-- Cabecera -->
+<header class="cab">
+  <div class="env">
+    <a href="#inicio" class="marca">
+      <svg class="marca-emblema" width="42" height="42" viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M24 3l17 6v13c0 10-7 18.5-17 22C14 40.5 7 32 7 22V9z" fill="none" stroke="#c9a227" stroke-width="1.6"/><path d="M24 12v20M17 33h14" stroke="#e2c874" stroke-width="1.6" stroke-linecap="round"/><path d="M24 15l-8 2.5 4 8a4.5 4.5 0 0 1-8 0zM24 15l8 2.5-4 8a4.5 4.5 0 0 0 8 0z" fill="none" stroke="#c9a227" stroke-width="1.4" stroke-linejoin="round"/></svg>      <span class="marca-txt">
+        <strong>Consultoría Legal &amp;</strong>
+        <span>Empresarial Premium</span>
+      </span>
+    </a>
+    <nav class="menu">
+      <a href="#inicio">Inicio</a><a href="#nosotros">Nosotros</a><a href="#areas">Áreas</a><a href="#servicios">Servicios</a><a href="#blog">Blog</a><a href="#contacto">Contacto</a>    </nav>
+    <a href="#contacto" class="btn btn-oro btn-peq" style="margin-left:22px">Consulta online</a>
+    <button class="abrir-menu" id="abrirMenu" aria-expanded="false" aria-label="Abrir menú">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+    </button>
+  </div>
+  <nav class="menu-movil" id="menuMovil">
+    <a href="#inicio">Inicio</a><a href="#nosotros">Nosotros</a><a href="#areas">Áreas</a><a href="#servicios">Servicios</a><a href="#blog">Blog</a><a href="#contacto">Contacto</a>    <a href="#contacto" class="btn btn-oro">Consulta online</a>
+  </nav>
+</header>
+
+<!-- Portada -->
+<section class="portada" id="inicio">
+  <div class="portada-fondo">
+          <svg class="portada-arte" viewBox="0 0 520 520" fill="none" aria-hidden="true">
+  <defs>
+    <radialGradient id="brillo" cx="50%" cy="46%" r="52%">
+      <stop offset="0%" stop-color="#c9a227" stop-opacity=".30"/>
+      <stop offset="60%" stop-color="#c9a227" stop-opacity=".07"/>
+      <stop offset="100%" stop-color="#c9a227" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="metal" gradientUnits="userSpaceOnUse" x1="260" y1="100" x2="260" y2="400">
+      <stop offset="0%" stop-color="#f0dca4"/>
+      <stop offset="55%" stop-color="#c9a227"/>
+      <stop offset="100%" stop-color="#8c6f18"/>
+    </linearGradient>
+  </defs>
+
+  <circle cx="260" cy="248" r="238" fill="url(#brillo)"/>
+  <circle cx="260" cy="248" r="196" stroke="#c9a227" stroke-opacity=".16" stroke-width="1"/>
+  <circle cx="260" cy="248" r="168" stroke="#c9a227" stroke-opacity=".10" stroke-width="1"/>
+
+  <g stroke="url(#metal)" stroke-width="4" stroke-linecap="round" fill="none">
+    <path d="M260 118v268"/>
+    <path d="M150 168h220"/>
+    <path d="M196 386h128"/>
+    <path d="M226 386c14-16 20-38 20-64M294 386c-14-16-20-38-20-64"/>
+  </g>
+
+  <circle cx="260" cy="118" r="13" fill="url(#metal)"/>
+  <circle cx="150" cy="168" r="7" fill="url(#metal)"/>
+  <circle cx="370" cy="168" r="7" fill="url(#metal)"/>
+
+  <g stroke="url(#metal)" stroke-width="2.6" fill="none" stroke-linecap="round">
+    <path d="M150 175v34M370 175v34"/>
+    <path d="M104 209h92M324 209h92"/>
+    <path d="M104 209a46 44 0 0 0 92 0M324 209a46 44 0 0 0 92 0"/>
+    <path d="M150 175l-46 34M150 175l46 34M370 175l-46 34M370 175l46 34" stroke-width="1.6" stroke-opacity=".6"/>
+  </g>
+</svg>      </div>
+  <div class="portada-vel"></div>
+  <div class="env">
+    <div class="portada-in">
+      <h1>Soluciones legales integrales para tu tranquilidad y el crecimiento de tu negocio</h1>
+      <div class="raya"></div>
+      <p>Un equipo de abogados especializados en las 10 áreas más importantes del derecho y la consultoría empresarial.</p>
+      <div class="portada-botones">
+        <a href="#contacto" class="btn btn-oro">Nuestra consulta</a>
+        <a href="#areas" class="btn btn-linea">Conoce nuestras áreas</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Ventajas -->
+<section class="ventajas">
+  <div class="env" style="padding:0">
+    <div class="ventajas-rejilla">
+              <div class="ventaja">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M2.5 20c0-3.3 2.9-5.5 6.5-5.5s6.5 2.2 6.5 5.5"/><path d="M16.5 6.2a3 3 0 0 1 0 5.6M18.5 14.4c1.9.7 3 2.2 3 4.1"/></svg>          <div>
+            <strong>Equipo Especializado</strong>
+            <p>Abogados expertos en cada área del derecho.</p>
+          </div>
+        </div>
+              <div class="ventaja">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.4"/><path d="M4.5 20.5c0-3.7 3.4-6.5 7.5-6.5s7.5 2.8 7.5 6.5"/></svg>          <div>
+            <strong>Atención Personalizada</strong>
+            <p>Estrategias legales a medida para ti.</p>
+          </div>
+        </div>
+              <div class="ventaja">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16.5" rx="2"/><path d="M3 10h18M8 2.5v5M16 2.5v5"/><path d="M8 14h3v3H8z"/></svg>          <div>
+            <strong>Experiencia Comprobada</strong>
+            <p>Años de resultados exitosos.</p>
+          </div>
+        </div>
+              <div class="ventaja">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="10" width="15" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><path d="M12 14.5v2.5"/></svg>          <div>
+            <strong>Confidencialidad Total</strong>
+            <p>Tu información siempre protegida.</p>
+          </div>
+        </div>
+          </div>
+  </div>
+</section>
+
+<!-- Áreas -->
+<section class="areas" id="areas">
+  <div class="env">
+    <div class="cabecera-sec centro">
+      <div class="rotulo">Especialidades</div>
+      <h2>Nuestras 10 Áreas de Especialización</h2>
+      <p>Un solo despacho para todo lo que tú o tu empresa podáis necesitar.
+      Sin derivaciones y sin empezar de cero cada vez.</p>
+    </div>
+    <div class="areas-rejilla">
+              <article class="area">
+          <div class="area-icono"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M7 21h10M12 6l-7 2 3.5 7A3.5 3.5 0 0 1 5 15.5M12 6l7 2-3.5 7A3.5 3.5 0 0 0 19 15.5"/><path d="M1.5 15h7M15.5 15h7"/></svg></div>
+          <h3><em>1.</em> Derecho Empresarial</h3>
+          <p>Asesoría integral para empresas y negocios.</p>
+        </article>
+              <article class="area">
+          <div class="area-icono"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M2.5 20c0-3.3 2.9-5.5 6.5-5.5s6.5 2.2 6.5 5.5"/><path d="M16.5 6.2a3 3 0 0 1 0 5.6M18.5 14.4c1.9.7 3 2.2 3 4.1"/></svg></div>
+          <h3><em>2.</em> Derecho Laboral</h3>
+          <p>Defensa y asesoría en relaciones laborales.</p>
+        </article>
+              <article class="area">
+          <div class="area-icono"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="7" cy="7" r="2.6"/><circle cx="17" cy="7" r="2.6"/><circle cx="12" cy="14.5" r="2"/><path d="M2.5 19c0-2.7 2-4.4 4.5-4.4M21.5 19c0-2.7-2-4.4-4.5-4.4M8.5 21c0-2 1.6-3.2 3.5-3.2s3.5 1.2 3.5 3.2"/></svg></div>
+          <h3><em>3.</em> Derecho de Familia</h3>
+          <p>Soluciones legales para tu familia.</p>
+        </article>
+              <article class="area">
+          <div class="area-icono"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5L12 3l9 7.5"/><path d="M5 9.8V20h14V9.8"/><path d="M10 20v-5.5h4V20"/></svg></div>
+          <h3><em>4.</em> Derecho Inmobiliario</h3>
+          <p>Compra, venta y disputas inmobiliarias.</p>
+        </article>
+              <article class="area">
+          <div class="area-icono"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2.5H6.5A1.5 1.5 0 0 0 5 4v16a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 20V7.5z"/><path d="M14 2.5V7.5H19"/><path d="M8.5 12.5h7M8.5 16h7M8.5 9h2.5"/></svg></div>
+          <h3><em>5.</em> Derecho Civil</h3>
+          <p>Contratos, obligaciones y responsabilidad civil.</p>
+        </article>
+              <article class="area">
+          <div class="area-icono"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 6.5l3 3M12.5 8.5l3 3"/><rect x="10.7" y="3.6" width="8.6" height="4" rx="1.4" transform="rotate(45 15 5.6)"/><path d="M11 11l-7 7 2.5 2.5 7-7"/><path d="M2.5 21.5h8"/></svg></div>
+          <h3><em>6.</em> Derecho Penal</h3>
+          <p>Defensa penal con estrategia y ética.</p>
+        </article>
+              <article class="area">
+          <div class="area-icono"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="2.5" width="16" height="19" rx="2"/><path d="M7.5 6.5h9v3.5h-9z"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 17.5h.01M12 17.5h.01M16 17.5h.01"/></svg></div>
+          <h3><em>7.</em> Derecho Fiscal</h3>
+          <p>Planificación y defensa fiscal para empresas y personas.</p>
+        </article>
+              <article class="area">
+          <div class="area-icono"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="7" width="19" height="13.5" rx="2"/><path d="M8.5 7V5a1.8 1.8 0 0 1 1.8-1.8h3.4A1.8 1.8 0 0 1 15.5 5v2"/><path d="M2.5 12.5h19M10.5 12.5v2h3v-2"/></svg></div>
+          <h3><em>8.</em> Derecho Comercial</h3>
+          <p>Asesoría en comercio, sociedades y contratos.</p>
+        </article>
+              <article class="area">
+          <div class="area-icono"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.2 17.5a6 6 0 1 1 5.6 0"/><path d="M9.5 17.5h5v2a2.5 2.5 0 0 1-5 0z"/><path d="M12 21.8h.01"/><path d="M12 7.5v3M10.4 9.2L12 10.5l1.6-1.3"/></svg></div>
+          <h3><em>9.</em> Propiedad Intelectual</h3>
+          <p>Protegemos tus ideas, marcas y creaciones.</p>
+        </article>
+              <article class="area">
+          <div class="area-icono"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20.5h18"/><path d="M3 20.5V4"/><path d="M7 16.5v-4M11.5 16.5V9M16 16.5v-6.5M20.5 16.5V6"/><path d="M6 8.5l4.5-3 4 2.5L20 3"/></svg></div>
+          <h3><em>10.</em> Consultoría Empresarial</h3>
+          <p>Estrategias para el crecimiento y éxito de tu negocio.</p>
+        </article>
+          </div>
+  </div>
+</section>
+
+<!-- Llamada -->
+<section class="llamada">
+  <div class="env">
+    <div class="llamada-txt">
+      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8.5 8.5 0 0 1-12.2 7.7L3 21l1.3-5.8A8.5 8.5 0 1 1 21 12z"/><path d="M8.5 11h.01M12 11h.01M15.5 11h.01"/></svg>      <div>
+        <strong>¿Necesitas asesoría legal?</strong>
+        <span>Hablemos sobre tu caso.</span>
+      </div>
+    </div>
+    <a href="#contacto" class="btn btn-oscuro">Agenda tu consulta</a>
+  </div>
+</section>
+
+<!-- Cifras -->
+<section class="cifras">
+  <div class="env">
+    <div class="cifras-rejilla">
+              <div class="cifra">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="M9 14.2L7.5 21.5l4.5-2.4 4.5 2.4L15 14.2"/><path d="M12 6.2l1 2 2.2.3-1.6 1.6.4 2.2-2-1-2 1 .4-2.2L8.8 8.5l2.2-.3z"/></svg>          <div>
+            <strong>+15</strong>
+            <span>Años de experiencia</span>
+          </div>
+        </div>
+              <div class="cifra">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M2.5 20c0-3.3 2.9-5.5 6.5-5.5s6.5 2.2 6.5 5.5"/><path d="M16.5 6.2a3 3 0 0 1 0 5.6M18.5 14.4c1.9.7 3 2.2 3 4.1"/></svg>          <div>
+            <strong>+1.200</strong>
+            <span>Clientes satisfechos</span>
+          </div>
+        </div>
+              <div class="cifra">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.2l2.6 2.6L16 9.4"/></svg>          <div>
+            <strong>+2.500</strong>
+            <span>Casos resueltos</span>
+          </div>
+        </div>
+              <div class="cifra">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.5l8 3v6c0 4.7-3.3 8.9-8 10.2-4.7-1.3-8-5.5-8-10.2v-6z"/><path d="M9 12l2.2 2.2L15.5 10"/></svg>          <div>
+            <strong>10</strong>
+            <span>Áreas especializadas</span>
+          </div>
+        </div>
+          </div>
+  </div>
+</section>
+
+<!-- Nosotros -->
+<section class="nosotros" id="nosotros">
+  <div class="env">
+    <div class="nos-rejilla">
+      <div class="nos-foto">
+                  <div style="height:430px;display:flex;align-items:center;justify-content:center;
+            background:linear-gradient(150deg,#111d33,#0b1424);border:1px solid var(--linea);border-radius:var(--radio)">
+            <svg class="marca-emblema" width="150" height="150" viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M24 3l17 6v13c0 10-7 18.5-17 22C14 40.5 7 32 7 22V9z" fill="none" stroke="#c9a227" stroke-width="1.6"/><path d="M24 12v20M17 33h14" stroke="#e2c874" stroke-width="1.6" stroke-linecap="round"/><path d="M24 15l-8 2.5 4 8a4.5 4.5 0 0 1-8 0zM24 15l8 2.5-4 8a4.5 4.5 0 0 0 8 0z" fill="none" stroke="#c9a227" stroke-width="1.4" stroke-linejoin="round"/></svg>          </div>
+                <div class="nos-sello">
+          <strong>+15</strong>
+          <span>años ejerciendo</span>
+        </div>
+      </div>
+      <div class="nos-texto">
+        <div class="rotulo">Sobre nosotros</div>
+        <h2>Un despacho que habla claro desde la primera reunión</h2>
+        <p>Somos un equipo de abogados y consultores que cubre las diez áreas que más necesitan las personas y las empresas. Eso significa que no te mandamos de despacho en despacho: tu asunto se resuelve aquí, con el especialista que corresponde.</p>
+        <p>Trabajamos con una idea simple: te explicamos tu situación en palabras que se entienden, te decimos qué opciones tienes de verdad y cuánto cuesta cada una. Después decides tú.</p>
+        <ul class="nos-lista">
+                      <li><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Primera consulta de valoración sin compromiso.</span></li>
+                      <li><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Presupuesto cerrado por escrito antes de empezar.</span></li>
+                      <li><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Un abogado responsable de tu caso, siempre el mismo.</span></li>
+                      <li><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Informe de situación cada mes, sin tener que pedirlo.</span></li>
+                  </ul>
+        <a href="#contacto" class="btn btn-oro">Agenda tu consulta</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Cómo trabajamos -->
+<section id="servicios">
+  <div class="env">
+    <div class="cabecera-sec centro">
+      <div class="rotulo">Cómo trabajamos</div>
+      <h2>De la primera llamada a la solución</h2>
+      <p>Un proceso claro, para que en todo momento sepas en qué punto está tu asunto.</p>
+    </div>
+    <div class="pasos-rejilla">
+              <div class="paso">
+          <div class="paso-num">01</div>
+          <h3>Nos cuentas tu caso</h3>
+          <p>Una primera reunión, presencial u online, para entender qué ha pasado y qué necesitas.</p>
+        </div>
+              <div class="paso">
+          <div class="paso-num">02</div>
+          <h3>Analizamos y valoramos</h3>
+          <p>Estudiamos la documentación y te decimos con honestidad qué posibilidades reales hay.</p>
+        </div>
+              <div class="paso">
+          <div class="paso-num">03</div>
+          <h3>Acordamos la estrategia</h3>
+          <p>Te presentamos el plan y el presupuesto cerrado. Sin sorpresas ni letra pequeña.</p>
+        </div>
+              <div class="paso">
+          <div class="paso-num">04</div>
+          <h3>Llevamos el asunto</h3>
+          <p>Nos ocupamos de todo y te mantenemos informado en cada paso del proceso.</p>
+        </div>
+          </div>
+  </div>
+</section>
+
+<!-- Opiniones -->
+<section class="opiniones">
+  <div class="env">
+    <div class="cabecera-sec centro">
+      <div class="rotulo">Clientes</div>
+      <h2>Lo que dicen de nosotros</h2>
+    </div>
+    <div class="op-rejilla">
+              <article class="op">
+          <div class="op-comillas">&ldquo;</div>
+          <p>Llevaban el despido de tres empleados y una inspección a la vez. Nos explicaron cada paso sin tecnicismos y todo se resolvió mejor de lo que esperábamos.</p>
+          <div class="op-quien">
+            <div class="op-ini">MR</div>
+            <div>
+              <strong>Marta Ruiz</strong>
+              <span>Directora de RR. HH., empresa de logística</span>
+            </div>
+          </div>
+        </article>
+              <article class="op">
+          <div class="op-comillas">&ldquo;</div>
+          <p>Vinimos por una herencia complicada entre cuatro hermanos. Consiguieron un acuerdo sin ir a juicio y la familia sigue hablándose, que no es poco.</p>
+          <div class="op-quien">
+            <div class="op-ini">JO</div>
+            <div>
+              <strong>Javier Ortega</strong>
+              <span>Cliente particular</span>
+            </div>
+          </div>
+        </article>
+              <article class="op">
+          <div class="op-comillas">&ldquo;</div>
+          <p>Registraron nuestra marca y luego defendieron el nombre frente a una copia. Rápidos, claros con los honorarios y siempre localizables.</p>
+          <div class="op-quien">
+            <div class="op-ini">LF</div>
+            <div>
+              <strong>Lucía Fernández</strong>
+              <span>Fundadora de una marca de cosmética</span>
+            </div>
+          </div>
+        </article>
+          </div>
+  </div>
+</section>
+
+<!-- Blog -->
+<section id="blog">
+  <div class="env">
+    <div class="cabecera-sec centro">
+      <div class="rotulo">Blog jurídico</div>
+      <h2>Artículos que resuelven dudas reales</h2>
+    </div>
+    <div class="blog-rejilla">
+              <article class="post">
+          <span class="post-tag">Derecho Laboral</span>
+          <h3>Despido objetivo o improcedente: en qué se diferencian</h3>
+          <p>Qué tiene que probar la empresa en cada caso y qué indemnización te corresponde según cuál sea.</p>
+          <a href="#contacto" class="enlace-flecha">Leer más →</a>
+        </article>
+              <article class="post">
+          <span class="post-tag">Derecho Fiscal</span>
+          <h3>Cómo preparar una inspección de Hacienda sin pánico</h3>
+          <p>Los documentos que conviene tener listos y los errores que más caros salen cuando llega el requerimiento.</p>
+          <a href="#contacto" class="enlace-flecha">Leer más →</a>
+        </article>
+              <article class="post">
+          <span class="post-tag">Propiedad Intelectual</span>
+          <h3>Registrar tu marca: cuándo hacerlo y qué protege realmente</h3>
+          <p>Lo que cubre el registro, lo que no cubre, y por qué esperar suele costar más que registrar.</p>
+          <a href="#contacto" class="enlace-flecha">Leer más →</a>
+        </article>
+          </div>
+  </div>
+</section>
+
+<!-- Preguntas -->
+<section class="opiniones">
+  <div class="env">
+    <div class="cabecera-sec centro">
+      <div class="rotulo">Preguntas frecuentes</div>
+      <h2>Lo que más nos preguntan</h2>
+    </div>
+    <div class="faq-lista">
+              <details class="faq">
+          <summary>¿La primera consulta tiene coste?</summary>
+          <p>No. La primera reunión es de valoración: escuchamos tu caso y te decimos si tiene recorrido y qué haríamos. Solo si decides seguir adelante hablamos de honorarios.</p>
+        </details>
+              <details class="faq">
+          <summary>¿Cómo cobráis, por horas o por asunto?</summary>
+          <p>Siempre que se puede, presupuesto cerrado por asunto: sabes desde el principio lo que vas a pagar. En los procedimientos largos lo dividimos en hitos, y cada hito se aprueba antes de empezarlo.</p>
+        </details>
+              <details class="faq">
+          <summary>¿Puedo llevar mi caso sin desplazarme?</summary>
+          <p>Sí. Trabajamos con videollamada y firma digital, y solo pedimos presencia física cuando el procedimiento lo exige. Muchos clientes de fuera de Madrid llevan todo el asunto a distancia.</p>
+        </details>
+              <details class="faq">
+          <summary>¿Cuánto tarda en resolverse un asunto?</summary>
+          <p>Depende mucho del tipo. Un contrato o una constitución de sociedad se resuelve en días; un procedimiento judicial puede llevar meses. En la primera reunión te damos un plazo realista, no el que te gustaría oír.</p>
+        </details>
+              <details class="faq">
+          <summary>¿Qué pasa con mi información?</summary>
+          <p>Está protegida por el secreto profesional, que nos obliga por ley y por deontología. Además ciframos la documentación y limitamos el acceso al equipo que lleva tu asunto.</p>
+        </details>
+              <details class="faq">
+          <summary>¿Atendéis a empresas y a particulares?</summary>
+          <p>A los dos. De hecho es habitual que empecemos con la empresa y acabemos ayudando a los socios en asuntos personales, o al revés. Cubrimos las diez áreas para no tener que derivarte a nadie.</p>
+        </details>
+          </div>
+  </div>
+</section>
+
+<!-- Contacto -->
+<section class="contacto" id="contacto">
+  <div class="env">
+    <div class="cont-rejilla">
+      <div>
+        <div class="rotulo">Contacto</div>
+        <h2 style="margin-bottom:16px">Cuéntanos tu caso</h2>
+        <p style="color:var(--apagado);margin-bottom:32px">La primera consulta es de valoración y no tiene
+        coste. Escríbenos y te decimos con honestidad si podemos ayudarte.</p>
+        <div class="cont-dato"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21.5s7-6.2 7-11.1A7 7 0 1 0 5 10.4c0 4.9 7 11.1 7 11.1z"/><circle cx="12" cy="10" r="2.6"/></svg><div><strong>Dirección</strong><span>Paseo de la Castellana, 95 · 28046 Madrid</span></div></div>
+        <div class="cont-dato"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 16.5v2.6a1.9 1.9 0 0 1-2.1 1.9 18.8 18.8 0 0 1-8.2-2.9 18.4 18.4 0 0 1-5.7-5.7A18.8 18.8 0 0 1 2.1 4.1 1.9 1.9 0 0 1 4 2h2.6a1.9 1.9 0 0 1 1.9 1.6c.1.9.3 1.8.7 2.7a1.9 1.9 0 0 1-.4 2L7.6 9.5a15 15 0 0 0 5.7 5.7l1.2-1.2a1.9 1.9 0 0 1 2-.4c.9.3 1.8.6 2.7.7A1.9 1.9 0 0 1 21 16.5z"/></svg><div><strong>Teléfono</strong><span>+34 910 123 456</span></div></div>
+        <div class="cont-dato"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><path d="M2.5 7l9.5 6.5L21.5 7"/></svg><div><strong>Email</strong><span>info@consultorialegal.es</span></div></div>
+        <div class="cont-dato"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5.2l3.3 2"/></svg><div><strong>Horario</strong><span>Lunes a viernes: 9:00 - 19:00</span></div></div>
+      </div>
+
+      <form class="formulario" id="formConsulta" novalidate>
+        <div class="dos">
+          <div class="campo"><label for="nombre">Nombre y apellidos</label><input type="text" id="nombre" name="nombre" autocomplete="name"></div>
+          <div class="campo"><label for="telefono">Teléfono</label><input type="tel" id="telefono" name="telefono" autocomplete="tel"></div>
+        </div>
+        <div class="campo"><label for="email">Correo electrónico</label><input type="email" id="email" name="email" autocomplete="email"></div>
+        <div class="campo">
+          <label for="area">¿Sobre qué área es tu consulta?</label>
+          <select id="area" name="area">
+                          <option>Derecho Empresarial</option>
+                          <option>Derecho Laboral</option>
+                          <option>Derecho de Familia</option>
+                          <option>Derecho Inmobiliario</option>
+                          <option>Derecho Civil</option>
+                          <option>Derecho Penal</option>
+                          <option>Derecho Fiscal</option>
+                          <option>Derecho Comercial</option>
+                          <option>Propiedad Intelectual</option>
+                          <option>Consultoría Empresarial</option>
+                        <option>Otro asunto</option>
+          </select>
+        </div>
+        <div class="campo"><label for="mensaje">Cuéntanos brevemente tu caso</label><textarea id="mensaje" name="mensaje" rows="4"></textarea></div>
+        <label style="display:flex;gap:10px;align-items:flex-start;font-size:12.5px;color:var(--apagado);cursor:pointer">
+          <input type="checkbox" name="privacidad" style="width:16px;height:16px;margin-top:2px;accent-color:var(--oro)">
+          <span>He leído y acepto la política de privacidad. Mis datos se usarán solo para responder a esta consulta.</span>
+        </label>
+        <button type="submit" class="btn btn-oro" style="width:100%;margin-top:20px">Enviar consulta</button>
+        <div class="aviso-form" id="avisoForm" role="status"></div>
+        <p class="legal-mini">Tu consulta está protegida por el secreto profesional.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Pie -->
+<footer class="pie">
+  <div class="env">
+    <div class="pie-rejilla">
+      <div>
+        <div class="marca" style="margin-bottom:16px">
+          <svg class="marca-emblema" width="38" height="38" viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M24 3l17 6v13c0 10-7 18.5-17 22C14 40.5 7 32 7 22V9z" fill="none" stroke="#c9a227" stroke-width="1.6"/><path d="M24 12v20M17 33h14" stroke="#e2c874" stroke-width="1.6" stroke-linecap="round"/><path d="M24 15l-8 2.5 4 8a4.5 4.5 0 0 1-8 0zM24 15l8 2.5-4 8a4.5 4.5 0 0 0 8 0z" fill="none" stroke="#c9a227" stroke-width="1.4" stroke-linejoin="round"/></svg>          <span class="marca-txt">
+            <strong>Consultoría Legal &amp;</strong>
+            <span>Empresarial Premium</span>
+          </span>
+        </div>
+        <p>Paseo de la Castellana, 95 · 28046 Madrid<br>+34 910 123 456<br>info@consultorialegal.es</p>
+      </div>
+      <div>
+        <h4>Áreas</h4>
+                  <a href="#areas">Derecho Empresarial</a>
+                  <a href="#areas">Derecho Laboral</a>
+                  <a href="#areas">Derecho de Familia</a>
+                  <a href="#areas">Derecho Inmobiliario</a>
+                  <a href="#areas">Derecho Civil</a>
+              </div>
+      <div>
+        <h4>&nbsp;</h4>
+                  <a href="#areas">Derecho Penal</a>
+                  <a href="#areas">Derecho Fiscal</a>
+                  <a href="#areas">Derecho Comercial</a>
+                  <a href="#areas">Propiedad Intelectual</a>
+                  <a href="#areas">Consultoría Empresarial</a>
+              </div>
+      <div>
+        <h4>Despacho</h4>
+        <a href="#nosotros">Sobre nosotros</a>
+        <a href="#servicios">Cómo trabajamos</a>
+        <a href="#blog">Blog jurídico</a>
+        <a href="#contacto">Contacto</a>
+      </div>
+    </div>
+    <div class="pie-abajo">
+      <span>© <span id="anio">2026</span> Consultoría Legal &amp; Empresarial Premium. Todos los derechos reservados.</span>
+      <span>Plantilla demostrativa · Aviso legal · Privacidad · Cookies</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Botones flotantes -->
+<div class="flotantes">
+      <a class="wa" href="https://wa.me/34600123456?text=Hola%2C%20me%20gustar%C3%ADa%20consultar%20sobre%20un%20asunto%20legal." target="_blank" rel="noopener" aria-label="WhatsApp"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 11.6a8.5 8.5 0 0 1-12.6 7.5L3.5 20.5l1.4-4.3A8.5 8.5 0 1 1 20.5 11.6z"/><path d="M8.9 8.4c.3-.7.6-.7.9-.7h.6c.2 0 .5 0 .7.5l.8 1.9c.1.2 0 .4-.1.6l-.4.5c-.1.2-.3.4-.1.7.2.4.9 1.4 1.9 2 1.2.7 1.4.5 1.7.5.2-.1.6-.5.7-.7.2-.2.3-.2.5-.1l1.8.9c.3.1.4.2.5.4 0 .2 0 .9-.3 1.3-.4.5-1.1.9-1.6.9-1.1.1-2.6-.3-4.4-1.5-2.1-1.4-3.4-3.5-3.5-3.7-.1-.2-.8-1.2-.8-2.3 0-1 .5-1.5.7-1.7z"/></svg></a>
+    <a href="tel:+34910123456" aria-label="Llamar"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 16.5v2.6a1.9 1.9 0 0 1-2.1 1.9 18.8 18.8 0 0 1-8.2-2.9 18.4 18.4 0 0 1-5.7-5.7A18.8 18.8 0 0 1 2.1 4.1 1.9 1.9 0 0 1 4 2h2.6a1.9 1.9 0 0 1 1.9 1.6c.1.9.3 1.8.7 2.7a1.9 1.9 0 0 1-.4 2L7.6 9.5a15 15 0 0 0 5.7 5.7l1.2-1.2a1.9 1.9 0 0 1 2-.4c.9.3 1.8.6 2.7.7A1.9 1.9 0 0 1 21 16.5z"/></svg></a>
+  <a href="mailto:info@consultorialegal.es" aria-label="Email"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><path d="M2.5 7l9.5 6.5L21.5 7"/></svg></a>
+</div>
+
+<script>
+/* ==========================================================================
+   Consultoría Legal & Empresarial Premium — comportamiento
+   ========================================================================== */
+(function () {
+  'use strict';
+
+  /* --- Menú en móvil --- */
+  var boton = document.getElementById('abrirMenu');
+  var menu  = document.getElementById('menuMovil');
+  if (boton && menu) {
+    boton.addEventListener('click', function () {
+      var abierto = menu.classList.toggle('ver');
+      boton.setAttribute('aria-expanded', abierto ? 'true' : 'false');
+    });
+    menu.addEventListener('click', function (ev) {
+      if (ev.target.tagName === 'A') {
+        menu.classList.remove('ver');
+        boton.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
+  /* --- Marcar en el menú la sección que se está viendo --- */
+  var enlaces = [].slice.call(document.querySelectorAll('.menu a[href^="#"]'));
+  var destinos = enlaces
+    .map(function (a) { return { a: a, sec: document.querySelector(a.getAttribute('href')) }; })
+    .filter(function (d) { return d.sec; });
+
+  if (destinos.length) {
+    var repintar = function () {
+      var y = window.scrollY + 140;
+      var activo = null;
+      destinos.forEach(function (d) {
+        if (d.sec.offsetTop <= y) activo = d;
+      });
+      destinos.forEach(function (d) { d.a.classList.toggle('act', d === activo); });
+    };
+    var esperando = false;
+    window.addEventListener('scroll', function () {
+      if (esperando) return;
+      esperando = true;
+      window.requestAnimationFrame(function () { repintar(); esperando = false; });
+    }, { passive: true });
+    repintar();
+  }
+
+  /* --- Formulario de consulta --- */
+  var form = document.getElementById('formConsulta');
+  if (form) {
+    var aviso = document.getElementById('avisoForm');
+
+    var decir = function (texto, clase) {
+      aviso.textContent = texto;
+      aviso.className = 'aviso-form ' + clase;
+    };
+
+    form.addEventListener('submit', function (ev) {
+      ev.preventDefault();
+
+      var nombre = form.nombre.value.trim();
+      var email  = form.email.value.trim();
+      var caso   = form.mensaje.value.trim();
+
+      if (nombre.length < 3) {
+        decir('Escribe tu nombre completo, por favor.', 'mal');
+        form.nombre.focus();
+        return;
+      }
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(email)) {
+        decir('Revisa el correo electrónico: parece incompleto.', 'mal');
+        form.email.focus();
+        return;
+      }
+      if (caso.length < 12) {
+        decir('Cuéntanos un poco más sobre tu caso para poder ayudarte.', 'mal');
+        form.mensaje.focus();
+        return;
+      }
+      if (form.privacidad && !form.privacidad.checked) {
+        decir('Necesitamos tu consentimiento para poder responderte.', 'mal');
+        return;
+      }
+
+      decir('✓ Gracias, ' + nombre.split(' ')[0] + '. Hemos recibido tu consulta y te '
+          + 'responderemos en menos de 24 horas laborables.', 'ok');
+      form.reset();
+      aviso.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    });
+  }
+
+  /* --- Año del pie --- */
+  var anio = document.getElementById('anio');
+  if (anio) anio.textContent = new Date().getFullYear();
+})();
+
+</script>
+</body>
+</html>

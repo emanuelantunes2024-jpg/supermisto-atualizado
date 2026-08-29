@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Magazine Pro — Revista Digital de Cultura y Actualidad</title>
+<meta name="description" content="Revista digital con artículos de cultura, tecnología, negocios y estilo de vida.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* En la web las fuentes vienen de Google Fonts (20 KB en vez de 400 KB).
+   El ZIP que descarga el cliente las lleva incrustadas. */
+/* ==========================================================================
+   MAGAZINE PRO — REVISTA / BLOG EDITORIAL
+   Leuname Software · leunamesoftware.com
+   ========================================================================== */
+
+:root{
+  --negro:#111113; --negro2:#1c1c1f;
+  --rojo:#d1362f; --rojo-osc:#a92924;
+  --blanco:#fff; --crema:#fbfaf8; --gris-cl:#f0efec;
+  --tinta:#16161a; --apagado:#767680; --linea:#e5e3de;
+  --ok:#2e8b57; --error:#d1362f;
+  --serif:'Playfair Display',Georgia,serif;
+  --sans:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --ancho:1320px;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--blanco);color:var(--tinta);font-family:var(--sans);
+  font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img,svg{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--rojo);outline-offset:3px}
+
+.env{max-width:var(--ancho);margin:0 auto;padding:0 26px}
+section{padding:64px 0}
+
+h1,h2,h3{font-family:var(--serif);font-weight:700;line-height:1.15}
+h2{font-size:clamp(24px,2.8vw,32px)}
+h3{font-size:19px}
+
+.eti{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--rojo);background:rgba(209,54,47,.08);
+  padding:5px 12px;border-radius:4px}
+.cab-sec{display:flex;align-items:baseline;justify-content:space-between;gap:20px;margin-bottom:32px;
+  border-bottom:2px solid var(--negro);padding-bottom:16px}
+.cab-sec h2{margin:0}
+.cab-sec a{font-size:13px;font-weight:700;color:var(--rojo)}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  padding:14px 28px;border:2px solid transparent;border-radius:4px;
+  font-family:var(--sans);font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;
+  cursor:pointer;transition:.2s;white-space:nowrap}
+.btn-rojo{background:var(--rojo);color:#fff}
+.btn-rojo:hover{background:var(--rojo-osc)}
+.btn-negro{background:var(--negro);color:#fff}
+.btn-negro:hover{background:var(--negro2)}
+
+/* ---------------- Barra superior ---------------- */
+.barra-top{background:var(--negro);color:#c9c9cf;font-size:12px}
+.barra-top .env{display:flex;justify-content:space-between;align-items:center;padding:8px 26px;flex-wrap:wrap;gap:10px}
+.barra-top a{transition:.2s}
+.barra-top a:hover{color:#fff}
+.barra-redes{display:flex;gap:14px}
+
+/* ---------------- Cabecera ---------------- */
+.cab{border-bottom:3px solid var(--negro);background:#fff}
+.cab-top{display:flex;align-items:center;justify-content:space-between;padding:24px 0}
+.marca{font-family:var(--serif);font-size:34px;font-weight:700;letter-spacing:-.01em}
+.marca span{color:var(--rojo)}
+.buscar{display:flex;align-items:center;gap:8px;border:1.5px solid var(--linea);border-radius:99px;padding:9px 16px;color:var(--apagado)}
+.buscar input{border:none;outline:none;font-size:13.5px;width:150px;font-family:var(--sans)}
+.cab-nav{border-top:1px solid var(--linea);display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap}
+.cab-nav a{padding:14px 20px;font-size:13.5px;font-weight:700;text-transform:uppercase;letter-spacing:.03em;
+  border-bottom:3px solid transparent;transition:.18s}
+.cab-nav a:hover,.cab-nav a.act{color:var(--rojo);border-color:var(--rojo)}
+.abrir-menu{display:none;background:none;border:1px solid var(--linea);border-radius:8px;
+  width:44px;height:44px;color:var(--tinta);cursor:pointer;align-items:center;justify-content:center}
+.menu-movil{display:none;border-top:1px solid var(--linea)}
+.menu-movil.ver{display:block}
+.menu-movil a{display:block;padding:13px 26px;border-bottom:1px solid var(--linea);font-size:14px;font-weight:600}
+
+/* ---------------- Destacado principal ---------------- */
+.destacado-grid{display:grid;grid-template-columns:1.6fr 1fr;gap:28px}
+.destacado-hero{position:relative;border-radius:6px;overflow:hidden;min-height:460px;
+  display:flex;flex-direction:column;justify-content:flex-end;padding:36px;color:#fff}
+.destacado-hero h1{font-size:clamp(28px,3.4vw,42px);margin:14px 0 12px;max-width:640px}
+.destacado-hero p{color:rgba(255,255,255,.85);max-width:520px;margin-bottom:16px;font-size:15.5px}
+.meta{display:flex;gap:16px;align-items:center;font-size:12.5px;color:rgba(255,255,255,.75)}
+.secundarios{display:flex;flex-direction:column;gap:20px}
+.secundario{display:flex;gap:14px}
+.secundario-img{width:110px;height:88px;border-radius:6px;flex-shrink:0}
+.secundario h3{font-size:16px;margin:6px 0 8px}
+.secundario .meta{color:var(--apagado)}
+
+/* ---------------- Últimos artículos ---------------- */
+.articulos{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.articulo-img{height:190px;border-radius:6px;margin-bottom:16px;position:relative}
+.articulo-img .eti{position:absolute;left:12px;top:12px;background:#fff}
+.articulo h3{font-size:19px;margin-bottom:10px}
+.articulo p{font-size:14px;color:var(--apagado);margin-bottom:12px}
+.meta-art{display:flex;gap:14px;font-size:12px;color:var(--apagado);align-items:center}
+.autor-ini{width:22px;height:22px;border-radius:50%;background:var(--negro);color:#fff;font-size:10px;
+  display:flex;align-items:center;justify-content:center;font-weight:700}
+
+/* ---------------- Categorías ---------------- */
+.categorias{background:var(--negro);color:#fff}
+.categorias .cab-sec{border-color:rgba(255,255,255,.2)}
+.categorias .cab-sec h2{color:#fff}
+.cat-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
+.cat-item{border:1px solid rgba(255,255,255,.15);border-radius:8px;padding:24px 16px;text-align:center;transition:.2s}
+.cat-item:hover{background:rgba(255,255,255,.08);border-color:var(--rojo)}
+.cat-item svg{margin:0 auto 12px;color:var(--rojo)}
+.cat-item h3{font-size:14px;color:#fff;font-family:var(--sans);font-weight:700}
+.cat-item span{font-size:11.5px;color:#9a9aa3}
+
+/* ---------------- Newsletter ---------------- */
+.newsletter{background:var(--rojo);color:#fff;text-align:center}
+.newsletter h2{color:#fff;margin-bottom:12px}
+.newsletter p{color:rgba(255,255,255,.9);max-width:480px;margin:0 auto 28px}
+.newsletter-form{display:flex;max-width:440px;margin:0 auto;gap:0;border-radius:4px;overflow:hidden}
+.newsletter-form input{flex:1;padding:15px 18px;border:none;font-size:14.5px;font-family:var(--sans)}
+.newsletter-form button{padding:15px 26px;background:var(--negro);color:#fff;border:none;font-weight:700;
+  text-transform:uppercase;font-size:13px;letter-spacing:.04em;cursor:pointer}
+.newsletter-form button:hover{background:var(--negro2)}
+
+/* ---------------- Pie ---------------- */
+.pie{background:var(--gris-cl);padding:50px 0 0}
+.pie-rejilla{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:34px;padding-bottom:36px}
+.pie h4{font-size:12.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px}
+.pie p,.pie a{font-size:13.5px;color:var(--apagado)}
+.pie a{display:block;margin-bottom:9px;transition:.2s}
+.pie a:hover{color:var(--rojo)}
+.pie-abajo{border-top:1px solid var(--linea);padding:17px 0;font-size:12.5px;color:var(--apagado);
+  display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.aviso-demo{background:#111;color:#ffb4ae;text-align:center;padding:9px 20px;font-size:12.5px;font-weight:600}
+
+@media(max-width:1100px){
+  .destacado-grid{grid-template-columns:1fr}
+  .articulos{grid-template-columns:1fr 1fr}
+  .cat-grid{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:900px){
+  .cab-nav{display:none}
+  .abrir-menu{display:flex}
+  .buscar{display:none}
+}
+@media(max-width:640px){
+  section{padding:44px 0}
+  .env{padding:0 18px}
+  .articulos{grid-template-columns:1fr}
+  .cat-grid{grid-template-columns:1fr 1fr}
+  .pie-rejilla{grid-template-columns:1fr 1fr;gap:24px}
+  .newsletter-form{flex-direction:column}
+  .marca{font-size:26px}
+}
+html,body{overflow-x:hidden;max-width:100%}
+
+</style>
+</head>
+<body>
+
+<div class="aviso-demo">Plantilla demostrativa. Nombre, artículos y datos son ficticios.</div>
+
+<div class="barra-top">
+  <div class="env">
+    <span>Sábado, <span id="fecha"></span></span>
+    <div class="barra-redes">
+      <a href="#">Instagram</a><a href="#">X</a><a href="#">YouTube</a>
+    </div>
+  </div>
+</div>
+
+<header class="cab">
+  <div class="env cab-top">
+    <a href="#inicio" class="marca">The<span>Wire</span>Mag</a>
+    <div class="buscar">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input type="search" placeholder="Buscar artículos...">
+    </div>
+    <button class="abrir-menu" id="abrirMenu" aria-expanded="false" aria-label="Abrir menú">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+    </button>
+  </div>
+  <nav class="cab-nav" id="menuPrincipal">
+    <a href="#inicio" class="act">Portada</a>
+    <a href="#cultura">Cultura</a>
+    <a href="#tecnologia">Tecnología</a>
+    <a href="#negocios">Negocios</a>
+    <a href="#estilo">Estilo de vida</a>
+    <a href="#viajes">Viajes</a>
+    <a href="#opinion">Opinión</a>
+  </nav>
+  <nav class="menu-movil" id="menuMovil">
+    <a href="#inicio">Portada</a><a href="#cultura">Cultura</a><a href="#tecnologia">Tecnología</a>
+    <a href="#negocios">Negocios</a><a href="#estilo">Estilo de vida</a><a href="#viajes">Viajes</a><a href="#opinion">Opinión</a>
+  </nav>
+</header>
+
+<section id="inicio">
+  <div class="env">
+    <div class="destacado-grid">
+      <a href="#" class="destacado-hero" style="background:linear-gradient(0deg,rgba(10,10,12,.88),rgba(10,10,12,.15) 60%),linear-gradient(135deg,#3a3a42,#111113)">
+        <span class="eti" style="background:var(--rojo);color:#fff">Tecnología</span>
+        <h1>La inteligencia artificial ya cambió cómo trabajamos: esto es lo que viene</h1>
+        <p>Un repaso a las herramientas que están redefiniendo la productividad en 2026 y lo que significan para el futuro del trabajo.</p>
+        <div class="meta"><span>Por Marta Dueñas</span><span>·</span><span>8 min de lectura</span></div>
+      </a>
+      <div class="secundarios">
+        <a href="#" class="secundario">
+          <div class="secundario-img" style="background:linear-gradient(140deg,#d1362f,#a92924)"></div>
+          <div><span class="eti">Negocios</span><h3>Cinco startups que están redefiniendo su sector</h3><div class="meta">6 min · Negocios</div></div>
+        </a>
+        <a href="#" class="secundario">
+          <div class="secundario-img" style="background:linear-gradient(140deg,#3a3a42,#1c1c1f)"></div>
+          <div><span class="eti">Cultura</span><h3>La exposición que reunió a medio millón de visitantes</h3><div class="meta">5 min · Cultura</div></div>
+        </a>
+        <a href="#" class="secundario">
+          <div class="secundario-img" style="background:linear-gradient(140deg,#767680,#3a3a42)"></div>
+          <div><span class="eti">Viajes</span><h3>Diez destinos para descubrir antes de que se pongan de moda</h3><div class="meta">7 min · Viajes</div></div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="cultura">
+  <div class="env">
+    <div class="cab-sec"><h2>Últimos artículos</h2><a href="#">Ver todos →</a></div>
+    <div class="articulos">
+      <a href="#" class="articulo">
+        <div class="articulo-img" style="background:linear-gradient(140deg,#d1362f,#7d201b)"><span class="eti">Cultura</span></div>
+        <h3>El renacer del cine independiente en streaming</h3>
+        <p>Las plataformas apuestan cada vez más por historias arriesgadas y autorales.</p>
+        <div class="meta-art"><span class="autor-ini">A</span><span>Andrea Solís</span><span>·</span><span>4 min</span></div>
+      </a>
+      <a href="#" class="articulo">
+        <div class="articulo-img" style="background:linear-gradient(140deg,#1c1c1f,#3a3a42)"><span class="eti">Tecnología</span></div>
+        <h3>Cómo proteger tu privacidad sin renunciar a la comodidad</h3>
+        <p>Una guía práctica para configurar tus dispositivos sin volverte loco.</p>
+        <div class="meta-art"><span class="autor-ini">J</span><span>Julio Reyes</span><span>·</span><span>6 min</span></div>
+      </a>
+      <a href="#" class="articulo">
+        <div class="articulo-img" style="background:linear-gradient(140deg,#767680,#3a3a42)"><span class="eti">Negocios</span></div>
+        <h3>El auge de las oficinas híbridas y qué significa para ti</h3>
+        <p>Empresas de todos los tamaños repensaron su forma de trabajar.</p>
+        <div class="meta-art"><span class="autor-ini">C</span><span>Clara Mendes</span><span>·</span><span>5 min</span></div>
+      </a>
+      <a href="#" class="articulo">
+        <div class="articulo-img" style="background:linear-gradient(140deg,#a92924,#d1362f)"><span class="eti">Estilo de vida</span></div>
+        <h3>Rutinas matutinas de personas realmente productivas</h3>
+        <p>Qué tienen en común quienes logran hacer más con menos estrés.</p>
+        <div class="meta-art"><span class="autor-ini">L</span><span>Laura Pinto</span><span>·</span><span>4 min</span></div>
+      </a>
+      <a href="#" class="articulo">
+        <div class="articulo-img" style="background:linear-gradient(140deg,#3a3a42,#111113)"><span class="eti">Viajes</span></div>
+        <h3>Rutas en tren por Europa que no te puedes perder</h3>
+        <p>Trayectos escénicos que vale la pena vivir despacio.</p>
+        <div class="meta-art"><span class="autor-ini">D</span><span>Diego Font</span><span>·</span><span>7 min</span></div>
+      </a>
+      <a href="#" class="articulo">
+        <div class="articulo-img" style="background:linear-gradient(140deg,#1c1c1f,#767680)"><span class="eti">Opinión</span></div>
+        <h3>Por qué deberíamos leer más despacio</h3>
+        <p>Una defensa de la lectura profunda en tiempos de scroll infinito.</p>
+        <div class="meta-art"><span class="autor-ini">S</span><span>Sofía Aranda</span><span>·</span><span>5 min</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="categorias">
+  <div class="env">
+    <div class="cab-sec"><h2>Explora por sección</h2></div>
+    <div class="cat-grid">
+      <div class="cat-item"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 19V7a2 2 0 0 1 2-2h4l2 2h6a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/></svg><h3>Cultura</h3><span>142 artículos</span></div>
+      <div class="cat-item"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg><h3>Tecnología</h3><span>98 artículos</span></div>
+      <div class="cat-item"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg><h3>Negocios</h3><span>76 artículos</span></div>
+      <div class="cat-item"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="3.4"/><path d="M4.5 20.5c0-3.7 3.4-6.5 7.5-6.5s7.5 2.8 7.5 6.5"/></svg><h3>Estilo de vida</h3><span>110 artículos</span></div>
+      <div class="cat-item"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2.5 16.5 12 4l9.5 12.5z"/><path d="M2.5 16.5h19"/></svg><h3>Viajes</h3><span>64 artículos</span></div>
+      <div class="cat-item"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4.5h13a2.5 2.5 0 0 1 2.5 2.5v11.5H6.5A2.5 2.5 0 0 1 4 16z"/></svg><h3>Opinión</h3><span>52 artículos</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="newsletter">
+  <div class="env">
+    <h2>No te pierdas nada</h2>
+    <p>Recibe cada viernes un resumen con los mejores artículos de la semana, directo a tu correo.</p>
+    <form class="newsletter-form" id="formNewsletter" novalidate>
+      <input type="email" name="email" placeholder="tucorreo@ejemplo.com" required>
+      <button type="submit">Suscribirme</button>
+    </form>
+    <div class="aviso-form" id="avisoNewsletter" style="margin-top:14px;color:#fff;font-size:13.5px"></div>
+  </div>
+</section>
+
+<footer class="pie">
+  <div class="env">
+    <div class="pie-rejilla">
+      <div><span class="marca">The<span>Wire</span>Mag</span><p style="margin-top:12px;max-width:280px">Periodismo independiente sobre cultura, tecnología y negocios.</p></div>
+      <div><h4>Secciones</h4><a href="#cultura">Cultura</a><a href="#tecnologia">Tecnología</a><a href="#negocios">Negocios</a></div>
+      <div><h4>Revista</h4><a href="#">Sobre nosotros</a><a href="#">Colabora</a><a href="#">Contacto</a></div>
+      <div><h4>Legal</h4><a href="#">Aviso legal</a><a href="#">Privacidad</a></div>
+    </div>
+    <div class="pie-abajo">
+      <span>© <span id="anio"></span> TheWireMag. Todos los derechos reservados.</span>
+      <span>redaccion@thewiremag.com</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ==========================================================================
+   TheWireMag — Magazine Pro
+   ========================================================================== */
+(function () {
+  'use strict';
+
+  var boton = document.getElementById('abrirMenu');
+  var menu  = document.getElementById('menuMovil');
+  if (boton && menu) {
+    boton.addEventListener('click', function () {
+      var abierto = menu.classList.toggle('ver');
+      boton.setAttribute('aria-expanded', abierto ? 'true' : 'false');
+    });
+    menu.addEventListener('click', function (ev) {
+      if (ev.target.closest('a')) {
+        menu.classList.remove('ver');
+        boton.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
+  var form = document.getElementById('formNewsletter');
+  if (form) {
+    var aviso = document.getElementById('avisoNewsletter');
+    form.addEventListener('submit', function (ev) {
+      ev.preventDefault();
+      var email = form.email.value.trim();
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(email)) {
+        aviso.textContent = 'Revisa el correo electrónico: parece incompleto.';
+        return;
+      }
+      aviso.textContent = '✓ ¡Gracias por suscribirte! Revisa tu correo para confirmar.';
+      form.reset();
+    });
+  }
+
+  var fecha = document.getElementById('fecha');
+  if (fecha) {
+    fecha.textContent = new Date().toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+  }
+
+  var anio = document.getElementById('anio');
+  if (anio) anio.textContent = new Date().getFullYear();
+})();
+
+</script>
+</body>
+</html>

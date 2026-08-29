@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Business Pro — Consultoría y Soluciones Corporativas</title>
+<meta name="description" content="Consultoría estratégica, financiera y de transformación digital para hacer crecer tu empresa.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* En la web las fuentes vienen de Google Fonts (20 KB en vez de 400 KB).
+   El ZIP que descarga el cliente las lleva incrustadas. */
+/* ==========================================================================
+   BUSINESS PRO — CONSULTORÍA Y SOLUCIONES CORPORATIVAS
+   Leuname Software · leunamesoftware.com
+   ========================================================================== */
+
+:root{
+  --teal:#0f5257; --teal-osc:#0a3a3d; --teal-cla:#1c7c80; --teal-suave:#e6f1f1;
+  --lima:#c7e63a; --lima-osc:#9fbb1f;
+  --blanco:#fff; --gris-cl:#f5f7f6; --gris2:#eef2f1;
+  --tinta:#12201f; --tinta2:#3a4a49; --apagado:#748584; --linea:#e1e8e7;
+  --ok:#2e8b57; --error:#c0492f;
+  --sans:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --disp:'Sora',var(--sans);
+  --radio:14px; --ancho:1320px;
+  --sombra:0 10px 30px rgba(15,82,87,.08);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--blanco);color:var(--tinta);font-family:var(--sans);
+  font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img,svg{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--lima);outline-offset:3px}
+
+.env{max-width:var(--ancho);margin:0 auto;padding:0 26px}
+section{padding:80px 0}
+
+h1,h2,h3{font-family:var(--disp);font-weight:700;line-height:1.14;letter-spacing:-.02em}
+h2{font-size:clamp(28px,3.3vw,40px)}
+h3{font-size:19px}
+
+.rotulo{display:inline-flex;align-items:center;gap:8px;padding:6px 15px;border-radius:6px;
+  background:var(--teal-suave);color:var(--teal-osc);font-size:12px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px}
+.cab-sec{margin-bottom:40px}
+.cab-sec.centro{text-align:center;max-width:660px;margin-left:auto;margin-right:auto}
+.cab-sec p{color:var(--apagado);margin-top:12px;font-size:16px}
+
+/* ---------------- Botones ---------------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  padding:14px 28px;border:2px solid transparent;border-radius:8px;
+  font-family:var(--sans);font-size:14.5px;font-weight:700;
+  cursor:pointer;transition:.2s;white-space:nowrap}
+.btn svg{flex-shrink:0}
+.btn-lima{background:var(--lima);color:var(--teal-osc);box-shadow:0 8px 22px rgba(199,230,58,.35)}
+.btn-lima:hover{background:var(--lima-osc);transform:translateY(-2px)}
+.btn-teal{background:var(--teal);color:#fff}
+.btn-teal:hover{background:var(--teal-osc);transform:translateY(-2px)}
+.btn-linea{border-color:rgba(255,255,255,.4);color:#fff;background:transparent}
+.btn-linea:hover{background:rgba(255,255,255,.12)}
+.btn-linea-osc{border-color:var(--teal);color:var(--teal);background:transparent}
+.btn-linea-osc:hover{background:var(--teal);color:#fff}
+
+/* ---------------- Cabecera ---------------- */
+.cab{position:sticky;top:0;z-index:80;background:rgba(255,255,255,.97);
+  backdrop-filter:blur(10px);border-bottom:1px solid var(--linea)}
+.cab .env{display:flex;align-items:center;gap:22px;padding-top:16px;padding-bottom:16px}
+.marca{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.marca-ic{width:36px;height:36px;border-radius:8px;background:var(--teal);color:var(--lima);
+  display:flex;align-items:center;justify-content:center;font-family:var(--disp);font-weight:800;font-size:17px}
+.marca-txt strong{display:block;font-family:var(--disp);font-size:19px;font-weight:800;line-height:1}
+.marca-txt span{display:block;font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--apagado);margin-top:2px}
+.menu{display:flex;gap:30px;margin:0 auto}
+.menu a{font-size:14.5px;font-weight:600;color:var(--tinta2);padding:5px 0;
+  border-bottom:2px solid transparent;transition:.2s}
+.menu a:hover,.menu a.act{color:var(--teal);border-color:var(--lima)}
+.abrir-menu{display:none;background:none;border:1px solid var(--linea);border-radius:10px;
+  width:44px;height:44px;color:var(--tinta);cursor:pointer;align-items:center;justify-content:center}
+.menu-movil{display:none;border-top:1px solid var(--linea);background:#fff}
+.menu-movil.ver{display:block}
+.menu-movil a{display:block;padding:13px 26px;border-bottom:1px solid var(--linea);font-size:15px}
+
+/* ---------------- Portada ---------------- */
+.portada{position:relative;overflow:hidden;background:linear-gradient(155deg,var(--teal-osc),var(--teal) 60%);color:#fff}
+.portada .env{padding-top:88px;padding-bottom:88px;position:relative;z-index:2}
+.portada-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center}
+.portada h1{font-size:clamp(34px,4.6vw,54px);margin-bottom:20px}
+.portada h1 span{color:var(--lima)}
+.portada p{font-size:17.5px;color:#c8dcda;max-width:480px;margin-bottom:30px}
+.portada-botones{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:40px}
+.portada-clientes{display:flex;gap:26px;flex-wrap:wrap;align-items:center;opacity:.8;font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:#a9c4c1}
+.portada-panel{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);border-radius:20px;padding:30px}
+.portada-metric{display:flex;justify-content:space-between;align-items:center;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+.portada-metric:last-child{border-bottom:none}
+.portada-metric strong{font-family:var(--disp);font-size:28px;color:var(--lima)}
+.portada-metric span{font-size:13px;color:#c8dcda}
+
+/* ---------------- Servicios ---------------- */
+.servicios{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.servicio{background:var(--gris-cl);border:1px solid var(--linea);border-radius:var(--radio);
+  padding:32px 28px;transition:.24s}
+.servicio:hover{transform:translateY(-6px);box-shadow:var(--sombra);background:#fff;border-color:var(--teal-cla)}
+.servicio-ic{width:52px;height:52px;border-radius:12px;background:var(--teal);
+  color:var(--lima);display:flex;align-items:center;justify-content:center;margin-bottom:18px}
+.servicio h3{margin-bottom:10px}
+.servicio p{font-size:14.5px;color:var(--apagado);line-height:1.65}
+.servicio a{display:inline-flex;align-items:center;gap:6px;margin-top:16px;font-size:13.5px;font-weight:700;color:var(--teal)}
+
+/* ---------------- Proceso ---------------- */
+.proceso{background:var(--gris-cl)}
+.pasos{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.paso{position:relative;background:#fff;border:1px solid var(--linea);border-radius:var(--radio);padding:28px 24px}
+.paso-num{font-family:var(--disp);font-size:38px;font-weight:800;color:var(--teal-suave);
+  -webkit-text-stroke:1.5px var(--teal-cla);margin-bottom:14px}
+.paso h3{margin-bottom:8px;font-size:16.5px}
+.paso p{font-size:13.5px;color:var(--apagado);line-height:1.6}
+
+/* ---------------- Stats ---------------- */
+.stats{background:linear-gradient(120deg,var(--teal-osc),var(--teal));color:#fff}
+.stats .env{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center}
+.stat strong{display:block;font-family:var(--disp);font-size:clamp(30px,3.6vw,44px);color:var(--lima)}
+.stat span{font-size:13.5px;color:#c8dcda}
+
+/* ---------------- Casos ---------------- */
+.casos{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.caso{border-radius:var(--radio);overflow:hidden;border:1px solid var(--linea);transition:.24s}
+.caso:hover{transform:translateY(-6px);box-shadow:var(--sombra)}
+.caso-img{height:170px;display:flex;align-items:flex-end;padding:20px;color:#fff}
+.caso-img span{font-size:11.5px;text-transform:uppercase;letter-spacing:.1em;background:rgba(0,0,0,.28);
+  padding:5px 12px;border-radius:99px}
+.caso-cuerpo{padding:22px}
+.caso-cuerpo h3{margin-bottom:8px}
+.caso-cuerpo p{font-size:14px;color:var(--apagado)}
+.caso-resultado{margin-top:14px;font-family:var(--disp);font-weight:800;color:var(--teal);font-size:22px}
+
+/* ---------------- Equipo ---------------- */
+.equipo{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.ficha{background:var(--gris-cl);border:1px solid var(--linea);border-radius:var(--radio);
+  padding:26px 20px;text-align:center;transition:.22s}
+.ficha:hover{box-shadow:var(--sombra);border-color:var(--teal-cla);background:#fff}
+.ficha-foto{width:88px;height:88px;margin:0 auto 16px;border-radius:50%;background:var(--teal);
+  display:flex;align-items:center;justify-content:center;color:var(--lima);font-family:var(--disp);font-size:24px;font-weight:800}
+.ficha h3{font-size:16px;margin-bottom:3px}
+.ficha .cargo{font-size:12.5px;color:var(--teal);font-weight:700;margin-bottom:9px}
+.ficha p{font-size:13px;color:var(--apagado);line-height:1.55}
+
+/* ---------------- Testimonios ---------------- */
+.opiniones{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.opinion{background:var(--gris-cl);border:1px solid var(--linea);border-radius:var(--radio);padding:30px}
+.opinion p{font-size:16px;color:var(--tinta2);margin-bottom:20px;font-style:italic}
+.opinion-quien{display:flex;align-items:center;gap:12px}
+.opinion-ini{width:44px;height:44px;border-radius:50%;background:var(--teal);color:var(--lima);
+  display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;flex-shrink:0}
+.opinion-quien strong{display:block;font-size:14.5px}
+.opinion-quien span{font-size:12.5px;color:var(--apagado)}
+
+/* ---------------- CTA ---------------- */
+.cta{background:linear-gradient(120deg,var(--teal),var(--teal-osc));color:#fff;text-align:center}
+.cta h2{margin-bottom:14px}
+.cta p{color:#c8dcda;max-width:560px;margin:0 auto 30px}
+
+/* ---------------- Contacto ---------------- */
+.cont-rejilla{display:grid;grid-template-columns:1fr 1.1fr;gap:50px}
+.cont-dato{display:flex;gap:14px;margin-bottom:22px}
+.cont-dato svg{color:var(--teal);flex-shrink:0;margin-top:3px}
+.cont-dato strong{display:block;font-size:14.5px;margin-bottom:2px}
+.cont-dato span{font-size:13.5px;color:var(--apagado)}
+.formulario{background:var(--gris-cl);border:1px solid var(--linea);border-radius:var(--radio);padding:32px 28px}
+.campo{margin-bottom:15px}
+.campo label{display:block;font-size:13px;font-weight:700;margin-bottom:6px}
+.campo input,.campo select,.campo textarea{width:100%;padding:12px 14px;border:1px solid var(--linea);
+  border-radius:8px;background:#fff;color:var(--tinta);font-family:inherit;font-size:14.5px;transition:.18s}
+.campo input:focus,.campo select:focus,.campo textarea:focus{outline:none;border-color:var(--teal);
+  box-shadow:0 0 0 3px rgba(15,82,87,.12)}
+.campo textarea{resize:vertical;min-height:90px}
+.dos{display:grid;grid-template-columns:1fr 1fr;gap:0 15px}
+.aviso-form{margin-top:14px;padding:13px 16px;border-radius:8px;font-size:13.5px;display:none}
+.aviso-form.ok{display:block;background:rgba(46,139,87,.1);border:1px solid rgba(46,139,87,.35);color:var(--ok)}
+.aviso-form.mal{display:block;background:rgba(192,73,47,.09);border:1px solid rgba(192,73,47,.3);color:var(--error)}
+
+/* ---------------- Pie ---------------- */
+.pie{background:var(--tinta);color:#c3ceCD;padding:54px 0 0}
+.pie-rejilla{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:34px;padding-bottom:36px}
+.pie .marca-txt strong{color:#fff}
+.pie h4{font-size:12.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--lima);margin-bottom:14px}
+.pie p,.pie a{font-size:13.5px;color:rgba(195,206,205,.8)}
+.pie a{display:block;margin-bottom:9px;transition:.2s}
+.pie a:hover{color:#fff}
+.pie-abajo{border-top:1px solid rgba(255,255,255,.12);padding:18px 0;font-size:12.5px;
+  color:rgba(195,206,205,.55);display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.aviso-demo{background:#fff4cc;color:#5c4a08;text-align:center;padding:9px 20px;font-size:12.5px;font-weight:700}
+
+/* ---------------- Responsive ---------------- */
+@media(max-width:1100px){
+  .servicios{grid-template-columns:repeat(2,1fr)}
+  .pasos{grid-template-columns:repeat(2,1fr)}
+  .stats .env{grid-template-columns:repeat(2,1fr)}
+  .casos{grid-template-columns:1fr 1fr}
+  .equipo{grid-template-columns:repeat(2,1fr)}
+  .opiniones{grid-template-columns:1fr}
+  .portada-grid{grid-template-columns:1fr}
+}
+@media(max-width:900px){
+  .menu{display:none}
+  .cab .btn{display:none}
+  .abrir-menu{display:flex}
+  .menu-movil .btn{display:flex;margin:14px 26px 18px}
+  .cont-rejilla{grid-template-columns:1fr;gap:30px}
+  .pie-rejilla{grid-template-columns:1fr 1fr}
+}
+@media(max-width:640px){
+  section{padding:56px 0}
+  .env{padding:0 18px}
+  .servicios{grid-template-columns:1fr}
+  .pasos{grid-template-columns:1fr}
+  .stats .env{grid-template-columns:1fr 1fr}
+  .casos{grid-template-columns:1fr}
+  .equipo{grid-template-columns:1fr}
+  .dos{grid-template-columns:1fr}
+  .pie-rejilla{grid-template-columns:1fr;gap:24px}
+}
+html,body{overflow-x:hidden;max-width:100%}
+
+</style>
+</head>
+<body>
+
+<div class="aviso-demo">Plantilla demostrativa. Nombre, datos y cifras son ficticios.</div>
+
+<header class="cab">
+  <div class="env">
+    <a href="#inicio" class="marca">
+      <span class="marca-ic">B</span>
+      <span class="marca-txt"><strong>Business Pro</strong><span>Consultoría</span></span>
+    </a>
+    <nav class="menu" id="menuPrincipal">
+      <a href="#inicio" class="act">Inicio</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#proceso">Proceso</a>
+      <a href="#casos">Casos de éxito</a>
+      <a href="#equipo">Equipo</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    <a href="#contacto" class="btn btn-teal">Hablemos</a>
+    <button class="abrir-menu" id="abrirMenu" aria-expanded="false" aria-label="Abrir menú">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+    </button>
+  </div>
+  <nav class="menu-movil" id="menuMovil">
+    <a href="#inicio">Inicio</a><a href="#servicios">Servicios</a><a href="#proceso">Proceso</a>
+    <a href="#casos">Casos de éxito</a><a href="#equipo">Equipo</a><a href="#contacto">Contacto</a>
+    <a href="#contacto" class="btn btn-teal">Hablemos</a>
+  </nav>
+</header>
+
+<section class="portada" id="inicio">
+  <div class="env">
+    <div class="portada-grid">
+      <div>
+        <div class="rotulo" style="background:rgba(255,255,255,.12);color:#e8f5cc">Consultoría empresarial</div>
+        <h1>Impulsamos decisiones que <span>hacen crecer</span> tu empresa</h1>
+        <p>Estrategia, finanzas y transformación digital para negocios que quieren dar el siguiente salto, con resultados medibles desde el primer trimestre.</p>
+        <div class="portada-botones">
+          <a href="#contacto" class="btn btn-lima">Solicitar diagnóstico gratis</a>
+          <a href="#casos" class="btn btn-linea">Ver casos de éxito</a>
+        </div>
+        <div class="portada-clientes">Con la confianza de +180 empresas en España y Latinoamérica</div>
+      </div>
+      <div class="portada-panel">
+        <div class="portada-metric"><span>Crecimiento medio de clientes</span><strong>+34%</strong></div>
+        <div class="portada-metric"><span>Proyectos entregados</span><strong>420+</strong></div>
+        <div class="portada-metric"><span>Satisfacción de clientes</span><strong>4.9/5</strong></div>
+        <div class="portada-metric"><span>Años de experiencia</span><strong>15+</strong></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="servicios">
+  <div class="env">
+    <div class="cab-sec centro">
+      <div class="rotulo">Servicios</div>
+      <h2>Soluciones para cada etapa de tu negocio</h2>
+      <p>Trabajamos contigo desde el diagnóstico hasta la implementación.</p>
+    </div>
+    <div class="servicios">
+      <div class="servicio">
+        <div class="servicio-ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></div>
+        <h3>Estrategia de negocio</h3><p>Diagnóstico, análisis de mercado y plan estratégico a 1-3 años.</p>
+        <a href="#contacto">Más información →</a>
+      </div>
+      <div class="servicio">
+        <div class="servicio-ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 4v5"/></svg></div>
+        <h3>Consultoría financiera</h3><p>Control de costes, proyecciones y estructura de capital saludable.</p>
+        <a href="#contacto">Más información →</a>
+      </div>
+      <div class="servicio">
+        <div class="servicio-ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></div>
+        <h3>Transformación digital</h3><p>Digitalización de procesos, automatización y adopción de datos.</p>
+        <a href="#contacto">Más información →</a>
+      </div>
+      <div class="servicio">
+        <div class="servicio-ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="8" r="3.4"/><path d="M2.5 20.5c0-3.7 3.4-6.5 6.5-6.5s6.5 2.8 6.5 6.5"/><circle cx="18" cy="8.5" r="2.6"/><path d="M16 14.2c2.6.4 4.5 2.5 4.5 5.3"/></svg></div>
+        <h3>Recursos humanos</h3><p>Estructura organizativa, cultura y planes de retención de talento.</p>
+        <a href="#contacto">Más información →</a>
+      </div>
+      <div class="servicio">
+        <div class="servicio-ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 11l18-7-7 18-2.5-7.5z"/></svg></div>
+        <h3>Marketing y ventas</h3><p>Posicionamiento de marca, embudo comercial y captación de clientes.</p>
+        <a href="#contacto">Más información →</a>
+      </div>
+      <div class="servicio">
+        <div class="servicio-ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2.5l9 4v6c0 5-3.6 9-9 10.5C6.6 21.5 3 17.5 3 12.5v-6z"/><path d="m9 12 2.2 2.2L15.5 10"/></svg></div>
+        <h3>Gestión de riesgos</h3><p>Auditoría de procesos, cumplimiento normativo y continuidad de negocio.</p>
+        <a href="#contacto">Más información →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="proceso" class="proceso">
+  <div class="env">
+    <div class="cab-sec centro">
+      <div class="rotulo">Metodología</div>
+      <h2>Cómo trabajamos contigo</h2>
+    </div>
+    <div class="pasos">
+      <div class="paso"><div class="paso-num">01</div><h3>Diagnóstico</h3><p>Analizamos tu negocio, procesos y números en profundidad.</p></div>
+      <div class="paso"><div class="paso-num">02</div><h3>Estrategia</h3><p>Diseñamos un plan de acción claro, con objetivos medibles.</p></div>
+      <div class="paso"><div class="paso-num">03</div><h3>Implementación</h3><p>Acompañamos la ejecución paso a paso junto a tu equipo.</p></div>
+      <div class="paso"><div class="paso-num">04</div><h3>Seguimiento</h3><p>Medimos resultados y ajustamos el rumbo cada trimestre.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="stats">
+  <div class="env">
+    <div class="stat"><strong>180+</strong><span>Empresas asesoradas</span></div>
+    <div class="stat"><strong>+34%</strong><span>Crecimiento medio</span></div>
+    <div class="stat"><strong>420+</strong><span>Proyectos entregados</span></div>
+    <div class="stat"><strong>15+</strong><span>Años de experiencia</span></div>
+  </div>
+</section>
+
+<section id="casos">
+  <div class="env">
+    <div class="cab-sec centro">
+      <div class="rotulo">Casos de éxito</div>
+      <h2>Resultados reales de nuestros clientes</h2>
+    </div>
+    <div class="casos">
+      <div class="caso">
+        <div class="caso-img" style="background:linear-gradient(140deg,#0f5257,#1c7c80)"><span>Retail</span></div>
+        <div class="caso-cuerpo"><h3>Cadena de tiendas</h3><p>Reestructuración logística y digitalización del inventario.</p><div class="caso-resultado">+28% margen</div></div>
+      </div>
+      <div class="caso">
+        <div class="caso-img" style="background:linear-gradient(140deg,#0a3a3d,#0f5257)"><span>Tecnología</span></div>
+        <div class="caso-cuerpo"><h3>Startup SaaS</h3><p>Plan financiero y ronda de inversión de 2M€.</p><div class="caso-resultado">2M€ levantados</div></div>
+      </div>
+      <div class="caso">
+        <div class="caso-img" style="background:linear-gradient(140deg,#1c7c80,#0f5257)"><span>Manufactura</span></div>
+        <div class="caso-cuerpo"><h3>Fábrica textil</h3><p>Automatización de procesos y reducción de desperdicio.</p><div class="caso-resultado">-40% costes</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="equipo" style="background:var(--gris-cl)">
+  <div class="env">
+    <div class="cab-sec centro">
+      <div class="rotulo">Equipo</div>
+      <h2>Consultores senior a tu lado</h2>
+    </div>
+    <div class="equipo">
+      <div class="ficha"><div class="ficha-foto">J</div><h3>Javier Soto</h3><div class="cargo">Socio director</div><p>Ex-consultor de estrategia en firmas internacionales.</p></div>
+      <div class="ficha"><div class="ficha-foto">N</div><h3>Nuria Campos</h3><div class="cargo">Directora financiera</div><p>15 años estructurando finanzas de empresas en crecimiento.</p></div>
+      <div class="ficha"><div class="ficha-foto">P</div><h3>Pablo Iriarte</h3><div class="cargo">Transformación digital</div><p>Especialista en automatización y adopción de datos.</p></div>
+      <div class="ficha"><div class="ficha-foto">E</div><h3>Elena Duarte</h3><div class="cargo">Recursos humanos</div><p>Diseña culturas organizativas de alto rendimiento.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="env">
+    <div class="cab-sec centro">
+      <div class="rotulo">Testimonios</div>
+      <h2>Lo que dicen nuestros clientes</h2>
+    </div>
+    <div class="opiniones">
+      <div class="opinion"><p>&ldquo;En seis meses reestructuraron nuestra operación y el margen mejoró un 28%. Un antes y un después.&rdquo;</p><div class="opinion-quien"><div class="opinion-ini">M</div><div><strong>Marta Llorente</strong><span>CEO, Cadena de tiendas</span></div></div></div>
+      <div class="opinion"><p>&ldquo;Nos ayudaron a preparar la ronda de inversión con una claridad financiera que no teníamos.&rdquo;</p><div class="opinion-quien"><div class="opinion-ini">T</div><div><strong>Tomás Vidal</strong><span>Fundador, Startup SaaS</span></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="env">
+    <h2>¿Listo para el siguiente nivel?</h2>
+    <p>Agenda una sesión de diagnóstico gratuita de 30 minutos y descubre en qué puedes mejorar hoy mismo.</p>
+    <a href="#contacto" class="btn btn-lima">Agendar diagnóstico gratis</a>
+  </div>
+</section>
+
+<section id="contacto">
+  <div class="env">
+    <div class="cont-rejilla">
+      <div>
+        <div class="rotulo">Contacto</div>
+        <h2>Hablemos de tu negocio</h2>
+        <div class="cont-dato"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21.5s7-6.2 7-11.1A7 7 0 1 0 5 10.4c0 4.9 7 11.1 7 11.1z"/><circle cx="12" cy="10" r="2.6"/></svg><div><strong>Oficina</strong><span>Paseo de la Castellana, 120 · Madrid</span></div></div>
+        <div class="cont-dato"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 16.5v2.6a1.9 1.9 0 0 1-2.1 1.9 18.8 18.8 0 0 1-8.2-2.9 18.4 18.4 0 0 1-5.7-5.7A18.8 18.8 0 0 1 2.1 4.1 1.9 1.9 0 0 1 4 2h2.6a1.9 1.9 0 0 1 1.9 1.6c.1.9.3 1.8.7 2.7a1.9 1.9 0 0 1-.4 2L7.6 9.5a15 15 0 0 0 5.7 5.7l1.2-1.2a1.9 1.9 0 0 1 2-.4c.9.3 1.8.6 2.7.7A1.9 1.9 0 0 1 21 16.5z"/></svg><div><strong>Teléfono</strong><span>+34 911 234 567</span></div></div>
+        <div class="cont-dato"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="4.5" width="19" height="15" rx="2.4"/><path d="M2.5 7 12 13.5 21.5 7"/></svg><div><strong>Email</strong><span>hola@businesspro.es</span></div></div>
+      </div>
+      <form class="formulario" id="formContacto" novalidate>
+        <div class="dos">
+          <div class="campo"><label for="nombre">Nombre</label><input id="nombre" name="nombre" type="text" placeholder="Tu nombre" required></div>
+          <div class="campo"><label for="empresa">Empresa</label><input id="empresa" name="empresa" type="text" placeholder="Nombre de tu empresa"></div>
+        </div>
+        <div class="dos">
+          <div class="campo"><label for="email">Correo electrónico</label><input id="email" name="email" type="email" placeholder="tucorreo@ejemplo.com" required></div>
+          <div class="campo"><label for="telefono">Teléfono</label><input id="telefono" name="telefono" type="tel" placeholder="600 000 000"></div>
+        </div>
+        <div class="campo"><label for="servicio">Servicio de interés</label>
+          <select id="servicio" name="servicio">
+            <option>Estrategia de negocio</option><option>Consultoría financiera</option>
+            <option>Transformación digital</option><option>Recursos humanos</option>
+            <option>Marketing y ventas</option><option>Otro</option>
+          </select>
+        </div>
+        <div class="campo"><label for="mensaje">Cuéntanos sobre tu proyecto</label><textarea id="mensaje" name="mensaje" placeholder="¿Qué reto quieres resolver?"></textarea></div>
+        <button type="submit" class="btn btn-teal" style="width:100%">Enviar solicitud</button>
+        <div class="aviso-form" id="avisoContacto"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer class="pie">
+  <div class="env">
+    <div class="pie-rejilla">
+      <div>
+        <span class="marca-txt"><strong style="color:#fff">Business Pro</strong><span>Consultoría</span></span>
+        <p style="margin-top:12px;max-width:280px">Consultoría estratégica y financiera para empresas que quieren crecer con datos.</p>
+      </div>
+      <div><h4>Servicios</h4><a href="#servicios">Estrategia</a><a href="#servicios">Finanzas</a><a href="#servicios">Transformación digital</a></div>
+      <div><h4>Empresa</h4><a href="#equipo">Equipo</a><a href="#casos">Casos de éxito</a><a href="#contacto">Contacto</a></div>
+      <div><h4>Legal</h4><a href="#">Aviso legal</a><a href="#">Privacidad</a></div>
+    </div>
+    <div class="pie-abajo">
+      <span>© <span id="anio"></span> Business Pro Consultoría. Todos los derechos reservados.</span>
+      <span>hola@businesspro.es · +34 911 234 567</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ==========================================================================
+   Business Pro — Consultoría
+   ========================================================================== */
+(function () {
+  'use strict';
+
+  var boton = document.getElementById('abrirMenu');
+  var menu  = document.getElementById('menuMovil');
+  if (boton && menu) {
+    boton.addEventListener('click', function () {
+      var abierto = menu.classList.toggle('ver');
+      boton.setAttribute('aria-expanded', abierto ? 'true' : 'false');
+    });
+    menu.addEventListener('click', function (ev) {
+      if (ev.target.closest('a')) {
+        menu.classList.remove('ver');
+        boton.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
+  var destinos = [].slice.call(document.querySelectorAll('.menu a[href^="#"]'))
+    .map(function (a) { return { a: a, sec: document.querySelector(a.getAttribute('href')) }; })
+    .filter(function (d) { return d.sec; });
+
+  if (destinos.length) {
+    var repintar = function () {
+      var y = window.scrollY + 150, activo = null;
+      destinos.forEach(function (d) { if (d.sec.offsetTop <= y) activo = d; });
+      destinos.forEach(function (d) { d.a.classList.toggle('act', d === activo); });
+    };
+    var esperando = false;
+    window.addEventListener('scroll', function () {
+      if (esperando) return;
+      esperando = true;
+      window.requestAnimationFrame(function () { repintar(); esperando = false; });
+    }, { passive: true });
+    repintar();
+  }
+
+  var form = document.getElementById('formContacto');
+  if (form) {
+    var aviso = document.getElementById('avisoContacto');
+    var decir = function (t, c) { aviso.textContent = t; aviso.className = 'aviso-form ' + c; };
+
+    form.addEventListener('submit', function (ev) {
+      ev.preventDefault();
+
+      var nombre = form.nombre.value.trim();
+      if (nombre.length < 3) { decir('Escribe tu nombre, por favor.', 'mal'); form.nombre.focus(); return; }
+
+      var email = form.email.value.trim();
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(email)) {
+        decir('Revisa el correo electrónico: parece incompleto.', 'mal'); form.email.focus(); return;
+      }
+
+      decir('✓ Gracias, ' + nombre.split(' ')[0] + '. Hemos recibido tu solicitud y te contactaremos en menos de 24 horas.', 'ok');
+      form.reset();
+      aviso.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    });
+  }
+
+  var anio = document.getElementById('anio');
+  if (anio) anio.textContent = new Date().getFullYear();
+})();
+
+</script>
+</body>
+</html>
