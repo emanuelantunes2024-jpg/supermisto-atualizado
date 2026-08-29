@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PDV Concesionaria Pro — Órdenes de Taller y Venta de Repuestos</title>
+<meta name="description" content="Sistema de punto de venta para concesionarias y talleres: órdenes de servicio, venta de repuestos y cobro, con datos de cliente y vehículo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="aviso-demo">Plantilla demostrativa de PDV para concesionaria/taller. Clientes, vehículos e importes son ficticios.</div>
+
+<header class="topbar">
+  <div class="marca">
+    <span class="marca-ic">AP</span>
+    <div><strong>Auto Parts <em>Pro</em></strong><span>Concesionaria &amp; Taller</span></div>
+  </div>
+  <div class="topbar-titulo">PDV · Punto de Venta</div>
+  <nav class="topbar-nav">
+    <button class="tn act"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="10" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2.5 3.5h2.8l2.4 11h11l2-8H6.6"/></svg>Nueva venta</button>
+    <button class="tn"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>Buscar cliente</button>
+    <button class="tn"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4.5" width="18" height="16" rx="2"/><path d="M3 9.5h18M8 3v3M16 3v3"/></svg>Agenda</button>
+    <button class="tn"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="3"/></svg>Caja</button>
+    <button class="tn"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 20V10M11 20V4M18 20v-7"/></svg>Reportes</button>
+  </nav>
+  <div class="topbar-usuario">
+    <div class="usuario-ini">A</div>
+    <div><span>Usuario</span><strong>Admin</strong></div>
+    <button class="salir">Cerrar sesión</button>
+  </div>
+</header>
+
+<div class="app">
+  <aside class="lateral">
+    <nav>
+      <span class="lateral-eti">Menú principal</span>
+      <a href="#" class="item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3.5 10.5 12 4l8.5 6.5V20a1 1 0 0 1-1 1H12"/></svg><span class="label">Inicio</span></a>
+      <a href="#" class="item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="8" r="3.4"/><path d="M4.5 20.5c0-3.7 3.4-6.5 7.5-6.5s7.5 2.8 7.5 6.5"/></svg><span class="label">Clientes</span></a>
+      <a href="#" class="item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 16v-3l1.8-4.4A2 2 0 0 1 7.7 7h8.6a2 2 0 0 1 1.9 1.6L20 13v3"/><path d="M3 16h18v2.5a1 1 0 0 1-1 1h-1.5a1 1 0 0 1-1-1V16M7.5 16v2.5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V16"/></svg><span class="label">Vehículos</span></a>
+      <a href="#" class="item act"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 4h9l4 4v12a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1z"/><path d="M9 12h6M9 16h6M9 8h2"/></svg><span class="label">Ventas / Órdenes</span></a>
+      <a href="#" class="item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M14.7 6.3a4 4 0 0 0-5.6 5.6L3 18l3 3 6.1-6.1a4 4 0 0 0 5.6-5.6L15 12l-3-3z"/></svg><span class="label">Servicios</span></a>
+      <a href="#" class="item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="2.6"/><path d="M12 3.5v2.3M12 18.2v2.3M20.5 12h-2.3M5.8 12H3.5"/></svg><span class="label">Repuestos</span></a>
+      <a href="#" class="item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 7.5h16M4 12h16M4 16.5h10"/></svg><span class="label">Inventario</span></a>
+      <a href="#" class="item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="3"/></svg><span class="label">Caja</span></a>
+      <a href="#" class="item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 3.5h9l4 4V19a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 5 19V5A1.5 1.5 0 0 1 6.5 3.5z"/><path d="M9 12.5h6M9 16h4"/></svg><span class="label">Cobros</span></a>
+      <a href="#" class="item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3.5v17M7.5 20.5h9"/><path d="M3.5 8h17"/><path d="M3.5 8 1 14a2.5 2.5 0 0 0 5 0zM20.5 8 18 14a2.5 2.5 0 0 0 5 0z"/></svg><span class="label">Gastos</span></a>
+      <a href="#" class="item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 20V10M11 20V4M18 20v-7"/></svg><span class="label">Reportes</span></a>
+    </nav>
+    <div class="lateral-pie">
+      <span class="lateral-eti">Accesos rápidos</span>
+      <button class="acceso ac-verde">Nueva orden <em>F2</em></button>
+      <button class="acceso ac-azul">Nuevo cliente <em>F3</em></button>
+      <button class="acceso ac-naranja">Nuevo vehículo <em>F4</em></button>
+      <button class="acceso ac-morado">Venta de repuestos <em>F5</em></button>
+    </div>
+  </aside>
+
+  <main class="contenido">
+    <section class="panel-orden">
+      <header class="orden-cab">
+        <div>
+          <span class="orden-eti">Orden de servicio / venta</span>
+          <h1>OS-000125</h1>
+        </div>
+        <div class="orden-datos">
+          <span>Fecha: <strong id="fecha">—</strong></span>
+          <span>Asesor: <strong>Julia Serrano</strong></span>
+          <span class="estado-pill" id="estadoTexto">En proceso</span>
+        </div>
+      </header>
+
+      <div class="orden-tipo">
+        <button class="tipo act" data-tipo="taller">🔧 Servicio taller</button>
+        <button class="tipo" data-tipo="repuestos">🛒 Venta repuestos</button>
+      </div>
+
+      <div class="rejilla-datos">
+        <div class="tarjeta-datos">
+          <h3>Datos del cliente</h3>
+          <div class="fila"><span>Cliente</span><strong>Carlos Martínez López</strong></div>
+          <div class="fila"><span>DNI / NIF</span><strong>12345678X</strong></div>
+          <div class="fila"><span>Teléfono</span><strong>+34 600 123 456</strong></div>
+          <div class="fila"><span>Email</span><strong>carlos.martinez@email.com</strong></div>
+        </div>
+        <div class="tarjeta-datos">
+          <h3>Datos del vehículo</h3>
+          <div class="fila"><span>Matrícula</span><strong>1234 ABC</strong></div>
+          <div class="fila"><span>Marca / Modelo</span><strong>BMW Serie 3</strong></div>
+          <div class="fila"><span>Versión</span><strong>320d · 2020</strong></div>
+          <div class="fila"><span>Kilometraje</span><strong>45.600 km</strong></div>
+          <button class="btn btn-linea btn-sm">Cambiar vehículo</button>
+        </div>
+      </div>
+
+      <div class="pestanas">
+        <button class="pestana act" data-tab="trabajos">Trabajos / Servicios</button>
+        <button class="pestana" data-tab="repuestos">Repuestos / Productos</button>
+        <button class="pestana" data-tab="historial">Historial del vehículo</button>
+      </div>
+
+      <div class="tab-panel" id="tab-trabajos">
+        <table class="tabla">
+          <thead><tr><th>Descripción del trabajo</th><th>Técnico</th><th>Horas</th><th>Precio/h</th><th>Total</th><th></th></tr></thead>
+          <tbody id="filasTrabajos"></tbody>
+        </table>
+        <button class="btn btn-linea btn-sm agregar" data-accion="agregar-trabajo">+ Agregar trabajo</button>
+      </div>
+
+      <div class="tab-panel" id="tab-repuestos" hidden>
+        <table class="tabla">
+          <thead><tr><th>Repuesto</th><th>Cant.</th><th>Precio unit.</th><th>Total</th><th></th></tr></thead>
+          <tbody id="filasRepuestos"></tbody>
+        </table>
+        <button class="btn btn-linea btn-sm agregar" data-accion="agregar-repuesto">+ Agregar repuesto</button>
+      </div>
+
+      <div class="tab-panel" id="tab-historial" hidden>
+        <div class="historial-item"><span>12/03/2026</span><strong>Cambio de aceite y filtro</strong><span class="historial-km">42.100 km</span></div>
+        <div class="historial-item"><span>05/09/2025</span><strong>Revisión de frenos</strong><span class="historial-km">37.800 km</span></div>
+        <div class="historial-item"><span>18/02/2025</span><strong>Cambio de neumáticos delanteros</strong><span class="historial-km">31.200 km</span></div>
+      </div>
+
+      <div class="observaciones">
+        <label for="obs">Observaciones</label>
+        <textarea id="obs" rows="2">Cliente solicita revisión completa y cambio de pastillas de freno.</textarea>
+      </div>
+    </section>
+
+    <aside class="panel-resumen">
+      <h2>Resumen de la orden</h2>
+      <div class="resumen-fila"><span>Mano de obra</span><span id="totalManoObra">0,00 €</span></div>
+      <div class="resumen-fila"><span>Repuestos / productos</span><span id="totalRepuestos">0,00 €</span></div>
+      <div class="resumen-fila resumen-sub"><span>Subtotal</span><span id="subtotal">0,00 €</span></div>
+      <div class="resumen-fila"><span>Impuestos (21%)</span><span id="impuestos">0,00 €</span></div>
+      <div class="resumen-fila resumen-total"><span>Total a pagar</span><span id="total">0,00 €</span></div>
+
+      <label class="campo-eti">Forma de pago</label>
+      <select id="formaPago" class="campo-select">
+        <option>Efectivo</option>
+        <option>Tarjeta</option>
+        <option>Transferencia</option>
+        <option>Financiación</option>
+      </select>
+
+      <label class="campo-eti">Estado de la orden</label>
+      <select id="estadoOrden" class="campo-select">
+        <option>Pendiente</option>
+        <option selected>En proceso</option>
+        <option>Terminada</option>
+        <option>Entregada</option>
+      </select>
+
+      <div class="resumen-botones">
+        <button class="btn btn-cobrar" id="cobrar">Guardar y cobrar</button>
+        <button class="btn btn-linea" id="guardar">Guardar orden</button>
+        <button class="btn btn-cancelar" id="cancelar">Cancelar orden</button>
+      </div>
+    </aside>
+  </main>
+
+  <footer class="pie-app">
+    <span>Caja actual: <strong>Caja 1</strong></span>
+    <span>Apertura: <strong>09:00</strong></span>
+    <span>Ventas del día: <strong>4</strong></span>
+    <span>Total en caja: <strong id="totalCaja">1.250,00 €</strong></span>
+  </footer>
+</div>
+
+<div class="modal-fondo" id="modalFondo">
+  <div class="modal">
+    <div class="modal-check">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M4 12.5l5 5L20 6.5"/></svg>
+    </div>
+    <h3>Orden cobrada</h3>
+    <p id="modalResumen">Total: 0,00 €</p>
+    <button class="btn btn-cobrar" id="modalCerrar">Aceptar</button>
+  </div>
+</div>
+
+<script src="js/main.js"></script>
+</body>
+</html>

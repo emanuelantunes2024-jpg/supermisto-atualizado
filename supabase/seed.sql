@@ -394,6 +394,15 @@ values
    '["Catálogo por categorías", "Carrito con cantidades", "Cálculo automático de IVA", "3 métodos de pago", "Ticket de venta en pantalla", "Pensado para tablet táctil"]'::jsonb,
    'published'),
 
+  ('22222222-2222-4222-8222-000000000040',
+   '11111111-1111-4111-8111-000000000038',
+   'PDV Concesionaria Pro', 'pdv-concesionaria-pro',
+   'Órdenes de servicio de taller y venta de repuestos, con datos de cliente y vehículo.',
+   'Sistema de punto de venta pensado para concesionarias y talleres mecánicos: ficha de cliente y de vehículo en la misma orden, pestañas de trabajos/servicios y repuestos con su propio total, historial del vehículo, resumen de mano de obra + repuestos + impuestos, forma de pago y estado de la orden (pendiente, en proceso, terminada, entregada).',
+   9900, '/demos/pdv-concesionaria-pro/index.html', '/thumbnails/pdv-concesionaria-pro.jpg',
+   '["Ficha de cliente y de vehículo", "Trabajos/servicios y repuestos por pestañas", "Historial del vehículo", "Resumen de mano de obra + repuestos + IVA", "Estado de la orden (pendiente a entregada)", "4 formas de pago"]'::jsonb,
+   'published'),
+
   ('22222222-2222-4222-8222-000000000039',
    '11111111-1111-4111-8111-000000000039',
    'Combo Restaurante: Web + PDV', 'combo-restaurante-pdv',

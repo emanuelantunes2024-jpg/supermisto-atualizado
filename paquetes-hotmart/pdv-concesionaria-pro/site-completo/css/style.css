@@ -1,0 +1,162 @@
+/* En la web las fuentes vienen de Google Fonts (20 KB en vez de 400 KB).
+   El ZIP que descarga el cliente las lleva incrustadas. */
+/* ==========================================================================
+   PDV CONCESIONARIA PRO — ÓRDENES DE TALLER Y VENTA DE REPUESTOS
+   Leuname Software · leunamesoftware.com
+   ========================================================================== */
+
+:root{
+  --fondo:#eef0f4; --panel:#fff; --panel2:#f7f8fa;
+  --tinta:#161a22; --apagado:#6b7180; --linea:#e2e4ea;
+  --azul:#1e4fd6; --azul-osc:#173da6; --azul-suave:#eaf0ff;
+  --naranja:#ff7a1a; --verde:#1f9d55; --rojo:#e33b3b; --morado:#7c4fe0;
+  --sans:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{overflow-x:hidden;max-width:100%}
+body{background:var(--fondo);color:var(--tinta);font-family:var(--sans);font-size:13.5px;-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font-family:inherit;font-size:inherit}
+::-webkit-scrollbar{width:8px;height:8px}
+::-webkit-scrollbar-thumb{background:#ccd0da;border-radius:99px}
+
+.aviso-demo{background:#111;color:#ffcf9e;text-align:center;padding:8px 20px;font-size:12px;font-weight:600}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:11px 16px;border:1.5px solid transparent;
+  border-radius:9px;font-size:13px;font-weight:700;cursor:pointer;transition:.15s}
+.btn-sm{padding:7px 12px;font-size:12px}
+.btn-linea{background:#fff;border-color:var(--linea);color:var(--tinta)}
+.btn-linea:hover{border-color:#b9bdc9}
+.btn-cobrar{background:var(--verde);color:#fff}
+.btn-cobrar:hover{background:#187f45}
+.btn-cancelar{background:#fff;border-color:var(--rojo);color:var(--rojo)}
+.btn-cancelar:hover{background:#fdeeee}
+
+/* ---------------- Barra superior ---------------- */
+.topbar{display:flex;align-items:center;gap:22px;background:#0f1420;color:#fff;padding:11px 20px;flex-wrap:wrap}
+.marca{display:flex;align-items:center;gap:10px}
+.marca-ic{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,var(--azul),var(--azul-osc));
+  display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12.5px;flex-shrink:0}
+.marca strong{font-size:14px;font-weight:800}
+.marca em{font-style:normal;color:var(--naranja)}
+.marca span{display:block;font-size:10px;color:#9aa1b0;letter-spacing:.06em;text-transform:uppercase}
+.topbar-titulo{font-size:12.5px;color:#c7cbd6;background:rgba(255,255,255,.08);padding:6px 12px;border-radius:7px;font-weight:700}
+.topbar-nav{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto}
+.tn{display:flex;align-items:center;gap:7px;background:none;border:1px solid rgba(255,255,255,.14);color:#c7cbd6;
+  padding:8px 12px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;transition:.15s}
+.tn:hover{background:rgba(255,255,255,.08);color:#fff}
+.tn.act{background:var(--azul);border-color:var(--azul);color:#fff}
+.topbar-usuario{display:flex;align-items:center;gap:10px}
+.usuario-ini{width:30px;height:30px;border-radius:50%;background:#2a3040;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px}
+.topbar-usuario span{display:block;font-size:10px;color:#9aa1b0}
+.topbar-usuario strong{font-size:12.5px}
+.salir{background:none;border:none;color:#ff8a7a;font-size:12px;font-weight:700;cursor:pointer;padding:6px 10px}
+
+/* ---------------- Layout general ---------------- */
+.app{display:grid;grid-template-columns:210px 1fr;grid-template-rows:1fr auto}
+.contenido{display:grid;grid-template-columns:1fr 300px;gap:16px;padding:18px;align-items:start}
+
+/* ---------------- Barra lateral ---------------- */
+.lateral{grid-row:1/2;background:#161b26;color:#c7cbd6;padding:18px 12px;display:flex;flex-direction:column;gap:22px;
+  min-height:calc(100vh - 100px)}
+.lateral-eti{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:#6b7180;padding:0 10px;margin-bottom:8px}
+.lateral nav{display:flex;flex-direction:column;gap:2px}
+.item{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:8px;color:#c7cbd6;font-size:12.5px;font-weight:600;transition:.15s}
+.item:hover{background:rgba(255,255,255,.06);color:#fff}
+.item.act{background:var(--azul);color:#fff}
+.lateral-pie{display:flex;flex-direction:column;gap:8px;margin-top:auto}
+.acceso{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border:none;border-radius:8px;
+  color:#fff;font-size:12px;font-weight:700;cursor:pointer}
+.acceso em{font-style:normal;background:rgba(0,0,0,.2);padding:1px 6px;border-radius:5px;font-size:10.5px}
+.ac-verde{background:var(--verde)}
+.ac-azul{background:var(--azul)}
+.ac-naranja{background:var(--naranja)}
+.ac-morado{background:var(--morado)}
+
+/* ---------------- Panel de orden ---------------- */
+.panel-orden{background:var(--panel);border:1px solid var(--linea);border-radius:14px;padding:20px}
+.orden-cab{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;margin-bottom:14px}
+.orden-eti{display:block;font-size:11px;color:var(--apagado);text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px}
+.orden-cab h1{font-size:20px;font-weight:800}
+.orden-datos{display:flex;align-items:center;gap:14px;font-size:12px;color:var(--apagado);flex-wrap:wrap}
+.estado-pill{background:var(--azul-suave);color:var(--azul-osc);padding:4px 11px;border-radius:99px;font-weight:700;font-size:11.5px}
+
+.orden-tipo{display:flex;gap:8px;margin-bottom:16px}
+.tipo{padding:9px 16px;border:1.5px solid var(--linea);border-radius:9px;background:#fff;font-weight:700;font-size:12.5px;cursor:pointer}
+.tipo.act{background:var(--azul);border-color:var(--azul);color:#fff}
+
+.rejilla-datos{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px}
+.tarjeta-datos{background:var(--panel2);border:1px solid var(--linea);border-radius:11px;padding:14px 16px}
+.tarjeta-datos h3{font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--apagado);margin-bottom:10px}
+.tarjeta-datos .fila{display:flex;justify-content:space-between;gap:10px;font-size:12.5px;padding:4px 0}
+.tarjeta-datos .fila span{color:var(--apagado)}
+.tarjeta-datos .btn{margin-top:10px;width:100%}
+
+.pestanas{display:flex;gap:4px;border-bottom:1.5px solid var(--linea);margin-bottom:16px;overflow-x:auto}
+.pestana{background:none;border:none;padding:10px 14px;font-size:12.5px;font-weight:700;color:var(--apagado);
+  border-bottom:2.5px solid transparent;cursor:pointer;white-space:nowrap}
+.pestana.act{color:var(--azul);border-color:var(--azul)}
+
+.tabla{width:100%;border-collapse:collapse;margin-bottom:12px;font-size:12.5px}
+.tabla th{text-align:left;color:var(--apagado);font-size:11px;text-transform:uppercase;letter-spacing:.04em;
+  padding:8px 10px;border-bottom:1.5px solid var(--linea)}
+.tabla td{padding:10px;border-bottom:1px solid var(--linea)}
+.tabla tr:last-child td{border-bottom:none}
+.quitar-fila{width:26px;height:26px;border-radius:7px;border:none;background:#fdeeee;color:var(--rojo);cursor:pointer;
+  display:flex;align-items:center;justify-content:center}
+.agregar{margin-bottom:18px}
+
+.historial-item{display:flex;align-items:center;gap:14px;padding:11px 4px;border-bottom:1px solid var(--linea);font-size:12.5px}
+.historial-item span:first-child{color:var(--apagado);min-width:80px}
+.historial-item strong{flex:1}
+.historial-km{color:var(--apagado)}
+
+.observaciones{margin-top:6px}
+.observaciones label{display:block;font-size:11.5px;font-weight:700;color:var(--apagado);margin-bottom:6px}
+.observaciones textarea{width:100%;border:1.5px solid var(--linea);border-radius:9px;padding:10px 12px;resize:vertical;color:var(--tinta)}
+
+/* ---------------- Panel resumen ---------------- */
+.panel-resumen{background:#101522;color:#fff;border-radius:14px;padding:20px;position:sticky;top:18px}
+.panel-resumen h2{font-size:15px;margin-bottom:14px}
+.resumen-fila{display:flex;justify-content:space-between;font-size:12.5px;color:#9aa1b0;padding:6px 0}
+.resumen-sub{border-top:1px solid rgba(255,255,255,.12);margin-top:4px;padding-top:10px;color:#fff;font-weight:700}
+.resumen-total{background:var(--azul);margin:10px -20px 16px;padding:14px 20px;font-size:16px;font-weight:800;color:#fff}
+.campo-eti{display:block;font-size:11px;color:#9aa1b0;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px;margin-top:12px}
+.campo-select{width:100%;padding:10px 12px;border-radius:9px;border:1.5px solid rgba(255,255,255,.14);
+  background:#161b26;color:#fff}
+.resumen-botones{display:flex;flex-direction:column;gap:9px;margin-top:18px}
+.resumen-botones .btn-linea{background:transparent;border-color:rgba(255,255,255,.2);color:#fff}
+.resumen-botones .btn-linea:hover{background:rgba(255,255,255,.08)}
+.resumen-botones .btn-cancelar{background:transparent}
+
+/* ---------------- Pie de la app ---------------- */
+.pie-app{grid-column:1/3;display:flex;gap:24px;flex-wrap:wrap;padding:12px 20px;background:#fff;border-top:1px solid var(--linea);
+  font-size:12px;color:var(--apagado)}
+.pie-app strong{color:var(--tinta)}
+
+/* ---------------- Modal ---------------- */
+.modal-fondo{position:fixed;inset:0;background:rgba(10,10,14,.55);display:none;align-items:center;justify-content:center;z-index:50;padding:20px}
+.modal-fondo.ver{display:flex}
+.modal{background:#fff;border-radius:16px;padding:32px 28px;max-width:320px;width:100%;text-align:center;box-shadow:0 24px 60px rgba(0,0,0,.25)}
+.modal-check{width:56px;height:56px;border-radius:50%;background:var(--verde);display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+.modal h3{font-size:18px;margin-bottom:8px}
+.modal p{font-size:13.5px;color:var(--apagado);margin-bottom:22px}
+
+@media(max-width:1180px){
+  .app{grid-template-columns:72px 1fr}
+  .marca strong,.marca span,.lateral-eti,.item .label,.acceso{display:none}
+  .item{justify-content:center}
+  .lateral-pie{display:none}
+  .contenido{grid-template-columns:1fr}
+  .panel-resumen{position:static}
+}
+@media(max-width:760px){
+  .topbar{padding:10px 14px}
+  .topbar-nav{display:none}
+  .topbar-titulo{display:none}
+  .app{grid-template-columns:1fr}
+  .lateral{display:none}
+  .rejilla-datos{grid-template-columns:1fr}
+  .pie-app{grid-column:1/2;flex-direction:column;gap:6px}
+  .tabla{display:block;overflow-x:auto;white-space:nowrap}
+}

@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PDV Retail Pro — Sistema de Punto de Venta</title>
+<meta name="description" content="Sistema de punto de venta (PDV) para tiendas, restaurantes y kioscos: catálogo táctil, carrito, caja y ticket en pantalla.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* En la web las fuentes vienen de Google Fonts (20 KB en vez de 400 KB).
+   El ZIP que descarga el cliente las lleva incrustadas. */
+/* ==========================================================================
+   PDV RETAIL PRO — SISTEMA DE PUNTO DE VENTA
+   Leuname Software · leunamesoftware.com
+   ========================================================================== */
+
+:root{
+  --fondo:#f4f5f7; --panel:#fff; --panel2:#fafafb;
+  --tinta:#181a1f; --apagado:#767b87; --linea:#e6e7ec;
+  --naranja:#ff7a1a; --naranja-osc:#e56000; --naranja-suave:#fff1e6;
+  --verde:#1f9d55; --azul:#1e63d6;
+  --sans:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow-x:hidden;max-width:100%}
+body{background:var(--fondo);color:var(--tinta);font-family:var(--sans);font-size:14.5px;-webkit-font-smoothing:antialiased}
+button,input{font-family:inherit}
+::-webkit-scrollbar{width:8px;height:8px}
+::-webkit-scrollbar-thumb{background:#d6d8e0;border-radius:99px}
+
+.aviso-demo{background:#111;color:#ffcf9e;text-align:center;padding:8px 20px;font-size:12px;font-weight:600}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 18px;border:1.5px solid transparent;
+  border-radius:10px;font-size:13.5px;font-weight:700;cursor:pointer;transition:.15s}
+.btn-linea{background:#fff;border-color:var(--linea);color:var(--tinta)}
+.btn-linea:hover{border-color:#c7c9d1}
+.btn-cobrar{background:var(--naranja);color:#fff}
+.btn-cobrar:hover{background:var(--naranja-osc)}
+
+/* ---------------- Layout general ---------------- */
+.pdv{display:grid;grid-template-columns:200px 1fr 340px;height:calc(100vh - 32px);min-height:640px}
+
+/* ---------------- Barra lateral ---------------- */
+.lateral{background:#14161b;color:#e7e8ec;display:flex;flex-direction:column;padding:20px 14px}
+.marca{display:flex;align-items:center;gap:10px;margin-bottom:26px}
+.marca-ic{width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,var(--naranja),var(--naranja-osc));
+  color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;flex-shrink:0}
+.marca strong{display:block;font-size:14.5px}
+.marca span{font-size:10.5px;color:#8b8f9c;letter-spacing:.04em}
+.cats{display:flex;flex-direction:column;gap:5px;flex:1}
+.cat{text-align:left;background:none;border:none;color:#b7bac4;padding:10px 12px;border-radius:9px;font-size:13px;
+  font-weight:600;cursor:pointer;transition:.15s}
+.cat:hover{background:rgba(255,255,255,.06);color:#fff}
+.cat.act{background:var(--naranja);color:#fff}
+.lateral-pie{border-top:1px solid rgba(255,255,255,.1);padding-top:16px;display:flex;flex-direction:column;gap:14px}
+.turno{display:flex;flex-direction:column;font-size:11.5px;color:#8b8f9c}
+.turno strong{font-size:19px;color:#fff;font-variant-numeric:tabular-nums;margin-top:2px}
+.cajero{display:flex;align-items:center;gap:9px}
+.cajero-ini{width:30px;height:30px;border-radius:50%;background:#2a2d36;color:#fff;font-weight:700;font-size:12.5px;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.cajero strong{display:block;font-size:12.5px}
+.cajero span{font-size:11px;color:#8b8f9c}
+
+/* ---------------- Catálogo central ---------------- */
+.catalogo{padding:20px 22px;overflow-y:auto}
+.cab-catalogo{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:18px;flex-wrap:wrap}
+.buscar{display:flex;align-items:center;gap:9px;background:#fff;border:1.5px solid var(--linea);border-radius:10px;
+  padding:11px 16px;flex:1;min-width:220px;color:var(--apagado)}
+.buscar input{border:none;outline:none;font-size:13.5px;width:100%;color:var(--tinta)}
+.fecha{font-size:12.5px;color:var(--apagado);white-space:nowrap;text-transform:capitalize}
+
+.grid-productos{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px}
+.producto{background:var(--panel);border:1.5px solid var(--linea);border-radius:12px;padding:12px;cursor:pointer;
+  transition:.15s;text-align:left}
+.producto:hover{border-color:var(--naranja);transform:translateY(-2px)}
+.producto:active{transform:translateY(0)}
+.producto-img{height:64px;border-radius:8px;margin-bottom:10px;display:flex;align-items:center;justify-content:center;
+  font-size:26px}
+.producto h4{font-size:12.5px;font-weight:700;line-height:1.3;margin-bottom:6px;min-height:32px}
+.producto .cat-eti{font-size:10px;color:var(--apagado);text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px;display:block}
+.producto .precio{font-size:14px;font-weight:800;color:var(--naranja-osc)}
+
+/* ---------------- Panel de ticket ---------------- */
+.ticket{background:var(--panel);border-left:1px solid var(--linea);display:flex;flex-direction:column;padding:20px}
+.ticket-cab{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px}
+.ticket-cab h2{font-size:15.5px;font-weight:800}
+.ticket-num{font-size:11px;color:var(--apagado);font-variant-numeric:tabular-nums}
+
+.ticket-lineas{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:9px;padding-right:2px;margin-bottom:14px}
+.ticket-vacio{font-size:12.5px;color:var(--apagado);text-align:center;padding:40px 10px}
+.linea{display:flex;align-items:center;gap:10px;background:var(--panel2);border:1px solid var(--linea);border-radius:10px;padding:9px 10px}
+.linea-info{flex:1;min-width:0}
+.linea-info strong{display:block;font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.linea-info span{font-size:11px;color:var(--apagado)}
+.linea-cant{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.linea-cant button{width:22px;height:22px;border-radius:6px;border:1px solid var(--linea);background:#fff;cursor:pointer;
+  font-size:14px;font-weight:700;color:var(--tinta);display:flex;align-items:center;justify-content:center}
+.linea-cant span{font-size:12.5px;font-weight:700;min-width:16px;text-align:center}
+.linea-precio{font-size:12.5px;font-weight:800;flex-shrink:0;min-width:56px;text-align:right}
+.linea-quitar{width:22px;height:22px;border-radius:6px;border:none;background:none;color:#c53030;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0}
+
+.ticket-totales{border-top:1.5px dashed var(--linea);padding-top:12px;margin-bottom:14px}
+.fila{display:flex;justify-content:space-between;font-size:12.5px;color:var(--apagado);margin-bottom:6px}
+.fila-total{font-size:18px;font-weight:800;color:var(--tinta);margin-top:6px}
+
+.ticket-pago{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+.pago{display:flex;flex-direction:column;align-items:center;gap:5px;padding:11px 6px;border:1.5px solid var(--linea);
+  border-radius:10px;background:#fff;cursor:pointer;font-size:11px;font-weight:700;color:var(--apagado);transition:.15s}
+.pago.act{border-color:var(--naranja);background:var(--naranja-suave);color:var(--naranja-osc)}
+
+.ticket-botones{display:grid;grid-template-columns:1fr 1.4fr;gap:10px}
+
+/* ---------------- Modal de venta cobrada ---------------- */
+.modal-fondo{position:fixed;inset:0;background:rgba(10,10,14,.55);display:none;align-items:center;justify-content:center;
+  z-index:50;padding:20px}
+.modal-fondo.ver{display:flex}
+.modal{background:#fff;border-radius:16px;padding:32px 28px;max-width:340px;width:100%;text-align:center;
+  box-shadow:0 24px 60px rgba(0,0,0,.25)}
+.modal-check{width:56px;height:56px;border-radius:50%;background:var(--verde);display:flex;align-items:center;
+  justify-content:center;margin:0 auto 16px}
+.modal h3{font-size:18px;margin-bottom:8px}
+.modal p{font-size:13.5px;color:var(--apagado);margin-bottom:22px}
+.modal-acciones{display:flex;flex-direction:column;gap:9px}
+
+@media(max-width:1024px){
+  .pdv{grid-template-columns:76px 1fr 300px}
+  .marca strong,.marca span,.turno,.cajero strong,.cajero span{display:none}
+  .marca{justify-content:center}
+  .cajero{justify-content:center}
+  .cat{text-align:center;font-size:0}
+  .cat::first-letter{font-size:13px}
+}
+@media(max-width:820px){
+  .pdv{grid-template-columns:1fr;height:auto;min-height:0}
+  .lateral{flex-direction:row;align-items:center;overflow-x:auto}
+  .cats{flex-direction:row}
+  .lateral-pie{display:none}
+  .catalogo{overflow-y:visible}
+  .ticket{border-left:none;border-top:1px solid var(--linea)}
+}
+
+</style>
+</head>
+<body>
+
+<div class="aviso-demo">Plantilla demostrativa de interfaz PDV. Productos, ventas y datos son ficticios — no procesa pagos reales.</div>
+
+<div class="pdv">
+  <aside class="lateral">
+    <div class="marca"><span class="marca-ic">LE</span><div><strong>Retail Pro</strong><span>PDV · Leuname</span></div></div>
+    <nav class="cats" id="categorias">
+      <button class="cat act" data-cat="Todos">Todos</button>
+      <button class="cat" data-cat="Bebidas">Bebidas</button>
+      <button class="cat" data-cat="Panadería">Panadería</button>
+      <button class="cat" data-cat="Snacks">Snacks</button>
+      <button class="cat" data-cat="Lácteos">Lácteos</button>
+      <button class="cat" data-cat="Limpieza">Limpieza</button>
+    </nav>
+    <div class="lateral-pie">
+      <div class="turno">
+        <span>Turno abierto</span>
+        <strong id="reloj">00:00</strong>
+      </div>
+      <div class="cajero">
+        <div class="cajero-ini">M</div>
+        <div><strong>Marta Ruiz</strong><span>Caja 02</span></div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="catalogo">
+    <header class="cab-catalogo">
+      <div class="buscar">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input type="search" id="buscarProducto" placeholder="Buscar producto o escanear código...">
+      </div>
+      <div class="fecha" id="fecha"></div>
+    </header>
+
+    <div class="grid-productos" id="grid"></div>
+  </main>
+
+  <section class="ticket">
+    <header class="ticket-cab">
+      <h2>Venta actual</h2>
+      <span class="ticket-num">Ticket #A-00482</span>
+    </header>
+
+    <div class="ticket-lineas" id="lineas">
+      <p class="ticket-vacio" id="vacio">El carrito está vacío. Toca un producto para añadirlo.</p>
+    </div>
+
+    <div class="ticket-totales">
+      <div class="fila"><span>Subtotal</span><span id="subtotal">0,00 €</span></div>
+      <div class="fila"><span>IVA (21%)</span><span id="iva">0,00 €</span></div>
+      <div class="fila fila-total"><span>Total</span><span id="total">0,00 €</span></div>
+    </div>
+
+    <div class="ticket-pago">
+      <button class="pago act" data-pago="Efectivo">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="3"/></svg>
+        Efectivo
+      </button>
+      <button class="pago" data-pago="Tarjeta">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2.5" y="5" width="19" height="14" rx="2.4"/><path d="M2.5 10h19"/></svg>
+        Tarjeta
+      </button>
+      <button class="pago" data-pago="Bizum">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="5" y="2.5" width="14" height="19" rx="2.6"/><path d="M9 18h6"/></svg>
+        Móvil
+      </button>
+    </div>
+
+    <div class="ticket-botones">
+      <button class="btn btn-linea" id="vaciar">Vaciar</button>
+      <button class="btn btn-cobrar" id="cobrar">Cobrar</button>
+    </div>
+  </section>
+</div>
+
+<div class="modal-fondo" id="modalFondo">
+  <div class="modal">
+    <div class="modal-check">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M4 12.5l5 5L20 6.5"/></svg>
+    </div>
+    <h3>Venta cobrada</h3>
+    <p id="modalResumen">Total: 0,00 € · Efectivo</p>
+    <div class="modal-acciones">
+      <button class="btn btn-linea" id="modalImprimir">Imprimir ticket</button>
+      <button class="btn btn-cobrar" id="modalNueva">Nueva venta</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ==========================================================================
+   PDV Retail Pro — interfaz de punto de venta (demo, sin backend real)
+   ========================================================================== */
+(function () {
+  'use strict';
+
+  var PRODUCTOS = [
+    { n: 'Agua mineral 500ml', c: 'Bebidas', p: 0.90, e: '💧' },
+    { n: 'Refresco cola lata', c: 'Bebidas', p: 1.20, e: '🥤' },
+    { n: 'Zumo de naranja 1L', c: 'Bebidas', p: 2.10, e: '🧃' },
+    { n: 'Café molido 250g', c: 'Bebidas', p: 4.50, e: '☕' },
+    { n: 'Cerveza pack x6', c: 'Bebidas', p: 5.80, e: '🍺' },
+    { n: 'Barra de pan', c: 'Panadería', p: 1.10, e: '🥖' },
+    { n: 'Croissant', c: 'Panadería', p: 1.40, e: '🥐' },
+    { n: 'Bollo de canela', c: 'Panadería', p: 1.90, e: '🍩' },
+    { n: 'Tarta de manzana', c: 'Panadería', p: 12.90, e: '🥧' },
+    { n: 'Patatas fritas', c: 'Snacks', p: 1.80, e: '🍟' },
+    { n: 'Frutos secos 200g', c: 'Snacks', p: 3.20, e: '🥜' },
+    { n: 'Chocolate barra', c: 'Snacks', p: 1.60, e: '🍫' },
+    { n: 'Galletas paquete', c: 'Snacks', p: 2.30, e: '🍪' },
+    { n: 'Leche entera 1L', c: 'Lácteos', p: 1.05, e: '🥛' },
+    { n: 'Yogur natural x4', c: 'Lácteos', p: 2.40, e: '🍦' },
+    { n: 'Queso curado 250g', c: 'Lácteos', p: 5.90, e: '🧀' },
+    { n: 'Detergente 1.5L', c: 'Limpieza', p: 6.50, e: '🧴' },
+    { n: 'Papel de cocina x2', c: 'Limpieza', p: 2.90, e: '🧻' },
+    { n: 'Lavavajillas 750ml', c: 'Limpieza', p: 3.10, e: '🧽' },
+    { n: 'Bolsas de basura', c: 'Limpieza', p: 2.20, e: '🗑️' },
+  ];
+
+  var IVA = 0.21;
+  var carrito = []; // { producto, cant }
+  var metodoPago = 'Efectivo';
+  var categoriaActiva = 'Todos';
+  var contadorTicket = 482;
+
+  var grid = document.getElementById('grid');
+  var lineasEl = document.getElementById('lineas');
+  var vacioEl = document.getElementById('vacio');
+  var subtotalEl = document.getElementById('subtotal');
+  var ivaEl = document.getElementById('iva');
+  var totalEl = document.getElementById('total');
+  var buscarInput = document.getElementById('buscarProducto');
+
+  function euros(n) {
+    return n.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €';
+  }
+
+  function pintarGrid() {
+    var texto = (buscarInput.value || '').trim().toLowerCase();
+    var lista = PRODUCTOS.filter(function (p) {
+      var pasaCat = categoriaActiva === 'Todos' || p.c === categoriaActiva;
+      var pasaTexto = !texto || p.n.toLowerCase().indexOf(texto) !== -1;
+      return pasaCat && pasaTexto;
+    });
+
+    grid.innerHTML = lista.map(function (p, i) {
+      return '<button class="producto" data-idx="' + PRODUCTOS.indexOf(p) + '">' +
+        '<div class="producto-img" style="background:linear-gradient(135deg,#fff1e6,#ffe1c7)">' + p.e + '</div>' +
+        '<span class="cat-eti">' + p.c + '</span>' +
+        '<h4>' + p.n + '</h4>' +
+        '<div class="precio">' + euros(p.p) + '</div>' +
+        '</button>';
+    }).join('');
+
+    [].slice.call(grid.querySelectorAll('.producto')).forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        agregarAlCarrito(PRODUCTOS[Number(btn.dataset.idx)]);
+      });
+    });
+  }
+
+  function agregarAlCarrito(producto) {
+    var linea = carrito.find(function (l) { return l.producto.n === producto.n; });
+    if (linea) linea.cant += 1;
+    else carrito.push({ producto: producto, cant: 1 });
+    pintarTicket();
+  }
+
+  function cambiarCantidad(nombre, delta) {
+    var linea = carrito.find(function (l) { return l.producto.n === nombre; });
+    if (!linea) return;
+    linea.cant += delta;
+    if (linea.cant <= 0) carrito = carrito.filter(function (l) { return l.producto.n !== nombre; });
+    pintarTicket();
+  }
+
+  function quitarLinea(nombre) {
+    carrito = carrito.filter(function (l) { return l.producto.n !== nombre; });
+    pintarTicket();
+  }
+
+  function pintarTicket() {
+    if (carrito.length === 0) {
+      lineasEl.innerHTML = '';
+      lineasEl.appendChild(vacioEl);
+    } else {
+      lineasEl.innerHTML = carrito.map(function (l) {
+        return '<div class="linea" data-nombre="' + l.producto.n + '">' +
+          '<div class="linea-info"><strong>' + l.producto.n + '</strong><span>' + euros(l.producto.p) + ' / ud.</span></div>' +
+          '<div class="linea-cant">' +
+            '<button data-accion="menos">−</button>' +
+            '<span>' + l.cant + '</span>' +
+            '<button data-accion="mas">+</button>' +
+          '</div>' +
+          '<div class="linea-precio">' + euros(l.producto.p * l.cant) + '</div>' +
+          '<button class="linea-quitar" data-accion="quitar" aria-label="Quitar">' +
+            '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>' +
+          '</button>' +
+        '</div>';
+      }).join('');
+
+      [].slice.call(lineasEl.querySelectorAll('.linea')).forEach(function (fila) {
+        var nombre = fila.dataset.nombre;
+        fila.querySelector('[data-accion="mas"]').addEventListener('click', function () { cambiarCantidad(nombre, 1); });
+        fila.querySelector('[data-accion="menos"]').addEventListener('click', function () { cambiarCantidad(nombre, -1); });
+        fila.querySelector('[data-accion="quitar"]').addEventListener('click', function () { quitarLinea(nombre); });
+      });
+    }
+
+    var subtotal = carrito.reduce(function (acc, l) { return acc + l.producto.p * l.cant; }, 0);
+    var iva = subtotal * IVA;
+    subtotalEl.textContent = euros(subtotal);
+    ivaEl.textContent = euros(iva);
+    totalEl.textContent = euros(subtotal + iva);
+  }
+
+  // Categorías
+  [].slice.call(document.querySelectorAll('.cat')).forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      document.querySelectorAll('.cat').forEach(function (b) { b.classList.remove('act'); });
+      btn.classList.add('act');
+      categoriaActiva = btn.dataset.cat;
+      pintarGrid();
+    });
+  });
+
+  // Métodos de pago
+  [].slice.call(document.querySelectorAll('.pago')).forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      document.querySelectorAll('.pago').forEach(function (b) { b.classList.remove('act'); });
+      btn.classList.add('act');
+      metodoPago = btn.dataset.pago;
+    });
+  });
+
+  buscarInput.addEventListener('input', pintarGrid);
+
+  document.getElementById('vaciar').addEventListener('click', function () {
+    carrito = [];
+    pintarTicket();
+  });
+
+  var modalFondo = document.getElementById('modalFondo');
+  var modalResumen = document.getElementById('modalResumen');
+
+  document.getElementById('cobrar').addEventListener('click', function () {
+    if (carrito.length === 0) return;
+    var subtotal = carrito.reduce(function (acc, l) { return acc + l.producto.p * l.cant; }, 0);
+    var total = subtotal * (1 + IVA);
+    modalResumen.textContent = 'Total: ' + euros(total) + ' · ' + metodoPago;
+    modalFondo.classList.add('ver');
+  });
+
+  document.getElementById('modalImprimir').addEventListener('click', function () {
+    window.print();
+  });
+
+  document.getElementById('modalNueva').addEventListener('click', function () {
+    modalFondo.classList.remove('ver');
+    carrito = [];
+    contadorTicket += 1;
+    document.querySelector('.ticket-num').textContent = 'Ticket #A-' + String(contadorTicket).padStart(5, '0');
+    pintarTicket();
+  });
+
+  function actualizarReloj() {
+    var ahora = new Date();
+    document.getElementById('reloj').textContent =
+      String(ahora.getHours()).padStart(2, '0') + ':' + String(ahora.getMinutes()).padStart(2, '0');
+  }
+  actualizarReloj();
+  setInterval(actualizarReloj, 15000);
+
+  var fecha = document.getElementById('fecha');
+  if (fecha) {
+    fecha.textContent = new Date().toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' });
+  }
+
+  pintarGrid();
+  pintarTicket();
+})();
+
+</script>
+</body>
+</html>

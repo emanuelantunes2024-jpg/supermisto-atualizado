@@ -78,6 +78,8 @@ interface SeedTemplate {
   /** Degradado de respaldo si algún día falta la miniatura. */
   gradient: string;
   features: string[];
+  /** Rubro dentro de /pdvs (además de "pdv" en sí); vacío para el resto del catálogo. */
+  tags?: string[];
 }
 
 const TPL = "22222222-2222-4222-8222-0000000000";
@@ -913,6 +915,28 @@ const seed: SeedTemplate[] = [
       "Ticket de venta en pantalla",
       "Pensado para tablet táctil",
     ],
+    tags: ["retail"],
+  },
+  {
+    id: `${TPL}40`,
+    categorySlug: "pdv",
+    title: "PDV Concesionaria Pro",
+    slug: "pdv-concesionaria-pro",
+    short_description: "Órdenes de servicio de taller y venta de repuestos, con datos de cliente y vehículo.",
+    full_description:
+      "Sistema de punto de venta pensado para concesionarias y talleres mecánicos: ficha de cliente y de vehículo en la misma orden, pestañas de trabajos/servicios y repuestos con su propio total, historial del vehículo, resumen de mano de obra + repuestos + impuestos, forma de pago y estado de la orden (pendiente, en proceso, terminada, entregada).",
+    price_cents: 9900,
+    preview_url: "/demos/pdv-concesionaria-pro/index.html",
+    gradient: "linear-gradient(160deg,#101522,#1e4fd6 55%,#101522)",
+    features: [
+      "Ficha de cliente y de vehículo",
+      "Trabajos/servicios y repuestos por pestañas",
+      "Historial del vehículo",
+      "Resumen de mano de obra + repuestos + IVA",
+      "Estado de la orden (pendiente a entregada)",
+      "4 formas de pago",
+    ],
+    tags: ["concesionaria", "taller-mecanico"],
   },
   {
     id: `${TPL}39`,
@@ -959,7 +983,7 @@ export const seedTemplates: TemplateWithCategory[] = seed.map((t) => ({
   // Maqueta del diseño real, generada por scripts/generate-thumbnails.mjs.
   thumbnail_url: `/thumbnails/${t.slug}.jpg`,
   features: t.features,
-  tags: [],
+  tags: t.tags ?? [],
   featured: FEATURED_SLUGS.includes(t.slug),
   file_url: null,
   status: "published",

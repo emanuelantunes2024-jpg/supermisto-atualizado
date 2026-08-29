@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PDV Concesionaria Pro — Órdenes de Taller y Venta de Repuestos</title>
+<meta name="description" content="Sistema de punto de venta para concesionarias y talleres: órdenes de servicio, venta de repuestos y cobro, con datos de cliente y vehículo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* En la web las fuentes vienen de Google Fonts (20 KB en vez de 400 KB).
+   El ZIP que descarga el cliente las lleva incrustadas. */
+/* ==========================================================================
+   PDV CONCESIONARIA PRO — ÓRDENES DE TALLER Y VENTA DE REPUESTOS
+   Leuname Software · leunamesoftware.com
+   ========================================================================== */
+
+:root{
+  --fondo:#eef0f4; --panel:#fff; --panel2:#f7f8fa;
+  --tinta:#161a22; --apagado:#6b7180; --linea:#e2e4ea;
+  --azul:#1e4fd6; --azul-osc:#173da6; --azul-suave:#eaf0ff;
+  --naranja:#ff7a1a; --verde:#1f9d55; --rojo:#e33b3b; --morado:#7c4fe0;
+  --sans:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{overflow-x:hidden;max-width:100%}
+body{background:var(--fondo);color:var(--tinta);font-family:var(--sans);font-size:13.5px;-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font-family:inherit;font-size:inherit}
+::-webkit-scrollbar{width:8px;height:8px}
+::-webkit-scrollbar-thumb{background:#ccd0da;border-radius:99px}
+
+.aviso-demo{background:#111;color:#ffcf9e;text-align:center;padding:8px 20px;font-size:12px;font-weight:600}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:11px 16px;border:1.5px solid transparent;
+  border-radius:9px;font-size:13px;font-weight:700;cursor:pointer;transition:.15s}
+.btn-sm{padding:7px 12px;font-size:12px}
+.btn-linea{background:#fff;border-color:var(--linea);color:var(--tinta)}
+.btn-linea:hover{border-color:#b9bdc9}
+.btn-cobrar{background:var(--verde);color:#fff}
+.btn-cobrar:hover{background:#187f45}
+.btn-cancelar{background:#fff;border-color:var(--rojo);color:var(--rojo)}
+.btn-cancelar:hover{background:#fdeeee}
+
+/* ---------------- Barra superior ---------------- */
+.topbar{display:flex;align-items:center;gap:22px;background:#0f1420;color:#fff;padding:11px 20px;flex-wrap:wrap}
+.marca{display:flex;align-items:center;gap:10px}
+.marca-ic{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,var(--azul),var(--azul-osc));
+  display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12.5px;flex-shrink:0}
+.marca strong{font-size:14px;font-weight:800}
+.marca em{font-style:normal;color:var(--naranja)}
+.marca span{display:block;font-size:10px;color:#9aa1b0;letter-spacing:.06em;text-transform:uppercase}
+.topbar-titulo{font-size:12.5px;color:#c7cbd6;background:rgba(255,255,255,.08);padding:6px 12px;border-radius:7px;font-weight:700}
+.topbar-nav{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto}
+.tn{display:flex;align-items:center;gap:7px;background:none;border:1px solid rgba(255,255,255,.14);color:#c7cbd6;
+  padding:8px 12px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;transition:.15s}
+.tn:hover{background:rgba(255,255,255,.08);color:#fff}
+.tn.act{background:var(--azul);border-color:var(--azul);color:#fff}
+.topbar-usuario{display:flex;align-items:center;gap:10px}
+.usuario-ini{width:30px;height:30px;border-radius:50%;background:#2a3040;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px}
+.topbar-usuario span{display:block;font-size:10px;color:#9aa1b0}
+.topbar-usuario strong{font-size:12.5px}
+.salir{background:none;border:none;color:#ff8a7a;font-size:12px;font-weight:700;cursor:pointer;padding:6px 10px}
+
+/* ---------------- Layout general ---------------- */
+.app{display:grid;grid-template-columns:210px 1fr;grid-template-rows:1fr auto}
+.contenido{display:grid;grid-template-columns:1fr 300px;gap:16px;padding:18px;align-items:start}
+
+/* ---------------- Barra lateral ---------------- */
+.lateral{grid-row:1/2;background:#161b26;color:#c7cbd6;padding:18px 12px;display:flex;flex-direction:column;gap:22px;
+  min-height:calc(100vh - 100px)}
+.lateral-eti{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:#6b7180;padding:0 10px;margin-bottom:8px}
+.lateral nav{display:flex;flex-direction:column;gap:2px}
+.item{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:8px;color:#c7cbd6;font-size:12.5px;font-weight:600;transition:.15s}
+.item:hover{background:rgba(255,255,255,.06);color:#fff}
+.item.act{background:var(--azul);color:#fff}
+.lateral-pie{display:flex;flex-direction:column;gap:8px;margin-top:auto}
+.acceso{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border:none;border-radius:8px;
+  color:#fff;font-size:12px;font-weight:700;cursor:pointer}
+.acceso em{font-style:normal;background:rgba(0,0,0,.2);padding:1px 6px;border-radius:5px;font-size:10.5px}
+.ac-verde{background:var(--verde)}
+.ac-azul{background:var(--azul)}
+.ac-naranja{background:var(--naranja)}
+.ac-morado{background:var(--morado)}
+
+/* ---------------- Panel de orden ---------------- */
+.panel-orden{background:var(--panel);border:1px solid var(--linea);border-radius:14px;padding:20px}
+.orden-cab{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;margin-bottom:14px}
+.orden-eti{display:block;font-size:11px;color:var(--apagado);text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px}
+.orden-cab h1{font-size:20px;font-weight:800}
+.orden-datos{display:flex;align-items:center;gap:14px;font-size:12px;color:var(--apagado);flex-wrap:wrap}
+.estado-pill{background:var(--azul-suave);color:var(--azul-osc);padding:4px 11px;border-radius:99px;font-weight:700;font-size:11.5px}
+
+.orden-tipo{display:flex;gap:8px;margin-bottom:16px}
+.tipo{padding:9px 16px;border:1.5px solid var(--linea);border-radius:9px;background:#fff;font-weight:700;font-size:12.5px;cursor:pointer}
+.tipo.act{background:var(--azul);border-color:var(--azul);color:#fff}
+
+.rejilla-datos{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px}
+.tarjeta-datos{background:var(--panel2);border:1px solid var(--linea);border-radius:11px;padding:14px 16px}
+.tarjeta-datos h3{font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--apagado);margin-bottom:10px}
+.tarjeta-datos .fila{display:flex;justify-content:space-between;gap:10px;font-size:12.5px;padding:4px 0}
+.tarjeta-datos .fila span{color:var(--apagado)}
+.tarjeta-datos .btn{margin-top:10px;width:100%}
+
+.pestanas{display:flex;gap:4px;border-bottom:1.5px solid var(--linea);margin-bottom:16px;overflow-x:auto}
+.pestana{background:none;border:none;padding:10px 14px;font-size:12.5px;font-weight:700;color:var(--apagado);
+  border-bottom:2.5px solid transparent;cursor:pointer;white-space:nowrap}
+.pestana.act{color:var(--azul);border-color:var(--azul)}
+
+.tabla{width:100%;border-collapse:collapse;margin-bottom:12px;font-size:12.5px}
+.tabla th{text-align:left;color:var(--apagado);font-size:11px;text-transform:uppercase;letter-spacing:.04em;
+  padding:8px 10px;border-bottom:1.5px solid var(--linea)}
+.tabla td{padding:10px;border-bottom:1px solid var(--linea)}
+.tabla tr:last-child td{border-bottom:none}
+.quitar-fila{width:26px;height:26px;border-radius:7px;border:none;background:#fdeeee;color:var(--rojo);cursor:pointer;
+  display:flex;align-items:center;justify-content:center}
+.agregar{margin-bottom:18px}
+
+.historial-item{display:flex;align-items:center;gap:14px;padding:11px 4px;border-bottom:1px solid var(--linea);font-size:12.5px}
+.historial-item span:first-child{color:var(--apagado);min-width:80px}
+.historial-item strong{flex:1}
+.historial-km{color:var(--apagado)}
+
+.observaciones{margin-top:6px}
+.observaciones label{display:block;font-size:11.5px;font-weight:700;color:var(--apagado);margin-bottom:6px}
+.observaciones textarea{width:100%;border:1.5px solid var(--linea);border-radius:9px;padding:10px 12px;resize:vertical;color:var(--tinta)}
+
+/* ---------------- Panel resumen ---------------- */
+.panel-resumen{background:#101522;color:#fff;border-radius:14px;padding:20px;position:sticky;top:18px}
+.panel-resumen h2{font-size:15px;margin-bottom:14px}
+.resumen-fila{display:flex;justify-content:space-between;font-size:12.5px;color:#9aa1b0;padding:6px 0}
+.resumen-sub{border-top:1px solid rgba(255,255,255,.12);margin-top:4px;padding-top:10px;color:#fff;font-weight:700}
+.resumen-total{background:var(--azul);margin:10px -20px 16px;padding:14px 20px;font-size:16px;font-weight:800;color:#fff}
+.campo-eti{display:block;font-size:11px;color:#9aa1b0;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px;margin-top:12px}
+.campo-select{width:100%;padding:10px 12px;border-radius:9px;border:1.5px solid rgba(255,255,255,.14);
+  background:#161b26;color:#fff}
+.resumen-botones{display:flex;flex-direction:column;gap:9px;margin-top:18px}
+.resumen-botones .btn-linea{background:transparent;border-color:rgba(255,255,255,.2);color:#fff}
+.resumen-botones .btn-linea:hover{background:rgba(255,255,255,.08)}
+.resumen-botones .btn-cancelar{background:transparent}
+
+/* ---------------- Pie de la app ---------------- */
+.pie-app{grid-column:1/3;display:flex;gap:24px;flex-wrap:wrap;padding:12px 20px;background:#fff;border-top:1px solid var(--linea);
+  font-size:12px;color:var(--apagado)}
+.pie-app strong{color:var(--tinta)}
+
+/* ---------------- Modal ---------------- */
+.modal-fondo{position:fixed;inset:0;background:rgba(10,10,14,.55);display:none;align-items:center;justify-content:center;z-index:50;padding:20px}
+.modal-fondo.ver{display:flex}
+.modal{background:#fff;border-radius:16px;padding:32px 28px;max-width:320px;width:100%;text-align:center;box-shadow:0 24px 60px rgba(0,0,0,.25)}
+.modal-check{width:56px;height:56px;border-radius:50%;background:var(--verde);display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+.modal h3{font-size:18px;margin-bottom:8px}
+.modal p{font-size:13.5px;color:var(--apagado);margin-bottom:22px}
+
+@media(max-width:1180px){
+  .app{grid-template-columns:72px 1fr}
+  .marca strong,.marca span,.lateral-eti,.item .label,.acceso{display:none}
+  .item{justify-content:center}
+  .lateral-pie{display:none}
+  .contenido{grid-template-columns:1fr}
+  .panel-resumen{position:static}
+}
+@media(max-width:760px){
+  .topbar{padding:10px 14px}
+  .topbar-nav{display:none}
+  .topbar-titulo{display:none}
+  .app{grid-template-columns:1fr}
+  .lateral{display:none}
+  .rejilla-datos{grid-template-columns:1fr}
+  .pie-app{grid-column:1/2;flex-direction:column;gap:6px}
+  .tabla{display:block;overflow-x:auto;white-space:nowrap}
+}
+
+</style>
+</head>
+<body>
+
+<div class="aviso-demo">Plantilla demostrativa de PDV para concesionaria/taller. Clientes, vehículos e importes son ficticios.</div>
+
+<header class="topbar">
+  <div class="marca">
+    <span class="marca-ic">AP</span>
+    <div><strong>Auto Parts <em>Pro</em></strong><span>Concesionaria &amp; Taller</span></div>
+  </div>
+  <div class="topbar-titulo">PDV · Punto de Venta</div>
+  <nav class="topbar-nav">
+    <button class="tn act"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="10" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2.5 3.5h2.8l2.4 11h11l2-8H6.6"/></svg>Nueva venta</button>
+    <button class="tn"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>Buscar cliente</button>
+    <button class="tn"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4.5" width="18" height="16" rx="2"/><path d="M3 9.5h18M8 3v3M16 3v3"/></svg>Agenda</button>
+    <button class="tn"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="3"/></svg>Caja</button>
+    <button class="tn"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 20V10M11 20V4M18 20v-7"/></svg>Reportes</button>
+  </nav>
+  <div class="topbar-usuario">
+    <div class="usuario-ini">A</div>
+    <div><span>Usuario</span><strong>Admin</strong></div>
+    <button class="salir">Cerrar sesión</button>
+  </div>
+</header>
+
+<div class="app">
+  <aside class="lateral">
+    <nav>
+      <span class="lateral-eti">Menú principal</span>
+      <a href="#" class="item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3.5 10.5 12 4l8.5 6.5V20a1 1 0 0 1-1 1H12"/></svg><span class="label">Inicio</span></a>
+      <a href="#" class="item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="8" r="3.4"/><path d="M4.5 20.5c0-3.7 3.4-6.5 7.5-6.5s7.5 2.8 7.5 6.5"/></svg><span class="label">Clientes</span></a>
+      <a href="#" class="item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 16v-3l1.8-4.4A2 2 0 0 1 7.7 7h8.6a2 2 0 0 1 1.9 1.6L20 13v3"/><path d="M3 16h18v2.5a1 1 0 0 1-1 1h-1.5a1 1 0 0 1-1-1V16M7.5 16v2.5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V16"/></svg><span class="label">Vehículos</span></a>
+      <a href="#" class="item act"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 4h9l4 4v12a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1z"/><path d="M9 12h6M9 16h6M9 8h2"/></svg><span class="label">Ventas / Órdenes</span></a>
+      <a href="#" class="item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M14.7 6.3a4 4 0 0 0-5.6 5.6L3 18l3 3 6.1-6.1a4 4 0 0 0 5.6-5.6L15 12l-3-3z"/></svg><span class="label">Servicios</span></a>
+      <a href="#" class="item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="2.6"/><path d="M12 3.5v2.3M12 18.2v2.3M20.5 12h-2.3M5.8 12H3.5"/></svg><span class="label">Repuestos</span></a>
+      <a href="#" class="item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 7.5h16M4 12h16M4 16.5h10"/></svg><span class="label">Inventario</span></a>
+      <a href="#" class="item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="3"/></svg><span class="label">Caja</span></a>
+      <a href="#" class="item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 3.5h9l4 4V19a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 5 19V5A1.5 1.5 0 0 1 6.5 3.5z"/><path d="M9 12.5h6M9 16h4"/></svg><span class="label">Cobros</span></a>
+      <a href="#" class="item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3.5v17M7.5 20.5h9"/><path d="M3.5 8h17"/><path d="M3.5 8 1 14a2.5 2.5 0 0 0 5 0zM20.5 8 18 14a2.5 2.5 0 0 0 5 0z"/></svg><span class="label">Gastos</span></a>
+      <a href="#" class="item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 20V10M11 20V4M18 20v-7"/></svg><span class="label">Reportes</span></a>
+    </nav>
+    <div class="lateral-pie">
+      <span class="lateral-eti">Accesos rápidos</span>
+      <button class="acceso ac-verde">Nueva orden <em>F2</em></button>
+      <button class="acceso ac-azul">Nuevo cliente <em>F3</em></button>
+      <button class="acceso ac-naranja">Nuevo vehículo <em>F4</em></button>
+      <button class="acceso ac-morado">Venta de repuestos <em>F5</em></button>
+    </div>
+  </aside>
+
+  <main class="contenido">
+    <section class="panel-orden">
+      <header class="orden-cab">
+        <div>
+          <span class="orden-eti">Orden de servicio / venta</span>
+          <h1>OS-000125</h1>
+        </div>
+        <div class="orden-datos">
+          <span>Fecha: <strong id="fecha">—</strong></span>
+          <span>Asesor: <strong>Julia Serrano</strong></span>
+          <span class="estado-pill" id="estadoTexto">En proceso</span>
+        </div>
+      </header>
+
+      <div class="orden-tipo">
+        <button class="tipo act" data-tipo="taller">🔧 Servicio taller</button>
+        <button class="tipo" data-tipo="repuestos">🛒 Venta repuestos</button>
+      </div>
+
+      <div class="rejilla-datos">
+        <div class="tarjeta-datos">
+          <h3>Datos del cliente</h3>
+          <div class="fila"><span>Cliente</span><strong>Carlos Martínez López</strong></div>
+          <div class="fila"><span>DNI / NIF</span><strong>12345678X</strong></div>
+          <div class="fila"><span>Teléfono</span><strong>+34 600 123 456</strong></div>
+          <div class="fila"><span>Email</span><strong>carlos.martinez@email.com</strong></div>
+        </div>
+        <div class="tarjeta-datos">
+          <h3>Datos del vehículo</h3>
+          <div class="fila"><span>Matrícula</span><strong>1234 ABC</strong></div>
+          <div class="fila"><span>Marca / Modelo</span><strong>BMW Serie 3</strong></div>
+          <div class="fila"><span>Versión</span><strong>320d · 2020</strong></div>
+          <div class="fila"><span>Kilometraje</span><strong>45.600 km</strong></div>
+          <button class="btn btn-linea btn-sm">Cambiar vehículo</button>
+        </div>
+      </div>
+
+      <div class="pestanas">
+        <button class="pestana act" data-tab="trabajos">Trabajos / Servicios</button>
+        <button class="pestana" data-tab="repuestos">Repuestos / Productos</button>
+        <button class="pestana" data-tab="historial">Historial del vehículo</button>
+      </div>
+
+      <div class="tab-panel" id="tab-trabajos">
+        <table class="tabla">
+          <thead><tr><th>Descripción del trabajo</th><th>Técnico</th><th>Horas</th><th>Precio/h</th><th>Total</th><th></th></tr></thead>
+          <tbody id="filasTrabajos"></tbody>
+        </table>
+        <button class="btn btn-linea btn-sm agregar" data-accion="agregar-trabajo">+ Agregar trabajo</button>
+      </div>
+
+      <div class="tab-panel" id="tab-repuestos" hidden>
+        <table class="tabla">
+          <thead><tr><th>Repuesto</th><th>Cant.</th><th>Precio unit.</th><th>Total</th><th></th></tr></thead>
+          <tbody id="filasRepuestos"></tbody>
+        </table>
+        <button class="btn btn-linea btn-sm agregar" data-accion="agregar-repuesto">+ Agregar repuesto</button>
+      </div>
+
+      <div class="tab-panel" id="tab-historial" hidden>
+        <div class="historial-item"><span>12/03/2026</span><strong>Cambio de aceite y filtro</strong><span class="historial-km">42.100 km</span></div>
+        <div class="historial-item"><span>05/09/2025</span><strong>Revisión de frenos</strong><span class="historial-km">37.800 km</span></div>
+        <div class="historial-item"><span>18/02/2025</span><strong>Cambio de neumáticos delanteros</strong><span class="historial-km">31.200 km</span></div>
+      </div>
+
+      <div class="observaciones">
+        <label for="obs">Observaciones</label>
+        <textarea id="obs" rows="2">Cliente solicita revisión completa y cambio de pastillas de freno.</textarea>
+      </div>
+    </section>
+
+    <aside class="panel-resumen">
+      <h2>Resumen de la orden</h2>
+      <div class="resumen-fila"><span>Mano de obra</span><span id="totalManoObra">0,00 €</span></div>
+      <div class="resumen-fila"><span>Repuestos / productos</span><span id="totalRepuestos">0,00 €</span></div>
+      <div class="resumen-fila resumen-sub"><span>Subtotal</span><span id="subtotal">0,00 €</span></div>
+      <div class="resumen-fila"><span>Impuestos (21%)</span><span id="impuestos">0,00 €</span></div>
+      <div class="resumen-fila resumen-total"><span>Total a pagar</span><span id="total">0,00 €</span></div>
+
+      <label class="campo-eti">Forma de pago</label>
+      <select id="formaPago" class="campo-select">
+        <option>Efectivo</option>
+        <option>Tarjeta</option>
+        <option>Transferencia</option>
+        <option>Financiación</option>
+      </select>
+
+      <label class="campo-eti">Estado de la orden</label>
+      <select id="estadoOrden" class="campo-select">
+        <option>Pendiente</option>
+        <option selected>En proceso</option>
+        <option>Terminada</option>
+        <option>Entregada</option>
+      </select>
+
+      <div class="resumen-botones">
+        <button class="btn btn-cobrar" id="cobrar">Guardar y cobrar</button>
+        <button class="btn btn-linea" id="guardar">Guardar orden</button>
+        <button class="btn btn-cancelar" id="cancelar">Cancelar orden</button>
+      </div>
+    </aside>
+  </main>
+
+  <footer class="pie-app">
+    <span>Caja actual: <strong>Caja 1</strong></span>
+    <span>Apertura: <strong>09:00</strong></span>
+    <span>Ventas del día: <strong>4</strong></span>
+    <span>Total en caja: <strong id="totalCaja">1.250,00 €</strong></span>
+  </footer>
+</div>
+
+<div class="modal-fondo" id="modalFondo">
+  <div class="modal">
+    <div class="modal-check">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M4 12.5l5 5L20 6.5"/></svg>
+    </div>
+    <h3>Orden cobrada</h3>
+    <p id="modalResumen">Total: 0,00 €</p>
+    <button class="btn btn-cobrar" id="modalCerrar">Aceptar</button>
+  </div>
+</div>
+
+<script>
+/* ==========================================================================
+   PDV Concesionaria Pro — órdenes de taller y venta de repuestos (demo)
+   ========================================================================== */
+(function () {
+  'use strict';
+
+  var IVA = 0.21;
+
+  var trabajos = [
+    { d: 'Revisión general del vehículo', t: 'Pedro Santos', h: 1.5, p: 45 },
+    { d: 'Cambio de aceite y filtro', t: 'Pedro Santos', h: 0.8, p: 45 },
+    { d: 'Revisión de frenos delanteros', t: 'Ana Gómez', h: 1.2, p: 45 },
+    { d: 'Alineación y equilibrado', t: 'Luis Ramírez', h: 1.0, p: 45 },
+  ];
+
+  var repuestos = [
+    { n: 'Filtro de aceite', c: 1, p: 12.5 },
+    { n: 'Aceite 5W30 (5L)', c: 1, p: 14.9 },
+    { n: 'Pastillas de freno delanteras', c: 1, p: 89 },
+  ];
+
+  var filasTrabajos = document.getElementById('filasTrabajos');
+  var filasRepuestos = document.getElementById('filasRepuestos');
+
+  function euros(n) {
+    return n.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €';
+  }
+
+  function pintarTrabajos() {
+    filasTrabajos.innerHTML = trabajos.map(function (f, i) {
+      var total = f.h * f.p;
+      return '<tr><td>' + f.d + '</td><td>' + f.t + '</td><td>' + f.h.toFixed(2) + '</td><td>' + euros(f.p) + '</td>' +
+        '<td><strong>' + euros(total) + '</strong></td>' +
+        '<td><button class="quitar-fila" data-tipo="trabajo" data-idx="' + i + '">✕</button></td></tr>';
+    }).join('');
+  }
+
+  function pintarRepuestos() {
+    filasRepuestos.innerHTML = repuestos.map(function (r, i) {
+      var total = r.c * r.p;
+      return '<tr><td>' + r.n + '</td><td>' + r.c + '</td><td>' + euros(r.p) + '</td>' +
+        '<td><strong>' + euros(total) + '</strong></td>' +
+        '<td><button class="quitar-fila" data-tipo="repuesto" data-idx="' + i + '">✕</button></td></tr>';
+    }).join('');
+  }
+
+  function totales() {
+    var manoObra = trabajos.reduce(function (a, f) { return a + f.h * f.p; }, 0);
+    var repuestosTotal = repuestos.reduce(function (a, r) { return a + r.c * r.p; }, 0);
+    var subtotal = manoObra + repuestosTotal;
+    var imp = subtotal * IVA;
+    document.getElementById('totalManoObra').textContent = euros(manoObra);
+    document.getElementById('totalRepuestos').textContent = euros(repuestosTotal);
+    document.getElementById('subtotal').textContent = euros(subtotal);
+    document.getElementById('impuestos').textContent = euros(imp);
+    document.getElementById('total').textContent = euros(subtotal + imp);
+    return subtotal + imp;
+  }
+
+  function repintar() {
+    pintarTrabajos();
+    pintarRepuestos();
+    totales();
+  }
+
+  document.addEventListener('click', function (ev) {
+    var btn = ev.target.closest('.quitar-fila');
+    if (!btn) return;
+    var idx = Number(btn.dataset.idx);
+    if (btn.dataset.tipo === 'trabajo') trabajos.splice(idx, 1);
+    else repuestos.splice(idx, 1);
+    repintar();
+  });
+
+  document.querySelector('[data-accion="agregar-trabajo"]').addEventListener('click', function () {
+    trabajos.push({ d: 'Nuevo trabajo', t: 'Sin asignar', h: 1, p: 45 });
+    repintar();
+  });
+
+  document.querySelector('[data-accion="agregar-repuesto"]').addEventListener('click', function () {
+    repuestos.push({ n: 'Nuevo repuesto', c: 1, p: 20 });
+    repintar();
+  });
+
+  // Tabs
+  [].slice.call(document.querySelectorAll('.pestana')).forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      document.querySelectorAll('.pestana').forEach(function (t) { t.classList.remove('act'); });
+      document.querySelectorAll('.tab-panel').forEach(function (p) { p.hidden = true; });
+      tab.classList.add('act');
+      document.getElementById('tab-' + tab.dataset.tab).hidden = false;
+    });
+  });
+
+  // Tipo de orden
+  [].slice.call(document.querySelectorAll('.tipo')).forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      document.querySelectorAll('.tipo').forEach(function (b) { b.classList.remove('act'); });
+      btn.classList.add('act');
+    });
+  });
+
+  // Estado
+  document.getElementById('estadoOrden').addEventListener('change', function (ev) {
+    document.getElementById('estadoTexto').textContent = ev.target.value;
+  });
+
+  // Cobrar / guardar / cancelar
+  var modalFondo = document.getElementById('modalFondo');
+  document.getElementById('cobrar').addEventListener('click', function () {
+    var total = totales();
+    document.getElementById('modalResumen').textContent =
+      'Total: ' + euros(total) + ' · ' + document.getElementById('formaPago').value;
+    modalFondo.classList.add('ver');
+  });
+  document.getElementById('modalCerrar').addEventListener('click', function () {
+    modalFondo.classList.remove('ver');
+  });
+  document.getElementById('guardar').addEventListener('click', function () {
+    var boton = document.getElementById('guardar');
+    var original = boton.textContent;
+    boton.textContent = '✓ Orden guardada';
+    setTimeout(function () { boton.textContent = original; }, 1600);
+  });
+  document.getElementById('cancelar').addEventListener('click', function () {
+    document.getElementById('estadoOrden').value = 'Pendiente';
+    document.getElementById('estadoTexto').textContent = 'Cancelada';
+  });
+
+  var fecha = document.getElementById('fecha');
+  if (fecha) {
+    fecha.textContent = new Date().toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' }) +
+      ' ' + new Date().toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+  }
+
+  repintar();
+})();
+
+</script>
+</body>
+</html>
