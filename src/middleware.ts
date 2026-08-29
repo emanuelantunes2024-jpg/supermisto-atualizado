@@ -6,7 +6,7 @@ const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
 /**
  * Refresca el token de sesión de Supabase en cada navegación y protege
- * las rutas privadas (`/mi-cuenta`, `/admin`).
+ * las rutas privadas (`/cuenta`, `/admin`).
  */
 export async function middleware(request: NextRequest) {
   let response = NextResponse.next({ request });
@@ -31,7 +31,7 @@ export async function middleware(request: NextRequest) {
   } = await supabase.auth.getUser();
 
   const { pathname } = request.nextUrl;
-  const isPrivate = pathname.startsWith("/mi-cuenta") || pathname.startsWith("/admin");
+  const isPrivate = pathname.startsWith("/cuenta") || pathname.startsWith("/admin");
 
   if (!user && isPrivate) {
     const loginUrl = request.nextUrl.clone();

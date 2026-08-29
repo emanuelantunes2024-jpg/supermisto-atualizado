@@ -1,20 +1,31 @@
-import Link from "next/link";
-
-import { BenefitsStrip } from "@/components/home/BenefitsStrip";
-import { CategoryStrip } from "@/components/home/CategoryStrip";
 import { Hero } from "@/components/home/Hero";
-import { ProductPillars } from "@/components/home/ProductPillars";
-import { StatsBand } from "@/components/home/StatsBand";
-import { TemplateCard } from "@/components/templates/TemplateCard";
+import {
+  BenefitsRow,
+  CategoryGrid,
+  NewsletterSection,
+  PopularTemplates,
+  TestimonialsSection,
+  WhyUsBand,
+} from "@/components/home/HomeSections";
 import { siteConfig } from "@/lib/config";
-import { getCategories, getPublishedTemplates } from "@/lib/queries";
+import {
+  getCategoryCounts,
+  getFeaturedCategoriesForHome,
+  getFeaturedTemplatesForHome,
+  getHomepageContent,
+  getTestimonials,
+} from "@/lib/queries";
 
-export const revalidate = 300;
+export const revalidate = 60;
 
 export default async function HomePage() {
-  const [templates, categories] = await Promise.all([getPublishedTemplates(), getCategories()]);
-
-  const featured = templates.slice(0, 6);
+  const [content, categories, popular, counts, testimonials] = await Promise.all([
+    getHomepageContent(),
+    getFeaturedCategoriesForHome(7),
+    getFeaturedTemplatesForHome(4),
+    getCategoryCounts(),
+    getTestimonials(),
+  ]);
 
   return (
     <>
@@ -31,38 +42,13 @@ export default async function HomePage() {
         }}
       />
 
-      <Hero />
-      <CategoryStrip categories={categories} />
-      <ProductPillars templateCount={templates.length} />
-      <BenefitsStrip />
-      <StatsBand />
-
-      {featured.length > 0 && (
-        <section id="destacadas" className="pb-20">
-          <div className="container-shell">
-            <div className="section-head">
-              <div className="eyebrow">Sitios web premium</div>
-              <h2>Diseños listos para publicar hoy</h2>
-              <p>
-                Cada plantilla incluye todas las páginas del negocio, es 100% editable y funciona perfecto en
-                móvil.
-              </p>
-            </div>
-
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {featured.map((template, index) => (
-                <TemplateCard key={template.id} template={template} showPriceNote priority={index < 3} />
-              ))}
-            </div>
-
-            <div className="mt-10 text-center">
-              <Link href="/plantillas" className="btn btn-ghost btn-lg">
-                Ver el catálogo completo
-              </Link>
-            </div>
-          </div>
-        </section>
-      )}
+      <Hero hero={content.hero} categories={categories} mockups={popular} />
+      <BenefitsRow benefits={content.benefits} />
+      <CategoryGrid categories={categories} counts={counts} />
+      <PopularTemplates templates={popular} />
+      <WhyUsBand whyUs={content.why_us} />
+      <TestimonialsSection testimonials={testimonials} />
+      <NewsletterSection newsletter={content.newsletter} />
     </>
   );
 }

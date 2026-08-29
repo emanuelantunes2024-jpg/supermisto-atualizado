@@ -1,116 +1,127 @@
 import Link from "next/link";
 
-import { DeviceComposition } from "@/components/home/DeviceComposition";
-import { siteStats } from "@/lib/config";
+import type { HeroContent, TemplateWithCategory } from "@/lib/types";
 
-export function Hero() {
-  // Misma cifra que la banda "Líderes en soluciones digitales premium".
-  const categoriesLabel = siteStats[0]?.value || "+30";
+interface HeroProps {
+  hero: HeroContent;
+  categories: { slug: string; name: string }[];
+  mockups: TemplateWithCategory[];
+}
 
-  const highlights = [
-    {
-      icon: (
-        <>
-          <rect x="3" y="3" width="7" height="7" rx="1.5" />
-          <rect x="14" y="3" width="7" height="7" rx="1.5" />
-          <rect x="3" y="14" width="7" height="7" rx="1.5" />
-          <rect x="14" y="14" width="7" height="7" rx="1.5" />
-        </>
-      ),
-      title: categoriesLabel,
-      lines: ["Categorías", "Premium"],
-    },
-    {
-      icon: (
-        <>
-          <rect x="2" y="4" width="20" height="13" rx="2" />
-          <path d="M8 21h8M12 17v4" />
-        </>
-      ),
-      title: "PDVs",
-      lines: ["para cada", "tipo de negocio"],
-    },
-    {
-      icon: (
-        <>
-          <rect x="3" y="9" width="18" height="12" rx="1.5" />
-          <path d="M3 13h18M12 9v12" />
-          <path d="M12 9S9.5 4 7.5 5.2 8.6 9 12 9zM12 9s2.5-5 4.5-3.8S15.4 9 12 9z" />
-        </>
-      ),
-      title: "Combos",
-      lines: ["Ahorra", "comprando juntos"],
-    },
-  ];
+/**
+ * Portada: todo el texto y la imagen se editan en `/admin/contenido` → Hero.
+ * Sin imagen propia, se arma una maqueta con las miniaturas de los
+ * templates destacados, para que nunca se vea un hueco vacío.
+ */
+export function Hero({ hero, categories, mockups }: HeroProps) {
+  const laptopShot = hero.image_url ?? mockups[0]?.thumbnail_url ?? null;
+  const phoneShot = mockups[1]?.thumbnail_url ?? mockups[0]?.thumbnail_url ?? null;
 
   return (
-    <section className="relative overflow-hidden pb-12 pt-14">
+    <section className="on-dark relative overflow-hidden bg-navy-950 pb-14 pt-12">
       <div
-        className="pointer-events-none absolute inset-x-[-15%] top-[-30%] h-[700px]"
-        style={{ background: "radial-gradient(circle at 28% 30%,rgba(240,167,48,0.16),transparent 60%)" }}
+        className="pointer-events-none absolute inset-x-[-15%] top-[-35%] h-[640px]"
+        style={{ background: "radial-gradient(circle at 30% 30%,rgba(255,122,26,0.22),transparent 62%)" }}
       />
 
-      <div className="container-shell relative z-10 grid items-center gap-6 lg:grid-cols-[0.72fr_1.28fr]">
+      <div className="container-shell relative z-10 grid items-center gap-10 lg:grid-cols-[1fr_0.95fr]">
         <div className="anim-in">
-          <h1 className="mb-5 text-[clamp(22px,2.25vw,33px)] uppercase leading-[1.16] lg:whitespace-nowrap">
-            Todo lo que tu negocio
-            <br />
-            necesita, <span className="text-gold-400">en un solo lugar</span>
-          </h1>
-          <p className="mb-8 max-w-[440px] text-[14.5px] leading-relaxed text-ink-muted">
-            Sitios web premium, sistemas PDV y soluciones completas para llevar tu negocio al siguiente nivel.
-          </p>
+          {hero.eyebrow && <div className="eyebrow">{hero.eyebrow}</div>}
+          <h1 className="mb-4 text-[clamp(28px,3.6vw,44px)] leading-[1.12]">{hero.title}</h1>
+          <p className="mb-7 max-w-[480px] text-[15.5px] leading-relaxed text-ink-muted">{hero.subtitle}</p>
 
-          <div className="mb-8 flex flex-wrap gap-x-8 gap-y-6">
-            {highlights.map((item) => (
-              <div key={item.title} className="flex items-start gap-2.5">
-                <svg
-                  width="25"
-                  height="25"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  className="mt-0.5 shrink-0 text-gold-400"
-                >
-                  {item.icon}
-                </svg>
-                <div>
-                  <span className="font-display text-[18px] font-extrabold leading-tight text-gold-400">
-                    {item.title}
-                  </span>
-                  <div className="text-[12px] leading-tight text-ink-muted">
-                    {item.lines[0]}
-                    <br />
-                    {item.lines[1]}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+          <form action="/plantillas" className="mb-6 flex max-w-[480px] gap-2">
+            <div className="flex flex-1 items-center gap-2 rounded-lg border border-line bg-white/[0.04] px-4 py-3">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="shrink-0 text-ink-muted">
+                <circle cx="11" cy="11" r="7" />
+                <path d="M20 20l-3.5-3.5" />
+              </svg>
+              <input
+                name="q"
+                placeholder={hero.search_placeholder}
+                className="w-full bg-transparent text-[14px] text-ink outline-none placeholder:text-ink-muted"
+              />
+            </div>
+            <button type="submit" className="btn btn-gold px-5">
+              Buscar
+            </button>
+          </form>
+
+          {hero.trust_badges.length > 0 && (
+            <div className="mb-8 flex flex-wrap gap-x-6 gap-y-2 text-[12.5px] text-ink-muted">
+              {hero.trust_badges.map((badge) => (
+                <span key={badge} className="flex items-center gap-1.5">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className="text-gold-400">
+                    <path d="M4 12.5l5 5L20 6.5" />
+                  </svg>
+                  {badge}
+                </span>
+              ))}
+            </div>
+          )}
 
           <div className="flex flex-wrap gap-3">
-            <Link href="/plantillas" className="btn btn-gold btn-lg uppercase tracking-[0.04em]">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <rect x="3" y="3" width="7" height="7" rx="1.5" />
-                <rect x="14" y="3" width="7" height="7" rx="1.5" />
-                <rect x="3" y="14" width="7" height="7" rx="1.5" />
-                <rect x="14" y="14" width="7" height="7" rx="1.5" />
-              </svg>
-              Ver categorías
+            <Link href={hero.button_href} className="btn btn-gold btn-lg">
+              {hero.button_text}
             </Link>
-            <Link href="/combos" className="btn btn-ghost btn-lg uppercase tracking-[0.04em]">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M20.6 13.4L11 3.8V3H4v7h.8l9.6 9.6a1.5 1.5 0 0 0 2.1 0l4.1-4.1a1.5 1.5 0 0 0 0-2.1z" />
-                <circle cx="7.5" cy="6.5" r="1" />
-              </svg>
-              Ver combos
-            </Link>
+            {categories.slice(0, 1).map((cat) => (
+              <Link key={cat.slug} href={`/plantillas?cat=${cat.slug}`} className="btn btn-ghost btn-lg">
+                Ver {cat.name}
+              </Link>
+            ))}
           </div>
         </div>
 
-        <DeviceComposition />
+        <HeroMockup laptopShot={laptopShot} phoneShot={phoneShot} />
       </div>
     </section>
+  );
+}
+
+/** Maqueta portátil + móvil con capturas reales de templates (o un placeholder si aún no hay). */
+function HeroMockup({ laptopShot, phoneShot }: { laptopShot: string | null; phoneShot: string | null }) {
+  return (
+    <div className="anim-in relative mx-auto w-full max-w-[480px]" style={{ animationDelay: ".15s" }}>
+      <div
+        className="relative z-10 rounded-t-[14px] p-[9px] pb-[7px]"
+        style={{ background: "linear-gradient(160deg,#4a4d55,#26282e 40%,#15171a)", boxShadow: "var(--shadow-lg)" }}
+      >
+        <div className="relative aspect-[16/10] overflow-hidden rounded-[5px] bg-[#0b0d10]">
+          {laptopShot ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={laptopShot} alt="" className="h-full w-full object-cover" />
+          ) : (
+            <div className="flex h-full w-full items-center justify-center text-[12px] text-ink-muted">
+              Tu template aquí
+            </div>
+          )}
+        </div>
+      </div>
+      <div
+        className="relative z-10 mx-[-4%] h-[16px] rounded-b-[4px]"
+        style={{
+          background: "linear-gradient(180deg,#3c3f46,#23262b 55%,#15171a)",
+          clipPath: "polygon(3.5% 0,96.5% 0,100% 100%,0 100%)",
+        }}
+      />
+      <div
+        className="relative z-10 mx-[-6%] h-[9px] rounded-b-[10px]"
+        style={{ background: "linear-gradient(180deg,#2a2d33,#101215)" }}
+      />
+
+      <div className="absolute -bottom-6 -right-3 z-20 w-[26%] animate-floatY sm:-right-8">
+        <div
+          className="rounded-[17px] p-[4px]"
+          style={{ background: "linear-gradient(160deg,#4a4d55,#26282e 45%,#15171a)", boxShadow: "var(--shadow-lg)" }}
+        >
+          <div className="aspect-[9/18.5] overflow-hidden rounded-[14px] bg-[#0b0d10]">
+            {phoneShot ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={phoneShot} alt="" className="h-full w-full object-cover" />
+            ) : null}
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

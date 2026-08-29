@@ -16,6 +16,9 @@ const nav = [
   { href: "/admin/plantillas", label: "Plantillas", icon: "🎨" },
   { href: "/admin/pedidos", label: "Pedidos", icon: "🧾" },
   { href: "/admin/categorias", label: "Categorías", icon: "🏷️" },
+  { href: "/admin/contenido", label: "Contenido del sitio", icon: "🏠" },
+  { href: "/admin/testimonios", label: "Testimonios", icon: "💬" },
+  { href: "/admin/configuracion", label: "Configuración", icon: "⚙️" },
 ];
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -54,6 +57,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   }
 
   return (
+    <div className="on-dark min-h-screen" style={{ background: "var(--page-bg)" }}>
     <div className="container-shell py-10">
       <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
         <div>
@@ -93,13 +97,14 @@ export default async function AdminLayout({ children }: { children: React.ReactN
         <div className="min-w-0">{children}</div>
       </div>
     </div>
+    </div>
   );
 }
 
 function AdminShell({ children }: { children: React.ReactNode }) {
   return (
-    <div className="container-shell max-w-[680px] py-20">
-      {children}
+    <div className="on-dark min-h-screen" style={{ background: "var(--page-bg)" }}>
+      <div className="container-shell max-w-[680px] py-20">{children}</div>
     </div>
   );
 }

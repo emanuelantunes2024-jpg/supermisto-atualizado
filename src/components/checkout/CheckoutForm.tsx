@@ -3,15 +3,16 @@
 import { useState } from "react";
 
 import { countries } from "@/lib/config";
+import type { CartItem } from "@/lib/cart-context";
 
 interface CheckoutFormProps {
-  templateSlug: string;
+  items: CartItem[];
   /** Datos ya conocidos si el cliente ha iniciado sesión. */
   defaults: { email: string; fullName: string };
   paymentsEnabled: boolean;
 }
 
-export function CheckoutForm({ templateSlug, defaults, paymentsEnabled }: CheckoutFormProps) {
+export function CheckoutForm({ items, defaults, paymentsEnabled }: CheckoutFormProps) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -27,7 +28,7 @@ export function CheckoutForm({ templateSlug, defaults, paymentsEnabled }: Checko
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          templateSlug,
+          items: items.map((item) => ({ slug: item.slug, quantity: item.quantity })),
           fullName: `${formData.get("firstName")} ${formData.get("lastName")}`.trim(),
           email: formData.get("email"),
           phone: formData.get("phone"),
@@ -125,7 +126,7 @@ export function CheckoutForm({ templateSlug, defaults, paymentsEnabled }: Checko
         </div>
       </div>
 
-      <div className="mt-6 rounded-xl border border-line bg-navy-900 p-4">
+      <div className="on-dark mt-6 rounded-xl border border-line bg-navy-900 p-4">
         <h4 className="mb-2 text-[13px] font-semibold">Método de pago</h4>
         <p className="text-[12.5px] text-ink-muted">
           El pago se completa en la pasarela segura de Stripe: tarjeta de crédito o débito, Apple Pay y Google
@@ -139,8 +140,12 @@ export function CheckoutForm({ templateSlug, defaults, paymentsEnabled }: Checko
         </p>
       )}
 
-      <button type="submit" disabled={loading || !paymentsEnabled} className="btn btn-gold btn-block btn-lg mt-6">
-        {loading ? "Redirigiendo al pago…" : "Continuar al pago seguro →"}
+      <button
+        type="submit"
+        disabled={loading || !paymentsEnabled || items.length === 0}
+        className="btn btn-gold btn-block btn-lg mt-6"
+      >
+        {loading ? "Redirigiendo al pago…" : "Completar compra →"}
       </button>
 
       {!paymentsEnabled && (

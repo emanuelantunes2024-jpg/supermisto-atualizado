@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { downloadTemplatePackage, setTemplateStatus } from "@/app/admin/actions";
+import { downloadTemplatePackage, duplicateTemplate, setTemplateStatus, toggleFeatured } from "@/app/admin/actions";
 import { DeleteTemplateButton } from "@/components/admin/DeleteTemplateButton";
 import { formatPrice } from "@/lib/format";
 import { getAllTemplates } from "@/lib/queries";
@@ -9,7 +9,7 @@ import type { TemplateStatus } from "@/lib/types";
 export const dynamic = "force-dynamic";
 
 interface PageProps {
-  searchParams: Promise<{ error?: string; eliminado?: string; guardado?: string }>;
+  searchParams: Promise<{ error?: string; eliminado?: string; guardado?: string; duplicado?: string }>;
 }
 
 const statusStyles: Record<TemplateStatus, string> = {
@@ -25,7 +25,7 @@ const statusLabels: Record<TemplateStatus, string> = {
 };
 
 export default async function AdminTemplatesPage({ searchParams }: PageProps) {
-  const { error, eliminado, guardado } = await searchParams;
+  const { error, eliminado, guardado, duplicado } = await searchParams;
   const templates = await getAllTemplates();
   const conPaquete = templates.filter((t) => !!t.file_url).length;
 
@@ -54,6 +54,11 @@ export default async function AdminTemplatesPage({ searchParams }: PageProps) {
       {guardado && (
         <p className="rounded-lg border border-emerald-500/40 bg-emerald-500/10 px-4 py-3 text-[13px] text-emerald-300">
           ✓ Cambios guardados.
+        </p>
+      )}
+      {duplicado && (
+        <p className="rounded-lg border border-emerald-500/40 bg-emerald-500/10 px-4 py-3 text-[13px] text-emerald-300">
+          ✓ Plantilla duplicada como borrador.
         </p>
       )}
 
@@ -86,7 +91,10 @@ export default async function AdminTemplatesPage({ searchParams }: PageProps) {
             {templates.map((template) => (
               <tr key={template.id} className="border-b border-line/60 last:border-0">
                 <td className="py-3 pr-4">
-                  <div className="font-medium">{template.title}</div>
+                  <div className="flex items-center gap-1.5 font-medium">
+                    {template.featured && <span title="Destacada">⭐</span>}
+                    {template.title}
+                  </div>
                   <div className="text-[12px] text-ink-muted">/{template.slug}</div>
                 </td>
                 <td className="py-3 pr-4 text-ink-muted">{template.category?.name ?? "—"}</td>
@@ -124,6 +132,21 @@ export default async function AdminTemplatesPage({ searchParams }: PageProps) {
                       />
                       <button type="submit" className="text-ink-muted hover:text-gold-400">
                         {template.status === "published" ? "Archivar" : "Publicar"}
+                      </button>
+                    </form>
+
+                    <form action={toggleFeatured}>
+                      <input type="hidden" name="id" value={template.id} />
+                      <input type="hidden" name="featured" value={template.featured ? "0" : "1"} />
+                      <button type="submit" className="text-ink-muted hover:text-gold-400">
+                        {template.featured ? "Quitar destacado" : "Destacar"}
+                      </button>
+                    </form>
+
+                    <form action={duplicateTemplate}>
+                      <input type="hidden" name="id" value={template.id} />
+                      <button type="submit" className="text-ink-muted hover:text-gold-400">
+                        Duplicar
                       </button>
                     </form>
 

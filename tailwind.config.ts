@@ -17,19 +17,19 @@ const config: Config = {
           600: "#2c3039",
         },
         gold: {
-          400: "#ffc75f",
-          500: "#f0a730",
-          600: "#c9820f",
+          400: "#ff9a4d",
+          500: "#ff7a1a",
+          600: "#e8600a",
         },
         orange: {
-          500: "#ff7a3d",
-          600: "#e85d1f",
+          500: "#ff7a1a",
+          600: "#e8600a",
         },
         ink: {
-          DEFAULT: "#f5f6f8",
-          muted: "#a3a8b3",
+          DEFAULT: "var(--ink)",
+          muted: "var(--ink-muted)",
         },
-        line: "rgba(255,255,255,0.1)",
+        line: "var(--line)",
       },
       fontFamily: {
         display: ["var(--font-display)", "Sora", "sans-serif"],

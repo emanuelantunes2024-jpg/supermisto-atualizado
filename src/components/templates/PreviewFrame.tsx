@@ -57,7 +57,7 @@ export function PreviewFrame({ src, title, slug, thumbnail }: PreviewFrameProps)
       </div>
 
       {src ? (
-        <div className="flex justify-center bg-navy-950 p-3">
+        <div className="on-dark flex justify-center bg-navy-950 p-3">
           <iframe
             src={src}
             title={`Demo de ${title}`}
@@ -69,7 +69,7 @@ export function PreviewFrame({ src, title, slug, thumbnail }: PreviewFrameProps)
           />
         </div>
       ) : thumbnail ? (
-        <div className="bg-navy-950 p-3">
+        <div className="on-dark bg-navy-950 p-3">
           <div className="relative aspect-[1600/720] w-full overflow-hidden rounded-lg border border-line">
             <Image
               src={thumbnail}
@@ -85,7 +85,7 @@ export function PreviewFrame({ src, title, slug, thumbnail }: PreviewFrameProps)
           </p>
         </div>
       ) : (
-        <div className="flex h-[420px] flex-col items-center justify-center gap-3 bg-navy-950 px-6 text-center">
+        <div className="on-dark flex h-[420px] flex-col items-center justify-center gap-3 bg-navy-950 px-6 text-center">
           <span className="text-4xl" aria-hidden>
             🖼️
           </span>

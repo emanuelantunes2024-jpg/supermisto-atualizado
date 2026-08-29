@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 
 import { Logo } from "@/components/site/Logo";
 import { contactPhone, mainNav } from "@/lib/config";
+import { useCart } from "@/lib/cart-context";
+import { useFavorites } from "@/lib/favorites-context";
 
 interface HeaderProps {
   isLoggedIn: boolean;
@@ -65,6 +67,8 @@ function LineIcon({ children, size = 15 }: { children: React.ReactNode; size?: n
 export function Header({ isLoggedIn, isAdmin }: HeaderProps) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const { count: cartCount } = useCart();
+  const { count: favCount } = useFavorites();
 
   useEffect(() => setOpen(false), [pathname]);
 
@@ -74,7 +78,7 @@ export function Header({ isLoggedIn, isAdmin }: HeaderProps) {
   return (
     <>
       {/* Barra superior de servicio */}
-      <div className="border-b border-line bg-navy-950">
+      <div className="on-dark border-b border-line bg-navy-950">
         <div className="mx-auto flex max-w-shell items-center justify-between gap-3 px-5 py-2.5 text-[11.5px] text-ink-muted sm:px-7 sm:text-[12px]">
           <div className="flex items-center gap-5 xl:gap-8">
             {topBar.map((item, index) => (
@@ -120,7 +124,7 @@ export function Header({ isLoggedIn, isAdmin }: HeaderProps) {
       </div>
 
       <header
-        className="sticky top-0 z-50 border-b border-line backdrop-blur-[10px]"
+        className="on-dark sticky top-0 z-50 border-b border-line backdrop-blur-[10px]"
         style={{ background: "rgba(8,9,11,0.92)" }}
       >
         <div className="mx-auto flex max-w-shell items-center gap-4 px-5 py-4 sm:px-7 nav:gap-6">
@@ -169,18 +173,18 @@ export function Header({ isLoggedIn, isAdmin }: HeaderProps) {
             )}
 
             <Link
-              href="/mi-cuenta"
+              href="/cuenta/favoritos"
               className="relative hidden items-center gap-2 text-[13px] text-ink transition-colors hover:text-gold-400 sm:flex"
             >
               <LineIcon size={19}>
                 <path d="M12 20s-7-4.3-7-9a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 4.7-7 9-7 9z" />
               </LineIcon>
               <span className="hidden wide:inline">Favoritos</span>
-              <Count value={0} />
+              <Count value={favCount} />
             </Link>
 
             <Link
-              href={isLoggedIn ? "/mi-cuenta" : "/entrar"}
+              href={isLoggedIn ? "/cuenta/perfil" : "/entrar"}
               className="flex items-center gap-2 text-[13px] text-ink transition-colors hover:text-gold-400"
             >
               <LineIcon size={19}>
@@ -191,7 +195,7 @@ export function Header({ isLoggedIn, isAdmin }: HeaderProps) {
             </Link>
 
             <Link
-              href="/plantillas"
+              href="/carrito"
               className="flex items-center gap-2 text-[13px] text-ink transition-colors hover:text-gold-400"
             >
               <LineIcon size={19}>
@@ -200,7 +204,7 @@ export function Header({ isLoggedIn, isAdmin }: HeaderProps) {
                 <path d="M2.5 3.5h2.6l2.4 11h11l2-7.5H6.4" />
               </LineIcon>
               <span className="hidden wide:inline">Carrito</span>
-              <Count value={0} />
+              <Count value={cartCount} />
             </Link>
           </div>
 
@@ -232,7 +236,7 @@ export function Header({ isLoggedIn, isAdmin }: HeaderProps) {
               )}
             </nav>
             <div className="mt-4 flex flex-col gap-2">
-              <Link href={isLoggedIn ? "/mi-cuenta" : "/entrar"} className="btn btn-ghost btn-block">
+              <Link href={isLoggedIn ? "/cuenta/perfil" : "/entrar"} className="btn btn-ghost btn-block">
                 {isLoggedIn ? "Mi cuenta" : "Entrar"}
               </Link>
               <Link href="/plantillas" className="btn btn-gold btn-block">

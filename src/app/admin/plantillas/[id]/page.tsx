@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 
 import { TemplateForm } from "@/components/admin/TemplateForm";
-import { getCategories, getTemplateById } from "@/lib/queries";
+import { getCategories, getProductImages, getTemplateById } from "@/lib/queries";
 
 export const dynamic = "force-dynamic";
 
@@ -15,13 +15,15 @@ export default async function EditTemplatePage({ params }: PageProps) {
 
   if (!template) notFound();
 
+  const images = await getProductImages(id);
+
   return (
     <div className="space-y-6">
       <div>
         <h2 className="text-xl">Editar plantilla</h2>
         <p className="mt-1 text-[13px] text-ink-muted">{template.title}</p>
       </div>
-      <TemplateForm categories={categories} template={template} />
+      <TemplateForm categories={categories} template={template} images={images} />
     </div>
   );
 }

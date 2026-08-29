@@ -1,7 +1,23 @@
 import { createClient } from "@/lib/supabase/server";
 import { createPublicClient } from "@/lib/supabase/public";
-import { seedCategories, seedTemplates } from "@/lib/seed-data";
-import type { Category, OrderWithTemplate, Template, TemplateWithCategory } from "@/lib/types";
+import {
+  seedCategories,
+  seedHomepageContent,
+  seedSiteSettings,
+  seedTemplates,
+  seedTestimonials,
+} from "@/lib/seed-data";
+import type {
+  Category,
+  HomepageContent,
+  LicenseWithTemplate,
+  OrderWithTemplate,
+  ProductImage,
+  SiteSettings,
+  Template,
+  TemplateWithCategory,
+  Testimonial,
+} from "@/lib/types";
 
 /**
  * Acceso de lectura al catálogo.
@@ -11,7 +27,7 @@ import type { Category, OrderWithTemplate, Template, TemplateWithCategory } from
  * que la vitrine nunca se queda en blanco.
  */
 
-const TEMPLATE_SELECT = "*, category:categories(*)";
+const TEMPLATE_SELECT = "*, category:categories(*), images:product_images(*)";
 
 /** Orden oficial del catálogo (el de `seedCategories`), no alfabético. */
 function sortCategories(list: Category[]): Category[] {
@@ -58,7 +74,45 @@ export async function getPublishedTemplates(categorySlug?: string): Promise<Temp
 
 export async function getFeaturedTemplates(limit = 6): Promise<TemplateWithCategory[]> {
   const templates = await getPublishedTemplates();
-  return templates.slice(0, limit);
+  const featured = templates.filter((t) => t.featured);
+  const rest = templates.filter((t) => !t.featured);
+  return [...featured, ...rest].slice(0, limit);
+}
+
+/**
+ * Plantillas para la sección "Templates Más Populares" de la portada.
+ * Respeta el orden elegido a mano en `/admin/contenido`
+ * (`homepage_sections.featured_templates`, lista de slugs); si está vacía,
+ * cae a `getFeaturedTemplates()`.
+ */
+export async function getFeaturedTemplatesForHome(limit = 4): Promise<TemplateWithCategory[]> {
+  const content = await getHomepageContent();
+  if (content.featured_templates.length === 0) return getFeaturedTemplates(limit);
+
+  const templates = await getPublishedTemplates();
+  const bySlug = new Map(templates.map((t) => [t.slug, t]));
+  const picked = content.featured_templates
+    .map((slug) => bySlug.get(slug))
+    .filter((t): t is TemplateWithCategory => Boolean(t));
+
+  return picked.length > 0 ? picked.slice(0, limit) : getFeaturedTemplates(limit);
+}
+
+/**
+ * Categorías para la sección "Explora por Categorías" de la portada.
+ * Respeta la selección de `/admin/contenido`; si está vacía, muestra las
+ * primeras del orden oficial.
+ */
+export async function getFeaturedCategoriesForHome(limit = 7): Promise<Category[]> {
+  const [content, categories] = await Promise.all([getHomepageContent(), getCategories()]);
+  if (content.featured_categories.length === 0) return categories.slice(0, limit);
+
+  const bySlug = new Map(categories.map((c) => [c.slug, c]));
+  const picked = content.featured_categories
+    .map((slug) => bySlug.get(slug))
+    .filter((c): c is Category => Boolean(c));
+
+  return picked.length > 0 ? picked.slice(0, limit) : categories.slice(0, limit);
 }
 
 export async function getTemplateBySlug(slug: string): Promise<TemplateWithCategory | null> {
@@ -82,6 +136,52 @@ export async function getTemplateBySlug(slug: string): Promise<TemplateWithCateg
   return data as unknown as TemplateWithCategory;
 }
 
+/* ------------------------------------------------------------------ */
+/* Contenido del sitio (CMS): testimonios, configuración, portada       */
+/* ------------------------------------------------------------------ */
+
+export async function getTestimonials(publishedOnly = true): Promise<Testimonial[]> {
+  const supabase = createPublicClient();
+  if (!supabase) return publishedOnly ? seedTestimonials.filter((t) => t.is_published) : seedTestimonials;
+
+  let query = supabase.from("testimonials").select("*").order("sort_order", { ascending: true });
+  if (publishedOnly) query = query.eq("is_published", true);
+
+  const { data, error } = await query;
+  if (error || !data) return publishedOnly ? seedTestimonials.filter((t) => t.is_published) : seedTestimonials;
+  return data as Testimonial[];
+}
+
+export async function getSiteSettings(): Promise<SiteSettings> {
+  const supabase = createPublicClient();
+  if (!supabase) return seedSiteSettings;
+
+  const { data, error } = await supabase.from("site_settings").select("*").eq("id", true).maybeSingle();
+  if (error || !data) return seedSiteSettings;
+  return data as SiteSettings;
+}
+
+/** Todo el contenido editable de la portada, con los valores de ejemplo como respaldo por sección. */
+export async function getHomepageContent(): Promise<HomepageContent> {
+  const supabase = createPublicClient();
+  if (!supabase) return seedHomepageContent;
+
+  const { data, error } = await supabase.from("homepage_sections").select("key, content");
+  if (error || !data || data.length === 0) return seedHomepageContent;
+
+  const byKey = new Map(data.map((row) => [row.key as string, row.content]));
+  return {
+    hero: { ...seedHomepageContent.hero, ...(byKey.get("hero") ?? {}) },
+    benefits: (byKey.get("benefits") as HomepageContent["benefits"]) ?? seedHomepageContent.benefits,
+    featured_categories:
+      (byKey.get("featured_categories") as string[]) ?? seedHomepageContent.featured_categories,
+    featured_templates:
+      (byKey.get("featured_templates") as string[]) ?? seedHomepageContent.featured_templates,
+    why_us: { ...seedHomepageContent.why_us, ...(byKey.get("why_us") ?? {}) },
+    newsletter: { ...seedHomepageContent.newsletter, ...(byKey.get("newsletter") ?? {}) },
+  };
+}
+
 /** Cuántas plantillas publicadas hay por categoría (para las tarjetas de rubro). */
 export async function getCategoryCounts(): Promise<Record<string, number>> {
   const templates = await getPublishedTemplates();
@@ -96,19 +196,34 @@ export async function getCategoryCounts(): Promise<Record<string, number>> {
 /* Área de cliente                                                     */
 /* ------------------------------------------------------------------ */
 
-/** Compras pagadas del usuario autenticado. */
+/** Compras del usuario autenticado, con las líneas del carrito resueltas. */
 export async function getMyOrders(userId: string): Promise<OrderWithTemplate[]> {
   const supabase = await createClient();
   if (!supabase) return [];
 
   const { data, error } = await supabase
     .from("orders")
-    .select(`*, template:templates(${TEMPLATE_SELECT})`)
+    .select(`*, template:templates(${TEMPLATE_SELECT}), items:order_items(*, template:templates(${TEMPLATE_SELECT}))`)
     .eq("customer_id", userId)
     .order("created_at", { ascending: false });
 
   if (error || !data) return [];
   return data as unknown as OrderWithTemplate[];
+}
+
+/** Plantillas que el cliente tiene derecho a descargar (licencias emitidas tras el pago). */
+export async function getMyLicenses(userId: string): Promise<LicenseWithTemplate[]> {
+  const supabase = await createClient();
+  if (!supabase) return [];
+
+  const { data, error } = await supabase
+    .from("licenses")
+    .select(`*, template:templates(${TEMPLATE_SELECT})`)
+    .eq("customer_id", userId)
+    .order("created_at", { ascending: false });
+
+  if (error || !data) return [];
+  return data as unknown as LicenseWithTemplate[];
 }
 
 /* ------------------------------------------------------------------ */
@@ -138,18 +253,41 @@ export async function getTemplateById(id: string): Promise<Template | null> {
   return data as Template;
 }
 
+export async function getProductImages(templateId: string): Promise<ProductImage[]> {
+  const supabase = await createClient();
+  if (!supabase) return [];
+
+  const { data, error } = await supabase
+    .from("product_images")
+    .select("*")
+    .eq("template_id", templateId)
+    .order("sort_order", { ascending: true });
+
+  if (error || !data) return [];
+  return data as ProductImage[];
+}
+
 export async function getAllOrders(): Promise<OrderWithTemplate[]> {
   const supabase = await createClient();
   if (!supabase) return [];
 
   const { data, error } = await supabase
     .from("orders")
-    .select(`*, template:templates(${TEMPLATE_SELECT})`)
+    .select(`*, template:templates(${TEMPLATE_SELECT}), items:order_items(*, template:templates(${TEMPLATE_SELECT}))`)
     .order("created_at", { ascending: false })
     .limit(200);
 
   if (error || !data) return [];
   return data as unknown as OrderWithTemplate[];
+}
+
+export async function getCustomerCount(): Promise<number> {
+  const supabase = await createClient();
+  if (!supabase) return 0;
+
+  const { count, error } = await supabase.from("customers").select("id", { count: "exact", head: true });
+  if (error || count === null) return 0;
+  return count;
 }
 
 export interface DashboardStats {
@@ -158,28 +296,45 @@ export interface DashboardStats {
   ordersThisMonth: number;
   revenueThisMonthCents: number;
   publishedTemplates: number;
+  totalCustomers: number;
   bestSeller: { title: string; count: number } | null;
+  topSellers: { title: string; count: number }[];
+}
+
+/** Líneas vendidas de un pedido pagado: usa `order_items` (carrito) y cae al `template_id` antiguo si el pedido no tiene líneas. */
+function paidLines(order: OrderWithTemplate): { title: string; count: number }[] {
+  if (order.items && order.items.length > 0) {
+    return order.items.map((item) => ({
+      title: item.title_snapshot || item.template?.title || "Plantilla eliminada",
+      count: item.quantity,
+    }));
+  }
+  if (order.template_id) {
+    return [{ title: order.template?.title ?? "Plantilla eliminada", count: 1 }];
+  }
+  return [];
 }
 
 export async function getDashboardStats(): Promise<DashboardStats> {
-  const [orders, templates] = await Promise.all([getAllOrders(), getAllTemplates()]);
+  const [orders, templates, totalCustomers] = await Promise.all([
+    getAllOrders(),
+    getAllTemplates(),
+    getCustomerCount(),
+  ]);
 
   const paid = orders.filter((o) => o.status === "paid");
   const now = new Date();
   const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
   const paidThisMonth = paid.filter((o) => new Date(o.created_at) >= monthStart);
 
-  const salesByTemplate = paid.reduce<Record<string, { title: string; count: number }>>(
-    (acc, order) => {
-      const title = order.template?.title ?? "Plantilla eliminada";
-      acc[order.template_id] = { title, count: (acc[order.template_id]?.count ?? 0) + 1 };
+  const salesByTemplate = paid
+    .flatMap(paidLines)
+    .reduce<Record<string, { title: string; count: number }>>((acc, line) => {
+      acc[line.title] = { title: line.title, count: (acc[line.title]?.count ?? 0) + line.count };
       return acc;
-    },
-    {},
-  );
+    }, {});
 
-  const bestSeller =
-    Object.values(salesByTemplate).sort((a, b) => b.count - a.count)[0] ?? null;
+  const topSellers = Object.values(salesByTemplate).sort((a, b) => b.count - a.count);
 
   return {
     totalRevenueCents: paid.reduce((sum, o) => sum + o.amount_cents, 0),
@@ -187,6 +342,23 @@ export async function getDashboardStats(): Promise<DashboardStats> {
     ordersThisMonth: paidThisMonth.length,
     revenueThisMonthCents: paidThisMonth.reduce((sum, o) => sum + o.amount_cents, 0),
     publishedTemplates: templates.filter((t) => t.status === "published").length,
-    bestSeller,
+    totalCustomers,
+    bestSeller: topSellers[0] ?? null,
+    topSellers: topSellers.slice(0, 5),
   };
+}
+
+/** Descargas registradas en los últimos 7 días (para el dashboard). */
+export async function getRecentDownloadsCount(): Promise<number> {
+  const supabase = await createClient();
+  if (!supabase) return 0;
+
+  const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
+  const { count, error } = await supabase
+    .from("downloads")
+    .select("id", { count: "exact", head: true })
+    .gte("downloaded_at", sevenDaysAgo);
+
+  if (error || count === null) return 0;
+  return count;
 }

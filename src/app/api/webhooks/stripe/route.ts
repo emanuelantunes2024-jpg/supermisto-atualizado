@@ -99,7 +99,7 @@ export async function POST(request: Request) {
 
     const { data: existing } = await supabase
       .from("orders")
-      .select("id, status, download_token, buyer_email, buyer_name, amount_cents, template_id")
+      .select("id, status, customer_id, download_token, buyer_email, buyer_name, amount_cents, template_id")
       .eq("id", orderId)
       .maybeSingle();
 
@@ -125,16 +125,47 @@ export async function POST(request: Request) {
 
     if (updateError) throw updateError;
 
-    const { data: template } = await supabase
-      .from("templates")
-      .select("title")
-      .eq("id", existing.template_id)
-      .maybeSingle();
+    const { data: items } = await supabase
+      .from("order_items")
+      .select("id, template_id, title_snapshot, unit_price_cents, quantity")
+      .eq("order_id", orderId);
+
+    // Compatibilidad: pedidos antiguos de una sola plantilla sin `order_items`.
+    let lines = items ?? [];
+    if (lines.length === 0 && existing.template_id) {
+      const { data: template } = await supabase
+        .from("templates")
+        .select("title")
+        .eq("id", existing.template_id)
+        .maybeSingle();
+      lines = [
+        {
+          id: "",
+          template_id: existing.template_id,
+          title_snapshot: template?.title ?? "tu plantilla",
+          unit_price_cents: amountCents,
+          quantity: 1,
+        },
+      ];
+    }
+
+    // Emite una licencia por cada línea del pedido: es lo que da derecho a
+    // descargar desde "Mis templates" / "Licencias" en el área de cliente.
+    const licenseRows = lines
+      .filter((line) => line.id)
+      .map((line) => ({
+        order_item_id: line.id,
+        customer_id: existing.customer_id,
+        template_id: line.template_id,
+      }));
+    if (licenseRows.length > 0) {
+      await supabase.from("licenses").insert(licenseRows);
+    }
 
     await sendPurchaseEmail({
       to: session.customer_details?.email ?? existing.buyer_email,
       buyerName: session.customer_details?.name ?? existing.buyer_name,
-      templateTitle: template?.title ?? "tu plantilla",
+      items: lines.map((line) => ({ title: line.title_snapshot, priceCents: line.unit_price_cents * line.quantity })),
       amountCents,
       orderId,
       downloadUrl: `${siteConfig.url}/api/descargar/${existing.download_token}`,

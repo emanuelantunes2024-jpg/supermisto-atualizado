@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useState } from "react";
 
 import { Logo } from "@/components/site/Logo";
+import { AddToCartButton } from "@/components/templates/AddToCartButton";
+import type { TemplateWithCategory } from "@/lib/types";
 
 interface DemoViewerProps {
   slug: string;
@@ -12,6 +14,7 @@ interface DemoViewerProps {
   priceLabel: string;
   /** Demo navegable. Si es null se muestra el aviso de "demo en preparación". */
   src: string | null;
+  template: TemplateWithCategory;
 }
 
 const devices = [
@@ -59,12 +62,12 @@ type DeviceId = (typeof devices)[number]["id"];
  * Se monta como capa fija por encima de la cabecera del sitio para que la
  * demo ocupe toda la pantalla.
  */
-export function DemoViewer({ slug, title, categoryName, priceLabel, src }: DemoViewerProps) {
+export function DemoViewer({ slug, title, categoryName, priceLabel, src, template }: DemoViewerProps) {
   const [device, setDevice] = useState<DeviceId>("desktop");
   const width = devices.find((item) => item.id === device)!.width;
 
   return (
-    <div className="fixed inset-0 z-[60] flex flex-col bg-navy-950">
+    <div className="on-dark fixed inset-0 z-[60] flex flex-col bg-navy-950">
       {/* Barra de la demo */}
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-line bg-navy-900 px-4 py-2.5">
         <div className="flex min-w-0 items-center gap-3">
@@ -131,9 +134,9 @@ export function DemoViewer({ slug, title, categoryName, priceLabel, src }: DemoV
             <span className="block text-[10.5px] text-ink-muted">pago único</span>
           </span>
 
-          <Link href={`/checkout/${slug}`} className="btn btn-gold whitespace-nowrap">
-            Comprar esta plantilla
-          </Link>
+          <AddToCartButton template={template} goToCart className="btn btn-gold whitespace-nowrap">
+            Añadir al carrito
+          </AddToCartButton>
         </div>
       </div>
 

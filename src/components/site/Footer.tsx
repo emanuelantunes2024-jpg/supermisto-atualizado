@@ -17,7 +17,7 @@ const columns = [
     links: [
       { href: "/#servicios", label: "Servicios" },
       { href: "/contacto", label: "Contacto" },
-      { href: "/mi-cuenta", label: "Mis compras" },
+      { href: "/cuenta/compras", label: "Mis compras" },
     ],
   },
   {
@@ -32,7 +32,7 @@ const columns = [
 
 export function Footer() {
   return (
-    <footer className="border-t border-line bg-navy-900 pb-7 pt-14">
+    <footer className="on-dark border-t border-line bg-navy-900 pb-7 pt-14">
       <div className="container-shell">
         <div className="mb-10 grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div>

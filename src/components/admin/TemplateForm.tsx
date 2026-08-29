@@ -4,17 +4,26 @@ import Link from "next/link";
 import { useActionState, useState } from "react";
 import { useFormStatus } from "react-dom";
 
-import { saveTemplate, createUploadTicket, uploadTemplateDemo, type ActionState } from "@/app/admin/actions";
+import { saveTemplate, uploadTemplateDemo, type ActionState } from "@/app/admin/actions";
+import { UploadField } from "@/components/admin/UploadField";
 import { slugify } from "@/lib/format";
-import { createClient } from "@/lib/supabase/client";
-import type { Category, Template } from "@/lib/types";
+import type { Category, ProductImage, ProductImageKind, Template } from "@/lib/types";
 
 interface TemplateFormProps {
   categories: Category[];
   template?: Template | null;
+  images?: ProductImage[];
 }
 
-export function TemplateForm({ categories, template }: TemplateFormProps) {
+const DEVICE_IMAGE_FIELDS: { kind: Exclude<ProductImageKind, "gallery">; label: string; hint: string }[] = [
+  { kind: "main", label: "Imagen principal", hint: "La que se ve en la tarjeta del catálogo." },
+  { kind: "desktop", label: "Screenshot desktop", hint: "Pantalla completa de escritorio." },
+  { kind: "laptop", label: "Screenshot notebook", hint: "Vista en portátil (mockup)." },
+  { kind: "tablet", label: "Screenshot tablet", hint: "Vista adaptada a tablet." },
+  { kind: "mobile", label: "Screenshot mobile", hint: "Vista adaptada a celular." },
+];
+
+export function TemplateForm({ categories, template, images = [] }: TemplateFormProps) {
   const [state, formAction] = useActionState<ActionState, FormData>(saveTemplate, {});
 
   const [title, setTitle] = useState(template?.title ?? "");
@@ -23,6 +32,14 @@ export function TemplateForm({ categories, template }: TemplateFormProps) {
   const [thumbnailUrl, setThumbnailUrl] = useState(template?.thumbnail_url ?? "");
   const [fileUrl, setFileUrl] = useState(template?.file_url ?? "");
   const [slugTouched, setSlugTouched] = useState(Boolean(template?.slug));
+
+  const imageByKind = new Map(images.map((img) => [img.kind, img.url]));
+  const [deviceImages, setDeviceImages] = useState<Record<string, string>>(() =>
+    Object.fromEntries(DEVICE_IMAGE_FIELDS.map((f) => [f.kind, imageByKind.get(f.kind) ?? ""])),
+  );
+  const [galleryUrls, setGalleryUrls] = useState<string[]>(
+    images.filter((img) => img.kind === "gallery").map((img) => img.url),
+  );
 
   const effectiveSlug = slugTouched ? slug : slugify(title);
 
@@ -117,6 +134,48 @@ export function TemplateForm({ categories, template }: TemplateFormProps) {
           </div>
         </div>
 
+        <div className="grid gap-4 sm:grid-cols-3">
+          <div>
+            <label className="field-label" htmlFor="compare_at_price">
+              Precio anterior (€)
+            </label>
+            <input
+              id="compare_at_price"
+              name="compare_at_price"
+              type="number"
+              step="0.01"
+              min="0"
+              defaultValue={template?.compare_at_price_cents ? (template.compare_at_price_cents / 100).toFixed(2) : ""}
+              placeholder="Opcional, para mostrar descuento"
+              className="field-input"
+            />
+          </div>
+          <div>
+            <label className="field-label" htmlFor="tags">
+              Tags (separados por coma)
+            </label>
+            <input
+              id="tags"
+              name="tags"
+              defaultValue={(template?.tags ?? []).join(", ")}
+              placeholder="negocios, moderno, oscuro"
+              className="field-input"
+            />
+          </div>
+          <div className="flex items-end pb-2.5">
+            <label className="flex items-center gap-2 text-[13.5px]">
+              <input
+                type="checkbox"
+                name="featured"
+                value="1"
+                defaultChecked={template?.featured ?? false}
+                className="h-4 w-4 rounded border-line"
+              />
+              Destacar en la portada
+            </label>
+          </div>
+        </div>
+
         <div>
           <label className="field-label" htmlFor="short_description">
             Descripción corta *
@@ -161,6 +220,73 @@ export function TemplateForm({ categories, template }: TemplateFormProps) {
         </div>
       </div>
 
+      <div className="panel space-y-5">
+        <div>
+          <h2 className="text-lg">Imágenes del producto</h2>
+          <p className="mt-1 text-[12.5px] text-ink-muted">
+            Sube la imagen principal y, si quieres, una captura por tipo de dispositivo. Cada una se guarda por
+            separado y se puede sustituir en cualquier momento.
+          </p>
+        </div>
+
+        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+          {DEVICE_IMAGE_FIELDS.map(({ kind, label, hint }) => (
+            <div key={kind}>
+              <label className="field-label">{label}</label>
+              {deviceImages[kind] ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={deviceImages[kind]}
+                  alt={label}
+                  className="mb-2 h-28 w-full rounded-lg border border-line object-cover"
+                />
+              ) : (
+                <div className="mb-2 flex h-28 w-full items-center justify-center rounded-lg border border-dashed border-line text-[11.5px] text-ink-muted">
+                  Sin imagen
+                </div>
+              )}
+              <input type="hidden" name={`image_${kind}`} value={deviceImages[kind] ?? ""} />
+              <UploadField
+                kind="asset"
+                slug={effectiveSlug}
+                label={deviceImages[kind] ? "Subir nueva imagen" : "Subir imagen"}
+                onUploaded={(url) => setDeviceImages((prev) => ({ ...prev, [kind]: url }))}
+              />
+              <p className="mt-1.5 text-[11px] text-ink-muted">{hint}</p>
+            </div>
+          ))}
+        </div>
+
+        <div>
+          <label className="field-label">Imágenes adicionales (galería)</label>
+          <input type="hidden" name="gallery_urls" value={galleryUrls.join("\n")} />
+          {galleryUrls.length > 0 && (
+            <div className="mb-2 flex flex-wrap gap-2">
+              {galleryUrls.map((url, index) => (
+                // eslint-disable-next-line @next/next/no-img-element
+                <div key={url + index} className="relative">
+                  <img src={url} alt="" className="h-20 w-28 rounded-lg border border-line object-cover" />
+                  <button
+                    type="button"
+                    onClick={() => setGalleryUrls((prev) => prev.filter((_, i) => i !== index))}
+                    className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-navy-900 text-[11px] text-ink ring-1 ring-line"
+                    aria-label="Quitar imagen"
+                  >
+                    ×
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
+          <UploadField
+            kind="asset"
+            slug={effectiveSlug}
+            label="Añadir imagen a la galería"
+            onUploaded={(url) => setGalleryUrls((prev) => [...prev, url])}
+          />
+        </div>
+      </div>
+
       <div className="panel space-y-4">
         <h2 className="text-lg">Archivos y demo</h2>
 
@@ -186,7 +312,7 @@ export function TemplateForm({ categories, template }: TemplateFormProps) {
 
         <div>
           <label className="field-label" htmlFor="thumbnail_url">
-            Miniatura (URL pública)
+            Miniatura (URL pública) — respaldo si no subes imagen principal
           </label>
           <input
             id="thumbnail_url"
@@ -288,78 +414,3 @@ function DemoUploadField({ slug, onUploaded }: DemoUploadFieldProps) {
   );
 }
 
-interface UploadFieldProps {
-  kind: "asset" | "file";
-  slug: string;
-  label: string;
-  onUploaded: (path: string) => void;
-}
-
-/**
- * Subida a Supabase Storage. Va en su propio `<form>` lógico: se envía con
- * fetch para no interferir con el formulario principal de la plantilla.
- */
-function UploadField({ kind, slug, label, onUploaded }: UploadFieldProps) {
-  const [busy, setBusy] = useState(false);
-  const [message, setMessage] = useState<string | null>(null);
-
-  async function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-    const file = event.target.files?.[0];
-    if (!file) return;
-
-    setBusy(true);
-    setMessage(null);
-
-    // 1. Pide al servidor una URL firmada (petición diminuta, sin el archivo).
-    const ticketForm = new FormData();
-    ticketForm.set("kind", kind);
-    ticketForm.set("slug", slug || "plantilla");
-    ticketForm.set("filename", file.name);
-    const ticket = await createUploadTicket({}, ticketForm);
-
-    if (ticket.error || !ticket.path || !ticket.token || !ticket.bucket) {
-      setMessage(ticket.error ?? "No se pudo preparar la subida.");
-      setBusy(false);
-      return;
-    }
-
-    // 2. Sube el archivo directo del navegador a Supabase Storage: no pasa
-    // por el servidor, así que no hay límite de tamaño de las Server Actions.
-    const supabase = createClient();
-    const { error } = await supabase.storage
-      .from(ticket.bucket)
-      .uploadToSignedUrl(ticket.path, ticket.token, file);
-
-    if (error) {
-      setMessage(`No se pudo subir el archivo: ${error.message}`);
-      setBusy(false);
-      return;
-    }
-
-    if (kind === "file") {
-      onUploaded(ticket.path);
-    } else {
-      const { data } = supabase.storage.from(ticket.bucket).getPublicUrl(ticket.path);
-      onUploaded(data.publicUrl);
-    }
-    setMessage("Subido correctamente.");
-    setBusy(false);
-    event.target.value = "";
-  }
-
-  return (
-    <div className="mt-2 flex flex-wrap items-center gap-3">
-      <label className="btn btn-ghost cursor-pointer text-[13px]">
-        {busy ? "Subiendo…" : label}
-        <input
-          type="file"
-          className="hidden"
-          disabled={busy}
-          accept={kind === "file" ? ".zip" : "image/*"}
-          onChange={handleChange}
-        />
-      </label>
-      {message && <span className="text-[12px] text-ink-muted">{message}</span>}
-    </div>
-  );
-}

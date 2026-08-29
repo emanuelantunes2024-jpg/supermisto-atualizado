@@ -35,7 +35,13 @@ insert into public.categories (id, name, slug, icon) values
   ('11111111-1111-4111-8111-000000000028', 'Perfumería', 'perfumeria', '🧴'),
   ('11111111-1111-4111-8111-000000000029', 'Relojería', 'relojeria', '⌚'),
   ('11111111-1111-4111-8111-000000000030', 'Frutería y Verdulería', 'fruteria', '🥬'),
-  ('11111111-1111-4111-8111-000000000031', 'Abogados y Consultoría Legal', 'abogados', '⚖️')
+  ('11111111-1111-4111-8111-000000000031', 'Abogados y Consultoría Legal', 'abogados', '⚖️'),
+  ('11111111-1111-4111-8111-000000000032', 'Negocios', 'negocios', '💼'),
+  ('11111111-1111-4111-8111-000000000033', 'Tienda Online', 'tienda-online', '🛒'),
+  ('11111111-1111-4111-8111-000000000034', 'Salud y Belleza', 'salud-belleza', '💆'),
+  ('11111111-1111-4111-8111-000000000035', 'Portafolios', 'portafolios', '🖼️'),
+  ('11111111-1111-4111-8111-000000000036', 'Blogs y Revistas', 'blogs-revistas', '📰'),
+  ('11111111-1111-4111-8111-000000000037', 'Servicios Profesionales', 'servicios-profesionales', '🤝')
 on conflict (id) do update
   set name = excluded.name,
       slug = excluded.slug,
@@ -303,6 +309,42 @@ values
    'Para tiendas de instrumentos musicales y equipos de sonido: catálogo con descuentos destacados, ocho categorías filtrables (guitarras, baterías, teclados, micrófonos...), carrito de la compra con favoritos y pedido que se envía por WhatsApp. Paleta negro + dorado, tipografía Inter. No necesita fotos de producto: todo se muestra con iconos propios.',
    21900, '/demos/instrumentos-musicales-premium/index.html', '/thumbnails/instrumentos-musicales-premium.jpg',
    '["Catálogo con descuentos destacados", "8 categorías filtrables", "Carrito de la compra con favoritos", "El pedido llega por WhatsApp", "Sin fotos: todo ilustrado, carga al instante", "Newsletter y franja de confianza", "Responsive (móvil, tablet y desktop)", "Optimizado para Google (SEO)"]'::jsonb,
+   'published'),
+
+  ('22222222-2222-4222-8222-000000000030',
+   '11111111-1111-4111-8111-000000000032',
+   'Concesionaria Plus', 'concesionaria-plus',
+   'Concesionaria de coches con catálogo, financiación y solicitud por WhatsApp.',
+   'Para concesionarias y comercializadoras de vehículos: catálogo de coches nuevos y de ocasión con buscador por categoría, marca, año y precio, franjas de financiación y seguro, tasación de vehículo y solicitud de información directa por WhatsApp. Paleta roja + negra, tipografía Inter.',
+   5900, '/demos/concesionaria-premium/index.html', '/thumbnails/concesionaria-plus.jpg',
+   '["Buscador de vehículos por categoría, marca y año", "Financiación, seguro y tasación", "Solicitud de información por WhatsApp", "Favoritos (''Mi garaje'')", "Responsive (móvil, tablet y desktop)", "Optimizado para Google (SEO)"]'::jsonb,
+   'published'),
+
+  ('22222222-2222-4222-8222-000000000031',
+   '11111111-1111-4111-8111-000000000033',
+   'TechStore', 'techstore',
+   'Tienda online de electrónica con catálogo, carrito y pedido por WhatsApp.',
+   'Para tiendas de electrónica y tecnología: catálogo de productos con descuentos destacados, ocho categorías filtrables (móviles, portátiles, audio, gaming...), carrito de la compra con favoritos y pedido que se envía por WhatsApp. Paleta azul + morado, tipografía Inter.',
+   6900, '/demos/electronica-premium/index.html', '/thumbnails/techstore.jpg',
+   '["Catálogo con descuentos destacados", "8 categorías filtrables", "Carrito de la compra con favoritos", "El pedido llega por WhatsApp", "Responsive (móvil, tablet y desktop)", "Optimizado para Google (SEO)"]'::jsonb,
+   'published'),
+
+  ('22222222-2222-4222-8222-000000000032',
+   '11111111-1111-4111-8111-000000000007',
+   'Sabor Express', 'sabor-express',
+   'Comida rápida con pedidos online, cesta de la compra y entrega o recogida en tienda.',
+   'Para hamburgueserías y locales de comida rápida de calidad: catálogo por categorías con filtros, cesta de la compra que recuerda lo elegido, elección entre recoger en tienda o entrega a domicilio con su coste y su pedido mínimo, y un formulario que arma el pedido completo y lo manda al WhatsApp del negocio. Sin comisiones por pedido. Paleta negro + terracota, tipografía Playfair Display.',
+   4900, '/demos/hamburgueseria-premium/index.html', '/thumbnails/sabor-express.jpg',
+   '["Catálogo con filtros por categoría", "Cesta de la compra que no se pierde al cerrar", "Recogida en tienda o entrega, con pedido mínimo", "El pedido llega entero por WhatsApp", "Responsive (móvil, tablet y desktop)", "Optimizado para Google (SEO)"]'::jsonb,
+   'published'),
+
+  ('22222222-2222-4222-8222-000000000033',
+   '11111111-1111-4111-8111-000000000037',
+   'Servicios Pro', 'servicios-pro',
+   'Consultoría profesional con áreas de especialización, blog y formulario de consulta.',
+   'Para despachos y consultoras de servicios profesionales: áreas de especialización con ficha propia, proceso de trabajo en cuatro pasos, opiniones de clientes, blog y formulario de consulta con validación. Paleta azul noche + oro, tipografía Playfair Display. No necesita fotos: todo en vectores, carga al instante.',
+   6900, '/demos/consultoria-legal-premium/index.html', '/thumbnails/servicios-pro.jpg',
+   '["Áreas de especialización con icono propio", "Formulario de consulta con validación", "Proceso de trabajo en cuatro pasos", "Blog y preguntas frecuentes", "Sin fotos: todo en vectores, carga al instante", "Responsive (móvil, tablet y desktop)", "Optimizado para Google (SEO)"]'::jsonb,
    'published')
 
 on conflict (id) do update

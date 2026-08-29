@@ -3,7 +3,9 @@ import type { Metadata } from "next";
 import { Footer } from "@/components/site/Footer";
 import { Header } from "@/components/site/Header";
 import { getSession } from "@/lib/auth";
+import { CartProvider } from "@/lib/cart-context";
 import { siteConfig } from "@/lib/config";
+import { FavoritesProvider } from "@/lib/favorites-context";
 
 import "./globals.css";
 
@@ -53,9 +55,13 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <meta name="theme-color" content="#08090b" />
       </head>
       <body className="flex min-h-screen flex-col">
-        <Header isLoggedIn={Boolean(user)} isAdmin={isAdmin} />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <CartProvider>
+          <FavoritesProvider>
+            <Header isLoggedIn={Boolean(user)} isAdmin={isAdmin} />
+            <main className="flex-1">{children}</main>
+            <Footer />
+          </FavoritesProvider>
+        </CartProvider>
       </body>
     </html>
   );

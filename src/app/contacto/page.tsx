@@ -100,7 +100,7 @@ export default function ContactPage() {
                   <span className="block text-[15px] font-semibold">¿Problema con una compra?</span>
                   <span className="block text-[13px] text-ink-muted">
                     Indícanos el número de pedido que aparece en{" "}
-                    <Link href="/mi-cuenta" className="text-gold-400 hover:underline">
+                    <Link href="/cuenta/compras" className="text-gold-400 hover:underline">
                       Mis compras
                     </Link>
                     .
@@ -113,7 +113,7 @@ export default function ContactPage() {
               <h3 className="mb-5 text-lg">Preguntas frecuentes</h3>
               <div className="space-y-3">
                 {faqs.map((faq) => (
-                  <details key={faq.question} className="group rounded-lg border border-line bg-navy-900 p-4">
+                  <details key={faq.question} className="on-dark group rounded-lg border border-line bg-navy-900 p-4">
                     <summary className="cursor-pointer list-none text-[14px] font-medium marker:hidden">
                       <span className="flex items-center justify-between gap-3">
                         {faq.question}

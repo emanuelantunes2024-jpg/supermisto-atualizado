@@ -18,9 +18,13 @@ interface RouteContext {
  * Reglas: el token debe existir, el pedido debe estar en estado `paid` y el
  * archivo se sirve mediante una URL firmada de corta duración generada en el
  * momento — el bucket es privado, nunca se expone la ruta real.
+ *
+ * Un pedido puede tener varias plantillas (carrito): `?template=<id>` elige
+ * cuál descargar. Si el pedido tiene una sola línea, se puede omitir.
  */
 export async function GET(request: Request, context: RouteContext) {
   const { token } = await context.params;
+  const requestedTemplateId = new URL(request.url).searchParams.get("template");
 
   const supabase = createAdminClient();
   if (!supabase) {
@@ -44,9 +48,47 @@ export async function GET(request: Request, context: RouteContext) {
     );
   }
 
-  const template = Array.isArray(order.templates) ? order.templates[0] : order.templates;
-  const fileUrl = (template as { file_url?: string | null } | null)?.file_url;
+  const { data: items } = await supabase
+    .from("order_items")
+    .select("template_id, templates(file_url, title)")
+    .eq("order_id", order.id);
 
+  type FileRow = { file_url?: string | null; title?: string } | null;
+  const legacyTemplate = (Array.isArray(order.templates) ? order.templates[0] : order.templates) as FileRow;
+
+  const candidates = (items && items.length > 0
+    ? items.map((item) => ({
+        templateId: item.template_id as string,
+        template: (Array.isArray(item.templates) ? item.templates[0] : item.templates) as FileRow,
+      }))
+    : order.template_id
+      ? [{ templateId: order.template_id as string, template: legacyTemplate }]
+      : []
+  );
+
+  if (candidates.length === 0) {
+    return NextResponse.json({ error: "Este pedido no tiene plantillas asociadas." }, { status: 404 });
+  }
+
+  const chosen = requestedTemplateId
+    ? candidates.find((c) => c.templateId === requestedTemplateId)
+    : candidates.length === 1
+      ? candidates[0]
+      : null;
+
+  if (!chosen) {
+    // Varias plantillas y no se indicó cuál: se listan para que el cliente elija
+    // (la interfaz de "Mis templates"/"Descargas" siempre pasa `?template=`).
+    return NextResponse.json(
+      {
+        error: "Este pedido tiene varias plantillas. Indica cuál con ?template=<id>.",
+        templates: candidates.map((c) => ({ id: c.templateId, title: c.template?.title ?? "Plantilla" })),
+      },
+      { status: 300 },
+    );
+  }
+
+  const fileUrl = chosen.template?.file_url;
   if (!fileUrl) {
     return NextResponse.json(
       { error: "El archivo de esta plantilla aún no está disponible. Contacta con soporte." },

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { AddToCartButton } from "@/components/templates/AddToCartButton";
 import { PreviewFrame } from "@/components/templates/PreviewFrame";
 import { TemplateCard } from "@/components/templates/TemplateCard";
 import { siteConfig } from "@/lib/config";
@@ -118,23 +119,28 @@ export default async function TemplateDetailPage({ params }: PageProps) {
               ))}
             </ul>
 
-            <div className="font-display text-[34px] font-extrabold text-gold-400">
-              {formatPriceShort(template.price_cents)}
+            <div className="flex items-baseline gap-2.5">
+              <div className="font-display text-[34px] font-extrabold text-gold-400">
+                {formatPriceShort(template.price_cents)}
+              </div>
+              {Boolean(template.compare_at_price_cents && template.compare_at_price_cents > template.price_cents) && (
+                <div className="text-[16px] text-ink-muted line-through">
+                  {formatPriceShort(template.compare_at_price_cents!)}
+                </div>
+              )}
             </div>
             <div className="mb-5 text-[12.5px] text-ink-muted">
               Pago único · sin mensualidades · IVA incluido
             </div>
 
-            <Link href={`/checkout/${template.slug}`} className="btn btn-gold btn-block btn-lg">
-              Comprar esta plantilla
-            </Link>
+            <AddToCartButton template={template} goToCart className="btn btn-gold btn-block btn-lg" />
             {template.preview_url && (
               <Link href={`/plantillas/${template.slug}/demo`} className="btn btn-ghost btn-block mt-2.5">
                 Ver la demo completa
               </Link>
             )}
 
-            <div className="mt-6 rounded-xl border border-line bg-navy-900 p-4">
+            <div className="on-dark mt-6 rounded-xl border border-line bg-navy-900 p-4">
               <h5 className="mb-3 text-[12.5px] uppercase tracking-[0.06em] text-ink-muted">
                 Qué incluye tu compra
               </h5>

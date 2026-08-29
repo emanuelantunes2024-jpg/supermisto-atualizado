@@ -18,7 +18,7 @@ interface PageProps {
 
 export default async function RegisterPage({ searchParams }: PageProps) {
   const { redirect: redirectParam } = await searchParams;
-  const redirectTo = redirectParam?.startsWith("/") ? redirectParam : "/mi-cuenta";
+  const redirectTo = redirectParam?.startsWith("/") ? redirectParam : "/cuenta/perfil";
 
   if (isSupabaseConfigured) {
     const { user } = await getSession();

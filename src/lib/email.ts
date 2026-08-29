@@ -3,10 +3,15 @@ import { Resend } from "resend";
 import { isResendConfigured, siteConfig } from "@/lib/config";
 import { formatPrice } from "@/lib/format";
 
+interface PurchaseEmailItem {
+  title: string;
+  priceCents: number;
+}
+
 interface PurchaseEmailInput {
   to: string;
   buyerName: string | null;
-  templateTitle: string;
+  items: PurchaseEmailItem[];
   amountCents: number;
   downloadUrl: string;
   orderId: string;
@@ -30,11 +35,16 @@ export async function sendPurchaseEmail(input: PurchaseEmailInput): Promise<void
   const bcc = process.env.SALES_NOTIFICATION_EMAIL;
 
   try {
+    const subject =
+      input.items.length === 1
+        ? `Tu plantilla ${input.items[0].title} está lista para descargar`
+        : `Tus ${input.items.length} plantillas están listas para descargar`;
+
     await resend.emails.send({
       from,
       to: input.to,
       ...(bcc ? { bcc } : {}),
-      subject: `Tu plantilla ${input.templateTitle} está lista para descargar`,
+      subject,
       html: purchaseEmailHtml(input),
       text: purchaseEmailText(input),
     });
@@ -44,38 +54,32 @@ export async function sendPurchaseEmail(input: PurchaseEmailInput): Promise<void
   }
 }
 
-function purchaseEmailText({
-  buyerName,
-  templateTitle,
-  amountCents,
-  downloadUrl,
-  orderId,
-}: PurchaseEmailInput): string {
+function purchaseEmailText({ buyerName, items, amountCents, downloadUrl, orderId }: PurchaseEmailInput): string {
   return [
     `Hola${buyerName ? ` ${buyerName}` : ""},`,
     "",
     `Gracias por tu compra en ${siteConfig.name}.`,
     "",
-    `Plantilla: ${templateTitle}`,
-    `Importe: ${formatPrice(amountCents)}`,
+    ...items.map((item) => `- ${item.title}: ${formatPrice(item.priceCents)}`),
+    `Total: ${formatPrice(amountCents)}`,
     `Pedido: ${orderId}`,
     "",
     `Descarga tus archivos aquí: ${downloadUrl}`,
     "",
-    "El enlace está siempre disponible desde tu área de cliente, en «Mis compras».",
+    "El enlace está siempre disponible desde tu área de cliente, en «Mis templates».",
     `Tienes 30 días de soporte técnico incluido: escríbenos a ${siteConfig.supportEmail}.`,
     "",
     `— El equipo de ${siteConfig.name}`,
   ].join("\n");
 }
 
-function purchaseEmailHtml({
-  buyerName,
-  templateTitle,
-  amountCents,
-  downloadUrl,
-  orderId,
-}: PurchaseEmailInput): string {
+function purchaseEmailHtml({ buyerName, items, amountCents, downloadUrl, orderId }: PurchaseEmailInput): string {
+  const itemsHtml = items
+    .map(
+      (item) =>
+        `<div style="display:flex;justify-content:space-between;padding:4px 0;"><span>${escapeHtml(item.title)}</span><strong style="color:#ffc75f;">${formatPrice(item.priceCents)}</strong></div>`,
+    )
+    .join("");
   return `<!doctype html>
 <html lang="es">
 <body style="margin:0;padding:0;background:#08090b;font-family:Inter,Helvetica,Arial,sans-serif;color:#f5f6f8;">
@@ -90,27 +94,27 @@ function purchaseEmailHtml({
             buyerName ? `, ${escapeHtml(buyerName)}` : ""
           }!</h1>
           <p style="margin:0 0 20px;font-size:14px;line-height:1.6;color:#a3a8b3;">
-            Tu pago se ha confirmado y tu plantilla ya está disponible para descargar.
+            Tu pago se ha confirmado y ya ${items.length === 1 ? "está disponible" : "están disponibles"} para descargar.
           </p>
         </td></tr>
         <tr><td style="padding:0 32px;">
           <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#0d0f12;border:1px solid rgba(255,255,255,0.09);border-radius:12px;">
             <tr><td style="padding:16px 18px;font-size:13.5px;color:#a3a8b3;">
-              <div style="color:#f5f6f8;font-size:16px;font-weight:600;margin-bottom:6px;">${escapeHtml(templateTitle)}</div>
-              <div>Importe pagado: <strong style="color:#ffc75f;">${formatPrice(amountCents)}</strong></div>
+              ${itemsHtml}
+              <div style="margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,0.09);color:#f5f6f8;font-weight:700;">Total pagado: <strong style="color:#ffc75f;">${formatPrice(amountCents)}</strong></div>
               <div style="margin-top:4px;">Pedido: ${escapeHtml(orderId)}</div>
             </td></tr>
           </table>
         </td></tr>
         <tr><td style="padding:24px 32px 8px;" align="center">
           <a href="${downloadUrl}" style="display:inline-block;background:#f0a730;color:#08090b;font-weight:700;font-size:15px;text-decoration:none;padding:14px 28px;border-radius:9px;">
-            Descargar mi plantilla
+            Descargar mis plantillas
           </a>
         </td></tr>
         <tr><td style="padding:16px 32px 28px;">
           <p style="margin:0 0 10px;font-size:12.5px;line-height:1.6;color:#a3a8b3;">
             El enlace está siempre disponible desde tu área de cliente, en
-            <a href="${siteConfig.url}/mi-cuenta" style="color:#ffc75f;">Mis compras</a>.
+            <a href="${siteConfig.url}/cuenta/descargas" style="color:#ffc75f;">Mis descargas</a>.
           </p>
           <p style="margin:0;font-size:12.5px;line-height:1.6;color:#a3a8b3;">
             Incluye 30 días de soporte técnico: responde a este email o escribe a

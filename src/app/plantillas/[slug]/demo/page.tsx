@@ -45,6 +45,7 @@ export default async function TemplateDemoPage({ params }: PageProps) {
       categoryName={template.category?.name}
       priceLabel={formatPriceShort(template.price_cents)}
       src={template.preview_url}
+      template={template}
     />
   );
 }

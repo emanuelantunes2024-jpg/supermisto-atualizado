@@ -22,7 +22,7 @@ export default function PrivacyPage() {
           </a>
           .
         </p>
-        <p className="rounded-lg border border-line bg-navy-900 px-4 py-3 text-[13px]">
+        <p className="on-dark rounded-lg border border-line bg-navy-900 px-4 py-3 text-[13px]">
           <strong className="text-ink">Responsable:</strong> Emanuel Da Silva Antunes Coletto, persona física
           residente en Brasil, CPF 096.463.317-50. <strong className="text-ink">Domicilio:</strong> Estrada de
           Xerem, 484, Casa — Duque de Caxias, RJ, 25241390, Brasil.

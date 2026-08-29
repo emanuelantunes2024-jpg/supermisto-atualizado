@@ -1,4 +1,10 @@
-import type { Category, TemplateWithCategory } from "@/lib/types";
+import type {
+  Category,
+  HomepageContent,
+  SiteSettings,
+  Testimonial,
+  TemplateWithCategory,
+} from "@/lib/types";
 
 /**
  * Catálogo de ejemplo.
@@ -47,6 +53,13 @@ export const seedCategories: Category[] = [
   { id: `${CAT}29`, name: "Relojería", slug: "relojeria", icon: "⌚" },
   { id: `${CAT}30`, name: "Frutería y Verdulería", slug: "fruteria", icon: "🥬" },
   { id: `${CAT}31`, name: "Abogados y Consultoría Legal", slug: "abogados", icon: "⚖️" },
+  // Categorías "paraguas" del marketplace general (agrupan varios rubros de arriba).
+  { id: `${CAT}32`, name: "Negocios", slug: "negocios", icon: "💼" },
+  { id: `${CAT}33`, name: "Tienda Online", slug: "tienda-online", icon: "🛒" },
+  { id: `${CAT}34`, name: "Salud y Belleza", slug: "salud-belleza", icon: "💆" },
+  { id: `${CAT}35`, name: "Portafolios", slug: "portafolios", icon: "🖼️" },
+  { id: `${CAT}36`, name: "Blogs y Revistas", slug: "blogs-revistas", icon: "📰" },
+  { id: `${CAT}37`, name: "Servicios Profesionales", slug: "servicios-profesionales", icon: "🤝" },
 ];
 
 const byslug = (slug: string) => seedCategories.find((c) => c.slug === slug)!;
@@ -717,12 +730,97 @@ const seed: SeedTemplate[] = [
       SEO,
     ],
   },
+  // ---- Catálogo de demostración del marketplace general (categorías "paraguas") ----
+  {
+    id: `${TPL}30`,
+    categorySlug: "negocios",
+    title: "Concesionaria Plus",
+    slug: "concesionaria-plus",
+    short_description: "Concesionaria de coches con catálogo, financiación y solicitud por WhatsApp.",
+    full_description:
+      "Para concesionarias y comercializadoras de vehículos: catálogo de coches nuevos y de ocasión con buscador por categoría, marca, año y precio, franjas de financiación y seguro, tasación de vehículo y solicitud de información directa por WhatsApp. Paleta roja + negra, tipografía Inter.",
+    price_cents: 5900,
+    preview_url: "/demos/concesionaria-premium/index.html",
+    gradient: "linear-gradient(160deg,#141418,#c81a1c 55%,#0d0d10)",
+    features: [
+      "Buscador de vehículos por categoría, marca y año",
+      "Financiación, seguro y tasación",
+      "Solicitud de información por WhatsApp",
+      "Favoritos ('Mi garaje')",
+      RESPONSIVE,
+      SEO,
+    ],
+  },
+  {
+    id: `${TPL}31`,
+    categorySlug: "tienda-online",
+    title: "TechStore",
+    slug: "techstore",
+    short_description: "Tienda online de electrónica con catálogo, carrito y pedido por WhatsApp.",
+    full_description:
+      "Para tiendas de electrónica y tecnología: catálogo de productos con descuentos destacados, ocho categorías filtrables (móviles, portátiles, audio, gaming...), carrito de la compra con favoritos y pedido que se envía por WhatsApp. Paleta azul + morado, tipografía Inter.",
+    price_cents: 6900,
+    preview_url: "/demos/electronica-premium/index.html",
+    gradient: "linear-gradient(160deg,#0e4c6b,#8a6bb0 55%,#0a3650)",
+    features: [
+      "Catálogo con descuentos destacados",
+      "8 categorías filtrables",
+      "Carrito de la compra con favoritos",
+      "El pedido llega por WhatsApp",
+      RESPONSIVE,
+      SEO,
+    ],
+  },
+  {
+    id: `${TPL}32`,
+    categorySlug: "restaurante",
+    title: "Sabor Express",
+    slug: "sabor-express",
+    short_description: "Comida rápida con pedidos online, cesta de la compra y entrega o recogida en tienda.",
+    full_description:
+      "Para hamburgueserías y locales de comida rápida de calidad: catálogo por categorías con filtros, cesta de la compra que recuerda lo elegido, elección entre recoger en tienda o entrega a domicilio con su coste y su pedido mínimo, y un formulario que arma el pedido completo y lo manda al WhatsApp del negocio. Sin comisiones por pedido. Paleta negro + terracota, tipografía Playfair Display.",
+    price_cents: 4900,
+    preview_url: "/demos/hamburgueseria-premium/index.html",
+    gradient: "linear-gradient(160deg,#1a1210,#c9542f 55%,#0d0d0d)",
+    features: [
+      "Catálogo con filtros por categoría",
+      "Cesta de la compra que no se pierde al cerrar",
+      "Recogida en tienda o entrega, con pedido mínimo",
+      "El pedido llega entero por WhatsApp",
+      RESPONSIVE,
+      SEO,
+    ],
+  },
+  {
+    id: `${TPL}33`,
+    categorySlug: "servicios-profesionales",
+    title: "Servicios Pro",
+    slug: "servicios-pro",
+    short_description: "Consultoría profesional con áreas de especialización, blog y formulario de consulta.",
+    full_description:
+      "Para despachos y consultoras de servicios profesionales: áreas de especialización con ficha propia, proceso de trabajo en cuatro pasos, opiniones de clientes, blog y formulario de consulta con validación. Paleta azul noche + oro, tipografía Playfair Display. No necesita fotos: todo en vectores, carga al instante.",
+    price_cents: 6900,
+    preview_url: "/demos/consultoria-legal-premium/index.html",
+    gradient: "linear-gradient(160deg,#0b1424,#16243d 55%,#080e1a)",
+    features: [
+      "Áreas de especialización con icono propio",
+      "Formulario de consulta con validación",
+      "Proceso de trabajo en cuatro pasos",
+      "Blog y preguntas frecuentes",
+      "Sin fotos: todo en vectores, carga al instante",
+      RESPONSIVE,
+      SEO,
+    ],
+  },
 ];
 
 /** Degradado por slug — respaldo de miniatura en las tarjetas. */
 export const templateGradients: Record<string, string> = Object.fromEntries(
   seed.map((t) => [t.slug, t.gradient]),
 );
+
+/** Se muestran primero en "Templates Más Populares" mientras no haya ventas reales. */
+const FEATURED_SLUGS = ["concesionaria-plus", "techstore", "sabor-express", "servicios-pro"];
 
 export const seedTemplates: TemplateWithCategory[] = seed.map((t) => ({
   id: t.id,
@@ -732,11 +830,106 @@ export const seedTemplates: TemplateWithCategory[] = seed.map((t) => ({
   short_description: t.short_description,
   full_description: t.full_description,
   price_cents: t.price_cents,
+  compare_at_price_cents: null,
   preview_url: t.preview_url,
   // Maqueta del diseño real, generada por scripts/generate-thumbnails.mjs.
   thumbnail_url: `/thumbnails/${t.slug}.jpg`,
   features: t.features,
+  tags: [],
+  featured: FEATURED_SLUGS.includes(t.slug),
   file_url: null,
   status: "published",
   category: byslug(t.categorySlug),
+  images: [],
 }));
+
+/**
+ * Contenido de ejemplo para las tablas de configuración/CMS: alimenta el
+ * sitio cuando Supabase todavía no está configurado, igual que
+ * `seedCategories`/`seedTemplates` con el catálogo.
+ */
+export const seedSiteSettings: SiteSettings = {
+  company_name: "Leuname Software",
+  logo_url: null,
+  favicon_url: null,
+  email: "hola@leunamesoftware.com",
+  phone: null,
+  whatsapp: null,
+  address: null,
+  currency: "EUR",
+  language: "es",
+  social: {},
+  footer_text: "Plantillas profesionales para impulsar tu negocio en línea.",
+};
+
+export const seedHomepageContent: HomepageContent = {
+  hero: {
+    eyebrow: "Marketplace de plantillas",
+    title: "Los mejores templates para tu próximo proyecto",
+    subtitle:
+      "Plantillas profesionales, modernas y 100% personalizables para impulsar tu negocio en línea.",
+    image_url: null,
+    button_text: "Explorar templates",
+    button_href: "/plantillas",
+    search_placeholder: "Buscar templates...",
+    trust_badges: ["Descarga inmediata", "Pago seguro", "Actualizaciones gratuitas", "Soporte dedicado"],
+  },
+  benefits: [
+    { icon: "sparkles", title: "Templates Premium", text: "Diseños profesionales listos para usar." },
+    { icon: "pencil", title: "Fácil de Personalizar", text: "Edita colores, textos e imágenes sin complicaciones." },
+    { icon: "devices", title: "Compatible y Responsivo", text: "Se ven perfectos en cualquier dispositivo." },
+    { icon: "refresh", title: "Actualizaciones Constantes", text: "Nuevos diseños cada semana para ti." },
+  ],
+  featured_categories: [],
+  featured_templates: [],
+  why_us: {
+    title: "¿Por qué elegirnos?",
+    text: "Más de 10.000 clientes confían en nosotros para llevar sus proyectos al siguiente nivel.",
+    button_text: "Conoce más sobre nosotros",
+    button_href: "/contacto",
+    stats: [
+      { value: "10K+", label: "Clientes satisfechos" },
+      { value: "500+", label: "Templates disponibles" },
+      { value: "5★", label: "Calificación promedio" },
+      { value: "24/7", label: "Soporte dedicado" },
+    ],
+  },
+  newsletter: {
+    title: "Suscríbete a nuestro newsletter",
+    subtitle: "Recibe novedades, ofertas exclusivas y nuevos templates.",
+    button_text: "Suscribirme",
+  },
+};
+
+export const seedTestimonials: Testimonial[] = [
+  {
+    id: "t1",
+    customer_name: "Carlos M.",
+    role: "Emprendedor",
+    avatar_url: null,
+    comment: "Los templates son increíbles y fáciles de personalizar. Mi sitio web quedó profesional y moderno.",
+    rating: 5,
+    sort_order: 1,
+    is_published: true,
+  },
+  {
+    id: "t2",
+    customer_name: "Laura G.",
+    role: "Dueña de Tienda Online",
+    avatar_url: null,
+    comment: "Excelente soporte y calidad en los diseños. Volveré a comprar sin duda.",
+    rating: 5,
+    sort_order: 2,
+    is_published: true,
+  },
+  {
+    id: "t3",
+    customer_name: "Javier R.",
+    role: "Desarrollador Web",
+    avatar_url: null,
+    comment: "Me ahorraron mucho tiempo y dinero. 100% recomendados.",
+    rating: 5,
+    sort_order: 3,
+    is_published: true,
+  },
+];

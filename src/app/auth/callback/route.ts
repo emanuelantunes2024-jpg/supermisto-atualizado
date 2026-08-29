@@ -9,7 +9,7 @@ export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url);
   const code = searchParams.get("code");
   const nextParam = searchParams.get("next");
-  const next = nextParam?.startsWith("/") ? nextParam : "/mi-cuenta";
+  const next = nextParam?.startsWith("/") ? nextParam : "/cuenta/perfil";
 
   if (!code) {
     return NextResponse.redirect(`${origin}/entrar?error=auth`);

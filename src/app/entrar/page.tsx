@@ -19,7 +19,7 @@ interface PageProps {
 export default async function LoginPage({ searchParams }: PageProps) {
   const { redirect: redirectParam } = await searchParams;
   // Solo rutas internas, para evitar redirecciones abiertas.
-  const redirectTo = redirectParam?.startsWith("/") ? redirectParam : "/mi-cuenta";
+  const redirectTo = redirectParam?.startsWith("/") ? redirectParam : "/cuenta/perfil";
 
   if (isSupabaseConfigured) {
     const { user } = await getSession();

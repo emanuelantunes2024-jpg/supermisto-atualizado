@@ -1,11 +1,15 @@
-import Link from "next/link";
-
+import { CategoryCard } from "@/components/admin/CategoryCard";
+import { CategoryForm } from "@/components/admin/CategoryForm";
 import { getCategories, getCategoryCounts } from "@/lib/queries";
-import { NewCategoryForm } from "@/components/admin/NewCategoryForm";
 
 export const dynamic = "force-dynamic";
 
-export default async function AdminCategoriesPage() {
+interface PageProps {
+  searchParams: Promise<{ error?: string }>;
+}
+
+export default async function AdminCategoriesPage({ searchParams }: PageProps) {
+  const { error } = await searchParams;
   const [categories, counts] = await Promise.all([getCategories(), getCategoryCounts()]);
 
   return (
@@ -18,26 +22,23 @@ export default async function AdminCategoriesPage() {
         </p>
       </div>
 
-      <div className="panel max-w-lg space-y-4">
+      {error && (
+        <p className="rounded-lg border border-red-500/40 bg-red-500/10 px-4 py-3 text-[13px] text-red-300">
+          No se pudo eliminar: {error}
+          {error.toLowerCase().includes("foreign key") && (
+            <> — tiene plantillas asociadas. Muévelas a otra categoría antes de borrarla.</>
+          )}
+        </p>
+      )}
+
+      <div className="panel max-w-2xl space-y-4">
         <h3 className="text-[15px]">Nueva categoría</h3>
-        <NewCategoryForm />
+        <CategoryForm />
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
         {categories.map((category) => (
-          <div key={category.id} className="surface p-5">
-            <div className="mb-2 text-2xl">{category.icon}</div>
-            <h3 className="text-[15px]">{category.name}</h3>
-            <p className="mt-1 text-[12.5px] text-ink-muted">/{category.slug}</p>
-            <div className="mt-3 flex items-center justify-between text-[12.5px]">
-              <span className="text-ink-muted">
-                {counts[category.slug] ?? 0} publicadas
-              </span>
-              <Link href={`/plantillas?cat=${category.slug}`} className="text-gold-400 hover:underline">
-                Ver en la tienda →
-              </Link>
-            </div>
-          </div>
+          <CategoryCard key={category.id} category={category} count={counts[category.slug] ?? 0} />
         ))}
       </div>
     </div>

@@ -2,12 +2,16 @@ import Link from "next/link";
 
 import { OrderStatusBadge } from "@/components/admin/OrderStatusBadge";
 import { formatDate, formatPrice } from "@/lib/format";
-import { getAllOrders, getDashboardStats } from "@/lib/queries";
+import { getAllOrders, getDashboardStats, getRecentDownloadsCount } from "@/lib/queries";
 
 export const dynamic = "force-dynamic";
 
 export default async function AdminDashboardPage() {
-  const [stats, orders] = await Promise.all([getDashboardStats(), getAllOrders()]);
+  const [stats, orders, recentDownloads] = await Promise.all([
+    getDashboardStats(),
+    getAllOrders(),
+    getRecentDownloadsCount(),
+  ]);
   const recent = orders.slice(0, 8);
 
   const cards = [
@@ -17,12 +21,9 @@ export default async function AdminDashboardPage() {
       value: formatPrice(stats.revenueThisMonthCents),
       hint: `${stats.ordersThisMonth} ${stats.ordersThisMonth === 1 ? "pedido" : "pedidos"}`,
     },
-    {
-      label: "Más vendida",
-      value: stats.bestSeller?.title ?? "—",
-      hint: stats.bestSeller ? `${stats.bestSeller.count} ventas` : "Sin ventas todavía",
-    },
+    { label: "Clientes", value: String(stats.totalCustomers), hint: "cuentas registradas" },
     { label: "Plantillas publicadas", value: String(stats.publishedTemplates), hint: "visibles en la tienda" },
+    { label: "Descargas (7 días)", value: String(recentDownloads), hint: "descargas recientes" },
   ];
 
   return (
@@ -37,6 +38,27 @@ export default async function AdminDashboardPage() {
             <div className="mt-1 text-[12px] text-ink-muted">{card.hint}</div>
           </div>
         ))}
+      </div>
+
+      <div className="panel">
+        <h2 className="mb-4 text-lg">Templates más vendidos</h2>
+        {stats.topSellers.length === 0 ? (
+          <p className="text-[13.5px] text-ink-muted">Todavía no hay ventas.</p>
+        ) : (
+          <ol className="space-y-2.5">
+            {stats.topSellers.map((seller, index) => (
+              <li key={seller.title} className="flex items-center justify-between text-[13.5px]">
+                <span className="flex items-center gap-2.5">
+                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-navy-700 text-[11.5px] text-ink-muted">
+                    {index + 1}
+                  </span>
+                  {seller.title}
+                </span>
+                <span className="text-ink-muted">{seller.count} ventas</span>
+              </li>
+            ))}
+          </ol>
+        )}
       </div>
 
       <div className="panel">
@@ -92,6 +114,9 @@ export default async function AdminDashboardPage() {
           </Link>
           <Link href="/admin/pedidos" className="btn btn-ghost">
             Ver pedidos
+          </Link>
+          <Link href="/admin/contenido" className="btn btn-ghost">
+            Editar portada
           </Link>
         </div>
       </div>

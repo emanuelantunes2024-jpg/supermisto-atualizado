@@ -1,8 +1,12 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 
 import { CategoryIcon } from "@/components/templates/CategoryIcon";
 
+import { useCart } from "@/lib/cart-context";
+import { useFavorites } from "@/lib/favorites-context";
 import { formatPriceShort } from "@/lib/format";
 import { templateGradients } from "@/lib/seed-data";
 import type { TemplateWithCategory } from "@/lib/types";
@@ -24,6 +28,11 @@ export function TemplateCard({ template, showPriceNote = false, priority = false
     ? `/plantillas/${template.slug}/demo`
     : `/plantillas/${template.slug}`;
 
+  const { addItem, isInCart } = useCart();
+  const { isFavorite, toggle } = useFavorites();
+  const favorite = isFavorite(template.slug);
+  const inCart = isInCart(template.slug);
+
   return (
     <article className="surface flex flex-col overflow-hidden transition-all duration-[250ms] hover:-translate-y-1 hover:border-gold-500 hover:shadow-lg">
       <Link
@@ -32,6 +41,20 @@ export function TemplateCard({ template, showPriceNote = false, priority = false
         style={template.thumbnail_url ? undefined : { background: gradient }}
         aria-label={template.preview_url ? `Ver la demo de ${template.title}` : `Ver ${template.title}`}
       >
+        <button
+          type="button"
+          onClick={(event) => {
+            event.preventDefault();
+            toggle(template.slug);
+          }}
+          aria-label={favorite ? "Quitar de favoritos" : "Añadir a favoritos"}
+          aria-pressed={favorite}
+          className="absolute right-2.5 top-2.5 z-20 flex h-8 w-8 items-center justify-center rounded-full bg-white/90 text-[#0f1115] shadow-sm transition-transform hover:scale-105"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill={favorite ? "#ff7a1a" : "none"} stroke={favorite ? "#ff7a1a" : "currentColor"} strokeWidth="1.8">
+            <path d="M12 20s-7-4.3-7-9a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 4.7-7 9-7 9z" />
+          </svg>
+        </button>
         {template.thumbnail_url ? (
           <Image
             src={template.thumbnail_url}
@@ -85,7 +108,7 @@ export function TemplateCard({ template, showPriceNote = false, priority = false
         </h3>
         <p className="mb-3.5 flex-1 text-[13px] text-ink-muted">{template.short_description}</p>
 
-        <div className="flex items-center justify-between">
+        <div className="mb-3 flex items-center justify-between">
           <div className="font-display text-base font-extrabold text-gold-400">
             {formatPriceShort(template.price_cents)}
             {showPriceNote && <small className="ml-1 text-[11px] font-normal text-ink-muted">pago único</small>}
@@ -107,6 +130,23 @@ export function TemplateCard({ template, showPriceNote = false, priority = false
             </Link>
           </span>
         </div>
+
+        <button
+          type="button"
+          onClick={() =>
+            addItem({
+              slug: template.slug,
+              title: template.title,
+              price_cents: template.price_cents,
+              compare_at_price_cents: template.compare_at_price_cents,
+              thumbnail_url: template.thumbnail_url,
+              category_icon: template.category?.icon,
+            })
+          }
+          className={`btn btn-block text-[12.5px] ${inCart ? "btn-ghost" : "btn-gold"}`}
+        >
+          {inCart ? "✓ En el carrito — añadir otra vez" : "Añadir al carrito"}
+        </button>
       </div>
     </article>
   );
