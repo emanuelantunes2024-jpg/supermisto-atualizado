@@ -3,12 +3,14 @@ import { notFound } from "next/navigation";
 
 import { DemoViewer } from "@/components/templates/DemoViewer";
 import { formatPriceShort } from "@/lib/format";
+import { getDemoParts } from "@/lib/demo-parts";
 import { getPublishedTemplates, getTemplateBySlug } from "@/lib/queries";
 
 export const revalidate = 300;
 
 interface PageProps {
   params: Promise<{ slug: string }>;
+  searchParams: Promise<{ parte?: string }>;
 }
 
 export async function generateStaticParams() {
@@ -31,27 +33,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-/**
- * Un combo lleva varias demos (p. ej. el sitio web y el PDV incluidos):
- * se marcan en `tags` como `demo:<carpeta-en-public/demos>`.
- */
-function demoParts(tags: string[]): { label: string; src: string }[] {
-  const slugs = tags.filter((tag) => tag.startsWith("demo:")).map((tag) => tag.slice(5));
-  if (slugs.length < 2) return [];
-  return slugs.map((demoSlug) => ({
-    label: demoSlug.startsWith("pdv") ? "Sistema PDV" : "Sitio web",
-    src: `/demos/${demoSlug}/index.html`,
-  }));
-}
-
 /** Demo a pantalla completa con la barra de compra siempre visible. */
-export default async function TemplateDemoPage({ params }: PageProps) {
+export default async function TemplateDemoPage({ params, searchParams }: PageProps) {
   const { slug } = await params;
+  const { parte } = await searchParams;
   const template = await getTemplateBySlug(slug);
 
   if (!template) notFound();
 
-  const parts = demoParts(template.tags ?? []);
+  const parts = getDemoParts(template.tags, template.slug);
+  const initialIndex = parte ? Math.max(parts.findIndex((p) => p.src.includes(`/${parte}/`)), 0) : 0;
 
   return (
     <DemoViewer
@@ -59,8 +50,9 @@ export default async function TemplateDemoPage({ params }: PageProps) {
       title={template.title}
       categoryName={template.category?.name}
       priceLabel={formatPriceShort(template.price_cents)}
-      src={parts[0]?.src ?? template.preview_url}
+      src={parts[initialIndex]?.src ?? template.preview_url}
       parts={parts}
+      initialPartIndex={initialIndex}
       template={template}
     />
   );

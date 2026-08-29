@@ -5,12 +5,8 @@ import { useState } from "react";
 
 import { Logo } from "@/components/site/Logo";
 import { AddToCartButton } from "@/components/templates/AddToCartButton";
+import type { DemoPart } from "@/lib/demo-parts";
 import type { TemplateWithCategory } from "@/lib/types";
-
-interface DemoPart {
-  label: string;
-  src: string;
-}
 
 interface DemoViewerProps {
   slug: string;
@@ -22,6 +18,8 @@ interface DemoViewerProps {
   template: TemplateWithCategory;
   /** Combos: más de una demo para alternar (p. ej. "Sitio web" y "Sistema PDV"). */
   parts?: DemoPart[];
+  /** Con qué parte abrir (p. ej. al llegar desde el botón "Ver demo del PDV"). */
+  initialPartIndex?: number;
 }
 
 const devices = [
@@ -69,9 +67,18 @@ type DeviceId = (typeof devices)[number]["id"];
  * Se monta como capa fija por encima de la cabecera del sitio para que la
  * demo ocupe toda la pantalla.
  */
-export function DemoViewer({ slug, title, categoryName, priceLabel, src, template, parts }: DemoViewerProps) {
+export function DemoViewer({
+  slug,
+  title,
+  categoryName,
+  priceLabel,
+  src,
+  template,
+  parts,
+  initialPartIndex = 0,
+}: DemoViewerProps) {
   const [device, setDevice] = useState<DeviceId>("desktop");
-  const [partIndex, setPartIndex] = useState(0);
+  const [partIndex, setPartIndex] = useState(initialPartIndex);
   const width = devices.find((item) => item.id === device)!.width;
   const activeSrc = parts && parts.length > 0 ? parts[partIndex].src : src;
 

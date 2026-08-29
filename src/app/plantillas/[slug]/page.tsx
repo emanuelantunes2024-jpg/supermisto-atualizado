@@ -6,6 +6,7 @@ import { AddToCartButton } from "@/components/templates/AddToCartButton";
 import { PreviewFrame } from "@/components/templates/PreviewFrame";
 import { TemplateCard } from "@/components/templates/TemplateCard";
 import { siteConfig } from "@/lib/config";
+import { getDemoParts } from "@/lib/demo-parts";
 import { formatPriceShort } from "@/lib/format";
 import { getPublishedTemplates, getTemplateBySlug } from "@/lib/queries";
 
@@ -51,6 +52,8 @@ export default async function TemplateDetailPage({ params }: PageProps) {
   const template = await getTemplateBySlug(slug);
 
   if (!template) notFound();
+
+  const demoParts = getDemoParts(template.tags, template.slug);
 
   const all = await getPublishedTemplates();
   const related = all
@@ -134,10 +137,20 @@ export default async function TemplateDetailPage({ params }: PageProps) {
             </div>
 
             <AddToCartButton template={template} goToCart className="btn btn-gold btn-block btn-lg" />
-            {template.preview_url && (
-              <Link href={`/plantillas/${template.slug}/demo`} className="btn btn-ghost btn-block mt-2.5">
-                Ver la demo completa
-              </Link>
+            {demoParts.length > 1 ? (
+              <div className="mt-2.5 grid grid-cols-2 gap-2.5">
+                {demoParts.map((part) => (
+                  <Link key={part.href} href={part.href} className="btn btn-ghost btn-block">
+                    Ver demo{part.label === "Sistema PDV" ? " del PDV" : " del sitio"}
+                  </Link>
+                ))}
+              </div>
+            ) : (
+              template.preview_url && (
+                <Link href={`/plantillas/${template.slug}/demo`} className="btn btn-ghost btn-block mt-2.5">
+                  Ver la demo completa
+                </Link>
+              )
             )}
 
             <div className="on-dark mt-6 rounded-xl border border-line bg-navy-900 p-4">
