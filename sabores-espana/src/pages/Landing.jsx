@@ -66,7 +66,7 @@ export default function Landing() {
 
         <div className="flex justify-center">
           <img
-            src="/images/portada-libro.png"
+            src="/images/portada-libro.jpg"
             alt={`Portada de ${siteConfig.nombre}`}
             className="w-full max-w-sm rounded-2xl shadow-lift"
           />
