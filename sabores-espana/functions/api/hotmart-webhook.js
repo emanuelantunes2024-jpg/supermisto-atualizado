@@ -1,11 +1,12 @@
 // Webhook de Hotmart — Configurar en: Herramientas → Webhook, apuntando a
 // https://TU-DOMINIO/api/hotmart-webhook, y copiar el "Hottok" a la variable
-// de entorno HOTMART_HOTTOK en Vercel.
+// de entorno HOTMART_HOTTOK en Cloudflare Pages.
 //
 // Acepta el formato v2 de Hotmart (evento + data.buyer.email). Responde 200
 // siempre que el payload sea válido, como pide Hotmart para no reintentar.
 
-import { guardarAcceso } from './_lib/redis.js';
+import { guardarAcceso } from './_lib/kv.js';
+import { json } from './_lib/http.js';
 
 const EVENTOS_ACTIVAN = new Set([
   'PURCHASE_APPROVED',
@@ -22,10 +23,11 @@ const EVENTOS_CANCELAN = new Set([
   'SUBSCRIPTION_CANCELLATION',
 ]);
 
-function hottokValido(req, body) {
-  const esperado = process.env.HOTMART_HOTTOK;
+function hottokValido(request, body, env) {
+  const esperado = env?.HOTMART_HOTTOK;
   if (!esperado) return false;
-  const recibido = req.headers['x-hotmart-hottok'] || body?.hottok || req.query?.hottok;
+  const url = new URL(request.url);
+  const recibido = request.headers.get('x-hotmart-hottok') || body?.hottok || url.searchParams.get('hottok');
   return recibido === esperado;
 }
 
@@ -36,25 +38,23 @@ function epochAIso(valor) {
   return new Date(n).toISOString();
 }
 
-export default async function handler(req, res) {
-  if (req.method !== 'POST') {
-    res.status(405).json({ ok: false, error: 'method_not_allowed' });
-    return;
+export async function onRequestPost({ request, env }) {
+  let body = {};
+  try {
+    body = await request.json();
+  } catch {
+    body = {};
   }
 
-  const body = req.body || {};
-
-  if (!hottokValido(req, body)) {
-    res.status(401).json({ ok: false, error: 'hottok_invalido' });
-    return;
+  if (!hottokValido(request, body, env)) {
+    return json({ ok: false, error: 'hottok_invalido' }, { status: 401 });
   }
 
   const evento = body.event;
   const email = body.data?.buyer?.email;
 
   if (!email || !evento) {
-    res.status(200).json({ ok: true, ignorado: true });
-    return;
+    return json({ ok: true, ignorado: true });
   }
 
   const datosComunes = {
@@ -67,12 +67,12 @@ export default async function handler(req, res) {
   };
 
   if (EVENTOS_ACTIVAN.has(evento)) {
-    await guardarAcceso(email, { ...datosComunes, active: true, status: 'activo' });
+    await guardarAcceso(env, email, { ...datosComunes, active: true, status: 'activo' });
   } else if (EVENTOS_EXPIRAN.has(evento)) {
-    await guardarAcceso(email, { ...datosComunes, active: false, status: 'expirado' });
+    await guardarAcceso(env, email, { ...datosComunes, active: false, status: 'expirado' });
   } else if (EVENTOS_CANCELAN.has(evento)) {
-    await guardarAcceso(email, { ...datosComunes, active: false, status: 'cancelado' });
+    await guardarAcceso(env, email, { ...datosComunes, active: false, status: 'cancelado' });
   }
 
-  res.status(200).json({ ok: true });
+  return json({ ok: true });
 }

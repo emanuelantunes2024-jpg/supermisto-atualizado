@@ -11,6 +11,6 @@ const hash = scryptSync(senha, salt, 64).toString('hex');
 
 console.log('\nContraseña (guardala en un lugar seguro, no se vuelve a mostrar):');
 console.log('  ' + senha);
-console.log('\nADMIN_PASSWORD_HASH (pegalo en Vercel → Settings → Environment Variables):');
+console.log('\nADMIN_PASSWORD_HASH (pegalo en Cloudflare Pages → Settings → Environment Variables):');
 console.log('  ' + `${salt}:${hash}`);
 console.log('');

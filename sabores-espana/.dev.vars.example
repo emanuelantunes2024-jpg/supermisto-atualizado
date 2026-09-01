@@ -1,0 +1,7 @@
+# Copiá este archivo a ".dev.vars" (ya está en .gitignore, nunca se sube)
+# para probar el login/admin/webhook en local con `npm run pages:dev`.
+
+SESSION_SECRET=un-texto-largo-cualquiera-para-probar-en-local
+HOTMART_HOTTOK=prueba-local
+ADMIN_EMAILS=tu-email@ejemplo.com
+ADMIN_PASSWORD_HASH=
