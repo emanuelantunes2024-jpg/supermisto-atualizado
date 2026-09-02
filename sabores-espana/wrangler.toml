@@ -1,0 +1,9 @@
+name = "sabores-espana"
+pages_build_output_dir = "dist"
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+
+# El namespace de KV se enlaza desde el dashboard de Cloudflare:
+# Workers & Pages → tu proyecto → Settings → Functions → KV namespace
+# bindings → Variable name: SABORES_KV → elegir (o crear) el namespace.
+# Ver README.md → "Puesta en marcha (Cloudflare Pages)".
