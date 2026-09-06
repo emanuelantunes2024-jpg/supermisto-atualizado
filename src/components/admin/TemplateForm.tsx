@@ -15,12 +15,12 @@ interface TemplateFormProps {
   images?: ProductImage[];
 }
 
-const DEVICE_IMAGE_FIELDS: { kind: Exclude<ProductImageKind, "gallery">; label: string; hint: string }[] = [
-  { kind: "main", label: "Imagen principal", hint: "La que se ve en la tarjeta del catálogo." },
-  { kind: "desktop", label: "Screenshot desktop", hint: "Pantalla completa de escritorio." },
-  { kind: "laptop", label: "Screenshot notebook", hint: "Vista en portátil (mockup)." },
-  { kind: "tablet", label: "Screenshot tablet", hint: "Vista adaptada a tablet." },
-  { kind: "mobile", label: "Screenshot mobile", hint: "Vista adaptada a celular." },
+const DEVICE_IMAGE_FIELDS: { kind: Exclude<ProductImageKind, "gallery">; label: string; hint: string; size: string }[] = [
+  { kind: "main", label: "Imagen principal", hint: "La que se ve en la tarjeta del catálogo.", size: "1600 × 720 px (horizontal)" },
+  { kind: "desktop", label: "Screenshot desktop", hint: "Pantalla completa de escritorio.", size: "1920 × 1080 px" },
+  { kind: "laptop", label: "Screenshot notebook", hint: "Vista en portátil (mockup).", size: "1440 × 900 px" },
+  { kind: "tablet", label: "Screenshot tablet", hint: "Vista adaptada a tablet.", size: "1024 × 768 px" },
+  { kind: "mobile", label: "Screenshot mobile", hint: "Vista adaptada a celular.", size: "390 × 844 px (vertical)" },
 ];
 
 export function TemplateForm({ categories, template, images = [] }: TemplateFormProps) {
@@ -230,9 +230,12 @@ export function TemplateForm({ categories, template, images = [] }: TemplateForm
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-          {DEVICE_IMAGE_FIELDS.map(({ kind, label, hint }) => (
+          {DEVICE_IMAGE_FIELDS.map(({ kind, label, hint, size }) => (
             <div key={kind}>
               <label className="field-label">{label}</label>
+              <p className="mb-1.5 text-[11px] text-ink-muted">
+                Tamaño recomendado: <span className="font-semibold text-ink">{size}</span>
+              </p>
               {deviceImages[kind] ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
@@ -259,6 +262,10 @@ export function TemplateForm({ categories, template, images = [] }: TemplateForm
 
         <div>
           <label className="field-label">Imágenes adicionales (galería)</label>
+          <p className="mb-1.5 text-[11px] text-ink-muted">
+            Tamaño recomendado: <span className="font-semibold text-ink">1600 × 1000 px</span> (capturas extra del
+            sitio, cualquier cantidad)
+          </p>
           <input type="hidden" name="gallery_urls" value={galleryUrls.join("\n")} />
           {galleryUrls.length > 0 && (
             <div className="mb-2 flex flex-wrap gap-2">
@@ -314,6 +321,9 @@ export function TemplateForm({ categories, template, images = [] }: TemplateForm
           <label className="field-label" htmlFor="thumbnail_url">
             Miniatura (URL pública) — respaldo si no subes imagen principal
           </label>
+          <p className="mb-1.5 text-[11px] text-ink-muted">
+            Mismo tamaño que la imagen principal: <span className="font-semibold text-ink">1600 × 720 px</span>
+          </p>
           <input
             id="thumbnail_url"
             name="thumbnail_url"
