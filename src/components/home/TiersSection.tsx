@@ -130,33 +130,35 @@ export function TiersSection() {
               <h3 className="mb-4 text-center text-[13px] font-extrabold uppercase tracking-[0.12em] text-ink-muted">
                 {row.kind === "Sitio" ? "Sitios profesionales" : row.kind === "PDV" ? "Sistemas PDV" : "Combos completos (Sitio + PDV)"}
               </h3>
-              <div className="grid gap-5 lg:grid-cols-3">
+              <div className="grid grid-cols-2 gap-2.5 sm:gap-4 lg:grid-cols-3 lg:gap-5">
                 {TIERS.map((tier) => {
                   const card = row.cards[tier.key];
                   return (
                     <div
                       key={tier.key}
-                      className="rounded-xl border p-6"
+                      className="flex flex-col rounded-xl border p-3 sm:p-6"
                       style={{ borderColor: `${tier.accent}55`, background: `linear-gradient(160deg, ${tier.accentSoft}, transparent 60%)` }}
                     >
-                      <div className="mb-4 flex items-center gap-3">
+                      <div className="mb-2.5 flex items-center gap-2 sm:mb-4 sm:gap-3">
                         <span
-                          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[10px] border"
+                          className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border sm:h-11 sm:w-11 sm:rounded-[10px]"
                           style={{ borderColor: `${tier.accent}66`, background: tier.accentSoft }}
                         >
                           <HexIcon accent={tier.accent} kind={row.kind} />
                         </span>
-                        <div>
-                          <div className="text-[11px] font-bold uppercase tracking-[0.08em] text-ink-muted">{row.kind}</div>
-                          <div className="text-[17px] font-extrabold" style={{ color: tier.accent }}>
+                        <div className="min-w-0">
+                          <div className="text-[9.5px] font-bold uppercase tracking-[0.08em] text-ink-muted sm:text-[11px]">
+                            {row.kind}
+                          </div>
+                          <div className="truncate text-[13px] font-extrabold sm:text-[17px]" style={{ color: tier.accent }}>
                             {tier.label}
                           </div>
                         </div>
                       </div>
-                      <p className="mb-4 text-[13.5px] text-ink-muted">{card.desc}</p>
-                      <ul className="mb-5 space-y-2">
+                      <p className="mb-2.5 text-[11.5px] text-ink-muted sm:mb-4 sm:text-[13.5px]">{card.desc}</p>
+                      <ul className="mb-3 space-y-1.5 sm:mb-5 sm:space-y-2">
                         {card.features.map((feature) => (
-                          <li key={feature} className="flex gap-2 text-[13px]" style={{ color: tier.accent }}>
+                          <li key={feature} className="flex gap-1.5 text-[11px] sm:gap-2 sm:text-[13px]" style={{ color: tier.accent }}>
                             {check}
                             <span className="text-ink">{feature}</span>
                           </li>
@@ -164,7 +166,7 @@ export function TiersSection() {
                       </ul>
                       <Link
                         href={row.href}
-                        className="btn btn-block text-[13px]"
+                        className="btn btn-block mt-auto text-[11.5px] sm:text-[13px]"
                         style={{ background: tier.accent, color: "#12140f" }}
                       >
                         {card.cta} →
