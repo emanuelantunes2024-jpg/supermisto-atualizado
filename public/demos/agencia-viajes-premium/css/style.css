@@ -104,6 +104,7 @@ section{padding:62px 0;}
 .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-top:14px;padding-bottom:14px;}
 .logo{display:flex;align-items:center;gap:10px;}
 .logo-mark{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--coral),#f0a03c);color:#fff;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0;}
+.logo-img{width:40px;height:40px;border-radius:50%;object-fit:cover;flex-shrink:0;}
 .logo-text{font-family:'Playfair Display',serif;font-weight:700;font-size:19px;letter-spacing:.06em;color:var(--teal-900);line-height:1.05;}
 .logo-text small{display:block;font-family:'Inter';font-size:9.5px;font-weight:600;letter-spacing:.22em;color:var(--muted);}
 .nav-links{display:flex;gap:22px;}
@@ -270,6 +271,7 @@ footer{background:var(--teal-900);color:#b9d0ce;padding-top:52px;}
 .foot-grid h5{color:#fff;font-size:13px;margin-bottom:13px;letter-spacing:.04em;}
 .foot-grid a{display:block;font-size:12.5px;margin-bottom:9px;transition:.2s;}
 .foot-grid a:hover{color:var(--coral);}
+.foot-pendiente{display:block;font-size:12.5px;margin-bottom:9px;opacity:.55;cursor:default;}
 .logo-foot .logo-text{color:#fff;}
 .logo-foot .logo-text small{color:#8fadab;}
 .foot-about{font-size:12.5px;margin:14px 0;max-width:230px;}

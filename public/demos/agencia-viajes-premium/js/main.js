@@ -74,6 +74,24 @@
     });
   });
 
+  /* Envío real de formularios: por WhatsApp (número configurado en el panel)
+     o, si no hay WhatsApp configurado, por email (mailto). No usa servidor
+     propio ni base de datos: abre el canal de contacto ya configurado con
+     el mensaje ya redactado, así el mensaje de éxito nunca es falso. */
+  function enviarContacto(asunto, texto) {
+    var cfg = window.AGV || {};
+    var numero = (cfg.whatsapp || "").replace(/\D/g, "");
+    if (numero) {
+      window.open("https://wa.me/" + numero + "?text=" + encodeURIComponent(texto), "_blank");
+      return "whatsapp";
+    }
+    if (cfg.email) {
+      window.location.href = "mailto:" + cfg.email + "?subject=" + encodeURIComponent(asunto) + "&body=" + encodeURIComponent(texto);
+      return "email";
+    }
+    return null;
+  }
+
   /* Buscador del hero */
   var searchForm = document.getElementById("searchForm");
   if (searchForm) {
@@ -87,10 +105,21 @@
         document.getElementById("sbDestino").focus();
         return;
       }
-      msg.style.color = "#1a7f5a";
-      msg.textContent = "✓ Búsqueda enviada (demo): " + destino + ". Un asesor te escribirá con las opciones.";
       var pd = document.getElementById("pDestino");
       if (pd) pd.value = destino;
+      var canal = enviarContacto(
+        "Búsqueda de viaje: " + destino,
+        "Hola, quiero información para viajar a: " + destino
+      );
+      msg.style.color = "#1a7f5a";
+      if (canal === "whatsapp") {
+        msg.textContent = "✓ Te abrimos WhatsApp para que un asesor te ayude con tu búsqueda de " + destino + ".";
+      } else if (canal === "email") {
+        msg.textContent = "✓ Se abrirá tu correo para enviarnos tu búsqueda de " + destino + ".";
+      } else {
+        msg.style.color = "#d9534f";
+        msg.textContent = "Contáctanos directamente: revisa el teléfono o email de la sección de contacto.";
+      }
     });
   }
 
@@ -124,9 +153,33 @@
         planForm.querySelector(".bad").focus();
         return;
       }
-      out.style.color = "#1a7f5a";
-      out.textContent = "✓ ¡Solicitud enviada! (demo) Te responderemos en menos de 24 horas.";
-      planForm.reset();
+      var val = function (id) {
+        var el = document.getElementById(id);
+        return el ? el.value.trim() : "";
+      };
+      var lineas = [
+        "Hola, quiero solicitar una propuesta de viaje:",
+        "Nombre: " + val("pNombre"),
+        "Email: " + val("pEmail"),
+        "Teléfono: " + val("pTel")
+      ];
+      if (val("pDestino")) lineas.push("Destino de interés: " + val("pDestino"));
+      if (val("pTipo")) lineas.push("Tipo de viaje: " + val("pTipo"));
+      if (val("pFecha")) lineas.push("Fecha aproximada: " + val("pFecha"));
+      if (val("pMsg")) lineas.push("Detalles: " + val("pMsg"));
+      var canal = enviarContacto("Solicitud de propuesta de viaje", lineas.join("\n"));
+      if (canal === "whatsapp") {
+        out.style.color = "#1a7f5a";
+        out.textContent = "✓ Te abrimos WhatsApp con tu solicitud lista para enviar. Te responderemos en menos de 24 horas.";
+        planForm.reset();
+      } else if (canal === "email") {
+        out.style.color = "#1a7f5a";
+        out.textContent = "✓ Se abrirá tu correo con tu solicitud lista para enviar. Te responderemos en menos de 24 horas.";
+        planForm.reset();
+      } else {
+        out.style.color = "#d9534f";
+        out.textContent = "No hay un canal de contacto configurado todavía. Llámanos o escríbenos directamente.";
+      }
     });
   }
 
@@ -143,9 +196,22 @@
         email.focus();
         return;
       }
-      out.style.color = "#7fe3a0";
-      out.textContent = "✓ ¡Suscripción registrada! (demo)";
-      newsForm.reset();
+      var canal = enviarContacto(
+        "Suscripción al boletín",
+        "Hola, quiero recibir ofertas y novedades en este email: " + email.value.trim()
+      );
+      if (canal === "whatsapp") {
+        out.style.color = "#7fe3a0";
+        out.textContent = "✓ Te abrimos WhatsApp para confirmar tu suscripción.";
+        newsForm.reset();
+      } else if (canal === "email") {
+        out.style.color = "#7fe3a0";
+        out.textContent = "✓ Se abrirá tu correo para confirmar tu suscripción.";
+        newsForm.reset();
+      } else {
+        out.style.color = "#ffb59b";
+        out.textContent = "No hay un canal de contacto configurado todavía.";
+      }
     });
   }
 })();
