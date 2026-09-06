@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Consultoría Legal & Empresarial Premium — comportamiento
+   Inmobiliaria Prisma — comportamiento
    ========================================================================== */
 (function () {
   'use strict';
@@ -44,6 +44,26 @@
     repintar();
   }
 
+  /* --- Envío real del formulario: por WhatsApp (número configurado en el
+     panel) o, si no hay WhatsApp configurado, por email (mailto). No hay
+     servidor propio ni base de datos: se abre el canal de contacto ya
+     configurado con el mensaje ya redactado, así el aviso de éxito nunca
+     es falso. --- */
+  function enviarContacto(asunto, texto) {
+    var cfg = window.AGV || {};
+    var numero = (cfg.whatsapp || '').replace(/\D/g, '');
+    if (numero) {
+      window.open('https://wa.me/' + numero + '?text=' + encodeURIComponent(texto), '_blank');
+      return 'whatsapp';
+    }
+    if (cfg.email) {
+      window.location.href = 'mailto:' + cfg.email + '?subject=' + encodeURIComponent(asunto)
+        + '&body=' + encodeURIComponent(texto);
+      return 'email';
+    }
+    return null;
+  }
+
   /* --- Formulario de consulta --- */
   var form = document.getElementById('formConsulta');
   if (form) {
@@ -81,9 +101,27 @@
         return;
       }
 
-      decir('✓ Gracias, ' + nombre.split(' ')[0] + '. Hemos recibido tu consulta y te '
-          + 'responderemos en menos de 24 horas laborables.', 'ok');
-      form.reset();
+      var telefono = form.telefono ? form.telefono.value.trim() : '';
+      var area = form.area ? form.area.value : '';
+      var lineas = [
+        'Hola, quiero hacer una consulta:',
+        'Nombre: ' + nombre,
+        'Email: ' + email
+      ];
+      if (telefono) lineas.push('Teléfono: ' + telefono);
+      if (area) lineas.push('Servicio: ' + area);
+      lineas.push('Mensaje: ' + caso);
+
+      var canal = enviarContacto('Consulta desde la web', lineas.join('\n'));
+      if (canal === 'whatsapp') {
+        decir('✓ Te abrimos WhatsApp con tu consulta lista para enviar, ' + nombre.split(' ')[0] + '.', 'ok');
+        form.reset();
+      } else if (canal === 'email') {
+        decir('✓ Se abrirá tu correo con tu consulta lista para enviar, ' + nombre.split(' ')[0] + '.', 'ok');
+        form.reset();
+      } else {
+        decir('No hay un canal de contacto configurado todavía. Llámanos o escríbenos directamente.', 'mal');
+      }
       aviso.scrollIntoView({ block: 'center', behavior: 'smooth' });
     });
   }
