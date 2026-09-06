@@ -150,9 +150,16 @@ export function AuthForm({ mode, redirectTo }: AuthFormProps) {
         </div>
 
         <div className="mb-5">
-          <label className="field-label" htmlFor="password">
-            Contraseña
-          </label>
+          <div className="mb-1.5 flex items-center justify-between">
+            <label className="field-label !mb-0" htmlFor="password">
+              Contraseña
+            </label>
+            {!isRegister && (
+              <Link href="/recuperar" className="text-[12.5px] text-gold-400 hover:underline">
+                ¿Olvidaste tu contraseña?
+              </Link>
+            )}
+          </div>
           <input
             id="password"
             name="password"
