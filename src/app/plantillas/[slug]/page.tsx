@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 
 import { AddToCartButton } from "@/components/templates/AddToCartButton";
 import { PreviewFrame } from "@/components/templates/PreviewFrame";
+import { ProductGallery } from "@/components/templates/ProductGallery";
 import { TemplateCard } from "@/components/templates/TemplateCard";
 import { siteConfig } from "@/lib/config";
 import { getDemoParts } from "@/lib/demo-parts";
@@ -54,6 +55,7 @@ export default async function TemplateDetailPage({ params }: PageProps) {
   if (!template) notFound();
 
   const demoParts = getDemoParts(template.tags, template.slug);
+  const mainImage = template.images?.find((img) => img.kind === "main")?.url || template.thumbnail_url;
 
   const all = await getPublishedTemplates();
   const related = all
@@ -97,7 +99,7 @@ export default async function TemplateDetailPage({ params }: PageProps) {
               src={template.preview_url}
               title={template.title}
               slug={template.slug}
-              thumbnail={template.thumbnail_url}
+              thumbnail={mainImage}
             />
 
             <div className="panel mt-6">
@@ -106,6 +108,8 @@ export default async function TemplateDetailPage({ params }: PageProps) {
                 {template.full_description || template.short_description}
               </p>
             </div>
+
+            <ProductGallery images={template.images ?? []} title={template.title} />
           </div>
 
           <aside className="panel lg:sticky lg:top-24">
