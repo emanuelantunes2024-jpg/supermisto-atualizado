@@ -4,15 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Agencia de Viajes — El mundo empieza donde decides ir</title>
-<meta name="description" content="Agencia de viajes premium: destinos, escapadas, lunas de miel, cruceros y viajes a medida por toda Europa y el mundo. Planifica tu viaje con asesoramiento personalizado.">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<meta name="description" content="Agencia de viajes premium: destinos, escapadas, lunas de miel, cruceros y viajes a medida. Planifica tu viaje con asesoramiento personalizado.">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
 <div class="demo-note">Plantilla demostrativa. Nombre, datos y contenidos ficticios.</div>
 
-<!-- TOPBAR -->
 <div class="topbar">
   <div class="container">
     <div class="tb-left">
@@ -22,22 +20,20 @@
       <span class="tb-hide">🕐 Lunes - Viernes: 9:00 - 19:00 | Sábado: 10:00 - 14:00</span>
     </div>
     <div class="tb-social">
-      <a href="#" aria-label="Facebook">f</a>
-      <a href="#" aria-label="Instagram">ig</a>
-      <a href="#" aria-label="Twitter">tw</a>
-      <a href="#" aria-label="YouTube">yt</a>
-    </div>
+              <a href="#" aria-label="Facebook">f</a>
+              <a href="#" aria-label="Instagram">ig</a>
+              <a href="#" aria-label="Twitter">tw</a>
+              <a href="#" aria-label="Youtube">yt</a>
+          </div>
   </div>
 </div>
 
-<!-- HEADER -->
 <header class="main-header">
   <div class="container nav-inner">
     <a href="#inicio" class="logo">
       <span class="logo-mark">✈</span>
       <span class="logo-text">AGENCIA<small>DE VIAJES</small></span>
     </a>
-
     <nav class="nav-links" id="navLinks">
       <a href="#inicio" class="active">Inicio</a>
       <a href="#destinos">Destinos</a>
@@ -48,18 +44,15 @@
       <a href="#blog">Blog</a>
       <a href="#contacto">Contacto</a>
     </nav>
-
     <a href="#planificar" class="btn btn-coral btn-header">✈ Planificar mi viaje</a>
-
     <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
   </div>
 </header>
 
-<!-- HERO -->
 <section class="hero" id="inicio">
-  <div class="hero-bg"><img src="img/hero.jpg" alt="Pueblo de Santorini al atardecer con cúpulas azules"></div>
+  <div class="hero-bg"><img src="img/hero.jpg" alt="donde decides ir"></div>
   <div class="hero-veil"></div>
   <div class="container hero-content">
     <p class="hero-script">Viaja. Descubre. Vive.</p>
@@ -71,7 +64,6 @@
     </div>
   </div>
 
-  <!-- BUSCADOR -->
   <div class="container">
     <form class="searchbar" id="searchForm" novalidate>
       <div class="sb-field">
@@ -80,26 +72,22 @@
         <input type="text" id="sbDestino" placeholder="¿A dónde quieres ir?" required>
       </div>
       <div class="sb-field">
-        <span class="sb-ic">📅</span>
-        <label for="sbSalida">Fecha de salida</label>
+        <span class="sb-ic">📅</span><label for="sbSalida">Fecha de salida</label>
         <input type="date" id="sbSalida" required>
       </div>
       <div class="sb-field">
-        <span class="sb-ic">📅</span>
-        <label for="sbRegreso">Fecha de regreso</label>
+        <span class="sb-ic">📅</span><label for="sbRegreso">Fecha de regreso</label>
         <input type="date" id="sbRegreso">
       </div>
       <div class="sb-field">
-        <span class="sb-ic">👤</span>
-        <label for="sbViajeros">Viajeros</label>
+        <span class="sb-ic">👤</span><label for="sbViajeros">Viajeros</label>
         <select id="sbViajeros">
           <option>1 viajero</option><option selected>2 viajeros</option>
           <option>3 viajeros</option><option>4 viajeros</option><option>5 o más</option>
         </select>
       </div>
       <div class="sb-field">
-        <span class="sb-ic">🏷️</span>
-        <label for="sbTipo">Tipo de viaje</label>
+        <span class="sb-ic">🏷️</span><label for="sbTipo">Tipo de viaje</label>
         <select id="sbTipo">
           <option>Vacaciones</option><option>Escapada</option><option>Familiar</option>
           <option>Luna de miel</option><option>Aventura</option><option>Lujo</option>
@@ -112,16 +100,27 @@
   </div>
 </section>
 
-<!-- VENTAJAS + LATERALES -->
 <section class="mid">
   <div class="container mid-grid">
     <div>
       <div class="perks">
-        <div class="perk"><span class="perk-ic">🎧</span><div><strong>Asesoramiento</strong><span>personalizado</span></div></div>
-        <div class="perk"><span class="perk-ic">🏷️</span><div><strong>Los mejores</strong><span>precios</span></div></div>
-        <div class="perk"><span class="perk-ic">🛡️</span><div><strong>Viajes</strong><span>100% seguros</span></div></div>
-        <div class="perk"><span class="perk-ic">🕐</span><div><strong>Atención 24/7</strong><span>durante tu viaje</span></div></div>
-      </div>
+                  <div class="perk">
+            <span class="perk-ic">🎧</span>
+            <div><strong>Asesoramiento</strong><span>personalizado</span></div>
+          </div>
+                  <div class="perk">
+            <span class="perk-ic">🏷️</span>
+            <div><strong>Los mejores</strong><span>precios</span></div>
+          </div>
+                  <div class="perk">
+            <span class="perk-ic">🛡️</span>
+            <div><strong>Viajes</strong><span>100% seguros</span></div>
+          </div>
+                  <div class="perk">
+            <span class="perk-ic">🕐</span>
+            <div><strong>Atención 24/7</strong><span>durante tu viaje</span></div>
+          </div>
+              </div>
 
       <div class="sec-head">
         <h2>Destinos destacados</h2>
@@ -131,9 +130,11 @@
       <div class="dest-wrap">
         <button class="carousel-btn prev" id="destPrev" aria-label="Anterior">‹</button>
         <div class="dest-track" id="destTrack">
-          <article class="dest-card">
-            <div class="dest-photo"><img src="img/paris.jpg" alt="Torre Eiffel de París al atardecer">
-              <button class="fav" aria-label="Guardar París en favoritos">♡</button></div>
+                    <article class="dest-card">
+            <div class="dest-photo">
+              <img src="img/paris.jpg" alt="París, Francia">
+              <button class="fav" aria-label="Guardar París, Francia en favoritos">♡</button>
+            </div>
             <div class="dest-body">
               <span class="dest-zone">Europa</span>
               <h3>París, Francia</h3>
@@ -145,9 +146,11 @@
               <a href="#planificar" class="btn btn-outline btn-sm">Ver viaje</a>
             </div>
           </article>
-          <article class="dest-card">
-            <div class="dest-photo"><img src="img/bali.jpg" alt="Templo tradicional en Bali">
-              <button class="fav" aria-label="Guardar Bali en favoritos">♡</button></div>
+                    <article class="dest-card">
+            <div class="dest-photo">
+              <img src="img/bali.jpg" alt="Bali, Indonesia">
+              <button class="fav" aria-label="Guardar Bali, Indonesia en favoritos">♡</button>
+            </div>
             <div class="dest-body">
               <span class="dest-zone">Asia</span>
               <h3>Bali, Indonesia</h3>
@@ -159,9 +162,11 @@
               <a href="#planificar" class="btn btn-outline btn-sm">Ver viaje</a>
             </div>
           </article>
-          <article class="dest-card">
-            <div class="dest-photo"><img src="img/caribe.jpg" alt="Playa caribeña con palmeras">
-              <button class="fav" aria-label="Guardar Punta Cana en favoritos">♡</button></div>
+                    <article class="dest-card">
+            <div class="dest-photo">
+              <img src="img/caribe.jpg" alt="Punta Cana, Rep. Dominicana">
+              <button class="fav" aria-label="Guardar Punta Cana, Rep. Dominicana en favoritos">♡</button>
+            </div>
             <div class="dest-body">
               <span class="dest-zone">Caribe</span>
               <h3>Punta Cana, Rep. Dominicana</h3>
@@ -173,9 +178,11 @@
               <a href="#planificar" class="btn btn-outline btn-sm">Ver viaje</a>
             </div>
           </article>
-          <article class="dest-card">
-            <div class="dest-photo"><img src="img/roma.jpg" alt="Coliseo de Roma">
-              <button class="fav" aria-label="Guardar Roma en favoritos">♡</button></div>
+                    <article class="dest-card">
+            <div class="dest-photo">
+              <img src="img/roma.jpg" alt="Roma, Italia">
+              <button class="fav" aria-label="Guardar Roma, Italia en favoritos">♡</button>
+            </div>
             <div class="dest-body">
               <span class="dest-zone">Europa</span>
               <h3>Roma, Italia</h3>
@@ -187,129 +194,179 @@
               <a href="#planificar" class="btn btn-outline btn-sm">Ver viaje</a>
             </div>
           </article>
-        </div>
+                  </div>
         <button class="carousel-btn next" id="destNext" aria-label="Siguiente">›</button>
       </div>
     </div>
 
     <aside class="side-cards" id="ofertas">
-      <a href="#planificar" class="side-card">
-        <img src="img/crucero.jpg" alt="Crucero navegando">
+            <a href="#planificar" class="side-card">
+        <img src="img/crucero.jpg" alt="Cruceros inolvidables">
         <div class="side-body">
           <h3>Cruceros inolvidables</h3>
           <p>Descubre el mundo a bordo de los mejores cruceros.</p>
           <span class="btn btn-dark btn-sm">Ver cruceros</span>
         </div>
       </a>
-      <a href="#planificar" class="side-card">
-        <img src="img/ofertas.jpg" alt="Pareja de viajeros disfrutando de un mirador">
+            <a href="#planificar" class="side-card">
+        <img src="img/ofertas.jpg" alt="Ofertas especiales">
         <div class="side-body">
           <h3>Ofertas especiales</h3>
           <p>Viajes increíbles a precios únicos.</p>
           <span class="btn btn-coral btn-sm">Ver ofertas</span>
         </div>
       </a>
-    </aside>
+          </aside>
   </div>
 </section>
 
-<!-- CIFRAS -->
 <section class="stats" id="destinos">
   <div class="container stats-grid">
-    <div class="stat"><span class="stat-ic">🏅</span><div><b>15+</b><span>Años de experiencia</span></div></div>
-    <div class="stat"><span class="stat-ic">🌍</span><div><b>120+</b><span>Destinos disponibles</span></div></div>
-    <div class="stat"><span class="stat-ic">🧳</span><div><b>2.500+</b><span>Viajes organizados</span></div></div>
-    <div class="stat"><span class="stat-ic">🙂</span><div><b>98%</b><span>Clientes satisfechos</span></div></div>
-    <div class="stat"><span class="stat-ic">🎧</span><div><b>24/7</b><span>Atención personalizada</span></div></div>
-  </div>
+          <div class="stat">
+        <span class="stat-ic">🏅</span>
+        <div><b>15+</b><span>Años de experiencia</span></div>
+      </div>
+          <div class="stat">
+        <span class="stat-ic">🌍</span>
+        <div><b>120+</b><span>Destinos disponibles</span></div>
+      </div>
+          <div class="stat">
+        <span class="stat-ic">🧳</span>
+        <div><b>2.500+</b><span>Viajes organizados</span></div>
+      </div>
+          <div class="stat">
+        <span class="stat-ic">🙂</span>
+        <div><b>98%</b><span>Clientes satisfechos</span></div>
+      </div>
+          <div class="stat">
+        <span class="stat-ic">🎧</span>
+        <div><b>24/7</b><span>Atención personalizada</span></div>
+      </div>
+      </div>
 </section>
 
-<!-- TIPOS DE VIAJE + TESTIMONIOS -->
 <section class="types-wrap" id="tipos">
   <div class="container types-grid">
     <div>
       <h2 class="h2-sm">Encuentra tu tipo de viaje</h2>
       <div class="types" id="typeGrid">
-        <button class="type" data-type="Vacaciones"><span>⛱️</span>Vacaciones</button>
-        <button class="type" data-type="Escapada"><span>📸</span>Escapadas</button>
-        <button class="type" data-type="Familiar"><span>👨‍👩‍👧</span>Familiar</button>
-        <button class="type" data-type="Luna de miel"><span>💗</span>Luna de miel</button>
-        <button class="type" data-type="Aventura"><span>⛰️</span>Aventura</button>
-        <button class="type" data-type="Lujo"><span>💎</span>Lujo</button>
-        <button class="type" data-type="Crucero"><span>🛳️</span>Cruceros</button>
-        <button class="type" data-type="Cultural"><span>🏛️</span>Cultural</button>
-        <a href="#planificar" class="type type-all"><span>🔲</span>Ver todos<br>los viajes</a>
+                  <button class="type" data-type="Vacaciones"><span>⛱️</span>Vacaciones</button>
+                  <button class="type" data-type="Escapada"><span>📸</span>Escapadas</button>
+                  <button class="type" data-type="Familiar"><span>👨‍👩‍👧</span>Familiar</button>
+                  <button class="type" data-type="Luna de miel"><span>💗</span>Luna de miel</button>
+                  <button class="type" data-type="Aventura"><span>⛰️</span>Aventura</button>
+                  <button class="type" data-type="Lujo"><span>💎</span>Lujo</button>
+                  <button class="type" data-type="Crucero"><span>🛳️</span>Cruceros</button>
+                  <button class="type" data-type="Cultural"><span>🏛️</span>Cultural</button>
+                <a href="#planificar" class="type type-all"><span>🔲</span>Ver todos<br>los viajes</a>
       </div>
       <p class="type-msg" id="typeMsg" role="status"></p>
     </div>
 
     <div id="experiencias">
-      <div class="sec-head">
-        <h2 class="h2-sm">Lo que dicen nuestros viajeros</h2>
-      </div>
+      <div class="sec-head"><h2 class="h2-sm">Lo que dicen nuestros viajeros</h2></div>
       <div class="testis">
-        <figure class="testi">
+                <figure class="testi">
           <p>“La mejor experiencia de viaje que hemos tenido. Todo organizado al detalle. ¡Inolvidable!”</p>
           <div class="testi-foot"><span class="stars">★★★★★ <b>5.0</b></span></div>
-          <figcaption><span class="avatar">ML</span><span><b>María López</b><small>Madrid, España</small></span></figcaption>
+          <figcaption>
+            <span class="avatar">ML</span>
+            <span><b>María López</b><small>Madrid, España</small></span>
+          </figcaption>
         </figure>
-        <figure class="testi">
+                <figure class="testi">
           <p>“Excelente atención y destinos increíbles. Repetiremos sin duda.”</p>
           <div class="testi-foot"><span class="stars">★★★★★ <b>5.0</b></span></div>
-          <figcaption><span class="avatar">CS</span><span><b>Carlos Sánchez</b><small>Barcelona, España</small></span></figcaption>
+          <figcaption>
+            <span class="avatar">CS</span>
+            <span><b>Carlos Sánchez</b><small>Barcelona, España</small></span>
+          </figcaption>
         </figure>
-      </div>
+              </div>
     </div>
   </div>
 </section>
 
-<!-- PAQUETES -->
 <section class="packs" id="paquetes">
   <div class="container">
     <div class="sec-head center"><h2>Paquetes preparados para ti</h2></div>
     <div class="pack-grid">
-      <article class="pack">
+            <article class="pack">
         <span class="pack-tag">Escapada</span>
         <h3>Capitales de Europa</h3>
         <p>París, Ámsterdam y Berlín en un solo itinerario, con trenes y hoteles incluidos.</p>
-        <ul><li>✓ 8 días / 7 noches</li><li>✓ Vuelos y traslados</li><li>✓ Guía en español</li></ul>
-        <div class="pack-foot"><span class="price"><small>Desde</small>1.249 €</span>
-          <a href="#planificar" class="btn btn-coral btn-sm">Solicitar</a></div>
+        <ul>
+                      <li>✓ 8 días / 7 noches</li>
+                      <li>✓ Vuelos y traslados</li>
+                      <li>✓ Guía en español</li>
+                  </ul>
+        <div class="pack-foot">
+          <span class="price"><small>Desde</small>1.249 €</span>
+          <a href="#planificar" class="btn btn-coral btn-sm">Solicitar</a>
+        </div>
       </article>
-      <article class="pack featured">
+            <article class="pack featured">
         <span class="pack-tag">Más vendido</span>
         <h3>Luna de miel en Maldivas</h3>
         <p>Villa sobre el agua, cena privada en la playa y experiencias de bienestar.</p>
-        <ul><li>✓ 9 días / 8 noches</li><li>✓ Todo incluido</li><li>✓ Traslado en hidroavión</li></ul>
-        <div class="pack-foot"><span class="price"><small>Desde</small>2.890 €</span>
-          <a href="#planificar" class="btn btn-coral btn-sm">Solicitar</a></div>
+        <ul>
+                      <li>✓ 9 días / 8 noches</li>
+                      <li>✓ Todo incluido</li>
+                      <li>✓ Traslado en hidroavión</li>
+                  </ul>
+        <div class="pack-foot">
+          <span class="price"><small>Desde</small>2.890 €</span>
+          <a href="#planificar" class="btn btn-coral btn-sm">Solicitar</a>
+        </div>
       </article>
-      <article class="pack">
+            <article class="pack">
         <span class="pack-tag">Aventura</span>
         <h3>Costa Rica salvaje</h3>
         <p>Volcanes, selva tropical y playas del Pacífico con actividades guiadas.</p>
-        <ul><li>✓ 10 días / 9 noches</li><li>✓ Alojamiento en eco-lodges</li><li>✓ Excursiones incluidas</li></ul>
-        <div class="pack-foot"><span class="price"><small>Desde</small>1.980 €</span>
-          <a href="#planificar" class="btn btn-coral btn-sm">Solicitar</a></div>
+        <ul>
+                      <li>✓ 10 días / 9 noches</li>
+                      <li>✓ Alojamiento en eco-lodges</li>
+                      <li>✓ Excursiones incluidas</li>
+                  </ul>
+        <div class="pack-foot">
+          <span class="price"><small>Desde</small>1.980 €</span>
+          <a href="#planificar" class="btn btn-coral btn-sm">Solicitar</a>
+        </div>
       </article>
-    </div>
+          </div>
   </div>
 </section>
 
-<!-- FAQ -->
 <section class="faq-sec">
   <div class="container narrow">
     <div class="sec-head center"><h2>Preguntas frecuentes</h2></div>
-    <details class="faq"><summary>¿Cómo puedo reservar un viaje?</summary><p>Rellena el formulario de planificación o llámanos: un asesor prepara una propuesta a medida en menos de 24 horas.</p></details>
-    <details class="faq"><summary>¿Los precios incluyen vuelos?</summary><p>En los paquetes indicados, sí. En el resto se detalla siempre antes de confirmar la reserva.</p></details>
-    <details class="faq"><summary>¿Puedo modificar o cancelar mi reserva?</summary><p>Sí, según las condiciones de cada proveedor. Te explicamos los plazos antes de que confirmes nada.</p></details>
-    <details class="faq"><summary>¿Ofrecéis seguro de viaje?</summary><p>Todos nuestros viajes pueden incluir seguro con cobertura médica y de cancelación.</p></details>
-    <details class="faq"><summary>¿Organizáis viajes de grupo o empresa?</summary><p>Sí, diseñamos itinerarios para grupos, incentivos y viajes de empresa.</p></details>
-    <details class="faq"><summary>¿Qué pasa si tengo una incidencia durante el viaje?</summary><p>Dispones de atención 24/7 con un teléfono directo durante todo tu viaje.</p></details>
-  </div>
+          <details class="faq">
+        <summary>¿Cómo puedo reservar un viaje?</summary>
+        <p>Rellena el formulario de planificación o llámanos: un asesor prepara una propuesta a medida en menos de 24 horas.</p>
+      </details>
+          <details class="faq">
+        <summary>¿Los precios incluyen vuelos?</summary>
+        <p>En los paquetes indicados, sí. En el resto se detalla siempre antes de confirmar la reserva.</p>
+      </details>
+          <details class="faq">
+        <summary>¿Puedo modificar o cancelar mi reserva?</summary>
+        <p>Sí, según las condiciones de cada proveedor. Te explicamos los plazos antes de que confirmes nada.</p>
+      </details>
+          <details class="faq">
+        <summary>¿Ofrecéis seguro de viaje?</summary>
+        <p>Todos nuestros viajes pueden incluir seguro con cobertura médica y de cancelación.</p>
+      </details>
+          <details class="faq">
+        <summary>¿Organizáis viajes de grupo o empresa?</summary>
+        <p>Sí, diseñamos itinerarios para grupos, incentivos y viajes de empresa.</p>
+      </details>
+          <details class="faq">
+        <summary>¿Qué pasa si tengo una incidencia durante el viaje?</summary>
+        <p>Dispones de atención 24/7 con un teléfono directo durante todo tu viaje.</p>
+      </details>
+      </div>
 </section>
 
-<!-- PLANIFICAR -->
 <section class="plan" id="planificar">
   <div class="container plan-grid">
     <div class="plan-intro">
@@ -344,25 +401,46 @@
   </div>
 </section>
 
-<!-- BLOG -->
 <section class="blog" id="blog">
   <div class="container">
     <div class="sec-head center"><h2>Consejos para viajar mejor</h2></div>
     <div class="blog-grid">
-      <article class="post"><span class="post-tag">Guías</span><h3>Cómo elegir la mejor época para viajar</h3><p>Clima, temporada y precios: tres claves para acertar con las fechas.</p><a href="#planificar" class="link-arrow">Leer más →</a></article>
-      <article class="post"><span class="post-tag">Consejos</span><h3>Qué llevar en la maleta según el destino</h3><p>Una lista práctica para no cargar de más ni olvidar lo importante.</p><a href="#planificar" class="link-arrow">Leer más →</a></article>
-      <article class="post"><span class="post-tag">Documentación</span><h3>Visados y documentos: lo que debes saber</h3><p>Requisitos habituales y con cuánta antelación conviene tramitarlos.</p><a href="#planificar" class="link-arrow">Leer más →</a></article>
-    </div>
+            <article class="post">
+        <span class="post-tag">Guías</span>
+        <h3>Cómo elegir la mejor época para viajar</h3>
+        <p>Clima, temporada y precios: tres claves para acertar con las fechas.</p>
+        <a href="#planificar" class="link-arrow">Leer más →</a>
+      </article>
+            <article class="post">
+        <span class="post-tag">Consejos</span>
+        <h3>Qué llevar en la maleta según el destino</h3>
+        <p>Una lista práctica para no cargar de más ni olvidar lo importante.</p>
+        <a href="#planificar" class="link-arrow">Leer más →</a>
+      </article>
+            <article class="post">
+        <span class="post-tag">Documentación</span>
+        <h3>Visados y documentos: lo que debes saber</h3>
+        <p>Requisitos habituales y con cuánta antelación conviene tramitarlos.</p>
+        <a href="#planificar" class="link-arrow">Leer más →</a>
+      </article>
+          </div>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer id="contacto">
   <div class="container foot-grid">
     <div>
-      <a href="#inicio" class="logo logo-foot"><span class="logo-mark">✈</span><span class="logo-text">AGENCIA<small>DE VIAJES</small></span></a>
+      <a href="#inicio" class="logo logo-foot">
+        <span class="logo-mark">✈</span>
+        <span class="logo-text">AGENCIA<small>DE VIAJES</small></span>
+      </a>
       <p class="foot-about">Diseñamos experiencias únicas y viajes a medida para que solo tengas que preocuparte por disfrutar.</p>
-      <div class="foot-social"><a href="#" aria-label="Facebook">f</a><a href="#" aria-label="Instagram">ig</a><a href="#" aria-label="Twitter">tw</a><a href="#" aria-label="YouTube">yt</a></div>
+      <div class="foot-social">
+                  <a href="#" aria-label="Facebook">f</a>
+                  <a href="#" aria-label="Instagram">ig</a>
+                  <a href="#" aria-label="Twitter">tw</a>
+                  <a href="#" aria-label="Youtube">yt</a>
+              </div>
     </div>
     <div><h5>Agencia</h5><a href="#inicio">Inicio</a><a href="#destinos">Destinos</a><a href="#paquetes">Paquetes</a><a href="#experiencias">Experiencias</a><a href="#blog">Blog</a></div>
     <div><h5>Viajes</h5><a href="#tipos">Vacaciones</a><a href="#tipos">Escapadas</a><a href="#tipos">Luna de miel</a><a href="#tipos">Aventura</a><a href="#tipos">Cruceros</a></div>
@@ -381,12 +459,12 @@
     </div>
   </div>
   <div class="foot-bottom container">
-    <p>© 2026 Agencia de Viajes. Plantilla demostrativa creada por Leuname Software.</p>
-    <p class="fict">Plantilla demostrativa. Nombre, datos y contenidos ficticios.</p>
-  </div>
+    <p>© 2026 AGENCIA. Plantilla creada por Leuname Software.</p>
+          <p class="fict">Plantilla demostrativa. Nombre, datos y contenidos ficticios.</p>
+      </div>
 </footer>
 
-<a href="#planificar" class="wa" id="waBtn" aria-label="Contactar por WhatsApp" target="_blank" rel="noopener">
+<a href="https://wa.me/34600123456?text=Hola%2C%20me%20gustar%C3%ADa%20informaci%C3%B3n%20sobre%20un%20viaje." class="wa" id="waBtn" aria-label="Contactar por WhatsApp" target="_blank" rel="noopener">
   <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
     <path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.4A10 10 0 1 0 12 2zm5.6 14.3c-.2.6-1.4 1.2-1.9 1.3-.5.1-1.1.1-1.8-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8s.7-2 .9-2.3c.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.4.2.5.7 1.7.8 1.9.1.2.1.4 0 .6-.1.2-.2.4-.3.5-.2.2-.3.4-.1.7.2.4.9 1.5 1.9 2.3 1.3 1.1 2.3 1.5 2.7 1.6.3.1.5.1.7-.1.2-.2.7-.8.9-1.1.2-.3.4-.2.6-.1.2.1 1.5.7 1.7.8.2.1.4.2.4.3.1.2.1.6-.1 1.2z"/>
   </svg>
