@@ -40,6 +40,22 @@
     repintar();
   }
 
+  /* --- Envío real de formularios (WhatsApp o email) --- */
+  function enviarContacto(asunto, texto) {
+    var cfg = window.AGV || {};
+    var numero = (cfg.whatsapp || '').replace(/\D/g, '');
+    if (numero) {
+      window.open('https://wa.me/' + numero + '?text=' + encodeURIComponent(texto), '_blank');
+      return 'whatsapp';
+    }
+    if (cfg.email) {
+      window.location.href = 'mailto:' + cfg.email + '?subject=' + encodeURIComponent(asunto)
+        + '&body=' + encodeURIComponent(texto);
+      return 'email';
+    }
+    return null;
+  }
+
   /* --- Formulario de cita --- */
   var form = document.getElementById('formCita');
   if (form) {
@@ -78,11 +94,33 @@
         decir('Esa fecha ya pasó. Elige un día a partir de hoy.', 'mal'); form.dia.focus(); return;
       }
 
-      decir('✓ Gracias, ' + tutor.split(' ')[0] + '. Hemos recibido la solicitud de cita para ' +
-            mascota + ' el ' + form.dia.value.split('-').reverse().join('/') +
-            '. Te llamamos en menos de 2 horas para confirmarla.', 'ok');
-      form.reset();
-      if (form.dia) form.dia.value = hoy;
+      var animalSel = form.querySelector('input[name="animal"]:checked');
+      var tipoAnimal = animalSel ? animalSel.value : '';
+      var fechaTxt = form.dia.value.split('-').reverse().join('/');
+      var notas = form.notas.value.trim();
+
+      var lineas = [
+        'Solicitud de cita — ' + tutor,
+        'Mascota: ' + mascota + (tipoAnimal ? ' (' + tipoAnimal + ')' : ''),
+        'Teléfono: ' + form.telefono.value.trim(),
+        email ? 'Email: ' + email : null,
+        'Motivo: ' + form.motivo.value,
+        'Día preferido: ' + fechaTxt + ' · ' + form.franja.value,
+        notas ? 'Notas: ' + notas : null
+      ].filter(Boolean);
+
+      var canal = enviarContacto('Solicitud de cita — Huellas', lineas.join('\n'));
+      if (canal === 'whatsapp') {
+        decir('✓ Te abrimos WhatsApp con la solicitud de cita lista para enviar, ' + tutor.split(' ')[0] + '.', 'ok');
+        form.reset();
+        if (form.dia) form.dia.value = hoy;
+      } else if (canal === 'email') {
+        decir('✓ Se abrirá tu correo con la solicitud de cita lista para enviar, ' + tutor.split(' ')[0] + '.', 'ok');
+        form.reset();
+        if (form.dia) form.dia.value = hoy;
+      } else {
+        decir('No hay un canal de contacto configurado todavía. Llámanos directamente.', 'mal');
+      }
       aviso.scrollIntoView({ block: 'center', behavior: 'smooth' });
     });
   }
