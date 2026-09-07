@@ -60,8 +60,8 @@
 
 :root{
   --noche:#241220; --noche-2:#352431; --carta:#4b3c48; --carta-2:#584a55;
-  --oro:#e8556b; --oro-claro:#ed7a8b; --oro-suave:#f2a1ad;
-  --oro-rgb:232,85,107; --noche-rgb:36,18,32;
+  --oro:#f2760a; --oro-claro:#f4943f; --oro-suave:#f7b378;
+  --oro-rgb:242,118,10; --noche-rgb:36,18,32;
   --claro:#f4f6f9; --claro-2:#e9edf3;
   --texto:#f2ede6; --apagado:#a89a8a; --tinta:#1c1610; --tinta-suave:#5c5248;
   --linea:rgba(var(--oro-rgb),.22); --linea-clara:#dde3ec;
