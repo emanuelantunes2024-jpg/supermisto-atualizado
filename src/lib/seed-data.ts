@@ -145,7 +145,7 @@ const seed: SeedTemplate[] = [
     short_description:
       "Despacho de abogados con 10 áreas de especialización, blog jurídico y formulario de consulta.",
     full_description:
-      "Para despachos de abogados y consultoras: las 10 áreas más demandadas del derecho con ficha propia (empresarial, laboral, familia, inmobiliario, civil, penal, fiscal, comercial, propiedad intelectual y consultoría), proceso de trabajo en cuatro pasos, opiniones de clientes, blog jurídico, preguntas frecuentes y formulario de consulta con validación. Paleta azul noche + oro, tipografía Playfair Display. No necesita fotos: la balanza de la portada y los iconos de las áreas están dibujados en vectores, así que se ven nítidos en cualquier pantalla y la web carga al instante.",
+      "Para despachos de abogados y consultoras: las 10 áreas más demandadas del derecho con ficha propia (empresarial, laboral, familia, inmobiliario, civil, penal, fiscal, comercial, propiedad intelectual y consultoría), foto de portada y de equipo, proceso de trabajo en cuatro pasos, opiniones de clientes, blog jurídico, preguntas frecuentes y formulario de consulta con validación. Paleta azul noche + oro, tipografía Playfair Display. Si no subes foto, la portada dibuja una balanza dorada y las áreas llevan iconos en vectores, así que se ve nítido desde el primer minuto.",
     price_cents: 24900,
     preview_url: "/demos/consultoria-legal-premium/index.html",
     gradient: "linear-gradient(160deg,#0b1424,#16243d 55%,#080e1a)",
@@ -155,7 +155,7 @@ const seed: SeedTemplate[] = [
       "Proceso de trabajo en cuatro pasos",
       "Blog jurídico y preguntas frecuentes",
       "Botones de WhatsApp, teléfono y email",
-      "Sin fotos: todo en vectores, carga al instante",
+      "Foto de portada y de equipo incluidas",
       RESPONSIVE,
       SEO,
     ],
