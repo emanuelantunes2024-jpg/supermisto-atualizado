@@ -45,7 +45,7 @@ export function Logo({ href = "/", variant = "mark" }: LogoProps) {
             width={brandLogo.width}
             height={brandLogo.height}
             priority
-            className="h-10 w-auto"
+            className="h-10 w-10 object-contain"
           />
           {!brandLogo.includesName && <Wordmark />}
         </>
