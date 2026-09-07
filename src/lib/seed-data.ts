@@ -989,6 +989,28 @@ const seed: SeedTemplate[] = [
     ],
     thumbnailSlug: "concesionaria-plus",
   },
+  {
+    id: `${TPL}42`,
+    categorySlug: "pet-shop",
+    title: "Fauna — Pet Shop",
+    slug: "fauna-pet-shop",
+    short_description: "Tienda de mascotas con 10 servicios, cita de peluquería y formulario de contacto.",
+    full_description:
+      "Para tiendas de animales, peluquerías caninas y centros de guardería: diez áreas de negocio con icono propio (alimentación, peluquería, guardería y hotel, adiestramiento, accesorios, pequeños animales...), foto de portada y de equipo, proceso de trabajo en cuatro pasos, cifras de la tienda, opiniones de clientes, blog y formulario de contacto con validación. Tipografía Playfair Display. Los colores de marca (acento y fondo oscuro) se cambian con un selector desde el propio panel, sin tocar código: todo el sitio se actualiza al instante.",
+    price_cents: 22900,
+    preview_url: "/demos/fauna-pet-shop/index.html",
+    gradient: "linear-gradient(160deg,#241220,#4b3c48 55%,#241220)",
+    features: [
+      "10 áreas de negocio con icono propio",
+      "Color de marca editable desde el panel",
+      "Formulario de contacto con validación",
+      "Proceso de trabajo en cuatro pasos",
+      "Blog y preguntas frecuentes",
+      "Botones de WhatsApp, teléfono y email",
+      RESPONSIVE,
+      SEO,
+    ],
+  },
 ];
 
 /** Degradado por slug — respaldo de miniatura en las tarjetas. */

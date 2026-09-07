@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fauna — Pet Shop | Alimentación, peluquería y accesorios para mascotas</title>
+<meta name="description" content="Tienda para mascotas con alimentación premium, peluquería canina y felina, guardería, adiestramiento y accesorios. Envío a domicilio y recogida en tienda.">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon/favicon-192.png">
+<link rel="apple-touch-icon" href="favicon/favicon-192.png">
+<link rel="stylesheet" href="css/style.css">
+<style>:root{--oro:#e8556b;--oro-claro:#ef8897;--oro-suave:#f6bbc4;--oro-rgb:232,85,107;--noche:#241220;--noche-2:#362532;--carta:#4b3d48;--carta-2:#594b56;--noche-rgb:36,18,32;}</style>
+</head>
+<body>
+
+<div class="aviso-demo">Plantilla demostrativa. Nombre, datos y contenidos ficticios.</div>
+
+<!-- Barra superior -->
+<div class="barra-top">
+  <div class="env">
+    <div class="izq">
+      <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21.5s7-6.2 7-11.1A7 7 0 1 0 5 10.4c0 4.9 7 11.1 7 11.1z"/><circle cx="12" cy="10" r="2.6"/></svg>Avenida del Puerto, 88 · 46021 Valencia</span>
+      <a href="tel:+34963456789"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 16.5v2.6a1.9 1.9 0 0 1-2.1 1.9 18.8 18.8 0 0 1-8.2-2.9 18.4 18.4 0 0 1-5.7-5.7A18.8 18.8 0 0 1 2.1 4.1 1.9 1.9 0 0 1 4 2h2.6a1.9 1.9 0 0 1 1.9 1.6c.1.9.3 1.8.7 2.7a1.9 1.9 0 0 1-.4 2L7.6 9.5a15 15 0 0 0 5.7 5.7l1.2-1.2a1.9 1.9 0 0 1 2-.4c.9.3 1.8.6 2.7.7A1.9 1.9 0 0 1 21 16.5z"/></svg>+34 963 456 789</a>
+      <a href="mailto:hola@faunapetshop.es"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><path d="M2.5 7l9.5 6.5L21.5 7"/></svg>hola@faunapetshop.es</a>
+    </div>
+    <div class="redes-top">
+          </div>
+  </div>
+</div>
+
+<!-- Cabecera -->
+<header class="cab">
+  <div class="env">
+    <a href="#inicio" class="marca">
+      <svg class="marca-emblema" width="42" height="42" viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M24 3l17 6v13c0 10-7 18.5-17 22C14 40.5 7 32 7 22V9z" fill="none" stroke="#e8556b" stroke-width="1.6"/><text x="24" y="25" text-anchor="middle" dominant-baseline="central" font-family="Playfair Display, Georgia, serif" font-weight="700" font-size="19" fill="#ef8897">F</text></svg>      <span class="marca-txt">
+        <strong>Fauna</strong>
+        <span>Pet Shop</span>
+      </span>
+    </a>
+    <nav class="menu">
+      <a href="#inicio">Inicio</a><a href="#nosotros">Nosotros</a><a href="#areas">Áreas</a><a href="#servicios">Servicios</a><a href="#blog">Blog</a><a href="#contacto">Contacto</a>    </nav>
+    <a href="#contacto" class="btn btn-oro btn-peq" style="margin-left:22px">Consulta online</a>
+    <button class="abrir-menu" id="abrirMenu" aria-expanded="false" aria-label="Abrir menú">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+    </button>
+  </div>
+  <nav class="menu-movil" id="menuMovil">
+    <a href="#inicio">Inicio</a><a href="#nosotros">Nosotros</a><a href="#areas">Áreas</a><a href="#servicios">Servicios</a><a href="#blog">Blog</a><a href="#contacto">Contacto</a>    <a href="#contacto" class="btn btn-oro">Consulta online</a>
+  </nav>
+</header>
+
+<!-- Portada -->
+<section class="portada" id="inicio">
+  <div class="portada-fondo">
+          <svg class="portada-arte" viewBox="0 0 520 520" fill="none" aria-hidden="true">
+  <defs>
+    <radialGradient id="brillo" cx="50%" cy="46%" r="52%">
+      <stop offset="0%" stop-color="#e8556b" stop-opacity=".30"/>
+      <stop offset="60%" stop-color="#e8556b" stop-opacity=".07"/>
+      <stop offset="100%" stop-color="#e8556b" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="metal" gradientUnits="userSpaceOnUse" x1="260" y1="100" x2="260" y2="400">
+      <stop offset="0%" stop-color="#f9d5da"/>
+      <stop offset="55%" stop-color="#e8556b"/>
+      <stop offset="100%" stop-color="#973746"/>
+    </linearGradient>
+  </defs>
+
+  <circle cx="260" cy="248" r="238" fill="url(#brillo)"/>
+  <circle cx="260" cy="248" r="196" stroke="#e8556b" stroke-opacity=".16" stroke-width="1"/>
+  <circle cx="260" cy="248" r="168" stroke="#e8556b" stroke-opacity=".10" stroke-width="1"/>
+
+  <g transform="translate(200,188)"><svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="url(#metal)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="16" rx="4.3" ry="3.3"/><circle cx="6" cy="10.5" r="1.9"/><circle cx="10" cy="6.5" r="1.9"/><circle cx="14" cy="6.5" r="1.9"/><circle cx="18" cy="10.5" r="1.9"/></svg></g>
+</svg>      </div>
+  <div class="portada-vel"></div>
+  <div class="env">
+    <div class="portada-in">
+      <h1>Todo lo que tu mascota necesita, en un solo sitio</h1>
+      <div class="raya"></div>
+      <p>Alimentación premium, peluquería, guardería y accesorios. Un equipo que conoce a tu mascota por su nombre.</p>
+      <div class="portada-botones">
+        <a href="#contacto" class="btn btn-oro">Ver servicios</a>
+        <a href="#areas" class="btn btn-linea">Pedir cita de peluquería</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Ventajas -->
+<section class="ventajas">
+  <div class="env" style="padding:0">
+    <div class="ventajas-rejilla">
+              <div class="ventaja">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M2.5 20c0-3.3 2.9-5.5 6.5-5.5s6.5 2.2 6.5 5.5"/><path d="M16.5 6.2a3 3 0 0 1 0 5.6M18.5 14.4c1.9.7 3 2.2 3 4.1"/></svg>          <div>
+            <strong>Marcas premium</strong>
+            <p>Alimentación seleccionada para cada raza y edad.</p>
+          </div>
+        </div>
+              <div class="ventaja">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.4"/><path d="M4.5 20.5c0-3.7 3.4-6.5 7.5-6.5s7.5 2.8 7.5 6.5"/></svg>          <div>
+            <strong>Peluquería profesional</strong>
+            <p>Higiene, corte y desenredo sin estrés para tu mascota.</p>
+          </div>
+        </div>
+              <div class="ventaja">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16.5" rx="2"/><path d="M3 10h18M8 2.5v5M16 2.5v5"/><path d="M8 14h3v3H8z"/></svg>          <div>
+            <strong>Entrega a domicilio</strong>
+            <p>Pedidos de pienso grandes, sin que tengas que cargarlos.</p>
+          </div>
+        </div>
+              <div class="ventaja">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="10" width="15" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><path d="M12 14.5v2.5"/></svg>          <div>
+            <strong>Equipo cercano</strong>
+            <p>Te asesoramos según la raza y necesidades reales.</p>
+          </div>
+        </div>
+          </div>
+  </div>
+</section>
+
+<!-- Áreas -->
+<section class="areas" id="areas">
+  <div class="env">
+    <div class="cabecera-sec centro">
+      <div class="rotulo">Especialidades</div>
+      <h2>Nuestras 10 Áreas de Especialización</h2>
+      <p>Un solo proveedor para todo lo que tú o tu empresa podáis necesitar.
+      Sin intermediarios y con un trato cercano desde el primer día.</p>
+    </div>
+    <div class="areas-rejilla">
+              <article class="area">
+          <div class="area-icono"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="4.7" cy="8.5" r="2.2"/><circle cx="4.7" cy="15.5" r="2.2"/><circle cx="19.3" cy="8.5" r="2.2"/><circle cx="19.3" cy="15.5" r="2.2"/><rect x="4.7" y="10" width="14.6" height="4" rx="1.2"/></svg></div>
+          <h3><em>1.</em> Alimentación premium</h3>
+          <p>Pienso y comida húmeda de las mejores marcas, para perros, gatos y pequeños animales.</p>
+        </article>
+              <article class="area">
+          <div class="area-icono"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="2.3"/><circle cx="6" cy="18" r="2.3"/><path d="M7.8 7.6 19 17M7.8 16.4 19 7"/></svg></div>
+          <h3><em>2.</em> Peluquería canina y felina</h3>
+          <p>Baño, corte, deslanado y limpieza de oídos con productos profesionales.</p>
+        </article>
+              <article class="area">
+          <div class="area-icono"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11.5 12 4l8 7.5"/><path d="M5.5 10.5V20h13v-9.5"/><path d="M10 20v-5h4v5"/></svg></div>
+          <h3><em>3.</em> Guardería y hotel</h3>
+          <p>Cuidamos a tu mascota por horas, días o mientras estás de vacaciones.</p>
+        </article>
+              <article class="area">
+          <div class="area-icono"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="3"/><path d="M8.5 8.5 17 17"/><path d="M17 17a2.2 2.2 0 1 0 3 3 2.2 2.2 0 0 0-3-3z"/></svg></div>
+          <h3><em>4.</em> Adiestramiento</h3>
+          <p>Educación básica y avanzada con métodos en positivo.</p>
+        </article>
+              <article class="area">
+          <div class="area-icono"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18M3 12h18M5.5 6.5c2 2 4 3 6.5 3s4.5-1 6.5-3M5.5 17.5c2-2 4-3 6.5-3s4.5 1 6.5 3"/></svg></div>
+          <h3><em>5.</em> Juguetes y ocio</h3>
+          <p>Juguetes resistentes para morder, buscar y jugar en casa o en el parque.</p>
+        </article>
+              <article class="area">
+          <div class="area-icono"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5s6.5 7.4 6.5 12A6.5 6.5 0 1 1 5.5 15.5C5.5 10.9 12 3.5 12 3.5z"/></svg></div>
+          <h3><em>6.</em> Higiene y salud básica</h3>
+          <p>Champús, antiparasitarios y productos de cuidado diario.</p>
+        </article>
+              <article class="area">
+          <div class="area-icono"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="8" width="18" height="11" rx="2"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/><path d="M7 12h10M7 15h10"/></svg></div>
+          <h3><em>7.</em> Transportines y viaje</h3>
+          <p>Transportines homologados y accesorios para viajar tranquilos.</p>
+        </article>
+              <article class="area">
+          <div class="area-icono"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3 4 6l1.5 3L8 8v11h8V8l2.5 1L20 6l-4-3-2 2h-4z"/></svg></div>
+          <h3><em>8.</em> Moda y accesorios</h3>
+          <p>Collares, arneses, correas y ropa de abrigo para el invierno.</p>
+        </article>
+              <article class="area">
+          <div class="area-icono"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="16" rx="4.3" ry="3.3"/><circle cx="6" cy="10.5" r="1.9"/><circle cx="10" cy="6.5" r="1.9"/><circle cx="14" cy="6.5" r="1.9"/><circle cx="18" cy="10.5" r="1.9"/></svg></div>
+          <h3><em>9.</em> Pequeños animales</h3>
+          <p>Alimentación y accesorios para conejos, roedores y aves.</p>
+        </article>
+              <article class="area">
+          <div class="area-icono"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 6.5h10.5v10H2.5z"/><path d="M13 9.5h4l3.5 3.5v3.5H13z"/><circle cx="7" cy="18.5" r="1.9"/><circle cx="17" cy="18.5" r="1.9"/></svg></div>
+          <h3><em>10.</em> Entrega a domicilio</h3>
+          <p>Pedido online y entrega en tu casa en 24-48h.</p>
+        </article>
+          </div>
+  </div>
+</section>
+
+<!-- Llamada -->
+<section class="llamada">
+  <div class="env">
+    <div class="llamada-txt">
+      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8.5 8.5 0 0 1-12.2 7.7L3 21l1.3-5.8A8.5 8.5 0 1 1 21 12z"/><path d="M8.5 11h.01M12 11h.01M15.5 11h.01"/></svg>      <div>
+        <strong>¿Reservas hora de peluquería?</strong>
+        <span>Pide cita online en menos de un minuto.</span>
+      </div>
+    </div>
+    <a href="#contacto" class="btn btn-oscuro">Pedir cita ahora</a>
+  </div>
+</section>
+
+<!-- Cifras -->
+<section class="cifras">
+  <div class="env">
+    <div class="cifras-rejilla">
+              <div class="cifra">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="M9 14.2L7.5 21.5l4.5-2.4 4.5 2.4L15 14.2"/><path d="M12 6.2l1 2 2.2.3-1.6 1.6.4 2.2-2-1-2 1 .4-2.2L8.8 8.5l2.2-.3z"/></svg>          <div>
+            <strong>+15</strong>
+            <span>Años cuidando mascotas</span>
+          </div>
+        </div>
+              <div class="cifra">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M2.5 20c0-3.3 2.9-5.5 6.5-5.5s6.5 2.2 6.5 5.5"/><path d="M16.5 6.2a3 3 0 0 1 0 5.6M18.5 14.4c1.9.7 3 2.2 3 4.1"/></svg>          <div>
+            <strong>+8.000</strong>
+            <span>Mascotas atendidas</span>
+          </div>
+        </div>
+              <div class="cifra">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.2l2.6 2.6L16 9.4"/></svg>          <div>
+            <strong>4,8/5</strong>
+            <span>Valoración en Google</span>
+          </div>
+        </div>
+              <div class="cifra">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.5l8 3v6c0 4.7-3.3 8.9-8 10.2-4.7-1.3-8-5.5-8-10.2v-6z"/><path d="M9 12l2.2 2.2L15.5 10"/></svg>          <div>
+            <strong>24-48h</strong>
+            <span>Entrega a domicilio</span>
+          </div>
+        </div>
+          </div>
+  </div>
+</section>
+
+<!-- Nosotros -->
+<section class="nosotros" id="nosotros">
+  <div class="env">
+    <div class="nos-rejilla">
+      <div class="nos-foto">
+                  <div style="height:430px;display:flex;align-items:center;justify-content:center;
+            background:linear-gradient(150deg,var(--noche-2),var(--noche));border:1px solid var(--linea);border-radius:var(--radio)">
+            <svg class="marca-emblema" width="150" height="150" viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M24 3l17 6v13c0 10-7 18.5-17 22C14 40.5 7 32 7 22V9z" fill="none" stroke="#e8556b" stroke-width="1.6"/><text x="24" y="25" text-anchor="middle" dominant-baseline="central" font-family="Playfair Display, Georgia, serif" font-weight="700" font-size="19" fill="#ef8897">F</text></svg>          </div>
+                <div class="nos-sello">
+          <strong>+15</strong>
+          <span>años de experiencia</span>
+        </div>
+      </div>
+      <div class="nos-texto">
+        <div class="rotulo">Sobre nosotros</div>
+        <h2>Una tienda de gente que también tiene mascotas</h2>
+        <p>Somos un equipo de auxiliares veterinarios y peluqueros caninos con más de 15 años cuidando perros, gatos y otros animales de compañía.</p>
+        <p>Elegimos cada marca que vendemos como si fuera para nuestras propias mascotas: sin ingredientes de relleno y con buena relación calidad-precio. Y si tienes dudas, te asesoramos sin compromiso.</p>
+        <ul class="nos-lista">
+                      <li><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Asesoramiento real, sin venderte lo que no necesitas.</span></li>
+                      <li><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Peluquería con productos profesionales e hipoalergénicos.</span></li>
+                      <li><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Pedidos grandes de pienso, con entrega a domicilio.</span></li>
+                      <li><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Te avisamos por WhatsApp cuando tu pedido está listo.</span></li>
+                  </ul>
+        <a href="#contacto" class="btn btn-oro">Conoce el equipo</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Cómo trabajamos -->
+<section id="servicios">
+  <div class="env">
+    <div class="cabecera-sec centro">
+      <div class="rotulo">Cómo trabajamos</div>
+      <h2>De la primera llamada a la solución</h2>
+      <p>Un proceso claro, para que en todo momento sepas en qué punto está tu asunto.</p>
+    </div>
+    <div class="pasos-rejilla">
+              <div class="paso">
+          <div class="paso-num">01</div>
+          <h3>Nos cuentas qué necesita tu mascota</h3>
+          <p>En tienda, por teléfono o WhatsApp: raza, edad y cualquier necesidad especial.</p>
+        </div>
+              <div class="paso">
+          <div class="paso-num">02</div>
+          <h3>Te recomendamos lo mejor para ella</h3>
+          <p>Sin venderte de más: solo lo que realmente le conviene.</p>
+        </div>
+              <div class="paso">
+          <div class="paso-num">03</div>
+          <h3>Recoges en tienda o te lo llevamos</h3>
+          <p>Pedidos grandes de pienso con entrega a domicilio en 24-48h.</p>
+        </div>
+              <div class="paso">
+          <div class="paso-num">04</div>
+          <h3>Seguimos cerca</h3>
+          <p>Recordatorios de vacunas, desparasitación y próximas citas de peluquería.</p>
+        </div>
+          </div>
+  </div>
+</section>
+
+<!-- Opiniones -->
+<section class="opiniones">
+  <div class="env">
+    <div class="cabecera-sec centro">
+      <div class="rotulo">Clientes</div>
+      <h2>Lo que dicen de nosotros</h2>
+    </div>
+    <div class="op-rejilla">
+              <article class="op">
+          <div class="op-comillas">&ldquo;</div>
+          <p>Mi perro le tiene miedo a todo y en la peluquería lo trataron con muchísima paciencia. Salió tranquilo y precioso.</p>
+          <div class="op-quien">
+            <div class="op-ini">LM</div>
+            <div>
+              <strong>Laura Méndez</strong>
+              <span>Clienta habitual</span>
+            </div>
+          </div>
+        </article>
+              <article class="op">
+          <div class="op-comillas">&ldquo;</div>
+          <p>Me asesoraron con el pienso de mi gata mayor y noté la diferencia en pocas semanas. Muy honestos, no te venden de más.</p>
+          <div class="op-quien">
+            <div class="op-ini">RO</div>
+            <div>
+              <strong>Ramón Ortiz</strong>
+              <span>Cliente de alimentación</span>
+            </div>
+          </div>
+        </article>
+              <article class="op">
+          <div class="op-comillas">&ldquo;</div>
+          <p>Dejé a mi perro en la guardería una semana de vacaciones y me mandaban fotos todos los días. Volvió feliz.</p>
+          <div class="op-quien">
+            <div class="op-ini">IC</div>
+            <div>
+              <strong>Inés Castro</strong>
+              <span>Clienta de guardería</span>
+            </div>
+          </div>
+        </article>
+          </div>
+  </div>
+</section>
+
+<!-- Blog -->
+<section id="blog">
+  <div class="env">
+    <div class="cabecera-sec centro">
+      <div class="rotulo">Blog</div>
+      <h2>Artículos que resuelven dudas reales</h2>
+    </div>
+    <div class="blog-rejilla">
+              <article class="post">
+          <span class="post-tag">Alimentación</span>
+          <h3>Cómo elegir el pienso adecuado según la edad de tu perro</h3>
+          <p>Diferencias entre cachorro, adulto y senior, y cómo hacer la transición sin problemas digestivos.</p>
+          <a href="#contacto" class="enlace-flecha">Leer más →</a>
+        </article>
+              <article class="post">
+          <span class="post-tag">Peluquería</span>
+          <h3>Cada cuánto hay que bañar a un gato</h3>
+          <p>La mayoría de los gatos no necesitan baños frecuentes: cuándo sí hace falta.</p>
+          <a href="#contacto" class="enlace-flecha">Leer más →</a>
+        </article>
+              <article class="post">
+          <span class="post-tag">Adiestramiento</span>
+          <h3>Primeros días de un cachorro en casa</h3>
+          <p>Rutinas básicas para que se adapte rápido y sin estrés.</p>
+          <a href="#contacto" class="enlace-flecha">Leer más →</a>
+        </article>
+          </div>
+  </div>
+</section>
+
+<!-- Preguntas -->
+<section class="opiniones">
+  <div class="env">
+    <div class="cabecera-sec centro">
+      <div class="rotulo">Preguntas frecuentes</div>
+      <h2>Lo que más nos preguntan</h2>
+    </div>
+    <div class="faq-lista">
+              <details class="faq">
+          <summary>¿Necesito cita previa para la peluquería?</summary>
+          <p>Sí, recomendamos pedir cita con antelación, sobre todo en fines de semana. Puedes reservarla por WhatsApp o por teléfono.</p>
+        </details>
+              <details class="faq">
+          <summary>¿Hacéis entrega a domicilio?</summary>
+          <p>Sí, en pedidos de pienso y accesorios hacemos entrega a domicilio en 24-48h en toda la ciudad.</p>
+        </details>
+              <details class="faq">
+          <summary>¿Tenéis servicio de guardería para varios días?</summary>
+          <p>Sí, cuidamos a tu mascota por horas, días o durante tus vacaciones, con fotos diarias para que estés tranquilo.</p>
+        </details>
+              <details class="faq">
+          <summary>¿Vendéis alimentación para animales exóticos?</summary>
+          <p>Sí, tenemos alimentación y accesorios para conejos, roedores y aves. Pregúntanos por tu caso concreto.</p>
+        </details>
+              <details class="faq">
+          <summary>¿Puedo devolver un producto si a mi mascota no le gusta?</summary>
+          <p>Sí, en alimentación sin abrir aceptamos devolución hasta 15 días con el ticket de compra.</p>
+        </details>
+              <details class="faq">
+          <summary>¿El adiestramiento es solo para cachorros?</summary>
+          <p>No, trabajamos educación básica y avanzada para perros de cualquier edad, con métodos en positivo.</p>
+        </details>
+          </div>
+  </div>
+</section>
+
+<!-- Contacto -->
+<section class="contacto" id="contacto">
+  <div class="env">
+    <div class="cont-rejilla">
+      <div>
+        <div class="rotulo">Contacto</div>
+        <h2 style="margin-bottom:16px">Cuéntanos qué necesitas</h2>
+        <p style="color:var(--apagado);margin-bottom:32px">La primera valoración no tiene coste. Escríbenos y te decimos con
+        honestidad si podemos ayudarte.</p>
+        <div class="cont-dato"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21.5s7-6.2 7-11.1A7 7 0 1 0 5 10.4c0 4.9 7 11.1 7 11.1z"/><circle cx="12" cy="10" r="2.6"/></svg><div><strong>Dirección</strong><span>Avenida del Puerto, 88 · 46021 Valencia</span></div></div>
+        <div class="cont-dato"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 16.5v2.6a1.9 1.9 0 0 1-2.1 1.9 18.8 18.8 0 0 1-8.2-2.9 18.4 18.4 0 0 1-5.7-5.7A18.8 18.8 0 0 1 2.1 4.1 1.9 1.9 0 0 1 4 2h2.6a1.9 1.9 0 0 1 1.9 1.6c.1.9.3 1.8.7 2.7a1.9 1.9 0 0 1-.4 2L7.6 9.5a15 15 0 0 0 5.7 5.7l1.2-1.2a1.9 1.9 0 0 1 2-.4c.9.3 1.8.6 2.7.7A1.9 1.9 0 0 1 21 16.5z"/></svg><div><strong>Teléfono</strong><span>+34 963 456 789</span></div></div>
+        <div class="cont-dato"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><path d="M2.5 7l9.5 6.5L21.5 7"/></svg><div><strong>Email</strong><span>hola@faunapetshop.es</span></div></div>
+        <div class="cont-dato"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5.2l3.3 2"/></svg><div><strong>Horario</strong><span>Lunes a sábado: 9:30 - 20:30 · Domingo: 10:00 - 14:00</span></div></div>
+      </div>
+
+      <form class="formulario" id="formConsulta" novalidate>
+        <div class="dos">
+          <div class="campo"><label for="nombre">Nombre y apellidos</label><input type="text" id="nombre" name="nombre" autocomplete="name"></div>
+          <div class="campo"><label for="telefono">Teléfono</label><input type="tel" id="telefono" name="telefono" autocomplete="tel"></div>
+        </div>
+        <div class="campo"><label for="email">Correo electrónico</label><input type="email" id="email" name="email" autocomplete="email"></div>
+        <div class="campo">
+          <label for="area">¿Sobre qué servicio es tu consulta?</label>
+          <select id="area" name="area">
+                          <option>Alimentación premium</option>
+                          <option>Peluquería canina y felina</option>
+                          <option>Guardería y hotel</option>
+                          <option>Adiestramiento</option>
+                          <option>Juguetes y ocio</option>
+                          <option>Higiene y salud básica</option>
+                          <option>Transportines y viaje</option>
+                          <option>Moda y accesorios</option>
+                          <option>Pequeños animales</option>
+                          <option>Entrega a domicilio</option>
+                        <option>Otro asunto</option>
+          </select>
+        </div>
+        <div class="campo"><label for="mensaje">Cuéntanos brevemente qué necesitas</label><textarea id="mensaje" name="mensaje" rows="4"></textarea></div>
+        <label style="display:flex;gap:10px;align-items:flex-start;font-size:12.5px;color:var(--apagado);cursor:pointer">
+          <input type="checkbox" name="privacidad" style="width:16px;height:16px;margin-top:2px;accent-color:var(--oro)">
+          <span>He leído y acepto la política de privacidad. Mis datos se usarán solo para responder a esta consulta.</span>
+        </label>
+        <button type="submit" class="btn btn-oro" style="width:100%;margin-top:20px">Enviar solicitud</button>
+        <div class="aviso-form" id="avisoForm" role="status"></div>
+        <p class="legal-mini">Tu consulta se trata con total confidencialidad.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Pie -->
+<footer class="pie">
+  <div class="env">
+    <div class="pie-rejilla">
+      <div>
+        <div class="marca" style="margin-bottom:16px">
+          <svg class="marca-emblema" width="38" height="38" viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M24 3l17 6v13c0 10-7 18.5-17 22C14 40.5 7 32 7 22V9z" fill="none" stroke="#e8556b" stroke-width="1.6"/><text x="24" y="25" text-anchor="middle" dominant-baseline="central" font-family="Playfair Display, Georgia, serif" font-weight="700" font-size="19" fill="#ef8897">F</text></svg>          <span class="marca-txt">
+            <strong>Fauna</strong>
+            <span>Pet Shop</span>
+          </span>
+        </div>
+        <p>Avenida del Puerto, 88 · 46021 Valencia<br>+34 963 456 789<br>hola@faunapetshop.es</p>
+      </div>
+      <div>
+        <h4>Áreas</h4>
+                  <a href="#areas">Alimentación premium</a>
+                  <a href="#areas">Peluquería canina y felina</a>
+                  <a href="#areas">Guardería y hotel</a>
+                  <a href="#areas">Adiestramiento</a>
+                  <a href="#areas">Juguetes y ocio</a>
+              </div>
+      <div>
+        <h4>&nbsp;</h4>
+                  <a href="#areas">Higiene y salud básica</a>
+                  <a href="#areas">Transportines y viaje</a>
+                  <a href="#areas">Moda y accesorios</a>
+                  <a href="#areas">Pequeños animales</a>
+                  <a href="#areas">Entrega a domicilio</a>
+              </div>
+      <div>
+        <h4>Despacho</h4>
+        <a href="#nosotros">Sobre nosotros</a>
+        <a href="#servicios">Cómo trabajamos</a>
+        <a href="#blog">Blog</a>
+        <a href="#contacto">Contacto</a>
+      </div>
+    </div>
+    <div class="pie-abajo">
+      <span>© <span id="anio">2026</span> Fauna Pet Shop. Todos los derechos reservados.</span>
+      <span>Plantilla demostrativa · Aviso legal · Privacidad · Cookies</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Botones flotantes -->
+<div class="flotantes">
+      <a class="wa" href="https://wa.me/34611223344?text=Hola%2C%20tengo%20una%20consulta%20sobre%20mi%20mascota." target="_blank" rel="noopener" aria-label="WhatsApp"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 11.6a8.5 8.5 0 0 1-12.6 7.5L3.5 20.5l1.4-4.3A8.5 8.5 0 1 1 20.5 11.6z"/><path d="M8.9 8.4c.3-.7.6-.7.9-.7h.6c.2 0 .5 0 .7.5l.8 1.9c.1.2 0 .4-.1.6l-.4.5c-.1.2-.3.4-.1.7.2.4.9 1.4 1.9 2 1.2.7 1.4.5 1.7.5.2-.1.6-.5.7-.7.2-.2.3-.2.5-.1l1.8.9c.3.1.4.2.5.4 0 .2 0 .9-.3 1.3-.4.5-1.1.9-1.6.9-1.1.1-2.6-.3-4.4-1.5-2.1-1.4-3.4-3.5-3.5-3.7-.1-.2-.8-1.2-.8-2.3 0-1 .5-1.5.7-1.7z"/></svg></a>
+    <a href="tel:+34963456789" aria-label="Llamar"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 16.5v2.6a1.9 1.9 0 0 1-2.1 1.9 18.8 18.8 0 0 1-8.2-2.9 18.4 18.4 0 0 1-5.7-5.7A18.8 18.8 0 0 1 2.1 4.1 1.9 1.9 0 0 1 4 2h2.6a1.9 1.9 0 0 1 1.9 1.6c.1.9.3 1.8.7 2.7a1.9 1.9 0 0 1-.4 2L7.6 9.5a15 15 0 0 0 5.7 5.7l1.2-1.2a1.9 1.9 0 0 1 2-.4c.9.3 1.8.6 2.7.7A1.9 1.9 0 0 1 21 16.5z"/></svg></a>
+  <a href="mailto:hola@faunapetshop.es" aria-label="Email"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><path d="M2.5 7l9.5 6.5L21.5 7"/></svg></a>
+</div>
+
+<script>window.AGV = {whatsapp: "34611223344", email: "hola@faunapetshop.es"};</script>
+<script src="js/main.js"></script>
+</body>
+</html>
