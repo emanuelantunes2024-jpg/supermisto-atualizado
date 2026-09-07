@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Consultoría Legal & Empresarial Premium — comportamiento
+   Taller Premium — Servicio Mecánico — comportamiento
    ========================================================================== */
 (function () {
   'use strict';
@@ -44,6 +44,22 @@
     repintar();
   }
 
+  /* --- Envío real de formularios (WhatsApp o email) --- */
+  function enviarContacto(asunto, texto) {
+    var cfg = window.AGV || {};
+    var numero = (cfg.whatsapp || '').replace(/\D/g, '');
+    if (numero) {
+      window.open('https://wa.me/' + numero + '?text=' + encodeURIComponent(texto), '_blank');
+      return 'whatsapp';
+    }
+    if (cfg.email) {
+      window.location.href = 'mailto:' + cfg.email + '?subject=' + encodeURIComponent(asunto)
+        + '&body=' + encodeURIComponent(texto);
+      return 'email';
+    }
+    return null;
+  }
+
   /* --- Formulario de consulta --- */
   var form = document.getElementById('formConsulta');
   if (form) {
@@ -81,9 +97,24 @@
         return;
       }
 
-      decir('✓ Gracias, ' + nombre.split(' ')[0] + '. Hemos recibido tu consulta y te '
-          + 'responderemos en menos de 24 horas laborables.', 'ok');
-      form.reset();
+      var lineas = [
+        'Consulta desde la web — ' + nombre,
+        'Teléfono: ' + form.telefono.value.trim(),
+        'Email: ' + email,
+        'Servicio: ' + form.area.value,
+        'Consulta: ' + caso
+      ];
+
+      var canal = enviarContacto('Consulta desde la web', lineas.join('\n'));
+      if (canal === 'whatsapp') {
+        decir('✓ Te abrimos WhatsApp con tu consulta lista para enviar, ' + nombre.split(' ')[0] + '.', 'ok');
+        form.reset();
+      } else if (canal === 'email') {
+        decir('✓ Se abrirá tu correo con tu consulta lista para enviar, ' + nombre.split(' ')[0] + '.', 'ok');
+        form.reset();
+      } else {
+        decir('No hay un canal de contacto configurado todavía. Llámanos o escríbenos directamente.', 'mal');
+      }
       aviso.scrollIntoView({ block: 'center', behavior: 'smooth' });
     });
   }
