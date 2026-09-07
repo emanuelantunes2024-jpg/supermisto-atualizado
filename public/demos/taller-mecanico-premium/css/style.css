@@ -59,11 +59,11 @@
    ========================================================================== */
 
 :root{
-  --noche:#170f0f; --noche-2:#1f1313; --carta:#2b1717; --carta-2:#331b1b;
-  --oro:#d9432c; --oro-claro:#f0836b; --oro-suave:#f5c4b8;
-  --oro-rgb:217,67,44; --noche-rgb:23,15,15;
+  --noche:#0d0d0d; --noche-2:#161616; --carta:#201f1f; --carta-2:#282626;
+  --oro:#d6202d; --oro-claro:#e86970; --oro-suave:#f3c1c4;
+  --oro-rgb:214,32,45; --noche-rgb:13,13,13;
   --claro:#f4f6f9; --claro-2:#e9edf3;
-  --texto:#f2e8e5; --apagado:#b09a94; --tinta:#241512; --tinta-suave:#6b5650;
+  --texto:#f2f0f0; --apagado:#a89e9e; --tinta:#181616; --tinta-suave:#5c5252;
   --linea:rgba(var(--oro-rgb),.22); --linea-clara:#dde3ec;
   --serif:'Playfair Display',Georgia,'Times New Roman',serif;
   --sans:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
